@@ -25,7 +25,7 @@ class StyleGeneral {
   static final Color RED = Color(0xFFB20B32);
   static final Color YELLOW = Color(0xFFFFD200);
   static final Color ORANGE = Color(0xFFFF8B00);
-  static final Color GREEN = Color(0xFF1ED760);
+  static final Color GREEN = Color(0xFF2C7245);
 
   static final Color GREEN_LIGTH_50 = Color(0xFF96d68e);
   static final Color GREEN_LIGTH_25 = Color(0xFFbce3b7);
@@ -38,4 +38,55 @@ class StyleGeneral {
   static final Color GREY = Color(0xFFF8F8F8);
   static final Color RED_LIGTH = Color(0xFF9F0000);
 
+
+  static final styleTextTitlePage = TextStyle(
+      color: StyleGeneral.BLACK,
+      letterSpacing: .5,
+      fontSize: ScreenUtil().setSp(20),
+      fontFamily: 'Poppins-Semi');
+  static final styleTextTitleComfirmar = TextStyle(
+      color: StyleGeneral.BLACK,
+      letterSpacing: .5,
+      fontSize: ScreenUtil().setSp(15),
+      fontFamily: 'Poppins-Semi');
+  static final styleTextDescription = TextStyle(
+      color: StyleGeneral.GREY_LIGTH,
+      letterSpacing: .5,
+      fontSize: ScreenUtil().setSp(15),
+      fontFamily: 'Poppins-Regular');
+  static final styleTextButtonRedes = TextStyle(
+      color: StyleGeneral.WHITE,
+      fontSize: ScreenUtil().setSp(13),
+      fontFamily: 'Poppins-Medium');
+  static final styleTextButtonCustom = TextStyle(
+      color: StyleGeneral.WHITE,
+      fontSize: ScreenUtil().setSp(15),
+      fontFamily: 'Poppins-Semi');
+  static final styleTextSubtitle = TextStyle(
+      color: StyleGeneral.BLACK,
+      letterSpacing: .5,
+      fontSize: ScreenUtil().setSp(15),
+      fontFamily: 'Poppins-Semi');
+  //PADDING
+  static final double FONT_SIZE_TITLE_DETAIL = ScreenUtil().setSp(5);
+
+  static final styleTextTitle = TextStyle(color: StyleGeneral.BLACK, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Bold');
+  static final styleTextTitleMenuHeader = TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
+  static final styleTextTitleMenu = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
+  static final styleTextTitleTerminos = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
+
+}
+
+void statusBarLight(){
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white, // this one for android
+      statusBarBrightness: Brightness.light// this one for iOS
+  ));
+}
+
+void statusBarDark(){
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.black, // this one for android
+      statusBarBrightness: Brightness.dark// this one for iOS
+  ));
 }

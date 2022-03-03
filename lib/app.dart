@@ -22,7 +22,8 @@ class _AppState extends State<App> {
         designSize: Size(360, 690),
         builder: () => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(autenticado: widget.autenticado),
+         // home: SplashScreen(autenticado: widget.autenticado),
+          home: HomePage(),
           routes: getAplicationRoutes(),
           theme: ThemeData(
               primarySwatch: colorCustom),
