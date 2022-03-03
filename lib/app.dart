@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:radadz_app/splash_screen.dart';
+import 'package:radadz_app/src/register_page.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class App extends StatefulWidget {
@@ -23,7 +24,7 @@ class _AppState extends State<App> {
         builder: () => MaterialApp(
           debugShowCheckedModeBanner: false,
          // home: SplashScreen(autenticado: widget.autenticado),
-          home: HomePage(),
+          home: RegisterPage(),
           routes: getAplicationRoutes(),
           theme: ThemeData(
               primarySwatch: colorCustom),
