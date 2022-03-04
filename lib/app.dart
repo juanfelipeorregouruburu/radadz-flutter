@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:radadz_app/splash_screen.dart';
 import 'package:radadz_app/src/register_page.dart';
 import 'package:radadz_app/src/utils/export.dart';
+import 'package:radadz_app/src/views/detail_payment.dart';
 
 class App extends StatefulWidget {
   final bool autenticado;
@@ -24,7 +25,7 @@ class _AppState extends State<App> {
         builder: () => MaterialApp(
           debugShowCheckedModeBanner: false,
          // home: SplashScreen(autenticado: widget.autenticado),
-          home: ProfilePage(),
+          home: DetailPaymentPage(),
           routes: getAplicationRoutes(),
           theme: ThemeData(
               primarySwatch: colorCustom),
