@@ -50,10 +50,10 @@ class StyleGeneral {
       fontSize: ScreenUtil().setSp(15),
       fontFamily: 'Poppins-Semi');
   static final styleTextDescription = TextStyle(
-      color: StyleGeneral.GREY_LIGTH,
+      color: StyleGeneral.BLACK,
       letterSpacing: .5,
-      fontSize: ScreenUtil().setSp(15),
-      fontFamily: 'Poppins-Regular');
+      fontSize: ScreenUtil().setSp(17),
+      fontFamily: 'Poppins-Semi');
   static final styleTextButtonRedes = TextStyle(
       color: StyleGeneral.WHITE,
       fontSize: ScreenUtil().setSp(13),

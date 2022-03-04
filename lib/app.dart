@@ -17,7 +17,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    MaterialColor colorCustom = MaterialColor(0xFF880E4F, StyleGeneral.colors);
+    MaterialColor colorCustom = MaterialColor(0xFF2C7245, StyleGeneral.colors);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ScreenUtilInit(
         designSize: Size(360, 690),

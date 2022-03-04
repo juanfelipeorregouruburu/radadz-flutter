@@ -4,6 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class InputCustom extends StatelessWidget {
   final String hintText;
+  final bool obscureText;
   final Function validator;
   final FocusNode focusNode;
   final Function onFieldSubmitted;
@@ -14,6 +15,7 @@ class InputCustom extends StatelessWidget {
   const InputCustom({
     Key key,
     this.hintText,
+    this.obscureText  = false,
     this.onFieldSubmitted,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
@@ -32,6 +34,7 @@ class InputCustom extends StatelessWidget {
     return TextFormField(
       controller: controller,
       textAlign: TextAlign.left,
+      obscureText: this.obscureText,
       keyboardType:this.keyboardType ,
       textCapitalization: TextCapitalization.words,
       textInputAction: textInputAction,
@@ -49,6 +52,60 @@ class InputCustom extends StatelessWidget {
       style: new TextStyle(
         color: StyleGeneral.BLACK,
         fontSize: ScreenUtil().setSp(15),
+        fontFamily: "Poppins-Regular",
+      ),
+      validator: validator,
+    );
+  }
+}
+
+class InputTextfield extends StatelessWidget {
+  final String hintText;
+  final bool obscureText;
+  final Function validator;
+  final FocusNode focusNode;
+  final Function onFieldSubmitted;
+  final TextInputAction textInputAction;
+  final TextInputType keyboardType;
+  final TextEditingController controller;
+
+  const InputTextfield({
+      Key key ,
+      this.hintText,
+      this.obscureText  = false,
+      this.onFieldSubmitted,
+      this.textInputAction = TextInputAction.next,
+      this.keyboardType = TextInputType.text,
+      @required this.focusNode,
+      @required this.validator,
+      @required this.controller,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      textAlign: TextAlign.left,
+      obscureText: this.obscureText,
+      keyboardType:this.keyboardType ,
+      textCapitalization: TextCapitalization.words,
+      textInputAction: textInputAction,
+      focusNode: focusNode,
+      decoration: InputDecoration(
+        labelText: hintText,
+        fillColor: Colors.transparent,
+        filled: true,
+        hintText: "ema@gmail.com",
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            )),
+      ),
+      style: new TextStyle(
+        color: StyleGeneral.BLACK,
+        fontSize: ScreenUtil().setSp(15.sp),
         fontFamily: "Poppins-Regular",
       ),
       validator: validator,
