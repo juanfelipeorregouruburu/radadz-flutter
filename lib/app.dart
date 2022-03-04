@@ -24,7 +24,7 @@ class _AppState extends State<App> {
         builder: () => MaterialApp(
           debugShowCheckedModeBanner: false,
          // home: SplashScreen(autenticado: widget.autenticado),
-          home: RegisterPage(),
+          home: ProfilePage(),
           routes: getAplicationRoutes(),
           theme: ThemeData(
               primarySwatch: colorCustom),
