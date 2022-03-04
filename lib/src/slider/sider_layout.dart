@@ -194,7 +194,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       padding: 16.w,
                                     ),
 
-                                    SizedBox(height: 55.h),
+                                    SizedBox(height: 25.h),
 
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -229,19 +229,12 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       ],
                                     ),
 
-                                    SizedBox(height: 10.h),
-                                    Align(
-                                        alignment: Alignment.topRight,
-                                        child: Text('Versión 1.0', textAlign: TextAlign.right, style: TextStyle(fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Semi', color: Colors.white)
-                                        )
-                                    ),
                                   ],
 
                                 ),
                               ),
                             ),
-                          )
-
+                          ) ,
                         ],
                       ),
                     )

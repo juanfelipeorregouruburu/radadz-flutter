@@ -95,25 +95,39 @@ class _RegisterPageState extends State<RegisterPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
+                            // InputTextfield(
+                            //   focusNode: _emailFocus,
+                            //   controller: _inputEmailController,
+                            //   keyboardType: TextInputType.emailAddress,
+                            //   onFieldSubmitted: (term) {
+                            //     _fieldFocusChange(context, _emailFocus, _phoneFocus);
+                            //   },
+                            //   hintText: 'Correo electronico',
+                            //   validator: (value) {
+                            //     if (value.isEmpty) return 'El correo es obligatorio';
+                            //     return null;
+                            //   },
+                            // ) ,
+
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Flexible(
-                                  flex: 2,
-                                  child: InputCustom(
-                                    focusNode: _nameFirstFocus,
-                                    controller: _inputNameFirstController,
-                                    onFieldSubmitted: (term) {
-                                      _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
-                                    },
-                                    hintText: 'Primer nombre',
-                                    validator: (value) {
-                                      if (value.isEmpty) return 'El nombre es obligatorio';
-                                      return null;
-                                    },
-                                  )
+                                    flex: 2,
+                                    child: InputCustom(
+                                      focusNode: _nameFirstFocus,
+                                      controller: _inputNameFirstController,
+                                      onFieldSubmitted: (term) {
+                                        _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
+                                      },
+                                      hintText: 'Primer nombre',
+                                      validator: (value) {
+                                        if (value.isEmpty) return 'El nombre es obligatorio';
+                                        return null;
+                                      },
+                                    )
                                 ),
 
                                 SizedBox(
@@ -360,6 +374,111 @@ class _RegisterPageState extends State<RegisterPage> {
                               height: 25.h,
                             ),
 
+                            Text(
+                              'Tu rutina diaria',
+                              style: StyleGeneral.styleTextDescription,
+                              textAlign: TextAlign.left,
+                            ),
+
+                            SizedBox(
+                              height: 15.h,
+                            ),
+
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 3,
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    "- Manejas diario solo para ir al trabajo.",
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: StyleGeneral.BLACK,
+                                      fontSize: ScreenUtil().setSp(14),
+                                      fontFamily: 'Poppins-Regular',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 3,
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    "- Eres conductor de tiempo completo.",
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: StyleGeneral.BLACK,
+                                      fontSize: ScreenUtil().setSp(14),
+                                      fontFamily: 'Poppins-Regular',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 3,
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    "- No usas tu carro diariamente.",
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: StyleGeneral.BLACK,
+                                      fontSize: ScreenUtil().setSp(14),
+                                      fontFamily: 'Poppins-Regular',
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  fit: FlexFit.loose,
+                                  child: Container(
+                                    width: 35.h,
+                                    height: 25.h,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      color: StyleGeneral.WHITE,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: StyleGeneral.RED,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.done,
+                                        color: Colors.white,
+                                        size: ScreenUtil().setSp(15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
 
                             /////
                             CustomButton(
@@ -376,13 +495,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               height: 25.h,
                             ),
 
-                            Center(
-                              child: Text(
-                                "¡Ya estoy registrado!",
-                                style: TextStyle(fontSize: ScreenUtil().setSp(15),fontFamily: 'Poppins-Bold'),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+
+
+
+
 
                           ],
 
