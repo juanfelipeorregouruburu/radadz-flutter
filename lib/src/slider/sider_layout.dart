@@ -152,7 +152,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                 child: Column(
                                   children: [
                                     MenuItem(
-                                      title: "Inicio",
+                                      title: "Inicio Viaje",
                                       icon: AssetImage("assets/menu/icono_marker.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -179,6 +179,17 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       onTap: () {
                                         onIconPressed();
                                         BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PaymentPageClickedEvent);
+                                      },
+                                      padding: 16.w,
+                                    ),
+
+                                    SizedBox(height: 15.h),
+                                    MenuItem(
+                                      title: "Datos bancarios",
+                                      icon: AssetImage("assets/menu/icono_home.png"),
+                                      onTap: () {
+                                        onIconPressed();
+                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.BankDataPageClickedEvent);
                                       },
                                       padding: 16.w,
                                     ),
