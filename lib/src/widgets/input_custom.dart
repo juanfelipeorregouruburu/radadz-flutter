@@ -7,6 +7,7 @@ class InputCustom extends StatelessWidget {
   final bool obscureText;
   final Function validator;
   final FocusNode focusNode;
+  final Function onTap;
   final Function onFieldSubmitted;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
@@ -17,6 +18,7 @@ class InputCustom extends StatelessWidget {
     this.hintText,
     this.obscureText  = false,
     this.onFieldSubmitted,
+    this.onTap,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
     @required this.focusNode,
@@ -32,6 +34,7 @@ class InputCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
       controller: controller,
       textAlign: TextAlign.left,
       obscureText: this.obscureText,
@@ -60,7 +63,9 @@ class InputCustom extends StatelessWidget {
 }
 
 class InputTextfield extends StatelessWidget {
+  final Function onTap;
   final String hintText;
+  final String labelText;
   final bool obscureText;
   final Function validator;
   final FocusNode focusNode;
@@ -72,6 +77,8 @@ class InputTextfield extends StatelessWidget {
   const InputTextfield({
       Key key ,
       this.hintText,
+      this.labelText,
+      this.onTap,
       this.obscureText  = false,
       this.onFieldSubmitted,
       this.textInputAction = TextInputAction.next,
@@ -85,6 +92,7 @@ class InputTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
       controller: controller,
       textAlign: TextAlign.left,
       obscureText: this.obscureText,
@@ -93,10 +101,10 @@ class InputTextfield extends StatelessWidget {
       textInputAction: textInputAction,
       focusNode: focusNode,
       decoration: InputDecoration(
-        labelText: hintText,
+        labelText: labelText,
         fillColor: Colors.transparent,
         filled: true,
-        hintText: "ema@gmail.com",
+        hintText: hintText,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(
