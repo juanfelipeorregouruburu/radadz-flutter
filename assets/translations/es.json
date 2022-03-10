@@ -1,0 +1,9 @@
+{
+  "login_hello" : "Hola conductor",
+  "login_info" : "Ingresa tu número de teléfono y contraseña",
+  "enter_phone" : "Ingresa tu teléfono",
+  "enter_password" : "Ingresa tu contraseña",
+  "required_field": "Este es un campo requerido",
+  "login_button" : "Ingresar",
+  "no_register": "¡No estoy registrado!"
+}

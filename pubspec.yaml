@@ -29,19 +29,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations: # Add this line
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   shared_preferences: any
   flutter_screenutil: any
+  intl: ^0.17.0
   rxdart: any
   provider:
   path:
   path_provider: any
   http: any
   flutter_bloc: ^6.0.1
+  flutter_easyloading: ^3.0.3
+  hexcolor: ^2.0.4
+  easy_localization: ^3.0.0
 
 
 dev_dependencies:
@@ -51,7 +56,7 @@ dev_dependencies:
 
 flutter_native_splash:
   image: assets/logo_tipo.png
-  color: "191919"
+  color: "#FFFFFF"
   android_disable_fullscreen: true
 
 
@@ -78,6 +83,7 @@ flutter:
   assets:
     - assets/
     - assets/menu/
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
