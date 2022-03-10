@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StyleGeneral {
@@ -74,6 +75,8 @@ class StyleGeneral {
   static final styleTextTitleMenuHeader = TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
   static final styleTextTitleMenu = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
   static final styleTextTitleTerminos = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
+  static final styleTextTitleSpinner = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(15), fontFamily: 'Poppins-Regular');
+  static final styleTextTextSpinner = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(14), fontFamily: 'Poppins-Regular');
 
 }
 
@@ -89,4 +92,13 @@ void statusBarDark(){
       statusBarColor: Colors.black, // this one for android
       statusBarBrightness: Brightness.dark// this one for iOS
   ));
+}
+
+
+void showSuccess(text) {
+  EasyLoading.showSuccess(text);
+}
+
+void showError(text) {
+  EasyLoading.showError(text);
 }

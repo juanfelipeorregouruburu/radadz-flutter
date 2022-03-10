@@ -27,6 +27,30 @@ class Preferences {
     _preferences.setBool('Auth', value);
   }
 
+  get getIntro {
+    return _preferences.getBool('intro') ?? false;
+  }
+
+  set setIntro( bool value ) {
+    _preferences.setBool('intro', value);
+  }
+
+  get getDriverId {
+    return _preferences.getString('driver_id') ?? false;
+  }
+
+  set setDriverId( String driver_id ) {
+    _preferences.setString('driver_id', driver_id);
+  }
+
+  set setToken(String token){
+    _preferences.setString('token', token);
+  }
+
+  get getToken {
+    return _preferences.getString('token') ?? '';
+  }
+
 
 
 
