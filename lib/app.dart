@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:radadz_app/splash_screen.dart';
-import 'package:radadz_app/src/register_page.dart';
 import 'package:radadz_app/src/utils/export.dart';
-import 'package:radadz_app/src/views/detail_payment.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class App extends StatefulWidget {
   final bool autenticado;
@@ -22,22 +22,37 @@ class _AppState extends State<App> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ScreenUtilInit(
         designSize: Size(360, 690),
-        builder: () => MaterialApp(
-          debugShowCheckedModeBanner: false,
-         // home: SplashScreen(autenticado: widget.autenticado),
-          home: TripStartPage(),
-          routes: getAplicationRoutes(),
-          theme: ThemeData(
-              primarySwatch: colorCustom),
-          builder: (context, widget) {
-            return MediaQuery(
-              //Setting font does not change with system font size
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: widget,
-            );
-          },
+        builder: () => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<ListDriverBloc>(
+              create: (_) => ListDriverBloc(),
+            ),
+            ChangeNotifierProvider<ListPaymentReceivedDriverBloc>(
+              create: (_) => ListPaymentReceivedDriverBloc(),
+            ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+           // home: SplashScreen(autenticado: widget.autenticado),
+            home: BankDataPage(),
+            routes: getAplicationRoutes(),
+            theme: ThemeData(
+                primarySwatch: colorCustom),
+            builder: EasyLoading.init()
+            // builder: (context, widget) {
+            //   return MediaQuery(
+            //     //Setting font does not change with system font size
+            //     data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            //     child: widget,
+            //   );
+            // },
+          ),
         )
     );
   }
+
 }
 
