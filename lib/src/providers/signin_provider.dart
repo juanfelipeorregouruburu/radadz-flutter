@@ -11,7 +11,6 @@ class LoginProvider {
       "password": password,
     });
     print(response.body);
-
     if(response.statusCode == 200) {
       return SingninModel.fromJson(json.decode(response.body));
     }else{
