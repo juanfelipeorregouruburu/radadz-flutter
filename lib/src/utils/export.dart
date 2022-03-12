@@ -3,6 +3,8 @@ export 'package:radadz_app/src/utils/style.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:radadz_app/src/providers/repository.dart';
+export 'package:easy_localization/easy_localization.dart';
+export 'package:intl/intl.dart';
 
 /* UTILS*/
 export 'package:radadz_app/src/route/routes.dart';
@@ -16,6 +18,7 @@ export 'package:radadz_app/src/models/save_driver_model.dart';
 export 'package:radadz_app/src/models/update_driver_model.dart';
 export 'package:radadz_app/src/models/document_type_model.dart';
 export 'package:radadz_app/src/models/bank_list_model.dart';
+export 'package:radadz_app/src/models/bank_acount_type_model.dart';
 export 'package:radadz_app/src/models/question_model.dart';
 export 'package:radadz_app/src/models/vehicles_type_model.dart';
 export 'package:radadz_app/src/models/list_driver_model.dart';
@@ -26,6 +29,7 @@ export 'package:radadz_app/src/providers/signin_provider.dart';
 export 'package:radadz_app/src/providers/save_driver_provider.dart';
 export 'package:radadz_app/src/providers/document_type_provider.dart';
 export 'package:radadz_app/src/providers/bank_list_provider.dart';
+export 'package:radadz_app/src/providers/bank_acount_type_provider.dart';
 export 'package:radadz_app/src/providers/vehicle_type_provider.dart';
 export 'package:radadz_app/src/providers/list_driver_provider.dart';
 export 'package:radadz_app/src/providers/payment_received_provider.dart';
@@ -37,9 +41,12 @@ export 'package:radadz_app/src/blog/signin_bloc.dart';
 export 'package:radadz_app/src/blog/save_driver_bloc.dart';
 export 'package:radadz_app/src/blog/document_type_bloc.dart';
 export 'package:radadz_app/src/blog/vehicle_type_bloc.dart';
-export 'package:radadz_app/src/blog/bank_type_bloc.dart';
+export 'package:radadz_app/src/blog/bank_list_bloc.dart';
+export 'package:radadz_app/src/blog/bank_acount_type_bloc.dart';
 export 'package:radadz_app/src/blog/list_driver_bloc.dart';
 export 'package:radadz_app/src/blog/payment_received_bloc.dart';
+export 'package:radadz_app/src/blog/update_data_bank_bloc.dart';
+export 'package:radadz_app/src/blog/update_driver_bloc.dart';
 
 /* PAGES */
 export 'package:radadz_app/src/home_page.dart';

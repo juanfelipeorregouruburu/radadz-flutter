@@ -106,14 +106,14 @@ class InputTextfield extends StatelessWidget {
         filled: true,
         hintText: hintText,
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10.r),
             borderSide: const BorderSide(
               color: Colors.white,
             )),
       ),
       style: new TextStyle(
         color: StyleGeneral.BLACK,
-        fontSize: ScreenUtil().setSp(15.sp),
+        fontSize: ScreenUtil().setSp(13.sp),
         fontFamily: "Poppins-Regular",
       ),
       validator: validator,
