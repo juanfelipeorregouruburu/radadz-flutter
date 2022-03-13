@@ -374,8 +374,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   onFieldSubmitted: (term) {
                                     _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
                                   },
-                                  labelText:'form_address'.tr(),
-                                  hintText: 'form_address'.tr(),
+                                  labelText:'form_license_plate_number'.tr(),
+                                  hintText: 'form_license_plate_number'.tr(),
                                   validator: (value) {
                                     if (value.isEmpty) return 'required_field'.tr();
                                     return null;
@@ -717,7 +717,9 @@ class _RegisterPageState extends State<RegisterPage> {
       _saveDriverBloc.SaveDriver();
 
       _saveDriverBloc.data.listen((data) {
-
+        setState(() {
+          _isLoading = false;
+        });
         if (data.error == 1) {
           Navigator.pushReplacementNamed(context, "login");
           prefs.setDriverId = data.driver_id;
