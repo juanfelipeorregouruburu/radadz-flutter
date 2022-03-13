@@ -59,8 +59,9 @@ export 'package:radadz_app/src/views/bank_data_page.dart';
 export 'package:radadz_app/src/views/payments_page.dart';
 export 'package:radadz_app/src/views/profile_page.dart';
 export 'package:radadz_app/src/views/detail_payment.dart';
-export 'package:radadz_app/src/views/detrail/profile_data.dart';
-export 'package:radadz_app/src/views/detrail/detail_payment_received.dart';
+export 'package:radadz_app/src/views/detail/profile_data.dart';
+export 'package:radadz_app/src/views/detail/bank_data.dart';
+export 'package:radadz_app/src/views/detail/detail_payment_received.dart';
 
 /* WIDGETS*/
 export 'package:radadz_app/src/widgets/input_custom.dart';

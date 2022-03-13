@@ -5,7 +5,8 @@ class Repository {
   final loginProvider = LoginProvider();
   final saveDriverProvider = SaveDriverProvider();
   final documentsTypeProvider = DocumentTypeProvider();
-  final banksTypeProvider = BankTypeProvider();
+  final bankListProvider = BankListProvider();
+  final bankAccountTypeProvider = BankAcountTypeProvider();
   final vehiclesTypeProvider = VehicleTypeProvider();
   final listDriverProvider = ListDriverProvider();
   final listPaymentReceivedDriverProvider = ListPaymentRecivedDriverProvider();
@@ -20,8 +21,11 @@ class Repository {
   /* VehicleType*/
   Future<VehicleTypeModel> vehicles_type( ) => vehiclesTypeProvider.VehiclesType();
 
+  /* BanktList*/
+  Future<BankListModel> banks_list( ) => bankListProvider.BanksTypes();
+
   /* BanktType*/
-  Future<BankTypeModel> banks_type( ) => banksTypeProvider.BanksTypes();
+  Future<BankAcountTypeModel> banks_account_types( ) => bankAccountTypeProvider.BankAccountTypes();
 
   /* SignIn */
   Future<SingninModel> sign_in(String phone, String password ) => loginProvider.SignIn(phone , password);
@@ -42,8 +46,8 @@ class Repository {
                       listPaymentReceivedDriverProvider.ListPaymentReceivedDriver(driver_id,start_time,end_date);
 
   /* UpdateDataBank */
-  Future<ResponseModel> update_data_bank_driver(String driver_id, String data_bank, String account_number ,  String account_type) =>
-      updateDataBankProvider.UpdateDataBankDriver(driver_id,data_bank,account_number,account_type);
+  Future<ResponseModel> update_data_bank_driver(String driver_id, String bank_id, String account_number , String account_type_id) =>
+      updateDataBankProvider.UpdateDataBankDriver(driver_id, bank_id,account_number,account_type_id);
 
   /* UpdateDriver*/
   Future<UpdateDriverModel> update_driver(String driver_id, String name_first , String name_second, String lastNameFirst , String lastNameSecond,

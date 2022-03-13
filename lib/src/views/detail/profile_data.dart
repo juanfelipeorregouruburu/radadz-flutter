@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-
 import 'package:radadz_app/src/blog/update_driver_bloc.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
@@ -491,7 +489,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                           onChanged: (DocumentType documentType){
                             setState(() {
                               _documentType = documentType;
-                              //_saveDriverBloc.document_type = documentType.id;
+                              _updateDriverBloc.document_type = documentType.id;
                             });
                           },
                           isExpanded: true,
