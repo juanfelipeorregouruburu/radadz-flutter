@@ -37,7 +37,7 @@ class _AppState extends State<App> {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
            // home: SplashScreen(autenticado: widget.autenticado),
-            home: Intro(),
+            home: TripStartPage(),
             routes: getAplicationRoutes(),
             theme: ThemeData(
                 primarySwatch: colorCustom),
