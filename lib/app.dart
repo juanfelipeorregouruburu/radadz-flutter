@@ -37,7 +37,7 @@ class _AppState extends State<App> {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
            // home: SplashScreen(autenticado: widget.autenticado),
-            home: BankDataPage(),
+            home: PaymentsPage(),
             routes: getAplicationRoutes(),
             theme: ThemeData(
                 primarySwatch: colorCustom),

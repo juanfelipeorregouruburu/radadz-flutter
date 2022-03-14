@@ -47,6 +47,7 @@ dependencies:
   flutter_easyloading: ^3.0.3
   hexcolor: ^2.0.4
   easy_localization: ^3.0.0
+  syncfusion_flutter_datepicker: ^19.4.55
 
 
 dev_dependencies:

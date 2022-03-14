@@ -62,6 +62,7 @@ export 'package:radadz_app/src/views/detail_payment.dart';
 export 'package:radadz_app/src/views/detail/profile_data.dart';
 export 'package:radadz_app/src/views/detail/bank_data.dart';
 export 'package:radadz_app/src/views/detail/detail_payment_received.dart';
+export 'package:radadz_app/src/views/card/card_payment_received.dart';
 
 /* WIDGETS*/
 export 'package:radadz_app/src/widgets/input_custom.dart';
