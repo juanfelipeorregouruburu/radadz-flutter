@@ -18,8 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(prefs.getDriverId);
-    context.read<ListDriverBloc>().getDriver(driver_id: "1");
+    context.read<ListDriverBloc>().getDriver(driver_id: prefs.getDriverId);
   }
 
   @override

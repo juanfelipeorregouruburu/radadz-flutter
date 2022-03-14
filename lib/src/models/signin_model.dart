@@ -9,7 +9,7 @@ class SingninModel {
     _error = json['msg'];
     _response = json['response'];
     if(_error == 1){
-      _driverId = json['driver_id'].toString() ;
+      _driverId = json['user_id'].toString() ;
       _token = json['token'] ;
     }
   }

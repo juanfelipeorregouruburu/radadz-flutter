@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:radadz_app/src/utils/export.dart';
 
 class UpdateDriverProvider {
-
+  final pref = Preferences();
   Future<UpdateDriverModel> UpdateDriver(String driver_id , String name_first, String name_second, String lastName_first, String lastName_second,
       String document_type, String document_number, String email ,  String phone,
       String address, String date_birth , String licence_number ,
@@ -11,7 +12,10 @@ class UpdateDriverProvider {
 
     var url = Uri.parse(API.UPDT_DRIVER);
 
-    final response = await http.post(url, body: {
+    String token = await pref.getToken;
+    final response = await http.post(url,headers: {
+      HttpHeaders.authorizationHeader: "token $token"
+    }, body: {
       "id": driver_id,
       "first_name": name_first,
       "second_name": name_second,

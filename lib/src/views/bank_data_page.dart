@@ -20,7 +20,7 @@ class _BankDataPageState extends State<BankDataPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<ListDriverBloc>().getDriver(driver_id: "1");
+    context.read<ListDriverBloc>().getDriver(driver_id: prefs.getDriverId);
   }
 
 
