@@ -97,24 +97,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                   children: [
                                     Expanded(
                                       flex: 8,
-                                      child: Column(children: [
-                                        Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text('!Hola!',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Regular')
-                                            )
-                                        ),
-                                        SizedBox(height: 5),
-                                        Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text("Invitado",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
-                                            )
-                                        ),
-                                      ]
-                                      ),
+                                      child: Container()
                                     ),
                                     Expanded(
                                       flex: 2,
@@ -152,7 +135,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                 child: Column(
                                   children: [
                                     MenuItem(
-                                      title: "Inicio Viaje",
+                                      title:'menu_title_start_trip'.tr(),
                                       icon: AssetImage("assets/menu/icono_marker.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -163,7 +146,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
 
                                     SizedBox(height: 15.h),
                                     MenuItem(
-                                      title: "Historial de viajes",
+                                      title: 'menu_title_history_trip'.tr(),
                                       icon: AssetImage("assets/menu/icono_terminos_politica.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -174,7 +157,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
 
                                     SizedBox(height: 15.h),
                                     MenuItem(
-                                      title: "Pagos recibidos",
+                                      title: 'menu_title_history_payment'.tr(),
                                       icon: AssetImage("assets/menu/icono_tipo_pago.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -182,10 +165,20 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       },
                                       padding: 16.w,
                                     ),
+                                    SizedBox(height: 15.h),
+                                    MenuItem(
+                                      title: 'menu_title_history_video'.tr(),
+                                      icon: AssetImage("assets/menu/icono_terminos_politica.png"),
+                                      onTap: () {
+                                        onIconPressed();
+                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.TripsHistoryClickedEvent);
+                                      },
+                                      padding: 16.w,
+                                    ),
 
                                     SizedBox(height: 15.h),
                                     MenuItem(
-                                      title: "Datos bancarios",
+                                      title: 'menu_title_bank_data'.tr(),
                                       icon: AssetImage("assets/menu/icono_home.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -195,8 +188,9 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                     ),
 
                                     SizedBox(height: 15.h),
+
                                     MenuItem(
-                                      title: "Mi perfil",
+                                      title: 'menu_title_profile_data'.tr(),
                                       icon: AssetImage("assets/menu/icono_usuario.png"),
                                       onTap: () {
                                         onIconPressed();
@@ -227,7 +221,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                             child: Padding(
                                               padding: EdgeInsets.only(left: 10.w),
                                               child: Text(
-                                                "cerrar sessión",
+                                                'menu_title_log_out'.tr(),
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                     fontSize: ScreenUtil().setSp(18),
