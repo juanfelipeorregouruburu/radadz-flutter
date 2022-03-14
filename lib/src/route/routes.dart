@@ -8,7 +8,6 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'login': (BuildContext context) => LoginPage(),
     'intro': (BuildContext context) => Intro(),
     'register': (BuildContext context) => RegisterPage(),
-    'detailPayment': (BuildContext context) => DetailPaymentPage(),
     'detailPaymentReceived': (BuildContext context) => DetailPaymentReceived(),
   };
 }

@@ -1,3 +1,5 @@
+import 'package:radadz_app/src/utils/export.dart';
+
 class SliderModel {
   String imagePath;
   String title;
@@ -35,23 +37,20 @@ List<SliderModel> getSlides() {
   SliderModel sliderModel = new SliderModel();
 
   sliderModel.setImageAssetPath("assets/ilustracion_1.png");
-  sliderModel.setTitle("Domicilios & pick up");
-  sliderModel.setDescription(
-      "Lo hacemos amigable. Inicia sesión, ingresa tu dirección, pide, espera y disfruta.");
+  sliderModel.setTitle('intro_page_title_one'.tr());
+  sliderModel.setDescription('intro_page_description_one'.tr());
   sliders.add(sliderModel);
 
   sliderModel = new SliderModel();
   sliderModel.setImageAssetPath("assets/ilustracion_2.png");
-  sliderModel.setTitle("Tu comida a un tab de distancia");
-  sliderModel.setDescription(
-      "Comida rápida nacional e internacional para ti y tus acompañantes.");
+  sliderModel.setTitle('intro_page_title_two'.tr());
+  sliderModel.setDescription('intro_page_description_two'.tr());
   sliders.add(sliderModel);
 
   sliderModel = new SliderModel();
   sliderModel.setImageAssetPath("assets/ilustracion_3.png");
-  sliderModel.setTitle("Tiempos cortos de entrega");
-  sliderModel.setDescription(
-      "Hacemos que pedir tu comida favorita a domicilio o para recoger sea rápido y sencillo.");
+  sliderModel.setTitle('intro_page_title_three'.tr());
+  sliderModel.setDescription('intro_page_description_three'.tr());
   sliders.add(sliderModel);
 
   sliderModel = new SliderModel();

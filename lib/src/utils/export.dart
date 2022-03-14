@@ -58,7 +58,6 @@ export 'package:radadz_app/src/views/trip_history_page.dart';
 export 'package:radadz_app/src/views/bank_data_page.dart';
 export 'package:radadz_app/src/views/payments_page.dart';
 export 'package:radadz_app/src/views/profile_page.dart';
-export 'package:radadz_app/src/views/detail_payment.dart';
 export 'package:radadz_app/src/views/detail/profile_data.dart';
 export 'package:radadz_app/src/views/detail/bank_data.dart';
 export 'package:radadz_app/src/views/detail/detail_payment_received.dart';

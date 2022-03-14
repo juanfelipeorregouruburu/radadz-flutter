@@ -85,7 +85,7 @@ class _IntroState extends State<Intro> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     child: Text(
-                      "Omitir",
+                      'intro_button_skip'.tr(),
                       style: TextStyle(
                           color: StyleGeneral.BLACK,
                           fontSize: ScreenUtil().setSp(15),
@@ -119,7 +119,7 @@ class _IntroState extends State<Intro> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
                       child: Text(
-                        "Siguiente",
+                        'intro_button_next'.tr(),
                         style: TextStyle(
                             color: StyleGeneral.WHITE,
                             fontSize: ScreenUtil().setSp(15),
@@ -151,7 +151,7 @@ class _IntroState extends State<Intro> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 child: Text(
-                  "Comenzar",
+                  'intro_button_start'.tr(),
                   style: TextStyle(
                       color: StyleGeneral.WHITE,
                       fontSize: ScreenUtil().setSp(15),
