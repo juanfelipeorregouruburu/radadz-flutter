@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:radadz_app/splash_screen.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -36,19 +37,11 @@ class _AppState extends State<App> {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-           // home: SplashScreen(autenticado: widget.autenticado),
-            home: TripStartPage(),
+            home: widget.autenticado  ? HomePage() : LoginPage(),
             routes: getAplicationRoutes(),
             theme: ThemeData(
                 primarySwatch: colorCustom),
             builder: EasyLoading.init()
-            // builder: (context, widget) {
-            //   return MediaQuery(
-            //     //Setting font does not change with system font size
-            //     data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            //     child: widget,
-            //   );
-            // },
           ),
         )
     );
