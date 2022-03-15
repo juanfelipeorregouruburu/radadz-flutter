@@ -604,10 +604,10 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _isLoading = true;
     });
 
-    _updateDriverBloc.driver_id = "1";
+    _updateDriverBloc.driver_id = prefs.getDriverId;
     _updateDriverBloc.name_first = _inputNameFirstController.text.trim();
     _updateDriverBloc.name_second = _inputNameSecondController.text.trim();
-    _updateDriverBloc.lastName_first = _inputLastNameSecondController.text.trim();
+    _updateDriverBloc.lastName_first = _inputLastNameFirstController.text.trim();
     _updateDriverBloc.lastName_second = _inputLastNameSecondController.text.trim();
     _updateDriverBloc.document_number = _inputDocumentoController.text.trim();
     _updateDriverBloc.email = widget.driver.email;

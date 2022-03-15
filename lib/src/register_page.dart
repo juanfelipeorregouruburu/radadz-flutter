@@ -49,6 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode _passwordFocus = FocusNode();
 
   String _inputStrDate;
+  String _inputStrYear;
 
   final prefs = new Preferences();
 
@@ -399,7 +400,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: InputTextfield(
                                   focusNode: _yearLicenceFocus,
                                   controller: _inputYearLicenceController,
-                                  keyboardType: TextInputType.text,
+                                  keyboardType: TextInputType.number,
                                   onFieldSubmitted: (term) {
                                     _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
                                   },
@@ -429,7 +430,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     _fieldFocusChange(context, _dateFocus, _passwordFocus);
                                   },
                                   hintText: 'yyyy-mm-dd',
-                                  labelText:'form_vehicle_year'.tr(),
+                                  labelText:'form_birth_date'.tr(),
                                   validator: (value) {
                                     if (value.isEmpty) return 'required_field'.tr();
                                     return null;
@@ -701,7 +702,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       _saveDriverBloc.name_first = _inputNameFirstController.text.trim();
       _saveDriverBloc.name_second = _inputNameSecondController.text.trim();
-      _saveDriverBloc.lastName_first = _inputLastNameSecondController.text.trim();
+      _saveDriverBloc.lastName_first = _inputLastNameFirstController.text.trim();
       _saveDriverBloc.lastName_second = _inputLastNameSecondController.text.trim();
       _saveDriverBloc.document_number = _inputDocumentoController.text.trim();
       _saveDriverBloc.email = _inputEmailController.text.trim().toLowerCase();
