@@ -21,23 +21,26 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
   Bank _bank;
   BankAcountType _bankAcountType;
+  bool stateReview = false;
 
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _updateDataBankDriverBloc = new UpdateDataBankDriverBloc();
 
-    _inputNumberCountController.text = widget.driver.accoutNumber;
-    _updateDataBankDriverBloc.account_type_id = widget.driver.account_type_bank_driver.id;
-    _updateDataBankDriverBloc.bank_id = widget.driver.bank_name_driver.id;
+    if(widget.driver.account_type_bank_driver != null && widget.driver.bank_name_driver != null){
+      _updateDataBankDriverBloc.account_type_id = widget.driver.account_type_bank_driver.id;
+      _updateDataBankDriverBloc.bank_id = widget.driver.account_type_bank_driver.id;
+      _inputNumberCountController.text = widget.driver.accoutNumber ;
+      stateReview = true ;
+    }
+
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _inputNumberCountController.dispose();
   }
@@ -147,11 +150,13 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
             if(bankTypeList != null){
 
-              bankTypeList.asMap().forEach((index, value) => {
-                if(widget.driver.bank_name_driver.id == value.id){
-                  _bank = bankTypeList[index]
-                }
-              });
+              if(stateReview){
+                bankTypeList.asMap().forEach((index, value) => {
+                  if(widget.driver.bank_name_driver.id == value.id){
+                    _bank = bankTypeList[index]
+                  }
+                });
+              }
 
               return Center(
                   child: Container(
@@ -220,11 +225,13 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
             if(bankAccountTypeList != null){
 
-              bankAccountTypeList.asMap().forEach((index, value) => {
-                if(widget.driver.account_type_bank_driver.id == value.id){
-                  _bankAcountType = bankAccountTypeList[index]
-                }
-              });
+              if(stateReview){
+                bankAccountTypeList.asMap().forEach((index, value) => {
+                  if(widget.driver.account_type_bank_driver.id == value.id){
+                    _bankAcountType = bankAccountTypeList[index]
+                  }
+                });
+              }
 
               return Center(
                   child: Container(

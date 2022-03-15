@@ -57,13 +57,13 @@ class Driver {
     _birthDate = parsedJson['birth_date'];
     _licensePlateNumber = parsedJson['license_plate_number'];
     _vehicleYear = parsedJson['vehicle_year'];
-    _accoutNumber = parsedJson['accoun_number'];
     _drivingDailyRoutine = parsedJson['driving_daily_routine'];
-
     _documentType = DocumentTypeDriver(parsedJson['document_type']);
     _vehicleType = VehicleTypeDriver(parsedJson['vehicle_type']);
-    _bankNameDriver = BankNameDriver(parsedJson['bank_name']);
-    _accountTypeDriver = AccountTypeDriver(parsedJson['account_type']);
+    if(parsedJson['bank_name'] != null){_bankNameDriver = BankNameDriver(parsedJson['bank_name']);}
+    if(parsedJson['account_type'] != null){_accountTypeDriver = AccountTypeDriver(parsedJson['account_type']);}
+    if(parsedJson['accoun_number'] != null){_accoutNumber = parsedJson['accoun_number'];}
+
   }
 
   String get id => _Id ;
