@@ -117,26 +117,18 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(15),
-                       fontFamily: 'Poppins-Bold',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentTitle
                    ),
                  ),
                  Flexible(
                    flex: 1,
                    fit: FlexFit.tight,
                    child: Text(
-                     DateFormat('hh:mm a').format(DateTime.parse(trip.startTime)),
+                     DateFormat('y-MM-dd  h:mm a').format(DateTime.parse(trip.startTime)),
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 1,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(14),
-                       fontFamily: 'Poppins-Semi',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentDescription
                    ),
                  ),
 
@@ -156,26 +148,18 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(15),
-                       fontFamily: 'Poppins-Bold',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentTitle
                    ),
                  ),
                  Flexible(
                    flex: 1,
                    fit: FlexFit.tight,
                    child: Text(
-                     DateFormat('hh:mm a').format(DateTime.parse(trip.endTime)),
+                     DateFormat('y-MM-dd  h:mm a').format(DateTime.parse(trip.endTime)),
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(14),
-                       fontFamily: 'Poppins-Semi',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentDescription
                    ),
                  ),
 
@@ -195,11 +179,7 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(15),
-                       fontFamily: 'Poppins-Bold',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentTitle
                    ),
                  ),
                  Flexible(
@@ -210,11 +190,7 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 1,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(14),
-                       fontFamily: 'Poppins-Semi',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentDescription
                    ),
                  ),
 
@@ -234,11 +210,7 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(15),
-                       fontFamily: 'Poppins-Bold',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentTitle
                    ),
                  ),
                  Flexible(
@@ -249,11 +221,7 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 1,
-                     style: TextStyle(
-                       color: StyleGeneral.BLACK,
-                       fontSize: ScreenUtil().setSp(14),
-                       fontFamily: 'Poppins-Semi',
-                     ),
+                     style: StyleGeneral.styleTextTextCardPaymentDescription
                    ),
                  ),
 
