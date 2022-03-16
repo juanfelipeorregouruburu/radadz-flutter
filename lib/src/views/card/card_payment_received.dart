@@ -16,7 +16,6 @@ class _CardPaymentReceivedWidgetState extends State<CardPaymentReceivedWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   // context.read<ListPaymentReceivedDriverBloc>().getPaymentReceivedDriver(driver_id: "1", start_time: "2022-01-24", end_date: "2022-03-24");
   }
   
   @override
@@ -25,7 +24,7 @@ class _CardPaymentReceivedWidgetState extends State<CardPaymentReceivedWidget> {
 
     return listPaymentRecivedProvider.isLoading
         ? ActivityIndicator(marginTop: 50.h)
-        : ListView.separated(
+        : listPaymentRecivedProvider?.paymentReceivedList.payments.length > 0 ? ListView.separated(
             shrinkWrap: true,
             separatorBuilder: (BuildContext context, int index) => SizedBox(height: 15.h),
             physics: BouncingScrollPhysics(),
@@ -39,7 +38,7 @@ class _CardPaymentReceivedWidgetState extends State<CardPaymentReceivedWidget> {
                 paymentsList: listPaymentRecivedProvider?.paymentReceivedList?.payments,
               );
             },
-        );
+        ) : EmptyDataView(message: 'payment_card_empty_data'.tr());
   }
 }
 
@@ -60,6 +59,8 @@ class ItemPaymentRecived extends StatelessWidget {
   Widget build(BuildContext context) {
     final paymentProvider = context.watch<ListPaymentReceivedDriverBloc>();
     final formatter = new NumberFormat("#,###");
+
+    String textPaymentInfo = 'payment_card_info_payment'.tr() +payment.accountTypeBankPayment.name + ' '+payment.accoutNumber+         ' - '+payment.bankNamePayment.name;
 
     return GestureDetector(
       onTap: (){
@@ -95,17 +96,13 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 1,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(15),
-                        fontFamily: 'Poppins-Bold',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentTitle
                     ),
                   ),
                   Flexible(
                     flex: 1,
                     fit: FlexFit.tight,
-                    child:  Align(
+                    child: payment.trips.length > 0 ? Align(
                        alignment: Alignment.centerRight,
                        child: Container(
                          width: 85.h,
@@ -125,7 +122,7 @@ class ItemPaymentRecived extends StatelessWidget {
                            ),
                          ),
                        ),
-                     ),
+                     ) : Container(),
                   )
 
                 ],
@@ -144,11 +141,7 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 1,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(15),
-                        fontFamily: 'Poppins-Bold',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentTitle
                     ),
                   ),
                   Flexible(
@@ -159,11 +152,7 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 1,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(14),
-                        fontFamily: 'Poppins-Semi',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentDescription
                     ),
                   ),
 
@@ -185,11 +174,7 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 2,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(15),
-                        fontFamily: 'Poppins-Bold',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentTitle
                     ),
                   ),
                   Flexible(
@@ -200,11 +185,7 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 1,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(14),
-                        fontFamily: 'Poppins-Semi',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentDescription
                     ),
                   ),
 
@@ -225,11 +206,7 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 2,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(15),
-                        fontFamily: 'Poppins-Bold',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentTitle
                     ),
                   ),
                   Flexible(
@@ -240,17 +217,22 @@ class ItemPaymentRecived extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       maxLines: 1,
-                      style: TextStyle(
-                        color: StyleGeneral.BLACK,
-                        fontSize: ScreenUtil().setSp(14),
-                        fontFamily: 'Poppins-Semi',
-                      ),
+                      style: StyleGeneral.styleTextTextCardPaymentDescription
                     ),
                   ),
-
-
                 ],
               ),
+
+
+              SizedBox(height: 10.h),
+              Text(
+                textPaymentInfo,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 2,
+                style: StyleGeneral.styleTextTextCardPaymentTitle
+              ),
+
             ],
           ),
         ),

@@ -51,6 +51,7 @@
   "payment_buton_search_title": "Search",
   "payment_buton_search_filter": "Filter",
   "payment_card_total_trip": "Total trips: ",
+  "payment_card_empty_data": "There is no data with that selected date range",
   "payment_card_buton_detail": "Show trips",
   "payment_card_date_payment": "Payment date:",
   "payment_card_money_payment": "Total money paid:",

@@ -51,24 +51,23 @@ class _PaymentsPageState extends State<PaymentsPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(65.h),
+        child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            flexibleSpace : ToolbarTitleCustom(title: 'payment_title'.tr())
+        ),
+      ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 10.h, 0.w, 15.h),
+        padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 15.w),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 45.h),
-              Center(
-                child: Text(
-                  'payment_title'.tr(),
-                  style: StyleGeneral.styleTextTitle,
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              SizedBox(height: 35.h),
-
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 30.w),
                 child: Column(

@@ -27,13 +27,21 @@ class Payment{
   String _paymentTime;
   String _totalTtokensCanceled;
   String _totalMoneyPayed;
+  String _accountNumber;
   List<Trip> _trips = [];
+  BankNamePayment _bankNamePayment;
+  AccountTypePayment _accountTypePayment;
 
   Payment(parsedJson){
     _paymentId = parsedJson['id'];
     _paymentTime = parsedJson['payment_time'];
     _totalTtokensCanceled = parsedJson['total_tokens_canceled'];
     _totalMoneyPayed = parsedJson['total_money_payed'];
+
+
+    if(parsedJson['bank_name'] != null){_bankNamePayment = BankNamePayment(parsedJson['bank_name']);}
+    if(parsedJson['account_type'] != null){_accountTypePayment = AccountTypePayment(parsedJson['account_type']);}
+    if(parsedJson['account_number'] != null){_accountNumber = parsedJson['account_number'];}
 
     List<Trip> tempTips = [];
 
@@ -50,6 +58,9 @@ class Payment{
   String get paymentDate => _paymentTime;
   String get tokensCancel => _totalTtokensCanceled;
   String get moneyPayment => _totalMoneyPayed;
+  String get accoutNumber => _accountNumber ;
+  BankNamePayment get bankNamePayment => _bankNamePayment ;
+  AccountTypePayment get accountTypeBankPayment => _accountTypePayment ;
   List<Trip> get trips => _trips;
 
   Map<String, dynamic> toJson() => {
@@ -64,6 +75,51 @@ class Payment{
             (x) => x.toJson(),
       ),
     ),
+  };
+}
+
+
+class AccountTypePayment{
+  String _Id;
+  String _accountType;
+  String _description;
+
+  AccountTypePayment(parsedJson) {
+    _Id = parsedJson['id'].toString();
+    _accountType = parsedJson['account_type'];
+    _description = parsedJson['description'];
+  }
+
+  String get id => _Id;
+  String get name => _accountType;
+  String get description => _description;
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "account_type": name,
+    "description": description,
+  };
+}
+
+class BankNamePayment{
+  String _Id;
+  String _BankName;
+  String _description;
+
+  BankNamePayment(parsedJson) {
+    _Id = parsedJson['id'].toString();
+    _BankName = parsedJson['bank_type'];
+    _description = parsedJson['description'];
+  }
+
+  String get id => _Id;
+  String get name => _BankName;
+  String get description => _description;
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "bank_type": name,
+    "description": description,
   };
 }
 

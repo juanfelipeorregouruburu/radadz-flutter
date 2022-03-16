@@ -70,7 +70,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
       builder: (context, isSideBarOpenedAsync) {
         return AnimatedPositioned(
           duration: _animationDuration,
-          top: 20.h,
+          top: 10.h,
           bottom: 0,
           left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
           right: isSideBarOpenedAsync.data ? -75.w : screenWidth - 75.w,
