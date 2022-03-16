@@ -115,6 +115,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 15.w),
+            physics: BouncingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: viewportConstraints.maxHeight,
@@ -122,304 +124,288 @@ class _ProfileDriverState extends State<ProfileDriver> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Container(
-                      height: 120.h,
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text(
-                          'profile_title'.tr(),
-                          style: StyleGeneral.styleTextTitle,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
-
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Column(
-                          children: [
-
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _nameFirstFocus,
-                                      controller: _inputNameFirstController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
-                                      },
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                      labelText: 'form_first_name'.tr(),
-                                      hintText: widget.driver.first_name,
-                                      validator: (value) {
-                                        if (value.isEmpty) return 'required_field'.tr();
-                                        return null;
-                                      },
-                                    ),
-                                ),
-
-                                SizedBox(
-                                  width: 20.h,
-                                ),
-
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _nameSecondFocus,
-                                      controller: _inputNameSecondController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _nameSecondFocus, _lastNameFirstFocus);
-                                      },
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                      labelText: 'form_second_name'.tr(),
-                                      hintText: widget.driver.second_name,
-                                      validator: (value) {
-
-                                      },
-                                    ),
-                                ),
-
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Flexible(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
                                   flex: 2,
                                   child: InputTextfield(
-                                    focusNode: _lastNameFirstFocus,
-                                    controller: _inputLastNameFirstController,
+                                    focusNode: _nameFirstFocus,
+                                    controller: _inputNameFirstController,
                                     onFieldSubmitted: (term) {
-                                      _fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
+                                      _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
                                     },
                                     keyboardType: TextInputType.text,
                                     textInputAction: TextInputAction.next,
-                                    labelText: 'form_first_lastname'.tr(),
-                                    hintText: widget.driver.first_lastname,
+                                    labelText: 'form_first_name'.tr(),
+                                    hintText: widget.driver.first_name,
                                     validator: (value) {
                                       if (value.isEmpty) return 'required_field'.tr();
                                       return null;
                                     },
                                   ),
-                                ),
+                              ),
 
-                                SizedBox(
-                                  width: 15.w,
-                                ),
+                              SizedBox(
+                                width: 20.h,
+                              ),
 
-                                Flexible(
+                              Flexible(
                                   flex: 2,
                                   child: InputTextfield(
-                                    focusNode: _lastNameSecondFocus,
-                                    controller: _inputLastNameSecondController,
+                                    focusNode: _nameSecondFocus,
+                                    controller: _inputNameSecondController,
                                     onFieldSubmitted: (term) {
-                                      _fieldFocusChange(context, _lastNameFirstFocus, _documentoFocus);
+                                      _fieldFocusChange(context, _nameSecondFocus, _lastNameFirstFocus);
                                     },
                                     keyboardType: TextInputType.text,
                                     textInputAction: TextInputAction.next,
-                                    labelText: 'form_second_lastname'.tr(),
-                                    hintText: widget.driver.second_lastname,
+                                    labelText: 'form_second_name'.tr(),
+                                    hintText: widget.driver.second_name,
                                     validator: (value) {
 
                                     },
                                   ),
+                              ),
+
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: InputTextfield(
+                                  focusNode: _lastNameFirstFocus,
+                                  controller: _inputLastNameFirstController,
+                                  onFieldSubmitted: (term) {
+                                    _fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  textInputAction: TextInputAction.next,
+                                  labelText: 'form_first_lastname'.tr(),
+                                  hintText: widget.driver.first_lastname,
+                                  validator: (value) {
+                                    if (value.isEmpty) return 'required_field'.tr();
+                                    return null;
+                                  },
                                 ),
+                              ),
 
-                              ],
-                            ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
 
-
-                            SizedBox(
-                              height: 20.h,
-                            ),
-
-                            Container(
-                                width: double.infinity,
-                                child: _dataSpinnerDocumentType()
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
+                              Flexible(
                                 flex: 2,
                                 child: InputTextfield(
-                                  focusNode: _documentoFocus,
-                                  controller: _inputDocumentoController,
-                                  keyboardType: TextInputType.number,
+                                  focusNode: _lastNameSecondFocus,
+                                  controller: _inputLastNameSecondController,
                                   onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _documentoFocus, _addressFocus);
-                                  },
-                                  labelText:'form_document_number'.tr(),
-                                  hintText: widget.driver.document_number,
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _addressFocus,
-                                  controller: _inputAddressController,
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
-                                  },
-                                  labelText:'form_address'.tr(),
-                                  hintText: widget.driver.address,
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Container(
-                                width: double.infinity,
-                                child: _dataSpinnerVehicleType()
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _numberLicenceFocus,
-                                  controller: _inputNummberLicenceController,
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
-                                  },
-                                  labelText:'form_license_plate_number'.tr(),
-                                  hintText: widget.driver.license_plate_number,
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _yearLicenceFocus,
-                                  controller: _inputYearLicenceController,
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
-                                  },
-                                  labelText:'form_vehicle_year'.tr(),
-                                  hintText: widget.driver.vehicle_year,
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _dateFocus,
-                                  controller: _inputDateController,
-                                  onTap: (){
-                                    _selectDate(context);
+                                    _fieldFocusChange(context, _lastNameFirstFocus, _documentoFocus);
                                   },
                                   keyboardType: TextInputType.text,
-                                  labelText:'form_vehicle_year'.tr(),
+                                  textInputAction: TextInputAction.next,
+                                  labelText: 'form_second_lastname'.tr(),
+                                  hintText: widget.driver.second_lastname,
                                   validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
+
                                   },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Text(
-                              'register_routine_daily_title'.tr(),
-                              style: StyleGeneral.styleTextDescription,
-                              textAlign: TextAlign.left,
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Column(
-                                  children: createRadioListQuestion(),
                                 ),
+                              ),
 
-                              ],
-                            ),
+                            ],
+                          ),
 
 
-                            SizedBox(
-                              height: 25.h,
-                            ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
 
-                            _isLoading ? ActivityIndicator() : CustomButton(
-                              text: 'profile_update_button'.tr(),
-                              fullscreen: true,
-                              onTap: (){
-                                _UpdateDriver();
-                              },
-                            ),
+                          Container(
+                              width: double.infinity,
+                              child: _dataSpinnerDocumentType()
+                          ),
 
-                            SizedBox(
-                              height: 15.h,
-                            ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
 
-                          ],
-                        ),
+
+                          Flexible(
+                              flex: 2,
+                              child: InputTextfield(
+                                focusNode: _documentoFocus,
+                                controller: _inputDocumentoController,
+                                keyboardType: TextInputType.number,
+                                onFieldSubmitted: (term) {
+                                  _fieldFocusChange(context, _documentoFocus, _addressFocus);
+                                },
+                                labelText:'form_document_number'.tr(),
+                                hintText: widget.driver.document_number,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                              )
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+
+                          Flexible(
+                              flex: 2,
+                              child: InputTextfield(
+                                focusNode: _addressFocus,
+                                controller: _inputAddressController,
+                                keyboardType: TextInputType.text,
+                                onFieldSubmitted: (term) {
+                                  _fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
+                                },
+                                labelText:'form_address'.tr(),
+                                hintText: widget.driver.address,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                              )
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+                          Container(
+                              width: double.infinity,
+                              child: _dataSpinnerVehicleType()
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+
+                          Flexible(
+                              flex: 2,
+                              child: InputTextfield(
+                                focusNode: _numberLicenceFocus,
+                                controller: _inputNummberLicenceController,
+                                keyboardType: TextInputType.text,
+                                onFieldSubmitted: (term) {
+                                  _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
+                                },
+                                labelText:'form_license_plate_number'.tr(),
+                                hintText: widget.driver.license_plate_number,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                              )
+                          ),
+
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+
+                          Flexible(
+                              flex: 2,
+                              child: InputTextfield(
+                                focusNode: _yearLicenceFocus,
+                                controller: _inputYearLicenceController,
+                                keyboardType: TextInputType.text,
+                                onFieldSubmitted: (term) {
+                                  _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
+                                },
+                                labelText:'form_vehicle_year'.tr(),
+                                hintText: widget.driver.vehicle_year,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                              )
+                          ),
+
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+
+                          Flexible(
+                              flex: 2,
+                              child: InputTextfield(
+                                focusNode: _dateFocus,
+                                controller: _inputDateController,
+                                onTap: (){
+                                  _selectDate(context);
+                                },
+                                keyboardType: TextInputType.text,
+                                labelText:'form_vehicle_year'.tr(),
+                                validator: (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                              )
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+                          Text(
+                            'register_routine_daily_title'.tr(),
+                            style: StyleGeneral.styleTextDescription,
+                            textAlign: TextAlign.left,
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Column(
+                                children: createRadioListQuestion(),
+                              ),
+
+                            ],
+                          ),
+
+
+                          SizedBox(
+                            height: 25.h,
+                          ),
+
+                          _isLoading ? ActivityIndicator() : CustomButton(
+                            text: 'profile_update_button'.tr(),
+                            fullscreen: true,
+                            onTap: (){
+                              _UpdateDriver();
+                            },
+                          ),
+
+                          SizedBox(
+                            height: 15.h,
+                          ),
+
+                        ],
                       ),
                     )
 

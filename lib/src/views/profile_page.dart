@@ -29,7 +29,15 @@ class _ProfilePageState extends State<ProfilePage> {
         ? ActivityIndicator(marginTop: 50)
         : Scaffold(
             key: _scaffoldKey,
-            extendBodyBehindAppBar: true,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(65.h),
+              child: AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  automaticallyImplyLeading: false,
+                  flexibleSpace : ToolbarTitleCustom(title: 'profile_title'.tr())
+              ),
+            ),
             backgroundColor: Colors.white,
             body: ProfileDriver(driver: listDriverProvider.selectDriver,));
   }

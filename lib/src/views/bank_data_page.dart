@@ -31,10 +31,18 @@ class _BankDataPageState extends State<BankDataPage> {
     return listDriverProvider.isLoading
         ? ActivityIndicator(marginTop: 50)
         : Scaffold(
-        key: _scaffoldKey,
-        extendBodyBehindAppBar: true,
-        backgroundColor: Colors.white,
-        body: DataBankDriver(driver: listDriverProvider.selectDriver,));
+          key: _scaffoldKey,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(65.h),
+            child: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                automaticallyImplyLeading: false,
+                flexibleSpace : ToolbarTitleCustom(title: 'data_bank_title'.tr())
+            ),
+          ),
+          backgroundColor: Colors.white,
+          body: DataBankDriver(driver: listDriverProvider.selectDriver,));
 
   }
 

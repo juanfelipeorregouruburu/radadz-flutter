@@ -50,6 +50,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints viewportConstraints) {
         return SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 15.w),
           child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: viewportConstraints.maxHeight,
@@ -57,17 +59,6 @@ class _DataBankDriverState extends State<DataBankDriver> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Container(
-                      height: 120.h,
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text(
-                          'data_bank_title'.tr(),
-                          style: StyleGeneral.styleTextTitle,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
 
                     Expanded(
                       child: Padding(
