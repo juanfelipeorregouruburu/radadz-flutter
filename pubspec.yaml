@@ -56,9 +56,11 @@ dev_dependencies:
   flutter_native_splash: any
 
 flutter_native_splash:
-  image: assets/logo_tipo.png
-  color: "#FFFFFF"
+  image: assets/icon_main.png
+  color: "#000000"
   android_disable_fullscreen: true
+  android_12:
+    image: assets/icon_main.png
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
