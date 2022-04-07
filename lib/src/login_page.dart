@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           return false;
         },
         child: Scaffold(
-          backgroundColor: StyleGeneral.BLACK,
+          backgroundColor: StyleGeneral.BLACK_DARK,
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width,
-                    child: Image (image: AssetImage('assets/background.png')),
+                    child: Image (image: AssetImage('assets/logo_radaz_transparente.png'))
                   ),
                   SizedBox(
                     height: 30.h,

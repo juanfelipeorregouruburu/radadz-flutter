@@ -26,7 +26,7 @@ class StyleGeneral {
   static final Color RED = Color(0xFFB20B32);
   static final Color YELLOW = Color(0xFFFFD200);
   static final Color ORANGE = Color(0xFFFF8B00);
-  static final Color GREEN = Color(0xFF2C7245);
+  static final Color GREEN = Color(0xFF48b74c);
 
   static final Color GREEN_LIGTH_50 = Color(0xFF96d68e);
   static final Color GREEN_LIGTH_25 = Color(0xFFbce3b7);
