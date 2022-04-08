@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="adintelo.com.radadz_app">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
    <application
-        android:label="radadz_app"
+        android:label="LoudTv"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
