@@ -19,7 +19,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    MaterialColor colorCustom = MaterialColor(0xFF2C7245, StyleGeneral.colors);
+    MaterialColor colorCustom = MaterialColor(0xFF48b74c, StyleGeneral.colors);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ScreenUtilInit(
         designSize: Size(360, 690),
@@ -39,9 +39,18 @@ class _AppState extends State<App> {
             locale: context.locale,
             home: widget.autenticado  ? HomePage() : LoginPage(),
             routes: getAplicationRoutes(),
+            builder: (context, widget) {
+              ScreenUtil.setContext(context);
+              return MediaQuery(
+                //Setting font does not change with system font size
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: widget,
+              );
+            },
             theme: ThemeData(
-                primarySwatch: colorCustom),
-            builder: EasyLoading.init()
+                scaffoldBackgroundColor: Colors.blueGrey[50],
+                primarySwatch: colorCustom
+            ),
           ),
         )
     );
