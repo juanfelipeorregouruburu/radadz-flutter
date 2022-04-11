@@ -26,11 +26,6 @@ class InputCustom extends StatelessWidget {
     @required this.controller,
   }) : super(key: key);
 
-  static OutlineInputBorder borderinput = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(15.0),
-    borderSide: BorderSide(color: Colors.green),
-  );
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -44,13 +39,20 @@ class InputCustom extends StatelessWidget {
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(left: 14.0, bottom: 12.h, top: 12.h),
         filled: true,
         fillColor: StyleGeneral.GREY,
         hintText: hintText,
-        enabledBorder: borderinput,
-        border: borderinput,
-        focusedBorder: borderinput,
+        hintStyle: TextStyle(
+          color: StyleGeneral.BLACK,
+          fontSize: ScreenUtil().setSp(12.sp),
+          fontFamily: "Poppins-Regular",
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            )
+        ),
       ),
       style: new TextStyle(
         color: StyleGeneral.BLACK,
@@ -114,6 +116,78 @@ class InputTextfield extends StatelessWidget {
       style: new TextStyle(
         color: StyleGeneral.BLACK,
         fontSize: ScreenUtil().setSp(13.sp),
+        fontFamily: "Poppins-Regular",
+      ),
+      validator: validator,
+    );
+  }
+}
+
+class CustomInputTextfieldPassword extends StatelessWidget {
+  final Function onPressed;
+  final String hintText;
+  final String labelText;
+  final bool obscureText;
+  final bool passwordVisible;
+  final Function validator;
+  final FocusNode focusNode;
+  final Function onFieldSubmitted;
+  final TextInputAction textInputAction;
+  final TextInputType keyboardType;
+  final TextEditingController controller;
+
+  const CustomInputTextfieldPassword({
+    Key key ,
+    this.hintText,
+    this.labelText,
+    this.onPressed,
+    this.obscureText  = false,
+    this.passwordVisible  = false,
+    this.onFieldSubmitted,
+    this.textInputAction = TextInputAction.next,
+    this.keyboardType = TextInputType.text,
+    @required this.focusNode,
+    @required this.validator,
+    @required this.controller,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      focusNode: focusNode,
+      textAlign: TextAlign.left,
+      maxLength: 16,
+      textInputAction: textInputAction,
+      obscureText: this.obscureText,
+      keyboardType:this.keyboardType ,
+      cursorColor: StyleGeneral.BLACK,
+      textCapitalization: TextCapitalization.words,
+      decoration: InputDecoration(
+        labelText: labelText,
+        fillColor: StyleGeneral.GREY,
+        filled: true,
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: StyleGeneral.BLACK,
+          fontSize: ScreenUtil().setSp(12.sp),
+          fontFamily: "Poppins-Regular",
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            )
+        ),
+        suffixIcon: IconButton(
+            icon: Icon(passwordVisible? Icons.visibility: Icons.visibility_off),
+            onPressed: onPressed
+        ),
+      ),
+      style: new TextStyle(
+        color: StyleGeneral.BLACK,
+        fontSize: ScreenUtil().setSp(15),
         fontFamily: "Poppins-Regular",
       ),
       validator: validator,
