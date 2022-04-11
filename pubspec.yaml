@@ -56,7 +56,7 @@ dev_dependencies:
   flutter_native_splash: any
 
 flutter_native_splash:
-  image: assets/icon.png
+  image: assets/logo_radaz_transparente.png
   color: "#171817"
   android_disable_fullscreen: true
   android_12:
