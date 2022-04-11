@@ -72,3 +72,4 @@ export 'package:radadz_app/src/widgets/activity_indicator.dart';
 export 'package:radadz_app/src/widgets/back_button_custom.dart';
 export 'package:radadz_app/src/widgets/empty_data_custom.dart';
 export 'package:radadz_app/src/widgets/toolbar_title_custom.dart';
+export 'package:radadz_app/src/widgets/alert_message_error.dart';

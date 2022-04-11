@@ -68,6 +68,11 @@ class StyleGeneral {
       letterSpacing: .5,
       fontSize: ScreenUtil().setSp(15),
       fontFamily: 'Poppins-Semi');
+
+  static final styleTextAlert = TextStyle(
+      color: StyleGeneral.WHITE,
+      fontSize: ScreenUtil().setSp(17),
+      fontFamily: 'Poppins-Regular');
   //PADDING
   static final double FONT_SIZE_TITLE_DETAIL = ScreenUtil().setSp(5);
 
