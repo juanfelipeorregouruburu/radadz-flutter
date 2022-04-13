@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:radadz_app/src/utils/export.dart';
+import 'dart:convert';
 
 class DataBankDriver extends StatefulWidget {
-  final Driver driver;
-  const DataBankDriver({Key key, @required this.driver}) : super(key: key);
+  const DataBankDriver({Key key}) : super(key: key);
 
   @override
   _DataBankDriverState createState() => _DataBankDriverState();
@@ -23,20 +22,31 @@ class _DataBankDriverState extends State<DataBankDriver> {
   BankAcountType _bankAcountType;
   bool stateReview = false;
 
+  Map<String, dynamic> _map;
+
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     _updateDataBankDriverBloc = new UpdateDataBankDriverBloc();
+    getDataDriver();
+  }
 
-    if(widget.driver.account_type_bank_driver != null && widget.driver.bank_name_driver != null){
-      _updateDataBankDriverBloc.account_type_id = widget.driver.account_type_bank_driver.id;
-      _updateDataBankDriverBloc.bank_id = widget.driver.account_type_bank_driver.id;
-      _inputNumberCountController.text = widget.driver.accoutNumber ;
-      stateReview = true ;
+  getDataDriver(){
+    String data = prefs.getDriver();
+    if(data == null){
+      print('no data in preferences');
+    }else {
+      _map = jsonDecode(data);
+
+      if(_map['account_type'] != null && _map['bank_name'] != null){
+        _inputNumberCountController.text = _map['account_number'];
+        _updateDataBankDriverBloc.account_type_id = _map['account_type']['id'];
+        _updateDataBankDriverBloc.bank_id = _map['bank_name']['id'];
+        stateReview = true ;
+      }
     }
-
   }
 
   @override
@@ -143,7 +153,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
               if(stateReview){
                 bankTypeList.asMap().forEach((index, value) => {
-                  if(widget.driver.bank_name_driver.id == value.id){
+                  if(_map['bank_name']['id'] == value.id){
                     _bank = bankTypeList[index]
                   }
                 });
@@ -218,7 +228,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
               if(stateReview){
                 bankAccountTypeList.asMap().forEach((index, value) => {
-                  if(widget.driver.account_type_bank_driver.id == value.id){
+                  if(_map['account_type']['id'] == value.id){
                     _bankAcountType = bankAccountTypeList[index]
                   }
                 });
@@ -293,11 +303,21 @@ class _DataBankDriverState extends State<DataBankDriver> {
       setState(() {
         _isLoading = false;
       });
-      if (data.error == 1) {
-        showSuccess(data.response);
-      } else {
-        showError(data.response);
-      }
+
+      var dialog = AlertMessageError(
+          icon: data.error == 1 ? "success" : "error",
+          message: data.response
+      );
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(Duration(seconds: 3), () {
+              Navigator.of(context).pop(true);
+            });
+            return dialog;
+          }
+      );
 
     });
 
