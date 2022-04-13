@@ -2,7 +2,7 @@ class API {
   static final String _URL = "https://radadz.herokuapp.com/api/";
 
   /* API LIST */
-  static final String SET_LOGIN = _URL + "log";
+  static final String SET_LOGIN = _URL + "driver_log";
   static final String GET_TYPE_DOCUMENTS = _URL + "list_documenttype";
   static final String GET_TYPE_VEHICLE = _URL + "list_vehicletype";
   static final String GET_BANK_LIST = _URL + "list_bank";

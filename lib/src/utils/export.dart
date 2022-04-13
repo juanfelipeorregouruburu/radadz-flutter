@@ -21,7 +21,7 @@ export 'package:radadz_app/src/models/bank_list_model.dart';
 export 'package:radadz_app/src/models/bank_acount_type_model.dart';
 export 'package:radadz_app/src/models/question_model.dart';
 export 'package:radadz_app/src/models/vehicles_type_model.dart';
-export 'package:radadz_app/src/models/list_driver_model.dart';
+export 'package:radadz_app/src/models/driver_model.dart';
 export 'package:radadz_app/src/models/payments_received_model.dart';
 
 /* PROVIDERS */

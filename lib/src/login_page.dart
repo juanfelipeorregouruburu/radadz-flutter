@@ -155,11 +155,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
 
                             SizedBox(
-                              height: 15.h,
+                              height: 5.h,
                             ),
 
                             Container(
-                            margin: EdgeInsets.fromLTRB(10.h, 20.w, 10.w, 20.h),
+                            margin: EdgeInsets.fromLTRB(10.h, 20.w, 10.w, 10.h),
                             child: Center(
                               child: Text.rich(
                                         TextSpan(
@@ -168,8 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   text: "no_register".tr(),
                                                   style: TextStyle(
                                                       color: StyleGeneral.WHITE,
-                                                      letterSpacing: .5,
-                                                      fontSize: ScreenUtil().setSp(14),
+                                                      fontSize: ScreenUtil().setSp(12),
                                                       fontFamily: 'Poppins-Medium')
                                               ),
                                               TextSpan(
@@ -180,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     },
                                                   style: TextStyle(
                                                       color: StyleGeneral.WHITE,
-                                                      fontSize: ScreenUtil().setSp(16),
+                                                      fontSize: ScreenUtil().setSp(13),
                                                       fontFamily: 'Poppins-Bold')
                                               )
                                           ]
@@ -225,16 +224,18 @@ class _LoginPageState extends State<LoginPage> {
 
       _signInBloc.data.listen((data) {
 
+        setState(() {
+          _isLoading = false;
+        });
+
         if (data.error == 1) {
           prefs.setAuth = true;
           prefs.setToken = data.token;
           prefs.setDriverId = data.driver_id;
+          prefs.setDriver = data.driver;
           Navigator.pushReplacementNamed(context, "home");
         } else {
           prefs.setAuth = false;
-          setState(() {
-            _isLoading = false;
-          });
 
           var dialog = AlertMessageError(
               icon: "error",

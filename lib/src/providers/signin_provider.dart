@@ -10,9 +10,9 @@ class LoginProvider {
       "username": phone,
       "password": password,
     });
-    print(response.body);
+
     if(response.statusCode == 200) {
-      return SingninModel.fromJson(json.decode(response.body));
+      return SingninModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
