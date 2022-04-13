@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:radadz_app/src/blog/update_driver_bloc.dart';
@@ -5,8 +7,8 @@ import 'package:radadz_app/src/utils/export.dart';
 
 
 class ProfileDriver extends StatefulWidget {
-  final Driver driver;
-  const ProfileDriver({Key key, @required this.driver,}) : super(key: key);
+
+  const ProfileDriver({Key key}) : super(key: key);
 
   @override
   _ProfileDriverState createState() => _ProfileDriverState();
@@ -14,35 +16,10 @@ class ProfileDriver extends StatefulWidget {
 
 class _ProfileDriverState extends State<ProfileDriver> {
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _updateDriverBloc = new UpdateDriverBloc();
-    questionRegisterList = QuestionRegister.getQuestions();
-    //
-    _inputNameFirstController.text = widget.driver.first_name;
-    _inputNameSecondController.text = widget.driver.second_name;
-    _inputLastNameFirstController.text = widget.driver.first_lastname;
-    _inputLastNameSecondController.text = widget.driver.second_lastname;
-    _inputDocumentoController.text = widget.driver.document_number;
-    _inputAddressController.text = widget.driver.address;
-    _inputNummberLicenceController.text = widget.driver.license_plate_number;
-    _inputYearLicenceController.text = widget.driver.vehicle_year;
-    _inputDateController.text = widget.driver.birth_date;
-
-    _updateDriverBloc.document_type = widget.driver.vehicle_type.id;
-    _updateDriverBloc.vehicule_type = widget.driver.document_type.id;
-
-    questionRegisterList.asMap().forEach((index, value) => {
-      if(widget.driver.driving_daily_routine == value.textQuestion){
-        selectionQuestion = questionRegisterList[index]
-      }
-    });
-
-  }
-
+  final prefs = new Preferences();
+  bool _isLoading = false;
   UpdateDriverBloc _updateDriverBloc;
+  Map<String, dynamic> _map;
 
   /* editext*/
   TextEditingController _inputNameFirstController = new TextEditingController();
@@ -66,16 +43,52 @@ class _ProfileDriverState extends State<ProfileDriver> {
   final FocusNode _yearLicenceFocus = FocusNode();
   final FocusNode _dateFocus = FocusNode();
 
-  bool _isLoading = false;
   DocumentType _documentType;
   VehicleType _vehicleType;
 
   String _inputStrDate;
 
-  final prefs = new Preferences();
-
   List<QuestionRegister> questionRegisterList;
   QuestionRegister selectionQuestion;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _updateDriverBloc = new UpdateDriverBloc();
+    questionRegisterList = QuestionRegister.getQuestions();
+    getDataDriver();
+  }
+
+  getDataDriver(){
+    String data = prefs.getDriver();
+    if(data == null){
+      print('no data in preferences');
+    }else {
+      _map = jsonDecode(data);
+
+      _inputNameFirstController.text = _map['first_name'];
+      _inputNameSecondController.text = _map['second_name'];
+      _inputLastNameFirstController.text = _map['first_lastname'];
+      _inputLastNameSecondController.text = _map['second_lastname'];
+      _inputDocumentoController.text = _map['document_number'];
+      _inputAddressController.text = _map['address'];
+      _inputNummberLicenceController.text = _map['license_plate_number'];
+      _inputYearLicenceController.text = _map['vehicle_year'];
+      _inputDateController.text = _map['birth_date'];
+      _inputDateController.text = _map['birth_date'];
+
+       _updateDriverBloc.document_type = _map['document_type']['id'];
+       _updateDriverBloc.vehicule_type = _map['vehicle_type']['id'];
+
+
+      questionRegisterList.asMap().forEach((index, value) => {
+        if(_map['driving_daily_routine'] == value.textQuestion){
+          selectionQuestion = questionRegisterList[index]
+        }
+      });
+    }
+  }
 
   setSelectedQuestion(QuestionRegister questionRegister) {
     setState(() {
@@ -143,7 +156,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                     keyboardType: TextInputType.text,
                                     textInputAction: TextInputAction.next,
                                     labelText: 'form_first_name'.tr(),
-                                    hintText: widget.driver.first_name,
+                                    hintText: _map['first_name'],
                                     validator: (value) {
                                       if (value.isEmpty) return 'required_field'.tr();
                                       return null;
@@ -166,7 +179,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                     keyboardType: TextInputType.text,
                                     textInputAction: TextInputAction.next,
                                     labelText: 'form_second_name'.tr(),
-                                    hintText: widget.driver.second_name,
+                                    hintText: _map['second_name'],
                                     validator: (value) {
 
                                     },
@@ -196,7 +209,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   keyboardType: TextInputType.text,
                                   textInputAction: TextInputAction.next,
                                   labelText: 'form_first_lastname'.tr(),
-                                  hintText: widget.driver.first_lastname,
+                                  hintText: _map['first_lastname'],
                                   validator: (value) {
                                     if (value.isEmpty) return 'required_field'.tr();
                                     return null;
@@ -219,7 +232,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   keyboardType: TextInputType.text,
                                   textInputAction: TextInputAction.next,
                                   labelText: 'form_second_lastname'.tr(),
-                                  hintText: widget.driver.second_lastname,
+                                  hintText: _map['second_lastname'],
                                   validator: (value) {
 
                                   },
@@ -254,7 +267,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   _fieldFocusChange(context, _documentoFocus, _addressFocus);
                                 },
                                 labelText:'form_document_number'.tr(),
-                                hintText: widget.driver.document_number,
+                                hintText: _map['document_number'],
                                 validator: (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -277,7 +290,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   _fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
                                 },
                                 labelText:'form_address'.tr(),
-                                hintText: widget.driver.address,
+                                hintText: _map['address'],
                                 validator: (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -309,7 +322,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
                                 },
                                 labelText:'form_license_plate_number'.tr(),
-                                hintText: widget.driver.license_plate_number,
+                                hintText: _map['license_plate_number'],
                                 validator: (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -333,7 +346,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
                                 },
                                 labelText:'form_vehicle_year'.tr(),
-                                hintText: widget.driver.vehicle_year,
+                                hintText: _map['vehicle_year'],
                                 validator: (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -356,7 +369,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                   _selectDate(context);
                                 },
                                 keyboardType: TextInputType.text,
-                                labelText:'form_vehicle_year'.tr(),
+                                labelText:'form_birth_date'.tr(),
                                 validator: (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -437,7 +450,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
             List<DocumentType> documentTypeList = snapshot.data.documentsType;
             if(documentTypeList != null){
               documentTypeList.asMap().forEach((index, value) => {
-                if(widget.driver.document_type.id == value.id){
+                if(_map['document_type']['id'] == value.id){
                   _documentType = documentTypeList[index]
                 }
               });
@@ -508,7 +521,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
             List<VehicleType> vehicleTypeList = snapshot.data.vehiclesType;
             if(vehicleTypeList != null){
               vehicleTypeList.asMap().forEach((index, value) => {
-                if(widget.driver.vehicle_type.id == value.id){
+                if(_map['vehicle_type']['id']== value.id){
                   _vehicleType = vehicleTypeList[index]
                 }
               });
@@ -596,8 +609,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
     _updateDriverBloc.lastName_first = _inputLastNameFirstController.text.trim();
     _updateDriverBloc.lastName_second = _inputLastNameSecondController.text.trim();
     _updateDriverBloc.document_number = _inputDocumentoController.text.trim();
-    _updateDriverBloc.email = widget.driver.email;
-    _updateDriverBloc.phone = widget.driver.phone;
+    _updateDriverBloc.email = _map['email'];
+    _updateDriverBloc.phone = _map['phone'];
     _updateDriverBloc.address = _inputAddressController.text.trim();
     _updateDriverBloc.date_birth = _inputDateController.text.trim();
     _updateDriverBloc.licence_number = _inputNummberLicenceController.text.trim();
@@ -612,11 +625,21 @@ class _ProfileDriverState extends State<ProfileDriver> {
       setState(() {
         _isLoading = false;
       });
-      if(data.error == 1){
-        showSuccess(data.response);
-      }else{
-        showError(data.response);
-      }
+
+      var dialog = AlertMessageError(
+          icon: data.error == 1 ? "success" : "error",
+          message: data.response
+      );
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(Duration(seconds: 3), () {
+              Navigator.of(context).pop(true);
+            });
+            return dialog;
+          }
+      );
     });
   }
 }
