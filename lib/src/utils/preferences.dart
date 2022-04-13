@@ -1,10 +1,10 @@
+import 'dart:convert';
+import 'package:radadz_app/src/utils/export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class Preferences {
 
   static Preferences _instance = new Preferences._internal();
-
 
   factory Preferences() {
     return _instance;
@@ -36,7 +36,7 @@ class Preferences {
   }
 
   get getDriverId {
-    return _preferences.getString('driver_id') ?? false;
+    return _preferences.getString('driver_id') ?? '';
   }
 
   set setDriverId( String driver_id ) {
@@ -51,7 +51,12 @@ class Preferences {
     return _preferences.getString('token') ?? '';
   }
 
+  set setDriver(Driver driver){
+    _preferences.setString("driver", json.encode(driver));
+  }
 
-
+  getDriver() {
+    return _preferences.getString("driver");
+  }
 
 }
