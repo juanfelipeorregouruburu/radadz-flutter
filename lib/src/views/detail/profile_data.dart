@@ -50,6 +50,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
   List<QuestionRegister> questionRegisterList;
   QuestionRegister selectionQuestion;
+  bool _stateReviewVehicle = true;
+  bool _stateReviewDocumentType = true;
 
   @override
   void initState() {
@@ -449,11 +451,13 @@ class _ProfileDriverState extends State<ProfileDriver> {
           if(snapshot.hasData){
             List<DocumentType> documentTypeList = snapshot.data.documentsType;
             if(documentTypeList != null){
-              documentTypeList.asMap().forEach((index, value) => {
-                if(_map['document_type']['id'] == value.id){
-                  _documentType = documentTypeList[index]
-                }
-              });
+
+              if(_stateReviewDocumentType)
+                documentTypeList.asMap().forEach((index, value) => {
+                  if(_map['document_type']['id'] == value.id){
+                    _documentType = documentTypeList[index]
+                  }
+                });
 
               return Center(
                   child: Container(
@@ -489,6 +493,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                             setState(() {
                               _documentType = documentType;
                               _updateDriverBloc.document_type = documentType.id;
+                              _stateReviewDocumentType = false;
                             });
                           },
                           isExpanded: true,
@@ -520,11 +525,13 @@ class _ProfileDriverState extends State<ProfileDriver> {
           if(snapshot.hasData){
             List<VehicleType> vehicleTypeList = snapshot.data.vehiclesType;
             if(vehicleTypeList != null){
-              vehicleTypeList.asMap().forEach((index, value) => {
-                if(_map['vehicle_type']['id']== value.id){
-                  _vehicleType = vehicleTypeList[index]
-                }
-              });
+
+              if(_stateReviewVehicle)
+                vehicleTypeList.asMap().forEach((index, value) => {
+                  if(_map['vehicle_type']['id']== value.id){
+                    _vehicleType = vehicleTypeList[index]
+                  }
+                });
 
               return Center(
                   child: Container(
@@ -560,6 +567,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                             setState(() {
                               _vehicleType = vehicleType;
                               _updateDriverBloc.vehicule_type = vehicleType.id;
+                              _stateReviewVehicle = false;
                             });
                           },
                           isExpanded: true,
@@ -625,6 +633,10 @@ class _ProfileDriverState extends State<ProfileDriver> {
       setState(() {
         _isLoading = false;
       });
+
+      if(data.error == 1){
+        prefs.setDriver = data.driver;
+      }
 
       var dialog = AlertMessageError(
           icon: data.error == 1 ? "success" : "error",

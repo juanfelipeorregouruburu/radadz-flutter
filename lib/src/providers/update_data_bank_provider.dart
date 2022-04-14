@@ -5,7 +5,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class UpdateDataBankProvider {
   final pref = Preferences();
-  Future<ResponseModel> UpdateDataBankDriver(String driver_id, String data_bank, String account_number ,  String account_type) async {
+  Future<updateDataBankModel> UpdateDataBankDriver(String driver_id, String data_bank, String account_number ,  String account_type) async {
     var url = Uri.parse(API.UPDT_DATE_BANK );
 
     String token = await pref.getToken;
@@ -20,7 +20,7 @@ class UpdateDataBankProvider {
     });
 
     if(response.statusCode == 200) {
-      return ResponseModel.fromJson(json.decode(response.body));
+      return updateDataBankModel.fromJson(json.decode(response.body));
     }else{
       throw Exception("Fallo al petición");
     }
