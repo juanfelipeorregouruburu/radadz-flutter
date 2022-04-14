@@ -8,7 +8,6 @@ class Repository {
   final bankListProvider = BankListProvider();
   final bankAccountTypeProvider = BankAcountTypeProvider();
   final vehiclesTypeProvider = VehicleTypeProvider();
-  final listDriverProvider = ListDriverProvider();
   final listPaymentReceivedDriverProvider = ListPaymentRecivedDriverProvider();
   final updateDataBankProvider = UpdateDataBankProvider();
   final updateDriverProvider = UpdateDriverProvider();

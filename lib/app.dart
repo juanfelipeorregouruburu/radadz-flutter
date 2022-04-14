@@ -25,9 +25,6 @@ class _AppState extends State<App> {
         designSize: Size(360, 690),
         builder: () => MultiProvider(
           providers: [
-            ChangeNotifierProvider<ListDriverBloc>(
-              create: (_) => ListDriverBloc(),
-            ),
             ChangeNotifierProvider<ListPaymentReceivedDriverBloc>(
               create: (_) => ListPaymentReceivedDriverBloc(),
             ),
