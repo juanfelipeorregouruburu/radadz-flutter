@@ -38,15 +38,12 @@ class Repository {
       saveDriverProvider.SaveDriver(name_first, name_second, lastNameFirst , lastNameSecond , document_type, document_number,
                                     email, phone , password, address , date_birth,  licence_number , vehicule_type, vehicule_year , driving_daily_routine);
 
-  /* ListDriver */
-  Future<ListDriverModel> list_driver_id(String driver_id) => listDriverProvider.ListDriverId(driver_id);
-
   /* ListPaymentReceivedDriver */
   Future<PaymentRecivedModel> list_payment_received_driver( String driver_id, String start_time, String end_date) =>
                       listPaymentReceivedDriverProvider.ListPaymentReceivedDriver(driver_id,start_time,end_date);
 
   /* UpdateDataBank */
-  Future<ResponseModel> update_data_bank_driver(String driver_id, String bank_id, String account_number , String account_type_id) =>
+  Future<updateDataBankModel> update_data_bank_driver(String driver_id, String bank_id, String account_number , String account_type_id) =>
       updateDataBankProvider.UpdateDataBankDriver(driver_id, bank_id,account_number,account_type_id);
 
   /* UpdateDriver*/

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:radadz_app/src/utils/export.dart';
+import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:radadz_app/src/utils/export.dart';
 
 class DataBankDriver extends StatefulWidget {
   const DataBankDriver({Key key}) : super(key: key);
@@ -20,7 +21,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
   Bank _bank;
   BankAcountType _bankAcountType;
-  bool stateReview = false;
+  bool _stateReviewBank = true;
+  bool _stateReviewAcountType = true;
 
   Map<String, dynamic> _map;
 
@@ -44,7 +46,6 @@ class _DataBankDriverState extends State<DataBankDriver> {
         _inputNumberCountController.text = _map['account_number'];
         _updateDataBankDriverBloc.account_type_id = _map['account_type']['id'];
         _updateDataBankDriverBloc.bank_id = _map['bank_name']['id'];
-        stateReview = true ;
       }
     }
   }
@@ -150,11 +151,10 @@ class _DataBankDriverState extends State<DataBankDriver> {
             List<Bank> bankTypeList = snapshot.data.bankType;
 
             if(bankTypeList != null){
-
-              if(stateReview){
-                bankTypeList.asMap().forEach((index, value) => {
+              if(_stateReviewBank){
+                bankTypeList.asMap().forEach((index, value) {
                   if(_map['bank_name']['id'] == value.id){
-                    _bank = bankTypeList[index]
+                    _bank = bankTypeList[index];
                   }
                 });
               }
@@ -192,6 +192,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
                             setState(() {
                               _bank = bank;
                               _updateDataBankDriverBloc.bank_id= _bank.id;
+                              _stateReviewBank = false;
                             });
                           },
                           isExpanded: true,
@@ -226,7 +227,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
             if(bankAccountTypeList != null){
 
-              if(stateReview){
+              if(_stateReviewAcountType){
                 bankAccountTypeList.asMap().forEach((index, value) => {
                   if(_map['account_type']['id'] == value.id){
                     _bankAcountType = bankAccountTypeList[index]
@@ -267,6 +268,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
                             setState(() {
                               _bankAcountType = _bankAccountType;
                               _updateDataBankDriverBloc.account_type_id= _bankAccountType.id;
+                              _stateReviewAcountType = false;
                             });
                           },
                           isExpanded: true,
@@ -300,15 +302,19 @@ class _DataBankDriverState extends State<DataBankDriver> {
     _updateDataBankDriverBloc.UpdateDataBank();
 
     _updateDataBankDriverBloc.data.listen((data) {
+
       setState(() {
         _isLoading = false;
       });
 
+      if(data.error == 1){
+        prefs.setDriver = data.driver;
+      }
       var dialog = AlertMessageError(
           icon: data.error == 1 ? "success" : "error",
           message: data.response
       );
-
+      SystemChannels.textInput.invokeMethod('TextInput.hide');
       showDialog(
           context: context,
           builder: (BuildContext context) {

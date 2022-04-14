@@ -13,7 +13,7 @@ export 'package:radadz_app/src/utils/debouncer.dart';
 
 /* MODELS */
 export 'package:radadz_app/src/models/signin_model.dart';
-export 'package:radadz_app/src/models/response.dart';
+export 'package:radadz_app/src/models/update_data_bank_model.dart';
 export 'package:radadz_app/src/models/save_driver_model.dart';
 export 'package:radadz_app/src/models/update_driver_model.dart';
 export 'package:radadz_app/src/models/document_type_model.dart';
