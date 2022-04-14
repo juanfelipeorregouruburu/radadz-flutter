@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/slider/navigation.dart';
@@ -17,11 +18,15 @@ class SiderLayout extends StatefulWidget {
 
 class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStateMixin<SiderLayout> {
 
+  final prefs = new Preferences();
   AnimationController _animationController;
   StreamController<bool> isSidebarOpenedStreamController;
   Stream<bool> isSidebarOpenedStream;
   StreamSink<bool> isSidebarOpenedSink;
   final _animationDuration = const Duration(milliseconds: 100);
+
+  Map<String, dynamic> _map;
+  String nameUser;
 
   @override
   void initState() {
@@ -34,6 +39,8 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
     isSidebarOpenedStream = isSidebarOpenedStreamController.stream;
     isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
 
+    _map = jsonDecode(prefs.getDriver());
+    nameUser = _map['first_name'] +" "+_map['second_name'] ;
   }
 
   @override
@@ -61,8 +68,6 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeigth = MediaQuery.of(context).size.height;
-    double top = 0;
 
     return StreamBuilder<bool>(
       initialData: false,
@@ -84,12 +89,30 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                       height: double.infinity,
                       decoration: BoxDecoration(color: Colors.black),
                     ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(10.h, 0, 15.h, 5.h),
+                        width: 75.h,
+                        height: 25.w,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'version'.tr() + " 1.0.2",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenUtil().setSp(8),
+                            fontFamily: 'Poppins-Semi',
+                          ),
+                        ),
+                      ),
+                    ),
+
                     Container(
-                      padding: EdgeInsets.only(left: 30.w, right: 10.w, top: 20.w),
+                      padding: EdgeInsets.only(left: 30.w, right: 10.w, top: 50.w),
                       child: Column(
                         children: [
                           Flexible(
-                            flex:2,
+                            flex:1,
                             fit: FlexFit.loose,
                             child: IntrinsicHeight(
                               child: Row(
@@ -97,7 +120,25 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                   children: [
                                     Expanded(
                                       flex: 8,
-                                      child: Container()
+                                      child: Column(children: [
+                                        Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                                'menu_title_top'.tr(),
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Regular')
+                                            )
+                                        ),
+                                        SizedBox(height: 5),
+                                        Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(nameUser,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
+                                            )
+                                        ),
+                                      ]
+                                      ),
                                     ),
                                     Expanded(
                                       flex: 2,
@@ -165,16 +206,6 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       },
                                       padding: 16.w,
                                     ),
-                                    SizedBox(height: 15.h),
-                                    MenuItem(
-                                      title: 'menu_title_history_video'.tr(),
-                                      icon: AssetImage("assets/menu/icono_terminos_politica.png"),
-                                      onTap: () {
-                                        onIconPressed();
-                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.TripsHistoryClickedEvent);
-                                      },
-                                      padding: 16.w,
-                                    ),
 
                                     SizedBox(height: 15.h),
                                     MenuItem(
@@ -188,7 +219,6 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                     ),
 
                                     SizedBox(height: 15.h),
-
                                     MenuItem(
                                       title: 'menu_title_profile_data'.tr(),
                                       icon: AssetImage("assets/menu/icono_usuario.png"),

@@ -1,8 +1,9 @@
 {
+  "menu_title_top" : "!Hola!",
+  "version" : "versión",
   "menu_title_start_trip" : "Inicio Viaje",
   "menu_title_history_trip" : "Historial de viajes",
   "menu_title_history_payment" : "Pagos recibidos",
-  "menu_title_history_video" : "Videos descargados",
   "menu_title_bank_data" : "Datos bancarios",
   "menu_title_profile_data" : "Mi perfil",
   "menu_title_log_out" : "cerrar sessión",

@@ -35,7 +35,10 @@ class MenuItem extends StatelessWidget {
                   child: Text(
                       title,
                       textAlign: TextAlign.left,
-                      style: StyleGeneral.styleTextTitleMenu
+                      style: StyleGeneral.styleTextTitleMenu,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      maxLines: 1,
                   ),
                 ),
               ),
