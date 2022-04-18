@@ -75,7 +75,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
       builder: (context, isSideBarOpenedAsync) {
         return AnimatedPositioned(
           duration: _animationDuration,
-          top: 10.h,
+          top: 5.h,
           bottom: 0,
           left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
           right: isSideBarOpenedAsync.data ? -75.w : screenWidth - 75.w,
@@ -112,32 +112,43 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                       child: Column(
                         children: [
                           Flexible(
-                            flex:1,
+                            flex:2,
                             fit: FlexFit.loose,
                             child: IntrinsicHeight(
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       flex: 8,
-                                      child: Column(children: [
-                                        Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                                'menu_title_top'.tr(),
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Regular')
-                                            )
-                                        ),
-                                        SizedBox(height: 5),
-                                        Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(nameUser,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
-                                            )
-                                        ),
-                                      ]
+                                      child: Column(
+
+                                          children: [
+                                              Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                      'menu_title_top'.tr(),
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
+                                                  )
+                                              ),
+                                              SizedBox(height: 5),
+                                              Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Flexible(
+                                                    flex: 1,
+                                                    fit: FlexFit.loose,
+                                                    child: Text(
+                                                          nameUser,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          softWrap: true,
+                                                          maxLines: 2,
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Regular')
+                                                    ),
+                                                  )
+                                              ),
+                                        ]
                                       ),
                                     ),
                                     Expanded(
@@ -291,6 +302,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                       child: Image(
                         height: 50.h,
                         width: 50.h,
+                        color: StyleGeneral.GREEN,
                         image: AssetImage("assets/menu/icono_menu.png",),
                       )
                   ),
