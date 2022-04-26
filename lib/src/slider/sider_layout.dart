@@ -97,7 +97,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.0.2",
+                          'version'.tr() + " 1.0.4",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(8),
@@ -240,6 +240,16 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       padding: 16.w,
                                     ),
 
+                                    SizedBox(height: 15.h),
+                                    MenuItem(
+                                      title: 'menu_title_blurts'.tr(),
+                                      icon: AssetImage("assets/menu/icono_terminos_politica.png"),
+                                      onTap: () {
+                                        onIconPressed();
+                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.TripsHistoryClickedEvent);
+                                      },
+                                      padding: 16.w,
+                                    ),
                                     SizedBox(height: 25.h),
 
                                     Row(
