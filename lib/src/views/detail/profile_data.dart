@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:radadz_app/src/blog/update_driver_bloc.dart';
 import 'package:radadz_app/src/utils/export.dart';
+import 'dart:convert';
+import 'package:intl/intl.dart';
 
 
 class ProfileDriver extends StatefulWidget {
@@ -80,9 +78,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _inputDateController.text = _map['birth_date'];
       _inputDateController.text = _map['birth_date'];
 
-       _updateDriverBloc.document_type = _map['document_type']['id'];
-       _updateDriverBloc.vehicule_type = _map['vehicle_type']['id'];
-
+      _updateDriverBloc.document_type = _map['document_type']['id'];
+      _updateDriverBloc.vehicule_type = _map['vehicle_type']['id'];
 
       questionRegisterList.asMap().forEach((index, value) => {
         if(_map['driving_daily_routine'] == value.textQuestion){
