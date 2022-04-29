@@ -11,7 +11,6 @@ class SaveDriverProvider {
                               String vehicule_type, String vehicule_year, String driving_daily_routine ) async {
 
     var url = Uri.parse(API.SET_SAVE_DRIVER );
-    print(url);
 
     final response = await http.post(url, body: {
       "first_name": name_first,
@@ -31,8 +30,6 @@ class SaveDriverProvider {
       "driving_daily_routine": driving_daily_routine,
       "staff_approval_date":"yes"
     });
-
-    print(response.body);
 
     if(response.statusCode == 200) {
       return SaveDriverModel.fromJson(json.decode(response.body));

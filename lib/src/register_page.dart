@@ -12,14 +12,20 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final prefs = new Preferences();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
   SaveDriverBloc _saveDriverBloc;
-
-  bool _isLoading = false;
   DocumentType _documentType;
   VehicleType _vehicleType;
+
+  bool _isLoading = false;
+  bool _stateReviewVehicle = true;
+  bool _stateReviewDocumentType = true;
+  bool _passwordVisible = false;
+  String _inputStrDate;
 
   /* editext*/
   TextEditingController _inputNameFirstController = new TextEditingController();
@@ -33,8 +39,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _inputNummberLicenceController = new TextEditingController();
   TextEditingController _inputYearLicenceController = new TextEditingController();
   TextEditingController _inputDateController = new TextEditingController();
-  TextEditingController _inputPasswordController = new TextEditingController();
 
+  TextEditingController _inputPasswordController = new TextEditingController();
   final FocusNode _nameFirstFocus = FocusNode();
   final FocusNode _nameSecondFocus = FocusNode();
   final FocusNode _lastNameFirstFocus = FocusNode();
@@ -48,19 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode _dateFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
-  String _inputStrDate;
-  String _inputStrYear;
 
-  final prefs = new Preferences();
-
-  static OutlineInputBorder borderinput = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(15.r),
-    borderSide: BorderSide(color: Colors.green),
-  );
-
-  bool _passwordVisible = false;
-  Timer _timer;
-  double _progress;
 
   @override
   void initState() {
@@ -69,7 +63,32 @@ class _RegisterPageState extends State<RegisterPage> {
     _saveDriverBloc = new SaveDriverBloc();
     _passwordVisible = false;
     questionRegisterList = QuestionRegister.getQuestions();
+
+    questionRegisterList.asMap().forEach((index, value) {
+       selectionQuestion = questionRegisterList[0];
+      _saveDriverBloc.driving_daily_routine = questionRegisterList[0].textQuestion;
+    });
+
+    _saveDriverBloc.document_type = "1";
+    _saveDriverBloc.vehicule_type = "1";
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _inputNameFirstController.dispose();
+    _inputNameSecondController.dispose();
+    _inputLastNameFirstController.dispose();
+    _inputLastNameSecondController.dispose();
+    _inputDocumentoController.dispose();
+    _inputEmailController.dispose();
+    _inputPhoneController.dispose();
+    _inputAddressController.dispose();
+    _inputNummberLicenceController.dispose();
+    _inputYearLicenceController.dispose();
+    _inputDateController.dispose();
+  }
+
 
   List<QuestionRegister> questionRegisterList;
   QuestionRegister selectionQuestion;
@@ -109,436 +128,415 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
-            },
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.all(10.w),
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Center(
-                        child: Text(
-                          'register_title'.tr(),
-                          style: StyleGeneral.styleTextTitle,
-                          textAlign: TextAlign.left,
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          extendBodyBehindAppBar: true,
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                },
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: EdgeInsets.all(15.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Text(
+                            'register_title'.tr(),
+                            style: StyleGeneral.styleTextTitle,
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                      ),
 
-                      SizedBox(
-                        height: 25.h,
-                      ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
 
-                      Form(
-                        key: formState,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 25.h,
-                            ),
+                        Form(
+                          key: formState,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
 
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _nameFirstFocus,
-                                      controller: _inputNameFirstController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
-                                      },
-                                      labelText: 'form_first_name'.tr(),
-                                      hintText: 'form_first_name'.tr(),
-                                      validator: (value) {
-                                        if (value.isEmpty) return 'required_field'.tr();
-                                        return null;
-                                      },
-                                    )
-                                ),
-
-                                SizedBox(
-                                  width: 15.w,
-                                ),
-
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _nameSecondFocus,
-                                      controller: _inputNameSecondController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _nameSecondFocus, _lastNameFirstFocus);
-                                      },
-                                      labelText: 'form_second_name'.tr(),
-                                      hintText: 'form_second_name'.tr(),
-                                      validator: (value) {
-                                        return null;
-                                      },
-                                    )
-                                ),
-
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _lastNameFirstFocus,
-                                      controller: _inputLastNameFirstController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
-                                      },
-                                      labelText:'form_first_lastname'.tr(),
-                                      hintText: 'form_first_lastname'.tr(),
-                                      validator: (value) {
-                                        if (value.isEmpty) return 'required_field'.tr();
-                                        return null;
-                                      },
-                                    )
-                                ),
-
-                                SizedBox(
-                                  width: 15.w,
-                                ),
-
-                                Flexible(
-                                    flex: 2,
-                                    child: InputTextfield(
-                                      focusNode: _lastNameSecondFocus,
-                                      controller: _inputLastNameSecondController,
-                                      onFieldSubmitted: (term) {
-                                        _fieldFocusChange(context, _lastNameSecondFocus, _emailFocus);
-                                      },
-                                      labelText: 'form_second_lastname'.tr(),
-                                      hintText: 'form_second_lastname'.tr(),
-                                      validator: (value) {
-
-                                        return null;
-                                      },
-                                    )
-                                ),
-
-                              ],
-                            ),
-
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Container(
-                                width: double.infinity,
-                                child: _dataSpinnerDocumentType()
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _documentoFocus,
-                                  controller: _inputDocumentoController,
-                                  keyboardType: TextInputType.number,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _documentoFocus, _emailFocus);
-                                  },
-                                  labelText:'form_document_number'.tr(),
-                                  hintText: 'form_document_number'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _emailFocus,
-                                  controller: _inputEmailController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _emailFocus, _phoneFocus);
-                                  },
-                                  labelText:'form_email'.tr(),
-                                  hintText: 'email@gmail.com',
-                                  validator: (value) {
-                                    if(value.isEmpty){
-                                      return 'required_field'.tr();
-                                    }else {
-                                      Pattern pattern =
-                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      RegExp regex = new RegExp(pattern);
-                                      bool email_value = (!regex.hasMatch(value)) ? false : true;
-
-                                      if(!email_value)
-                                        return 'required_email'.tr();
-
-                                    }
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _phoneFocus,
-                                  controller: _inputPhoneController,
-                                  keyboardType: TextInputType.phone,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _phoneFocus, _addressFocus);
-                                  },
-                                  labelText:'form_phone'.tr(),
-                                  hintText: 'form_phone'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _addressFocus,
-                                  controller: _inputAddressController,
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
-                                  },
-                                  labelText:'form_address'.tr(),
-                                  hintText: 'form_address'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _numberLicenceFocus,
-                                  controller: _inputNummberLicenceController,
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
-                                  },
-                                  labelText:'form_license_plate_number'.tr(),
-                                  hintText: 'form_license_plate_number'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  }
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 25.h,
-                            ),
-                            Container(
-                                width: double.infinity,
-                                child: _dataSpinnerVehicleType()
-                            ),
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _yearLicenceFocus,
-                                  controller: _inputYearLicenceController,
-                                  keyboardType: TextInputType.number,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
-                                  },
-                                  labelText:'form_vehicle_year'.tr(),
-                                  hintText: 'form_vehicle_year'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  }
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            Flexible(
-                                flex: 2,
-                                child: InputTextfield(
-                                  focusNode: _dateFocus,
-                                  controller: _inputDateController,
-                                  onTap: (){
-                                    _selectDate(context);
-                                  },
-                                  keyboardType: TextInputType.text,
-                                  onFieldSubmitted: (term) {
-                                    _fieldFocusChange(context, _dateFocus, _passwordFocus);
-                                  },
-                                  hintText: 'yyyy-mm-dd',
-                                  labelText:'form_birth_date'.tr(),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'required_field'.tr();
-                                    return null;
-                                  },
-                                )
-                            ),
-
-                            SizedBox(
-                              height: 15.h,
-                            ),
-
-                            TextFormField(
-                              controller: _inputPasswordController,
-                              textAlign: TextAlign.left,
-                              obscureText: !_passwordVisible,
-                              keyboardType: TextInputType.text ,
-                              textCapitalization: TextCapitalization.words,
-                              textInputAction: TextInputAction.next,
-                              focusNode: _passwordFocus,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 14.0, bottom: 12.h, top: 12.h),
-                                filled: true,
-                                fillColor: StyleGeneral.GREY,
-                                hintText:  'form_driver_password'.tr(),
-                                enabledBorder: borderinput,
-                                border: borderinput,
-                                focusedBorder: borderinput,
-                                errorStyle: TextStyle(color: Colors.white),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    // Based on passwordVisible state choose the icon
-                                    _passwordVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: Theme.of(context).primaryColorDark,
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                      flex: 2,
+                                      child: InputTextfield(
+                                        focusNode: _nameFirstFocus,
+                                        controller: _inputNameFirstController,
+                                        onFieldSubmitted: (term) {
+                                          _fieldFocusChange(context, _nameFirstFocus, _nameSecondFocus);
+                                        },
+                                        labelText: 'form_first_name'.tr(),
+                                        hintText: 'form_first_name'.tr(),
+                                        validator: (value) {
+                                          if (value.isEmpty) return 'required_field'.tr();
+                                          return null;
+                                        },
+                                      )
                                   ),
-                                  onPressed: () {
-                                    // Update the state i.e. toogle the state of passwordVisible variable
-                                    setState(() {
-                                      _passwordVisible = !_passwordVisible;
-                                    });
-                                  },
-                                ),
+
+                                  SizedBox(
+                                    width: 15.h,
+                                  ),
+
+                                  Flexible(
+                                      flex: 2,
+                                      child: InputTextfield(
+                                        focusNode: _nameSecondFocus,
+                                        controller: _inputNameSecondController,
+                                        onFieldSubmitted: (term) {
+                                          _fieldFocusChange(context, _nameSecondFocus, _lastNameFirstFocus);
+                                        },
+                                        labelText: 'form_second_name'.tr(),
+                                        hintText: 'form_second_name'.tr(),
+                                        validator: (value) {
+                                          return null;
+                                        },
+                                      )
+                                  ),
+
+                                ],
                               ),
-                              style: new TextStyle(
-                                color: StyleGeneral.BLACK,
-                                fontSize: ScreenUtil().setSp(15),
-                                fontFamily: "Poppins-Regular",
+
+                              SizedBox(
+                                height: 15.h,
                               ),
-                              validator:  (value) {
-                                if (value.isEmpty) return 'required_field'.tr();
-                                return null;
-                              },
-                            ),
 
-                            SizedBox(
-                              height: 15.h,
-                            ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                      flex: 2,
+                                      child: InputTextfield(
+                                        focusNode: _lastNameFirstFocus,
+                                        controller: _inputLastNameFirstController,
+                                        onFieldSubmitted: (term) {
+                                          _fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
+                                        },
+                                        labelText:'form_first_lastname'.tr(),
+                                        hintText: 'form_first_lastname'.tr(),
+                                        validator: (value) {
+                                          if (value.isEmpty) return 'required_field'.tr();
+                                          return null;
+                                        },
+                                      )
+                                  ),
 
-                            Text(
-                              'register_routine_daily_title'.tr(),
-                              style: StyleGeneral.styleTextDescription,
-                              textAlign: TextAlign.left,
-                            ),
+                                  SizedBox(
+                                    width: 15.w,
+                                  ),
 
-                            SizedBox(
-                              height: 15.h,
-                            ),
+                                  Flexible(
+                                      flex: 2,
+                                      child: InputTextfield(
+                                        focusNode: _lastNameSecondFocus,
+                                        controller: _inputLastNameSecondController,
+                                        onFieldSubmitted: (term) {
+                                          _fieldFocusChange(context, _lastNameSecondFocus, _emailFocus);
+                                        },
+                                        labelText: 'form_second_lastname'.tr(),
+                                        hintText: 'form_second_lastname'.tr(),
+                                        validator: (value) {
 
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Column(
-                                  children: createRadioListQuestion(),
-                                ),
+                                          return null;
+                                        },
+                                      )
+                                  ),
 
-                              ],
-                            ),
+                                ],
+                              ),
 
 
-                            SizedBox(
-                              height: 25.h,
-                            ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
 
-                            /////
-                            _isLoading ? ActivityIndicator() :CustomButton(
-                              text: 'register_button'.tr(),
-                              fullscreen: true,
-                              onTap: (){
-                               _SaveDriver();
-                              },
-                            ),
+                              Container(
+                                  width: double.infinity,
+                                  child: _dataSpinnerDocumentType()
+                              ),
 
-                          ],
+                              SizedBox(
+                                height: 15.h,
+                              ),
 
-                        ),
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _documentoFocus,
+                                    controller: _inputDocumentoController,
+                                    keyboardType: TextInputType.number,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _documentoFocus, _emailFocus);
+                                    },
+                                    labelText:'form_document_number'.tr(),
+                                    hintText: 'form_document_number'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    },
+                                  )
+                              ),
 
-                      )
+                              SizedBox(
+                                height: 15.h,
+                              ),
 
-                    ],
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _emailFocus,
+                                    controller: _inputEmailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _emailFocus, _phoneFocus);
+                                    },
+                                    labelText:'form_email'.tr(),
+                                    hintText: 'email@gmail.com',
+                                    validator: (value) {
+                                      if(value.isEmpty){
+                                        return 'required_field'.tr();
+                                      }else {
+                                        Pattern pattern =
+                                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                        RegExp regex = new RegExp(pattern);
+                                        bool email_value = (!regex.hasMatch(value)) ? false : true;
+
+                                        if(!email_value)
+                                          return 'required_email'.tr();
+
+                                      }
+                                      return null;
+                                    },
+                                  )
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _phoneFocus,
+                                    controller: _inputPhoneController,
+                                    keyboardType: TextInputType.phone,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _phoneFocus, _addressFocus);
+                                    },
+                                    labelText:'form_phone'.tr(),
+                                    hintText: 'form_phone'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    },
+                                  )
+                              ),
+
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _addressFocus,
+                                    controller: _inputAddressController,
+                                    keyboardType: TextInputType.text,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
+                                    },
+                                    labelText:'form_address'.tr(),
+                                    hintText: 'form_address'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    },
+                                  )
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _numberLicenceFocus,
+                                    controller: _inputNummberLicenceController,
+                                    keyboardType: TextInputType.text,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
+                                    },
+                                    labelText:'form_license_plate_number'.tr(),
+                                    hintText: 'form_license_plate_number'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    }
+                                  )
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Container(
+                                  width: double.infinity,
+                                  child: _dataSpinnerVehicleType()
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _yearLicenceFocus,
+                                    controller: _inputYearLicenceController,
+                                    keyboardType: TextInputType.number,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
+                                    },
+                                    maxLength: 4,
+                                    labelText:'form_vehicle_year'.tr(),
+                                    hintText: 'form_vehicle_year'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    }
+                                  )
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextfield(
+                                    focusNode: _dateFocus,
+                                    controller: _inputDateController,
+                                    onTap: (){
+                                      _selectDate(context);
+                                    },
+                                    keyboardType: TextInputType.text,
+                                    onFieldSubmitted: (term) {
+                                      _fieldFocusChange(context, _dateFocus, _passwordFocus);
+                                    },
+                                    hintText: 'yyyy-mm-dd',
+                                    labelText:'form_birth_date'.tr(),
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'required_field'.tr();
+                                      return null;
+                                    },
+                                  )
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              CustomInputTextfieldPassword(
+                                focusNode: _passwordFocus,
+                                controller: _inputPasswordController,
+                                keyboardType: TextInputType.text ,
+                                textInputAction: TextInputAction.done,
+                                obscureText: !_passwordVisible,
+                                hintText:  'enter_password'.tr(),
+                                labelText:'enter_password'.tr(),
+                                validator:  (value) {
+                                  if (value.isEmpty) return 'required_field'.tr();
+                                  return null;
+                                },
+                                onPressed: (){
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
+
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Text(
+                                'register_routine_daily_title'.tr(),
+                                style: StyleGeneral.styleTextDescription,
+                                textAlign: TextAlign.left,
+                              ),
+
+                              SizedBox(
+                                height: 15.h,
+                              ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Column(
+                                    children: createRadioListQuestion(),
+                                  ),
+
+                                ],
+                              ),
+
+
+                              SizedBox(
+                                height: 25.h,
+                              ),
+
+                              /////
+                              _isLoading ? ActivityIndicator() :CustomButton(
+                                text: 'register_button'.tr(),
+                                fullscreen: true,
+                                onTap: (){
+                                 _SaveDriver();
+                                },
+                              ),
+
+                            ],
+
+                          ),
+
+                        )
+
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
+
   }
 
   Widget _dataSpinnerDocumentType(){
@@ -550,16 +548,24 @@ class _RegisterPageState extends State<RegisterPage> {
       builder: (context , AsyncSnapshot<DocumentTypeModel> snapshot){
         if(snapshot.hasData){
           List<DocumentType> documentTypeList = snapshot.data.documentsType;
+
           if(documentTypeList != null){
+
+            if(_stateReviewDocumentType){
+              documentTypeList.asMap().forEach((index, value) {
+                _documentType =documentTypeList[0];
+              });
+            }
+
             return Center(
               child: Container(
                width: width,
                height: 60.h,
                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-               margin: EdgeInsets.all(5.h),
+               margin: EdgeInsets.all(0.h),
                decoration: BoxDecoration(
                  color: StyleGeneral.BLACK_LIGTH,
-                 borderRadius: BorderRadius.circular(15.r),
+                 borderRadius: BorderRadius.circular(10.r),
                  border: Border.all(
                      color: Colors.white,
                      style: BorderStyle.solid,
@@ -585,6 +591,7 @@ class _RegisterPageState extends State<RegisterPage> {
                        setState(() {
                          _documentType = documentType;
                          _saveDriverBloc.document_type = _documentType.id;
+                         _stateReviewDocumentType = false;
                        });
                      },
                      isExpanded: true,
@@ -615,13 +622,21 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (context , AsyncSnapshot<VehicleTypeModel> snapshot){
           if(snapshot.hasData){
            List<VehicleType> vehicleTypeList = snapshot.data.vehiclesType;
-            if(vehicleTypeList != null){
+
+           if(vehicleTypeList != null){
+
+              if(_stateReviewVehicle){
+                vehicleTypeList.asMap().forEach((index, value) {
+                  _vehicleType =vehicleTypeList[0];
+                });
+              }
+
               return Center(
                   child: Container(
                     width: width,
                     height: 60.h,
                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                    margin: EdgeInsets.all(5.h),
+                    margin: EdgeInsets.all(0.h),
                     decoration: BoxDecoration(
                         color: StyleGeneral.BLACK_LIGTH,
                         borderRadius: BorderRadius.circular(15.r),
@@ -638,7 +653,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         child: DropdownButton<VehicleType>(
                           hint: Text('selection_vehicle_type'.tr(), style: StyleGeneral.styleTextTitleSpinner),
-                          iconSize: 32,
+                          iconSize: 32.h,
                           value: _vehicleType == null ? _vehicleType : vehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
                           items: vehicleTypeList.map((VehicleType vehicleType) {
                             return DropdownMenuItem<VehicleType>(
@@ -650,6 +665,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             setState(() {
                               _vehicleType = vehicleType;
                               _saveDriverBloc.vehicule_type = _vehicleType.id;
+                              _stateReviewVehicle = false;
                             });
                           },
                           isExpanded: true,
@@ -725,14 +741,24 @@ class _RegisterPageState extends State<RegisterPage> {
           Navigator.pushReplacementNamed(context, "login");
           prefs.setDriverId = data.driver_id;
         } else {
-          showError(data.response);
+          var dialog = AlertMessageError(
+              icon: "error",
+              message: data.response
+          );
+
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                Future.delayed(Duration(seconds: 3), () {
+                  Navigator.of(context).pop(true);
+                });
+                return dialog;
+              }
+          );
         }
-      });
-    } else {
-      setState(() {
-        _isLoading = false;
       });
     }
 
-   }
+  }
 }

@@ -69,6 +69,7 @@ class InputTextfield extends StatelessWidget {
   final String hintText;
   final String labelText;
   final bool obscureText;
+  final int maxLength;
   final Function validator;
   final FocusNode focusNode;
   final Function onFieldSubmitted;
@@ -82,6 +83,7 @@ class InputTextfield extends StatelessWidget {
       this.labelText,
       this.onTap,
       this.obscureText  = false,
+      this.maxLength ,
       this.onFieldSubmitted,
       this.textInputAction = TextInputAction.next,
       this.keyboardType = TextInputType.text,
@@ -101,6 +103,7 @@ class InputTextfield extends StatelessWidget {
       keyboardType:this.keyboardType ,
       textCapitalization: TextCapitalization.words,
       textInputAction: textInputAction,
+      maxLength: maxLength,
       focusNode: focusNode,
       decoration: InputDecoration(
         labelText: labelText,
@@ -128,6 +131,7 @@ class CustomInputTextfieldPassword extends StatelessWidget {
   final String hintText;
   final String labelText;
   final bool obscureText;
+  final Color colorFill;
   final bool passwordVisible;
   final Function validator;
   final FocusNode focusNode;
@@ -142,6 +146,7 @@ class CustomInputTextfieldPassword extends StatelessWidget {
     this.labelText,
     this.onPressed,
     this.obscureText  = false,
+    this.colorFill  = Colors.transparent,
     this.passwordVisible  = false,
     this.onFieldSubmitted,
     this.textInputAction = TextInputAction.next,
@@ -166,7 +171,7 @@ class CustomInputTextfieldPassword extends StatelessWidget {
       textCapitalization: TextCapitalization.words,
       decoration: InputDecoration(
         labelText: labelText,
-        fillColor: StyleGeneral.GREY,
+        fillColor: colorFill,
         filled: true,
         hintText: hintText,
         hintStyle: TextStyle(
