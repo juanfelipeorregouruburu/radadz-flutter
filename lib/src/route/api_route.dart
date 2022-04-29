@@ -12,6 +12,13 @@ class API {
   static final String UPDT_DRIVER = _URL + "update_driver";
   static final String UPDT_DATE_BANK = _URL + "update_driver_bank";
   static final String GET_LIST_PAYMENT_RECEIVED_DRIVER = _URL + "list_trip_payment_history";
+  static final String GET_BLURT_LIST_ALL = _URL + "list_screen_msgs";
+  static final String GET_BLURT_LIST_DRIVER_ID = _URL + "list_screen_msgs_driver";
+  static final String SET_BLURT_DRIVER = _URL + "create_blurt";
+  static final String UPDT_BLURT_DRIVER = _URL + "enable_blurt";
+
+  static final String SET_TRIP_START = _URL + "trip_start";
+  static final String SET_TRIP_END = _URL + "trip_end";
 
 
 }
