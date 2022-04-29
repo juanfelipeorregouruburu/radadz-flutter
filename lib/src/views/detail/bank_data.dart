@@ -21,8 +21,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
   Bank _bank;
   BankAcountType _bankAcountType;
-  bool _stateReviewBank = true;
-  bool _stateReviewAcountType = true;
+  bool _stateReviewBank = false;
+  bool _stateReviewAcountType = false;
 
   Map<String, dynamic> _map;
 
@@ -46,6 +46,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
         _inputNumberCountController.text = _map['account_number'];
         _updateDataBankDriverBloc.account_type_id = _map['account_type']['id'];
         _updateDataBankDriverBloc.bank_id = _map['bank_name']['id'];
+        _stateReviewBank = true;
+        _stateReviewAcountType = true;
       }
     }
   }
