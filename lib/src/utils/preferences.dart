@@ -59,4 +59,17 @@ class Preferences {
     return _preferences.getString("driver");
   }
 
+  get getTripId {
+    return _preferences.getString('trip_id') ?? '';
+  }
+
+  set setTripId( String trip_id ) {
+    _preferences.setString('trip_id', trip_id);
+  }
+  void clearPreferences(){
+    setAuth = false;
+    setDriverId = '';
+  }
+
+
 }
