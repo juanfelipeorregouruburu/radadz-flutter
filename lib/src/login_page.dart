@@ -13,22 +13,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   final prefs = new Preferences();
-  bool _isLoading = false;
-  SignInBloc _signInBloc;
-
-  OutlineInputBorder borderinput = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(15.0),
-    borderSide: BorderSide(color: Colors.white),
-  );
-
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
-  final FocusNode _phoneFocus = FocusNode();
-  final FocusNode _passwordFocus = FocusNode();
+  bool _isLoading = false;
+  bool _passwordVisible;
+
+  SignInBloc _signInBloc;
+
+  /* Editext */
   TextEditingController _inputPhoneController = new TextEditingController();
   TextEditingController _inputPasswordController = new TextEditingController();
 
-  bool _passwordVisible;
+  final FocusNode _phoneFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
 
   @override
   void initState() {
@@ -121,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(height: 10.h,),
 
                             SizedBox(
-                              height: size.height / 10,
+                              height: size.height / 9,
                               child: CustomInputTextfieldPassword(
                                 focusNode: _passwordFocus,
                                 controller: _inputPasswordController,
@@ -129,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                                 textInputAction: TextInputAction.done,
                                 obscureText: !_passwordVisible,
                                 hintText:  'enter_password'.tr(),
+                                colorFill: StyleGeneral.GREY,
                                 validator:  (value) {
                                   if (value.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -206,8 +205,8 @@ class _LoginPageState extends State<LoginPage> {
 
   _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
+      currentFocus.unfocus();
+      FocusScope.of(context).requestFocus(nextFocus);
   }
 
   _signIn() async {
@@ -244,6 +243,7 @@ class _LoginPageState extends State<LoginPage> {
 
           showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (BuildContext context) {
                 Future.delayed(Duration(seconds: 3), () {
                   Navigator.of(context).pop(true);
