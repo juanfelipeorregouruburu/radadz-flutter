@@ -73,5 +73,16 @@
   "trip_state_text_syn_dispotive" : "RadAdz Screen Synchronized",
   "trip_state_text_syn_start_trip" : "Trip started",
   "trip_state_text_start_trip" : "Trip started: ",
-  "trip_state_text_time_trip" : "Time elapsed: "
+  "trip_state_text_time_trip" : "Time elapsed: ",
+  "register_blurt" : "Create blurt",
+  "register_message_textarea" : "Message",
+  "blurt_message_empty_data" : "There is no blurtr associated with that driver",
+  "tab_blurt_all" : "Blurts",
+  "tab_blurt_driver" : "My Blurts",
+  "tab_blurt_dialog_confirmation_possitive_button": "Yes",
+  "tab_blurt_dialog_confirmation_negative_button": "No",
+  "tab_blurt_dialog_confirmation_title": "Confirm",
+  "tab_blurt_dialog_confirmation_text": "Are you sure to enable blurt?",
+  "tab_blurt_switch_active": "Active",
+  "tab_blurt_switch_inactive": "Inactive"
 }

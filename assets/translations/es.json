@@ -73,5 +73,16 @@
   "trip_state_text_syn_dispotive" : "Pantalla RadAdz sincronizada",
   "trip_state_text_syn_start_trip" : "Viaje iniciado",
   "trip_state_text_start_trip" : "Viaje iniciado: ",
-  "trip_state_text_time_trip" : "tiempo transcurrido: "
+  "trip_state_text_time_trip" : "tiempo transcurrido: ",
+  "register_blurt" : "Crear blurt",
+  "register_message_textarea" : "Mensaje",
+  "blurt_message_empty_data" : "No hay blurtr asociados a ese driver",
+  "tab_blurt_all" : "Blurts",
+  "tab_blurt_driver" : "Mis Blurts",
+  "tab_blurt_dialog_confirmation_possitive_button": "Si",
+  "tab_blurt_dialog_confirmation_negative_button": "No",
+  "tab_blurt_dialog_confirmation_title": "Confirmar",
+  "tab_blurt_dialog_confirmation_text": "Estas seguro de activar este blurt?",
+  "tab_blurt_switch_active": "Activo",
+  "tab_blurt_switch_inactive": "Inactivo"
 }
