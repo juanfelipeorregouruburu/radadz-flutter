@@ -49,85 +49,90 @@ class _PaymentsPageState extends State<PaymentsPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65.h),
-        child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            flexibleSpace : ToolbarTitleCustom(title: 'payment_title'.tr())
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(65.h),
+          child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              flexibleSpace : ToolbarTitleCustom(title: 'payment_title'.tr())
+          ),
         ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 15.w),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 30.w),
-                child: Column(
-                  children: [
-                    _buttonSearch ? CustomButton(
-                      text: 'payment_buton_search_title'.tr(),
-                      fullscreen: true,
-                      onTap: (){
+        body: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Column(
+                    children: [
+                      _buttonSearch ? CustomButton(
+                        text: 'payment_buton_search_title'.tr(),
+                        fullscreen: true,
+                        onTap: (){
+                            setState(() {
+                              _isCalendar = true;
+                              _buttonSearch = false;
+                              _isDataPayment = false;
+                            });
+                        },
+                      ) : Container(),
+
+                      _buttonFilter ? CustomButton(
+                        text: 'payment_buton_search_filter'.tr(),
+                        fullscreen: true,
+                        onTap: (){
                           setState(() {
-                            _isCalendar = true;
+                            _isCalendar = false;
                             _buttonSearch = false;
-                            _isDataPayment = false;
+                            _filterData();
                           });
-                      },
-                    ) : Container(),
-
-                    _buttonFilter ? CustomButton(
-                      text: 'payment_buton_search_filter'.tr(),
-                      fullscreen: true,
-                      onTap: (){
-                        setState(() {
-                          _isCalendar = false;
-                          _buttonSearch = false;
-                          _filterData();
-                        });
-                      },
-                    ): Container(),
-                  ],
+                        },
+                      ): Container(),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 15.h),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        _range,
-                        style: TextStyle(
-                            color: StyleGeneral.BLACK,
-                            letterSpacing: .5,
-                            fontSize: ScreenUtil().setSp(12),
-                            fontFamily: 'Poppins-Semi'),
-                        textAlign: TextAlign.left,
+                SizedBox(height: 15.h),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          _range,
+                          style: TextStyle(
+                              color: StyleGeneral.BLACK,
+                              letterSpacing: .5,
+                              fontSize: ScreenUtil().setSp(12),
+                              fontFamily: 'Poppins-Semi'),
+                          textAlign: TextAlign.left,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 15.h),
-                    _isCalendar ?  SfDateRangePicker(
-                      onSelectionChanged: _onSelectionChanged,
-                      selectionMode: DateRangePickerSelectionMode.range,
-                      initialSelectedRange: PickerDateRange(
-                          DateTime.now().subtract(const Duration(days: 4)),
-                          DateTime.now().add(const Duration(days: 3))),
-                    ) : Container(),
-                  ],
+                      SizedBox(height: 15.h),
+                      _isCalendar ?  SfDateRangePicker(
+                        onSelectionChanged: _onSelectionChanged,
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        initialSelectedRange: PickerDateRange(
+                            DateTime.now().subtract(const Duration(days: 4)),
+                            DateTime.now().add(const Duration(days: 3))),
+                      ) : Container(),
+                    ],
+                  ),
                 ),
-              ),
 
-              _isDataPayment ? CardPaymentReceivedWidget() :Container()
-            ],
+                _isDataPayment ? CardPaymentReceivedWidget() :Container()
+              ],
+            ),
           ),
         ),
       ),
@@ -135,9 +140,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
   }
 
   _filterData() {
-    context.read<ListPaymentReceivedDriverBloc>().getPaymentReceivedDriver(
-        driver_id: prefs.getDriverId, start_time: _selectedStartDate, end_date:_selectedEndDate
-    );
+    Future.microtask(() =>context.read<ListPaymentReceivedDriverBloc>().getPaymentReceivedDriver(driver_id: prefs.getDriverId, start_time: _selectedStartDate, end_date:_selectedEndDate));
 
     _isDataPayment = true;
     _buttonSearch = true;
