@@ -26,7 +26,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
   final _animationDuration = const Duration(milliseconds: 100);
 
   Map<String, dynamic> _map;
-  String nameUser;
+ // String nameUser;
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
     isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
 
     _map = jsonDecode(prefs.getDriver());
-    nameUser = _map['first_name'] +" "+_map['second_name'] ;
+    //nameUser = _map['first_name'] +" "+_map['second_name'] ;
   }
 
   @override
@@ -121,35 +121,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                   children: [
                                     Expanded(
                                       flex: 8,
-                                      child: Column(
-
-                                          children: [
-                                              Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Text(
-                                                      'menu_title_top'.tr(),
-                                                      textAlign: TextAlign.left,
-                                                      style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
-                                                  )
-                                              ),
-                                              SizedBox(height: 5),
-                                              Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Flexible(
-                                                    flex: 1,
-                                                    fit: FlexFit.loose,
-                                                    child: Text(
-                                                          nameUser,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          softWrap: true,
-                                                          maxLines: 2,
-                                                          textAlign: TextAlign.left,
-                                                          style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Regular')
-                                                    ),
-                                                  )
-                                              ),
-                                        ]
-                                      ),
+                                      child: Container()
                                     ),
                                     Expanded(
                                       flex: 2,
@@ -246,7 +218,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                       icon: AssetImage("assets/menu/icono_terminos_politica.png"),
                                       onTap: () {
                                         onIconPressed();
-                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.TripsHistoryClickedEvent);
+                                        BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.BlurtPageClickedEvent);
                                       },
                                       padding: 16.w,
                                     ),
@@ -266,7 +238,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                           flex: 8,
                                           child: GestureDetector(
                                             onTap: (){
-                                              //prefs.clearPreferences();
+                                              prefs.clearPreferences();
                                               Navigator.pushReplacementNamed(context, 'login');
                                             },
                                             child: Padding(
