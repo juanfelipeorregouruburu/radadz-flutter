@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
-enum NavigationEvents { TripStartPageClickedEvent,  TripsHistoryClickedEvent, PaymentPageClickedEvent , BankDataPageClickedEvent ,ProfilePageClickedEvent }
+enum NavigationEvents { TripStartPageClickedEvent,  TripsHistoryClickedEvent, PaymentPageClickedEvent , BankDataPageClickedEvent ,ProfilePageClickedEvent , BlurtPageClickedEvent }
 
 abstract class NavigationStates {}
 
@@ -34,6 +34,10 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
 
       case NavigationEvents.ProfilePageClickedEvent:
         yield ProfilePage();
+        break;
+
+      case NavigationEvents.BlurtPageClickedEvent:
+        yield BlurtPage();
         break;
     }
   }
