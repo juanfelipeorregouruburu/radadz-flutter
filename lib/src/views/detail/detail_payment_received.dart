@@ -12,55 +12,58 @@ class DetailPaymentReceived extends StatelessWidget {
     final paymentProvider = context.watch<ListPaymentReceivedDriverBloc>();
     final detailPayment = paymentProvider.selectPayment;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          title: BackButtonCustom(icon: "assets/icono_flecha_atras.png")
-      ),
-      body: Container(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.all(5.w),
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  Center(
-                    child: Text(
-                      'payment_card_title_payment_detail'.tr(),
-                      style: StyleGeneral.styleTextTitle,
-                      textAlign: TextAlign.left,
+    return Hero(
+      tag: detailPayment.payment_id,
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            title: BackButtonCustom(icon: "assets/icono_flecha_atras.png")
+        ),
+        body: Container(
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.all(5.w),
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 50.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (BuildContext context, int index) => SizedBox(height: 15.h),
-                    physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.all(0.0),
-                    itemCount: detailPayment.trips.length?? 0,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ItemDetailPaymentRecived(
-                        index: index,
-                        trip: detailPayment?.trips[index],
-                        tripsList: detailPayment?.trips,
-                      );
-                    },
-                  )
-                ],
+                    Center(
+                      child: Text(
+                        'payment_card_title_payment_detail'.tr(),
+                        style: StyleGeneral.styleTextTitle,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (BuildContext context, int index) => SizedBox(height: 15.h),
+                      physics: BouncingScrollPhysics(),
+                      padding: EdgeInsets.all(0.0),
+                      itemCount: detailPayment.trips.length?? 0,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ItemDetailPaymentRecived(
+                          index: index,
+                          trip: detailPayment?.trips[index],
+                          tripsList: detailPayment?.trips,
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -97,9 +100,9 @@ class ItemDetailPaymentRecived extends StatelessWidget{
          borderSide: BorderSide(color: Colors.white)
      ),
      child: Container(
-       padding: EdgeInsets.fromLTRB(12.w, 15.h, 12.w, 10.h),
+       padding: EdgeInsets.fromLTRB(10.w, 15.h, 10.w, 10.h),
        child: Padding(
-         padding: EdgeInsets.only(top: 15.h, right: 10.w, left: 15.w, bottom: 15.h),
+         padding: EdgeInsets.only(top: 15.h, right: 10.w, left: 10.w, bottom: 15.h),
          child: Column(
            mainAxisSize: MainAxisSize.min,
            crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +158,7 @@ class ItemDetailPaymentRecived extends StatelessWidget{
                    flex: 1,
                    fit: FlexFit.tight,
                    child: Text(
-                     DateFormat('y-MM-dd  h:mm a').format(DateTime.parse(trip.endTime)),
+                     trip.endTime == "" ? "" : DateFormat('y-MM-dd  h:mm a').format(DateTime.parse(trip.endTime)),
                      overflow: TextOverflow.ellipsis,
                      softWrap: true,
                      maxLines: 2,

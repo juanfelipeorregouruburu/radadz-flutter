@@ -24,9 +24,10 @@ class _CardPaymentReceivedWidgetState extends State<CardPaymentReceivedWidget> {
 
     return listPaymentRecivedProvider.isLoading
         ? ActivityIndicator(marginTop: 50.h)
-        : listPaymentRecivedProvider?.paymentReceivedList.payments.length > 0 ? ListView.separated(
+        : listPaymentRecivedProvider?.paymentReceivedList.payments.length > 0 ?
+        ListView.separated(
             shrinkWrap: true,
-            separatorBuilder: (BuildContext context, int index) => SizedBox(height: 15.h),
+            separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.all(0.0),
             itemCount: listPaymentRecivedProvider?.paymentReceivedList.payments.length ?? 0,
@@ -62,181 +63,184 @@ class ItemPaymentRecived extends StatelessWidget {
 
     String textPaymentInfo = 'payment_card_info_payment'.tr() +payment.accountTypeBankPayment.name + ' '+payment.accoutNumber+         ' - '+payment.bankNamePayment.name;
 
-    return GestureDetector(
-      onTap: (){
-        paymentProvider.selectOrderDetail(payment);
-        Navigator.pushNamed(context, 'detailPaymentReceived');
-      },
-      child:Card(
-        elevation: 4,
-        color: StyleGeneral.GREY,
-        shadowColor: StyleGeneral.BLACK,
-        margin: EdgeInsets.all(15.r),
-        shape:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide(color: Colors.white)
-        ),
-        child: Container(
-          padding: EdgeInsets.fromLTRB(12.w, 15.h, 12.w, 10.h),
+    return Hero(
+      tag: payment.payment_id,
+      child: GestureDetector(
+        onTap: (){
+          paymentProvider.selectOrderDetail(payment);
+          Navigator.pushNamed(context, 'detailPaymentReceived');
+        },
+        child:Card(
+          elevation: 4,
+          color: StyleGeneral.GREY,
+          shadowColor: StyleGeneral.BLACK,
+          margin: EdgeInsets.all(15.r),
+          shape:  OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide(color: Colors.white)
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(12.w, 15.h, 12.w, 10.h),
 
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                     'payment_card_total_trip'.tr() + payment.trips.length.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 1,
-                      style: StyleGeneral.styleTextTextCardPaymentTitle
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                       'payment_card_total_trip'.tr() + payment.trips.length.toString(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: StyleGeneral.styleTextTextCardPaymentTitle
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: payment.trips.length > 0 ? Align(
-                       alignment: Alignment.centerRight,
-                       child: Container(
-                         width: 85.h,
-                         height: 30.w,
-                         alignment: Alignment.center,
-                         padding: const EdgeInsets.all(5),
-                         decoration: BoxDecoration(
-                           color: StyleGeneral.GREEN,
-                           borderRadius: BorderRadius.circular(30),
-                         ),
-                         child: Text(
-                           'payment_card_buton_detail'.tr(),
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: ScreenUtil().setSp(10),
-                             fontFamily: 'Poppins-Semi',
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: payment.trips.length > 0 ? Align(
+                         alignment: Alignment.centerRight,
+                         child: Container(
+                           width: 85.h,
+                           height: 30.w,
+                           alignment: Alignment.center,
+                           padding: const EdgeInsets.all(5),
+                           decoration: BoxDecoration(
+                             color: StyleGeneral.GREEN,
+                             borderRadius: BorderRadius.circular(30),
+                           ),
+                           child: Text(
+                             'payment_card_buton_detail'.tr(),
+                             style: TextStyle(
+                               color: Colors.white,
+                               fontSize: ScreenUtil().setSp(10),
+                               fontFamily: 'Poppins-Semi',
+                             ),
                            ),
                          ),
-                       ),
-                     ) : Container(),
-                  )
+                       ) : Container(),
+                    )
 
-                ],
-              ),
+                  ],
+                ),
 
-              SizedBox(height: 20.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      'payment_card_date_payment'.tr(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 1,
-                      style: StyleGeneral.styleTextTextCardPaymentTitle
+                SizedBox(height: 20.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                        'payment_card_date_payment'.tr(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: StyleGeneral.styleTextTextCardPaymentTitle
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      payment.paymentDate,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 1,
-                      style: StyleGeneral.styleTextTextCardPaymentDescription
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                        payment.paymentDate,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: StyleGeneral.styleTextTextCardPaymentDescription
+                      ),
                     ),
-                  ),
 
 
-                ],
-              ),
+                  ],
+                ),
 
 
-              SizedBox(height: 10.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      'payment_card_money_payment'.tr(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 2,
-                      style: StyleGeneral.styleTextTextCardPaymentTitle
+                SizedBox(height: 10.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                        'payment_card_money_payment'.tr(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 2,
+                        style: StyleGeneral.styleTextTextCardPaymentTitle
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      '\$' + formatter.format(int.parse(payment.moneyPayment)),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 1,
-                      style: StyleGeneral.styleTextTextCardPaymentDescription
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                          payment.moneyPayment == ""  ? "0" : '\$' + formatter.format(int.parse(payment.moneyPayment)),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: StyleGeneral.styleTextTextCardPaymentDescription
+                      ),
                     ),
-                  ),
 
 
-                ],
-              ),
+                  ],
+                ),
 
-              SizedBox(height: 10.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      'payment_card_tokens_payment'.tr(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 2,
-                      style: StyleGeneral.styleTextTextCardPaymentTitle
+                SizedBox(height: 10.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                        'payment_card_tokens_payment'.tr(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 2,
+                        style: StyleGeneral.styleTextTextCardPaymentTitle
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      formatter.format(int.parse(payment.tokensCancel)),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 1,
-                      style: StyleGeneral.styleTextTextCardPaymentDescription
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Text(
+                        formatter.format(int.parse(payment.tokensCancel)),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: StyleGeneral.styleTextTextCardPaymentDescription
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
 
-              SizedBox(height: 10.h),
-              Text(
-                textPaymentInfo,
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 2,
-                style: StyleGeneral.styleTextTextCardPaymentTitle
-              ),
+                SizedBox(height: 10.h),
+                Text(
+                  textPaymentInfo,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 2,
+                  style: StyleGeneral.styleTextTextCardPaymentDescription
+                ),
 
-            ],
+              ],
+            ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
   
