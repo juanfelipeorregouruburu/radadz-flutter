@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:radadz_app/splash_screen.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class App extends StatefulWidget {
@@ -27,6 +23,14 @@ class _AppState extends State<App> {
           providers: [
             ChangeNotifierProvider<ListPaymentReceivedDriverBloc>(
               create: (_) => ListPaymentReceivedDriverBloc(),
+            ),
+
+            ChangeNotifierProvider<ListBlurtAllBloc>(
+              create: (_) => ListBlurtAllBloc(),
+            ),
+
+            ChangeNotifierProvider<ListBlurtDriverBloc>(
+              create: (_) => ListBlurtDriverBloc(),
             ),
           ],
           child: MaterialApp(
