@@ -26,7 +26,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
   final _animationDuration = const Duration(milliseconds: 100);
 
   Map<String, dynamic> _map;
- // String nameUser;
+  String nameUser;
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
     isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
 
     _map = jsonDecode(prefs.getDriver());
-    //nameUser = _map['first_name'] +" "+_map['second_name'] ;
+    nameUser = _map['first_name'] +" "+_map['second_name'] ;
   }
 
   @override
@@ -121,7 +121,29 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                   children: [
                                     Expanded(
                                       flex: 8,
-                                      child: Container()
+                                      child: Column(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text('menu_title_top'.tr(),
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
+                                              )
+                                          ),
+
+                                          SizedBox(height: 5),
+                                          Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(nameUser,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                  maxLines: 2,
+                                                  style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Regular')
+                                              )
+                                          ),
+
+                                        ],
+                                      )
                                     ),
                                     Expanded(
                                       flex: 2,
