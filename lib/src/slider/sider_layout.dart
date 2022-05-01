@@ -97,7 +97,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.0.4",
+                          'version'.tr() + " 1.0.5",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(8),
