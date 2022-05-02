@@ -6,9 +6,9 @@ import 'package:radadz_app/src/utils/export.dart';
 class TripStartProvider {
 
   final pref = Preferences();
-  Future<TripStartModel> TripStart(String driver_id) async {
+  Future<TripStartModel> TripStart(String driver_id, String trip_payment_id) async {
     var url = Uri.parse(API.SET_TRIP_START);
-    print(url);
+
     String token = await pref.getToken;
     final response = await http.post(url,
         headers: {
@@ -16,9 +16,10 @@ class TripStartProvider {
         },
         body: {
           "driver": driver_id,
+          "trip_payment": trip_payment_id == "0" ? "" : trip_payment_id
         }
       );
-      print(response.body);
+
 
       if(response.statusCode == 200) {
         return TripStartModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));

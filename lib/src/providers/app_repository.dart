@@ -72,7 +72,7 @@ class Repository {
 
 
   /* TripStart */
-  Future<TripStartModel> trip_start(String driver_id) => tripStartProvider.TripStart(driver_id);
+  Future<TripStartModel> trip_start(String driver_id,String trip_payment_id) => tripStartProvider.TripStart(driver_id, trip_payment_id);
 
   /* TripEnd */
   Future<TripEndModel> trip_end(String driver_id, String trip_id) => tripEndProvider.TripEnd(driver_id, trip_id);
