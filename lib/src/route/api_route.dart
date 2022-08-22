@@ -1,24 +1,32 @@
 class API {
-  static final String _URL = "https://radadz.herokuapp.com/api/";
+  static const String _URL = "https://loud-tv-drf.herokuapp.com/api/";
 
   /* API LIST */
-  static final String SET_LOGIN = _URL + "driver_log";
-  static final String GET_TYPE_DOCUMENTS = _URL + "list_documenttype";
-  static final String GET_TYPE_VEHICLE = _URL + "list_vehicletype";
-  static final String GET_BANK_LIST = _URL + "list_bank";
-  static final String GET_BANK_ACCOUNT_TYPE = _URL + "list_bank_account_type";
-  static final String SET_SAVE_DRIVER = _URL + "save_driver";
-  static final String GET_LIST_ID_DRIVER = _URL + "list_driverid";
-  static final String UPDT_DRIVER = _URL + "update_driver";
-  static final String UPDT_DATE_BANK = _URL + "update_driver_bank";
-  static final String GET_LIST_PAYMENT_RECEIVED_DRIVER = _URL + "list_trip_payment_history";
-  static final String GET_BLURT_LIST_ALL = _URL + "list_screen_msgs";
-  static final String GET_BLURT_LIST_DRIVER_ID = _URL + "list_screen_msgs_driver";
-  static final String SET_BLURT_DRIVER = _URL + "create_blurt";
-  static final String UPDT_BLURT_DRIVER = _URL + "enable_blurt";
 
-  static final String SET_TRIP_START = _URL + "trip_start";
-  static final String SET_TRIP_END = _URL + "trip_end";
+  static final String login = _URL + "driver_log";
+
+  static const String resetPassword = _URL + "reset_password";
+  static const String resetVerifyCode = _URL + "verify_user_token";
+  static const String resetChangePassword = _URL + "change_password";
+
+  static final String documentsList = _URL + "list_documenttype";
+  static final String vehiclesList = _URL + "list_vehicletype";
+  static final String bankList = _URL + "list_bank";
+  static final String getAccountBankType = _URL + "list_bank_account_type";
+
+  static final String driverCreate = _URL + "save_driver";
+  static final String driverUpdate = _URL + "update_driver";
+  static final String driverDataBank = _URL + "update_driver_bank";
+  static final String driverListPaymentReceived = _URL + "list_trip_payment_history";
+  static final String getListTripHistoryDriver = _URL + "list_driver_trips";
+
+  static final String blurtListAll = _URL + "list_screen_msgs";
+  static final String blurtListDriverId = _URL + "list_screen_msgs_driver";
+  static final String blurtCreate = _URL + "create_blurt";
+  static final String blurtEnable = _URL + "enable_blurt";
+
+  static final String setTripStart = _URL + "trip_start";
+  static final String setTripEnd = _URL + "trip_end";
 
 
 }

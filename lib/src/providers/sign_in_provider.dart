@@ -5,7 +5,7 @@ import 'package:radadz_app/src/utils/export.dart';
 class LoginProvider {
 
   Future<SingninModel> SignIn(String phone, String password) async {
-    var url = Uri.parse(API.SET_LOGIN );
+    var url = Uri.parse(API.login );
     final response = await http.post(url, body: {
       "username": phone,
       "password": password,
