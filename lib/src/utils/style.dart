@@ -1,9 +1,14 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StyleGeneral {
+
+  //Icon
+  static IconData iconBackAppBar = Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios;
+
 
   static final Map<int, Color> colors =
   {
@@ -37,6 +42,11 @@ class StyleGeneral {
   static final Color GREY_LIGTH = Color(0xFF939393);
   static final Color GREY = Color(0xFFF8F8F8);
   static final Color RED_LIGTH = Color(0xFF9F0000);
+
+  static final styleTextToolbar = TextStyle(
+      color: StyleGeneral.WHITE,
+      fontSize: ScreenUtil().setSp(17),
+      fontFamily: 'Poppins-Semi');
 
 
   static final styleTextTitlePage = TextStyle(

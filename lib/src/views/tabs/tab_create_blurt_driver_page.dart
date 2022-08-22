@@ -130,7 +130,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                           ),
 
                           _isLoading ? ActivityIndicator() :CustomButton(
-                            text: 'register_button'.tr(),
+                            text: 'tab_blurt_driver_button'.tr(),
                             fullscreen: true,
                             onTap: () {
                               _blurtCreate();
