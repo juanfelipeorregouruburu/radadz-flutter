@@ -139,7 +139,11 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                               ),
                             ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
 
+                            passwordRestauredSection(),
 
                             SizedBox(
                               height: 30.h,
@@ -187,20 +191,41 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             )
 
-                          ],
-                        ),
-                      ),
+                          ]
+                        )
+                      )
                     )
-
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+                  ]
+                )
+              )
+            )
+          )
+        )
       )
     );
 
+  }
+
+  Widget passwordRestauredSection() {
+
+    return Container(
+        margin: EdgeInsets.only(top: 5.h),
+        alignment: Alignment.topRight,
+        child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "reset_password");
+            },
+            child: Text(
+              "login_forgot_password".tr(),
+              style:TextStyle(
+                color: StyleGeneral.WHITE,
+                fontSize: ScreenUtil().setSp(13.sp),
+                fontFamily: "Poppins-Regular",
+              ),
+              textAlign: TextAlign.right,
+            )
+        )
+    );
   }
 
   _fieldFocusChange(

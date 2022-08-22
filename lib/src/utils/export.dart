@@ -2,7 +2,6 @@ export 'package:radadz_app/src/utils/preferences.dart';
 export 'package:radadz_app/src/utils/style.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
-export 'package:radadz_app/src/providers/app_repository.dart';
 export 'package:easy_localization/easy_localization.dart';
 export 'package:intl/intl.dart';
 export 'package:flutter_switch/flutter_switch.dart';
@@ -17,6 +16,7 @@ export 'package:radadz_app/src/utils/debouncer.dart';
 
 /* MODELS */
 export 'package:radadz_app/src/models/signin_model.dart';
+export 'package:radadz_app/src/models/response_model.dart';
 export 'package:radadz_app/src/models/update_data_bank_model.dart';
 export 'package:radadz_app/src/models/save_driver_model.dart';
 export 'package:radadz_app/src/models/update_driver_model.dart';
@@ -31,45 +31,32 @@ export 'package:radadz_app/src/models/blurt_list_model.dart';
 export 'package:radadz_app/src/models/blurt_response_model.dart';
 export 'package:radadz_app/src/models/trip_start_model.dart';
 export 'package:radadz_app/src/models/trip_end_model.dart';
+export 'package:radadz_app/src/models/trip_history_model.dart';
 
 /* PROVIDERS */
-export 'package:radadz_app/src/providers/signin_provider.dart';
-export 'package:radadz_app/src/providers/save_driver_provider.dart';
-export 'package:radadz_app/src/providers/document_type_provider.dart';
-export 'package:radadz_app/src/providers/bank_list_provider.dart';
-export 'package:radadz_app/src/providers/bank_acount_type_provider.dart';
-export 'package:radadz_app/src/providers/vehicle_type_provider.dart';
-export 'package:radadz_app/src/providers/payment_received_provider.dart';
-export 'package:radadz_app/src/providers/update_driver_provider.dart';
-export 'package:radadz_app/src/providers/update_data_bank_provider.dart';
-export 'package:radadz_app/src/providers/blurt_list_all_provider.dart';
-export 'package:radadz_app/src/providers/blurt_list_driver_provider.dart';
-export 'package:radadz_app/src/providers/blurt_create_driver_provider.dart';
-export 'package:radadz_app/src/providers/blurt_update_driver_provider.dart';
-export 'package:radadz_app/src/providers/trip_start_provider.dart';
-export 'package:radadz_app/src/providers/trip_end_provider.dart';
+export 'package:radadz_app/src/providers/app_repository.dart';
+export 'package:radadz_app/src/providers/blurt_provider.dart';
+export 'package:radadz_app/src/providers/driver_provider.dart';
+export 'package:radadz_app/src/providers/master_provider.dart';
+export 'package:radadz_app/src/providers/reset_password_provider.dart';
+export 'package:radadz_app/src/providers/trip_provider.dart';
+export 'package:radadz_app/src/providers/sign_in_provider.dart';
 
 
 /* BLOC */
-export 'package:radadz_app/src/blog/signin_bloc.dart';
-export 'package:radadz_app/src/blog/save_driver_bloc.dart';
-export 'package:radadz_app/src/blog/document_type_bloc.dart';
-export 'package:radadz_app/src/blog/vehicle_type_bloc.dart';
-export 'package:radadz_app/src/blog/bank_list_bloc.dart';
-export 'package:radadz_app/src/blog/bank_acount_type_bloc.dart';
-export 'package:radadz_app/src/blog/payment_received_bloc.dart';
-export 'package:radadz_app/src/blog/update_data_bank_bloc.dart';
-export 'package:radadz_app/src/blog/update_driver_bloc.dart';
-export 'package:radadz_app/src/blog/blurt_list_all_bloc.dart';
-export 'package:radadz_app/src/blog/blurt_list_driver_bloc.dart';
-export 'package:radadz_app/src/blog/blurt_create_bloc.dart';
-export 'package:radadz_app/src/blog/blurt_update_bloc.dart';
-export 'package:radadz_app/src/blog/trip_start_bloc.dart';
-export 'package:radadz_app/src/blog/trip_end_bloc.dart';
+export 'package:radadz_app/src/blog/blurt_bloc.dart';
+export 'package:radadz_app/src/blog/driver_bloc.dart';
+export 'package:radadz_app/src/blog/master_bloc.dart';
+export 'package:radadz_app/src/blog/reset_password_bloc.dart';
+export 'package:radadz_app/src/blog/sign_in_bloc.dart';
+export 'package:radadz_app/src/blog/trip_bloc.dart';
 
 /* PAGES */
 export 'package:radadz_app/src/home_page.dart';
 export 'package:radadz_app/src/login_page.dart';
+export 'package:radadz_app/src/pages/reset_password_page.dart';
+export 'package:radadz_app/src/pages/verify_code_page.dart';
+export 'package:radadz_app/src/pages/reset_change_password_page.dart';
 export 'package:radadz_app/src/intro.dart';
 export 'package:radadz_app/src/register_page.dart';
 export 'package:radadz_app/src/views/trip_start_page.dart';

@@ -169,6 +169,7 @@ class CustomInputTextfieldPassword extends StatelessWidget {
       keyboardType:this.keyboardType ,
       cursorColor: StyleGeneral.BLACK,
       textCapitalization: TextCapitalization.words,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         labelText: labelText,
         fillColor: colorFill,

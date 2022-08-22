@@ -59,6 +59,14 @@ class Preferences {
     _preferences.setString('start_trip_hour', hour);
   }
 
+  get getCodeVerification {
+    return _preferences.getString('code_verification') ?? '';
+  }
+
+  set setCodeVerification( String code ) {
+    _preferences.setString('code_verification', code);
+  }
+
   get getTripPaymentId {
     return _preferences.getInt('trip_payment_id') ?? 0;
   }

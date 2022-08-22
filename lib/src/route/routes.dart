@@ -9,5 +9,10 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'intro': (BuildContext context) => Intro(),
     'register': (BuildContext context) => RegisterPage(),
     'detailPaymentReceived': (BuildContext context) => DetailPaymentReceived(),
+
+    'reset_password': (BuildContext context) => const ResetPasswordPage(),
+    'reset_verify_code': (BuildContext context) => const ResetVerificationCodePage(),
+    'reset_change_password': (BuildContext context) => const ResetChangePasswordPage(),
+
   };
 }
