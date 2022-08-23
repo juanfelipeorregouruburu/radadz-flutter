@@ -57,7 +57,7 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  TripHistory get selectPayment => _selectTrip;
+  TripHistory get selectTripHistory => _selectTrip;
 
   set selectTripHistory(TripHistory selectTrip) {
     _selectTrip = selectTrip;
@@ -76,11 +76,11 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
     selectTripHistory = newTrip;
   }
 
-  Future getListTripHistoryDriver({@required String driver_id}) async {
+  Future getListTripHistoryDriver({@required String driver_id,@required String start_time, @required String end_date}) async {
     isLoading = true;
 
     debouncer.run(() async {
-      TripHistoryModel _tripModel = await repository.listTripHistoryDriverRepository(driver_id);
+      TripHistoryModel _tripModel = await repository.listTripHistoryDriverRepository(driver_id,start_time,end_date);
       isLoading = false;
       listTripHistory = _tripModel;
     });

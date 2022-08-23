@@ -89,6 +89,6 @@ class Repository {
   Future<TripEndModel> tripEndRepository(String driver_id, String trip_id) => tripProvider.TripEnd(driver_id, trip_id);
 
   /* listTripHistoryDriver */
-  Future<TripHistoryModel>  listTripHistoryDriverRepository( String driver_id) => tripProvider.listTripHistoryDriver(driver_id);
+  Future<TripHistoryModel>  listTripHistoryDriverRepository( String driver_id, String start_time, String end_date) => tripProvider.listTripHistoryDriver(driver_id,start_time,end_date);
 
 }
