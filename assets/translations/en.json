@@ -105,5 +105,24 @@
   "trip_history_card_driver_vehicle" : "Vehicle",
   "trip_history_card_driver_vehicle_plate" : "Plate number",
   "trip_history_card_driver_account_number" : "Account number",
-  "trip_history_card_driver_account_bank" : "Bank"
+  "trip_history_card_driver_account_bank" : "Bank",
+  "trip_history_card_detail_data_driver" : "Driver information",
+  "trip_history_card_detail_data_driver_name" : "Names",
+  "trip_history_card_detail_data_driver_document" : "ID",
+  "trip_history_card_detail_data_driver_phone" : "Phone",
+  "trip_history_card_detail_data_driver_address" : "Address",
+  "trip_history_card_detail_data_driver_bank" : "Bank",
+  "trip_history_card_detail_data_driver_account" : "Account Bank",
+  "trip_history_card_detail_data_Vehicle" : "Vehicle data",
+  "trip_history_card_detail_data_Vehicle_name" : "Brand",
+  "trip_history_card_detail_data_plate_name" : "Plate" ,
+  "trip_history_card_detail_data_year_name" : "Year",
+  "trip_history_card_detail_data_trip" : "Trip time",
+  "trip_history_card_detail_data_trip_start_time" : "Start time",
+  "trip_history_card_detail_data_trip_end_time" : "End time",
+  "trip_history_card_detail_data_total_time" : "Travel time",
+  "trip_history_card_detail_data_earning" : "Earnings",
+  "trip_history_card_detail_data_earning_money" : "Money",
+  "trip_history_card_detail_data_earning_tokens" : "Tokens"
+
 }
