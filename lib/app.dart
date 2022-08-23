@@ -21,17 +21,10 @@ class _AppState extends State<App> {
         designSize: Size(360, 690),
         builder: () => MultiProvider(
           providers: [
-            ChangeNotifierProvider<ListPaymentReceivedDriverBloc>(
-              create: (_) => ListPaymentReceivedDriverBloc(),
-            ),
-
-            ChangeNotifierProvider<ListBlurtAllBloc>(
-              create: (_) => ListBlurtAllBloc(),
-            ),
-
-            ChangeNotifierProvider<ListBlurtDriverBloc>(
-              create: (_) => ListBlurtDriverBloc(),
-            ),
+            ChangeNotifierProvider<ListPaymentReceivedDriverBloc>(create: (_) => ListPaymentReceivedDriverBloc()),
+            ChangeNotifierProvider<ListTripHistoryDriverBloc>(create: (_) => ListTripHistoryDriverBloc()),
+            ChangeNotifierProvider<ListBlurtAllBloc>(create: (_) => ListBlurtAllBloc()),
+            ChangeNotifierProvider<ListBlurtDriverBloc>(create: (_) => ListBlurtDriverBloc())
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -93,7 +93,8 @@ class StyleGeneral {
   static final styleTextTextSpinner = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(14), fontFamily: 'Poppins-Regular');
 
   static final styleTextTextCardPaymentTitle = TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5 , fontSize: ScreenUtil().setSp(14), fontFamily: 'Poppins-Bold');
-  static final styleTextTextCardPaymentDescription = TextStyle(color: StyleGeneral.BLACK, fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Semi');
+  static final styleTextTextCardPaymentSubtitleCard = TextStyle(color: StyleGeneral.BLACK, fontSize: ScreenUtil().setSp(15), fontFamily: 'Poppins-Semi');
+  static final styleTextTextCardPaymentDescription = TextStyle(color: StyleGeneral.BLACK, fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Regular');
 
 }
 

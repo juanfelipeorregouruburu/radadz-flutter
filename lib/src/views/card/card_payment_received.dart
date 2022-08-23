@@ -68,7 +68,7 @@ class ItemPaymentRecived extends StatelessWidget {
       child: GestureDetector(
         onTap: (){
           paymentProvider.selectOrderDetail(payment);
-          Navigator.pushNamed(context, 'detailPaymentReceived');
+          Navigator.pushNamed(context, 'detail_payment_received');
         },
         child:Card(
           elevation: 4,
