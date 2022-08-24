@@ -12,7 +12,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
 
   final ResetChangePasswordBloc _changePasswordBloc = ResetChangePasswordBloc();
   final prefs = new Preferences();
-  final GlobalKey<FormState> formState = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
   bool stateButton = false;
   bool colorButton = false;
@@ -89,7 +89,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                   ),
 
                  Form(
-                   key: formState,
+                   key: _key,
                    autovalidateMode: AutovalidateMode.onUserInteraction,
                    child: Column(
                      mainAxisAlignment: MainAxisAlignment.start,
@@ -115,6 +115,9 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                          text: 'change_password_button'.tr(),
                          fullscreen: true,
                          onTap: (){
+                           if(_key.currentState.validate()){
+                             changePassword();
+                           }
 
                          },
                        ),
@@ -151,7 +154,9 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
         _fieldFocusChange(context, passwordFocus, passwordConfirmFocus);
       },
       validator:  (value) {
-        if (value.isEmpty) return 'required_field'.tr();
+        if (value.isEmpty) {
+          return 'required_field'.tr();
+        }
         return null;
       },
       onPressed: (){
@@ -173,12 +178,15 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       hintText:  'enter_password'.tr(),
       colorFill: StyleGeneral.GREY,
       validator:  (value) {
-        if (value.isEmpty) return 'required_field'.tr();
-        return null;
+        if (value.isEmpty) {
+          return 'required_field'.tr();
+        }else if(value != _inputPasswordController.text.trim()){
+          return 'required_password_math'.tr();
+        }
       },
       onPressed: (){
         setState(() {
-          _passwordVisibleVerify = !_passwordVisible;
+          _passwordVisibleVerify = !_passwordVisibleVerify;
         });
       },
     );

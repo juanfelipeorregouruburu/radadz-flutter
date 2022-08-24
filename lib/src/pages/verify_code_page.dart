@@ -152,9 +152,7 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
                          text: 'verify_code_button'.tr(),
                          fullscreen: true,
                          onTap: (){
-                           if(_key.currentState.validate() && isValidate){
-                             verifyCode();
-                           }
+                           verifyCode();
                          }
                        )
                     ]

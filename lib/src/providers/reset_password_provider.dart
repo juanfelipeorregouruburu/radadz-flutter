@@ -26,7 +26,6 @@ class ResetPasswordProvider{
       "token": code
     });
 
-    print(response.body);
     if(response.statusCode == 200) {
       return ResponseModel.fromJson(jsonDecode(response.body));
     }else{
