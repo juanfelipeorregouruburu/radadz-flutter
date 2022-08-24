@@ -24,6 +24,7 @@ class _TripStartPageState extends State<TripStartPage> {
     mode: StopWatchMode.countUp,
   );
 
+  bool _isLoading = false;
   bool _isStartTrip = false;
   int _cronometroView = 0;
   String textButton ='trip_state_button_syn_start_trip'.tr();
@@ -90,12 +91,25 @@ class _TripStartPageState extends State<TripStartPage> {
 
   _tripStart() async{
 
+
+    print(prefs.getTripPaymentId);
+
+    setState(() {
+      _isLoading = true ;
+    });
+
+
     _tripStartBloc.driver_id = prefs.getDriverId;
     _tripStartBloc.trip_payment_id = prefs.getTripPaymentId.toString();
 
      _tripStartBloc.TripStart();
 
     _tripStartBloc.data.listen((data) {
+
+      setState(() {
+        _isLoading = false ;
+      });
+
       String icon = data.error == 1 ? 'success' : 'error';
 
       if (data.error == 1) {
@@ -128,12 +142,21 @@ class _TripStartPageState extends State<TripStartPage> {
 
   _tripEnd() async {
 
+    setState(() {
+      _isLoading = true ;
+    });
+
     _tripEndBloc.driver_id = prefs.getDriverId;
     _tripEndBloc.trip_id = prefs.getTripId.toString();
 
     _tripEndBloc.TripEnd();
 
     _tripEndBloc.data.listen((data) {
+
+      setState(() {
+        _isLoading = false ;
+      });
+
       String icon = data.error == 1 ? 'success' : 'error';
 
       if (data.error == 1) {
@@ -230,9 +253,16 @@ class _TripStartPageState extends State<TripStartPage> {
                     Center(
                       child: GestureDetector(
                         onTap: (){
+                          print('clic');
                           _tripMethod();
                         },
-                        child: Container(
+                        child: _isLoading ? Container(
+                          padding: EdgeInsets.only(top: 100.h),
+                          alignment: Alignment.topLeft,
+                            width: 250.r,
+                            height: 250.r,
+                            child: ActivityIndicator()
+                          ) : Container(
                           width: 250.r,
                           height: 250.r,
                           child: Center(
@@ -247,18 +277,17 @@ class _TripStartPageState extends State<TripStartPage> {
                                     color: StyleGeneral.WHITE,
                                     fontSize: ScreenUtil().setSp(25),
                                     fontFamily: 'Poppins-Semi',
-                                  ),
-                                ),
-
-                              ],
-                            ),
+                                  )
+                                )
+                              ]
+                            )
                           ),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: StyleGeneral.GREEN,
-                          ),
-                        ),
-                      ),
+                          )
+                        )
+                      )
                     ),
 
                     SizedBox(height: 50.h),

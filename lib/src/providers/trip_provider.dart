@@ -9,7 +9,6 @@ class TripProvider {
   /* TripStart */
   Future<TripStartModel> TripStart(String driver_id, String trip_payment_id) async {
     var url = Uri.parse(API.setTripStart);
-
     String token = await pref.getToken;
     final response = await http.post(url,
         headers: {
