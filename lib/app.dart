@@ -31,8 +31,7 @@ class _AppState extends State<App> {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            //home: widget.autenticado  ? HomePage() : LoginPage(),
-            home: ResetChangePasswordPage(),
+            home: widget.autenticado  ? HomePage() : LoginPage(),
             routes: getAplicationRoutes(),
             builder: (context, widget) {
               ScreenUtil.setContext(context);
