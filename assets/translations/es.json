@@ -12,6 +12,7 @@
   "login_info" : "Ingresa tu número de teléfono y contraseña",
   "enter_phone" : "Ingresa tu teléfono",
   "enter_password" : "Ingresa tu contraseña",
+  "required_password_math": "Las contraseñas deben coincidir",
   "required_field": "Este es un campo requerido",
   "required_email": "Este email no es valido",
   "login_forgot_password" : "Se te olvidó tu contraseña?",
