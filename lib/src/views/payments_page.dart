@@ -3,14 +3,14 @@ import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class PaymentsPage extends StatefulWidget with NavigationStates{
-  const PaymentsPage({Key key}) : super(key: key);
+class PaymentHistoryPage extends StatefulWidget with NavigationStates{
+  const PaymentHistoryPage({Key key}) : super(key: key);
 
   @override
-  _PaymentsPageState createState() => _PaymentsPageState();
+  _PaymentHistoryPageState createState() => _PaymentHistoryPageState();
 }
 
-class _PaymentsPageState extends State<PaymentsPage> {
+class _PaymentHistoryPageState extends State<PaymentHistoryPage> {
 
   final prefs = new Preferences();
   bool _isCalendar = false;
@@ -77,7 +77,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                   child: Column(
                     children: [
                       _buttonSearch ? CustomButton(
-                        text: 'payment_buton_search_title'.tr(),
+                        text: 'payment_button_search_title'.tr(),
                         fullscreen: true,
                         onTap: (){
                             setState(() {
@@ -89,7 +89,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       ) : Container(),
 
                       _buttonFilter ? CustomButton(
-                        text: 'payment_buton_search_filter'.tr(),
+                        text: 'payment_button_search_filter'.tr(),
                         fullscreen: true,
                         onTap: (){
                           setState(() {
@@ -130,7 +130,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                   ),
                 ),
 
-                _isDataPayment ? CardPaymentReceivedWidget() :Container()
+                _isDataPayment ? CardPaymentHistoryPage() :Container()
               ],
             ),
           ),
@@ -140,7 +140,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
   }
 
   _filterData() {
-    Future.microtask(() =>context.read<ListPaymentReceivedDriverBloc>().getPaymentReceivedDriver(driver_id: prefs.getDriverId, start_time: _selectedStartDate, end_date:_selectedEndDate));
+    Future.microtask(() =>context.read<ListPaymentHistoryDriverBloc>().getListPaymentHistoryDriver(driver_id: prefs.getDriverId, start_time: _selectedStartDate, end_date:_selectedEndDate));
 
     _isDataPayment = true;
     _buttonSearch = true;

@@ -25,7 +25,7 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
         break;
 
       case NavigationEvents.PaymentPageClickedEvent:
-        yield PaymentsPage();
+        yield PaymentHistoryPage();
         break;
 
       case NavigationEvents.BankDataPageClickedEvent:
