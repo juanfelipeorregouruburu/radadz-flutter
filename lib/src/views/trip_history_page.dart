@@ -70,7 +70,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                   child: Column(
                     children: [
                       _buttonSearch ? CustomButton(
-                        text: 'payment_buton_search_title'.tr(),
+                        text: 'payment_button_search_title'.tr(),
                         fullscreen: true,
                         onTap: (){
                           setState(() {
@@ -82,7 +82,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                       ) : Container(),
 
                       _buttonFilter ? CustomButton(
-                        text: 'payment_buton_search_filter'.tr(),
+                        text: 'payment_button_search_filter'.tr(),
                         fullscreen: true,
                         onTap: (){
                           setState(() {
