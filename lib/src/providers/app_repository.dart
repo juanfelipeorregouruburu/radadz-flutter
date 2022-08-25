@@ -58,10 +58,6 @@ class Repository {
       driverProvider.UpdateDriver(driver_id, name_first, name_second, lastNameFirst , lastNameSecond , document_type, document_number,
           email, phone , address , date_birth,  licence_number , vehicule_type, vehicule_year , driving_daily_routine);
 
-  /* ListPaymentReceivedDriver */
-  Future<PaymentRecivedModel> listPaymentReceivedDriverRepository( String driver_id, String start_time, String end_date) =>
-      driverProvider.ListPaymentReceivedDriver(driver_id,start_time,end_date);
-
   /* UpdateDataBank */
   Future<UpdateDataBankModel> updateDriverDataBank(String driver_id, String bank_id, String account_number , String account_type_id) =>
       driverProvider.UpdateDataBankDriver(driver_id, bank_id,account_number,account_type_id);
@@ -91,4 +87,12 @@ class Repository {
   /* listTripHistoryDriver */
   Future<TripHistoryModel>  listTripHistoryDriverRepository( String driver_id, String start_time, String end_date) => tripProvider.listTripHistoryDriver(driver_id,start_time,end_date);
 
+  /* DetailTripHistory */
+  Future<TripDetailHistoryModel>  tripDetailHistoryDriverRepository( String trip_id) => tripProvider.tripDetailHistoryDriver(trip_id);
+
+  /* ListPaymentHistoryDriver */
+  Future<PaymentHistoryModel> listPaymentHistoryDriverRepository( String driver_id, String start_time, String end_date) => tripProvider.ListPaymentHistoryDriver(driver_id,start_time,end_date);
+
+  /* ListTripPaymentHistoryDriver */
+  Future<TripPaymentHistoryModel> listTripPaymentDriverRepository( String trip_payment_id) => tripProvider.ListTripPaymentDriver(trip_payment_id);
 }

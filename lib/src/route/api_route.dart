@@ -17,8 +17,10 @@ class API {
   static final String driverCreate = _URL + "save_driver";
   static final String driverUpdate = _URL + "update_driver";
   static final String driverDataBank = _URL + "update_driver_bank";
-  static final String driverListPaymentReceived = _URL + "list_trip_payment_history";
+  static final String driverListPaymentHistory = _URL + "list_trip_payment_history";
+  static final String driverListTripPaymentHistory = _URL + "list_of_trips_per_trip_payment";
   static final String getListTripHistoryDriver = _URL + "list_driver_trips";
+  static final String getTripDetailHistoryDriver = _URL + "get_driver_trip";
 
   static final String blurtListAll = _URL + "list_screen_msgs";
   static final String blurtListDriverId = _URL + "list_screen_msgs_driver";

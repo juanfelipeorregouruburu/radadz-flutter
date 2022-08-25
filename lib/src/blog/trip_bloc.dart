@@ -47,7 +47,6 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
   final debouncer = Debouncer();
 
   TripHistoryModel _tripHistoryModel;
-  TripHistory _selectTrip;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -57,35 +56,116 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  TripHistory get selectTripHistory => _selectTrip;
+  TripHistoryModel get listTripsHistory => _tripHistoryModel;
 
-  set selectTripHistory(TripHistory selectTrip) {
-    _selectTrip = selectTrip;
-    notifyListeners();
-  }
-
-  TripHistoryModel get tripHistoryList => _tripHistoryModel;
-
-  set listTripHistory(TripHistoryModel data) {
+  set listTripsHistory(TripHistoryModel data) {
     _tripHistoryModel = data;
     notifyListeners();
   }
 
-  void selectTripDetail(TripHistory tripHistory) {
-    final newTrip = TripHistory(tripHistory.toJson());
-    selectTripHistory = newTrip;
-  }
-
   Future getListTripHistoryDriver({@required String driver_id,@required String start_time, @required String end_date}) async {
     isLoading = true;
-
     debouncer.run(() async {
       TripHistoryModel _tripModel = await repository.listTripHistoryDriverRepository(driver_id,start_time,end_date);
       isLoading = false;
-      listTripHistory = _tripModel;
+      listTripsHistory = _tripModel;
     });
-
   }
 
+}
+
+class TripHistoryDetailDriverBloc with ChangeNotifier {
+  final repository = Repository();
+  final debouncer = Debouncer();
+
+  TripDetailHistoryModel _tripDetailHistoryModel;
+  bool _isLoading = true;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
+  TripDetailHistoryModel get tripDetailHistoryModel => _tripDetailHistoryModel;
+
+  set tripDetailHistoryModel(TripDetailHistoryModel data) {
+    _tripDetailHistoryModel = data;
+    notifyListeners();
+  }
+
+  Future getTripHistoryDetailDriver({@required String trip_id}) async {
+    isLoading = true;
+    debouncer.run(() async {
+      TripDetailHistoryModel _tripDetail = await repository.tripDetailHistoryDriverRepository(trip_id);
+      isLoading = false;
+      tripDetailHistoryModel = _tripDetail;
+    });
+  }
+
+}
+
+class ListPaymentHistoryDriverBloc with ChangeNotifier {
+  final repository = Repository();
+  final debouncer = Debouncer();
+
+  PaymentHistoryModel _paymentHistoryModel;
+  bool _isLoading = true;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
+  PaymentHistoryModel get listPaymentHistory => _paymentHistoryModel;
+
+  set listPaymentHistory(PaymentHistoryModel data) {
+    _paymentHistoryModel = data;
+    notifyListeners();
+  }
+
+  Future getListPaymentHistoryDriver({@required String driver_id,@required String start_time, @required String end_date}) async {
+    isLoading = true;
+    debouncer.run(() async {
+      PaymentHistoryModel _tripPaymentModel = await repository.listPaymentHistoryDriverRepository(driver_id, start_time, end_date);
+      isLoading = false;
+      listPaymentHistory = _tripPaymentModel;
+    });
+  }
+
+}
+
+class ListTripPaymentDriverBloc with ChangeNotifier {
+  final repository = Repository();
+  final debouncer = Debouncer();
+
+  TripPaymentHistoryModel _tripPaymentHistoryModel;
+  bool _isLoading = true;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
+  TripPaymentHistoryModel get listTripPaymentsHistory => _tripPaymentHistoryModel;
+
+  set listTripPaymentsHistory(TripPaymentHistoryModel data) {
+    _tripPaymentHistoryModel = data;
+    notifyListeners();
+  }
+
+  Future getListTripPaymentHistoryDriver({@required String trip_payment_id}) async {
+    isLoading = true;
+    debouncer.run(() async {
+      TripPaymentHistoryModel _tripPaymentModel = await repository.listTripPaymentDriverRepository(trip_payment_id);
+      isLoading = false;
+      listTripPaymentsHistory = _tripPaymentModel;
+    });
+  }
 
 }
