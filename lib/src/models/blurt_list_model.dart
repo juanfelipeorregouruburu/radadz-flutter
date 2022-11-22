@@ -1,7 +1,7 @@
 class BlurtListModel {
-  int _error;
-  String _response;
-  List<Blurt> _blurts = [];
+  int? _error;
+  String? _response;
+  List<Blurt>? _blurts = [];
 
   BlurtListModel.fromJson(Map<String , dynamic> json) {
     _error = json['msg'];
@@ -17,16 +17,16 @@ class BlurtListModel {
     }
   }
 
-  int get error => _error;
-  String get response => _response;
-  List<Blurt> get blurts => _blurts;
+  int get error => _error!;
+  String get response => _response!;
+  List<Blurt> get blurts => _blurts!;
 }
 
 class Blurt {
-  String _Id;
-  String _creation_date;
-  String _message;
-  StatusBlurt _statusBlurt;
+  String? _Id;
+  String? _creation_date;
+  String? _message;
+  StatusBlurt? _statusBlurt;
 
   Blurt(parsedJson) {
     _Id = parsedJson['id'].toString();
@@ -35,16 +35,16 @@ class Blurt {
     _statusBlurt = StatusBlurt(parsedJson['status']);
   }
 
-  String get id => _Id ;
-  String get create_date => _creation_date ;
-  String get message => _message ;
-  StatusBlurt get statusBlurt => _statusBlurt;
+  String get id => _Id! ;
+  String get create_date => _creation_date! ;
+  String get message => _message! ;
+  StatusBlurt get statusBlurt => _statusBlurt!;
 
 }
 
 class StatusBlurt{
-  int _Id;
-  String _status;
+  int? _Id;
+  String? _status;
 
   StatusBlurt(parsedJson) {
     _Id = parsedJson['id'];
@@ -52,7 +52,7 @@ class StatusBlurt{
 
   }
 
-  int get id => _Id ;
-  String get status => _status ;
+  int get id => _Id! ;
+  String get status => _status! ;
 
 }

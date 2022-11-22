@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 import 'package:radadz_app/src/utils/get_second.dart';
 
 class TripStartPage extends StatefulWidget with NavigationStates{
-  const TripStartPage({Key key}) : super(key: key);
+  const TripStartPage({Key? key}) : super(key: key);
 
   @override
   _TripStartPageState createState() => _TripStartPageState();
@@ -29,11 +29,11 @@ class _TripStartPageState extends State<TripStartPage> {
   int _cronometroView = 0;
   String textButton ='trip_state_button_syn_start_trip'.tr();
   int stateBtn = 1;
-  String hour;
-  int trip_id;
+  String hour = '';
+  int trip_id = 0;
 
-  TripStartBloc _tripStartBloc;
-  TripEndBloc _tripEndBloc;
+  TripStartBloc _tripStartBloc = new TripStartBloc();
+  TripEndBloc _tripEndBloc = new TripEndBloc();
 
   @override
   void initState() {
@@ -46,9 +46,9 @@ class _TripStartPageState extends State<TripStartPage> {
   }
 
   verifyStateTrip(){
-    if(prefs.getStartTrip){
-      getSecondDiferenceHourAfter(prefs.getHourTripStart);
-      changeText(prefs.getHourTripStart);
+    if(Preferences.getStartTrip){
+      getSecondDiferenceHourAfter(Preferences.getHourTripStart);
+      changeText(Preferences.getHourTripStart);
     }
   }
 
@@ -92,15 +92,13 @@ class _TripStartPageState extends State<TripStartPage> {
   _tripStart() async{
 
 
-    print(prefs.getTripPaymentId);
-
     setState(() {
       _isLoading = true ;
     });
 
 
-    _tripStartBloc.driver_id = prefs.getDriverId;
-    _tripStartBloc.trip_payment_id = prefs.getTripPaymentId.toString();
+    _tripStartBloc.driver_id = Preferences.getDriverId;
+    _tripStartBloc.trip_payment_id = Preferences.getTripPaymentId.toString();
 
      _tripStartBloc.TripStart();
 
@@ -116,10 +114,10 @@ class _TripStartPageState extends State<TripStartPage> {
 
         setState(() {
           _isStartTrip = true;
-          prefs.setStartTrip = true;
-          prefs.setHourTripStart = data.start_time;
-          prefs.setTripPaymentId = data.trip_payment_id;
-          prefs.setTripId = data.trip_id;
+          Preferences.setStartTrip = true;
+          Preferences.setHourTripStart = data.start_time;
+          Preferences.setTripPaymentId = data.trip_payment_id;
+          Preferences.setTripId = data.trip_id;
           changeText(data.start_time);
           _cronometroView= 0;
           getSecondDiferenceHour(data.start_time);
@@ -146,8 +144,8 @@ class _TripStartPageState extends State<TripStartPage> {
       _isLoading = true ;
     });
 
-    _tripEndBloc.driver_id = prefs.getDriverId;
-    _tripEndBloc.trip_id = prefs.getTripId.toString();
+    _tripEndBloc.driver_id = Preferences.getDriverId;
+    _tripEndBloc.trip_id = Preferences.getTripId.toString();
 
     _tripEndBloc.TripEnd();
 
@@ -164,8 +162,8 @@ class _TripStartPageState extends State<TripStartPage> {
           _isStartTrip = false;
           textButton = 'trip_state_button_syn_start_trip'.tr();
           stateBtn = 1;
-          prefs.setStartTrip = false;
-          prefs.setHourTripStart = '';
+          Preferences.setStartTrip = false;
+          Preferences.setHourTripStart = '';
           //_stopWatchTimer.onExecute.add(StopWatchExecute.reset);
         });
 
@@ -318,7 +316,7 @@ class _TripStartPageState extends State<TripStartPage> {
                                 builder: (context, snap) {
                                   final value = snap.data;
                                   final displayTime =
-                                  StopWatchTimer.getDisplayTime(value, hours: false , milliSecond: false);
+                                  StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
                                   return Text(
                                       'trip_state_text_time_trip'.tr() + " "+displayTime,
                                       style: TextStyle(
@@ -338,7 +336,7 @@ class _TripStartPageState extends State<TripStartPage> {
                                 builder: (context, snap) {
                                   final value = snap.data;
                                   final displayTime =
-                                  StopWatchTimer.getDisplayTime(value, hours: false , milliSecond: false);
+                                  StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
                                   return Text(
                                       'trip_state_text_time_trip'.tr() + " "+displayTime,
                                       style: TextStyle(

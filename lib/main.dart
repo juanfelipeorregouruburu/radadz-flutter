@@ -8,22 +8,19 @@ import 'package:radadz_app/src/utils/supported_locales.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  final preferences = new Preferences();
   await EasyLocalization.ensureInitialized();
-  await preferences.initPreferences();
-  bool auth = preferences.getAuth;
+  await Preferences.init();
 
   runApp(EasyLocalization(
     supportedLocales: supportedLocales,
     path: 'assets/translations',
     fallbackLocale: english,
-    child:auth == false ? MyApp(auth: false) : MyApp(auth: true),
+    child: const MyApp()
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final bool auth;
-  const MyApp({Key key, this.auth}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +28,6 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return App(autenticado: auth);
+    return App();
   }
 }

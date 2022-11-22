@@ -3,7 +3,7 @@ import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class BankDataPage extends StatefulWidget with NavigationStates{
-  const BankDataPage({Key key}) : super(key: key);
+  const BankDataPage({Key? key}) : super(key: key);
 
   @override
   _BankDataPageState createState() => _BankDataPageState();

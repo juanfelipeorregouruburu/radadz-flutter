@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class ResetPasswordPage extends StatefulWidget {
-  const ResetPasswordPage({Key key}) : super(key: key);
+  const ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -16,7 +16,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   bool stateButton = false;
   bool colorButton = false;
 
-  /* Editext */
   TextEditingController _inputPhoneController = new TextEditingController();
   final FocusNode _phoneFocus = FocusNode();
 
@@ -107,8 +106,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                            onFieldSubmitted: (term) {
 
                            },
-                           validator: (value) {
-                             if (value.isEmpty) return 'required_field'.tr();
+                           validator: (String? value) {
+                             if (value!.isEmpty) return 'required_field'.tr();
                              return null;
                            }
                          )
@@ -122,7 +121,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                          text: 'reset_button'.tr(),
                          fullscreen: true,
                          onTap: (){
-                           if(_key.currentState.validate()){
+                           if(_key.currentState!.validate()){
                              sendCode();
                            }
                          }
@@ -135,7 +134,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             )
           )
         )
-      ),
+      )
     );
   }
 }

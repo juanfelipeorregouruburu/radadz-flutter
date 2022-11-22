@@ -1,7 +1,7 @@
 class TripHistoryModel {
-  int _error;
-  String _message;
-  List<TripHistory> _tripHistory = [];
+  int? _error;
+  String? _message;
+  List<TripHistory>? _tripHistory = [];
 
   TripHistoryModel.fromJson(Map<String, dynamic> json) {
     _error = json['msg'];
@@ -17,20 +17,20 @@ class TripHistoryModel {
     }
   }
 
-  int get error => _error;
-  String get message => _message;
-  List<TripHistory> get trips => _tripHistory;
+  int get error => _error!;
+  String get message => _message!;
+  List<TripHistory> get trips => _tripHistory!;
 }
 
 class TripHistory {
-  int _tripId;
-  String _startTime;
-  String _endTime;
-  String _totalFinishedVideoTime;
-  String _totalEarnedFinishedVideo;
-  String _totalEarnedImageTime;
-   String _totalTokensEarned;
-   String _totalMoneyEarned;
+  int? _tripId;
+  String? _startTime;
+  String? _endTime;
+  String? _totalFinishedVideoTime;
+  String? _totalEarnedFinishedVideo;
+  String? _totalEarnedImageTime;
+   String? _totalTokensEarned;
+   String? _totalMoneyEarned;
 
   TripHistory(parsedJson){
     _tripId = parsedJson['id'];
@@ -43,12 +43,12 @@ class TripHistory {
     _totalMoneyEarned = parsedJson['total_money_earned'];
   }
 
-  int get id => _tripId;
-  String get startTime => _startTime;
-  String get endTime => _endTime;
-  String get totalFinishedVideoTime => _totalFinishedVideoTime;
-  String get totalEarnedFinishedVideo => _totalEarnedFinishedVideo;
-  String get totalEarnedImageTime => _totalEarnedImageTime;
-  String get totalTokensEarned => _totalTokensEarned;
-  String get totalMoneyEarned => _totalMoneyEarned;
+  int get id => _tripId!;
+  String get startTime => _startTime!;
+  String get endTime => _endTime!;
+  String get totalFinishedVideoTime => _totalFinishedVideoTime!;
+  String get totalEarnedFinishedVideo => _totalEarnedFinishedVideo!;
+  String get totalEarnedImageTime => _totalEarnedImageTime!;
+  String get totalTokensEarned => _totalTokensEarned!;
+  String get totalMoneyEarned => _totalMoneyEarned!;
 }

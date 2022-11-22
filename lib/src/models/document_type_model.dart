@@ -5,7 +5,7 @@ DocumentTypeModel documentModelFromJson(String str) => DocumentTypeModel.fromJso
 String documentModelToJson(DocumentTypeModel data) => json.encode(data.toJson());
 
 class DocumentTypeModel {
-  List<DocumentType> documentsType;
+  List<DocumentType>? documentsType;
 
   DocumentTypeModel({
     this.documentsType,
@@ -16,15 +16,15 @@ class DocumentTypeModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(documentsType.map((x) => x.toJson())),
+    "data": List<dynamic>.from(documentsType!.map((x) => x.toJson())),
   };
 
 }
 
 class DocumentType {
-  String id;
-  String name;
-  String description;
+  String? id;
+  String? name;
+  String? description;
 
   DocumentType({
     this.id,

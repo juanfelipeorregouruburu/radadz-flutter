@@ -10,7 +10,7 @@ class TripProvider {
   /* TripStart */
   Future<TripStartModel> TripStart(String driver_id, String trip_payment_id) async {
     var url = Uri.parse(API.setTripStart);
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,
         headers: {
           HttpHeaders.authorizationHeader: "token $token"
@@ -33,7 +33,7 @@ class TripProvider {
   Future<TripEndModel> TripEnd(String driver_id , String trip_id ) async {
     var url = Uri.parse(API.setTripEnd);
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,
         headers: {
           HttpHeaders.authorizationHeader: "token $token"
@@ -55,7 +55,7 @@ class TripProvider {
   Future<TripHistoryModel> listTripHistoryDriver(String driver_id, String start_time, String end_date) async {
     var url = Uri.parse(API.getListTripHistoryDriver );
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {
@@ -75,7 +75,7 @@ class TripProvider {
   Future<TripDetailHistoryModel> tripDetailHistoryDriver(String trip_id) async {
     var url = Uri.parse(API.getTripDetailHistoryDriver );
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {
@@ -94,7 +94,7 @@ class TripProvider {
   Future<PaymentHistoryModel> ListPaymentHistoryDriver(String driver_id, String start_time, String end_date) async {
     var url = Uri.parse(API.driverListPaymentHistory );
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {
@@ -114,7 +114,7 @@ class TripProvider {
   Future<TripPaymentHistoryModel> ListTripPaymentDriver(String trip_payment_id) async {
     var url = Uri.parse(API.driverListTripPaymentHistory );
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {

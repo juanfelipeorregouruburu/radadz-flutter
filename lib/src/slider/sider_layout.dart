@@ -10,7 +10,7 @@ import 'package:radadz_app/src/slider/menu_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SiderLayout extends StatefulWidget {
-  const SiderLayout({Key key}) : super(key: key);
+  const SiderLayout({Key? key}) : super(key: key);
 
   @override
   _SiderLayoutState createState() => _SiderLayoutState();
@@ -19,14 +19,13 @@ class SiderLayout extends StatefulWidget {
 class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStateMixin<SiderLayout> {
 
   final prefs = new Preferences();
-  AnimationController _animationController;
-  StreamController<bool> isSidebarOpenedStreamController;
-  Stream<bool> isSidebarOpenedStream;
-  StreamSink<bool> isSidebarOpenedSink;
+  AnimationController? _animationController;
+  StreamController<bool>? isSidebarOpenedStreamController;
+  Stream<bool>? isSidebarOpenedStream;
+  StreamSink<bool>? isSidebarOpenedSink;
   final _animationDuration = const Duration(milliseconds: 100);
 
-  Map<String, dynamic> _map;
-  String nameUser;
+  String? nameUser;
 
   @override
   void initState() {
@@ -36,31 +35,30 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
     _animationController =
         AnimationController(vsync: this, duration: _animationDuration);
     isSidebarOpenedStreamController = PublishSubject<bool>();
-    isSidebarOpenedStream = isSidebarOpenedStreamController.stream;
-    isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
+    isSidebarOpenedStream = isSidebarOpenedStreamController!.stream;
+    isSidebarOpenedSink = isSidebarOpenedStreamController!.sink;
 
-    _map = jsonDecode(prefs.getDriver());
-    nameUser = _map['first_name'] +" "+_map['second_name'] ;
+    nameUser = "name";
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
-    isSidebarOpenedStreamController.close();
-    isSidebarOpenedSink.close();
+    _animationController!.dispose();
+    isSidebarOpenedStreamController!.close();
+    isSidebarOpenedSink!.close();
     super.dispose();
   }
 
   onIconPressed() {
-    final animationStatus = _animationController.status;
+    final animationStatus = _animationController!.status;
     final isAnimationCompleted = animationStatus == AnimationStatus.completed;
 
     if (isAnimationCompleted) {
-      isSidebarOpenedSink.add(false);
-      _animationController.reverse();
+      isSidebarOpenedSink!.add(false);
+      _animationController!.reverse();
     } else {
-      isSidebarOpenedSink.add(true);
-      _animationController.forward();
+      isSidebarOpenedSink!.add(true);
+      _animationController!.forward();
     }
   }
 
@@ -77,8 +75,8 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
           duration: _animationDuration,
           top: 5.h,
           bottom: 0,
-          left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
-          right: isSideBarOpenedAsync.data ? -75.w : screenWidth - 75.w,
+          left: (isSideBarOpenedAsync.data ?? false) ? 0 : -screenWidth,
+          right: (isSideBarOpenedAsync.data ?? false) ? -75.w : screenWidth - 75.w,
           child: Row(
             children: [
               Expanded(
@@ -134,7 +132,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                           SizedBox(height: 5),
                                           Align(
                                               alignment: Alignment.topLeft,
-                                              child: Text(nameUser,
+                                              child: Text(nameUser!,
                                                   overflow: TextOverflow.ellipsis,
                                                   textAlign: TextAlign.left,
                                                   maxLines: 2,
@@ -272,24 +270,22 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                                     fontSize: ScreenUtil().setSp(18),
                                                     fontFamily: 'Poppins-Semi',
                                                     color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                  ],
-
-                                ),
-                              ),
-                            ),
-                          ) ,
-                        ],
-                      ),
+                                              )
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              )
+                            )
+                          )
+                        ]
+                      )
                     )
-                  ],
-                ),
+                  ]
+                )
               ),
 
               Align(
@@ -309,13 +305,11 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                         color: StyleGeneral.GREEN,
                         image: AssetImage("assets/menu/icono_menu.png",),
                       )
-                  ),
-                ),
+                  )
+                )
               )
-
-
-            ],
-          ),
+            ]
+          )
         );
       }
     );

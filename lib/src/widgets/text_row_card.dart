@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 class TextRowCardWidget extends StatelessWidget {
   final String text_row_title;
   final String text_row_data;
-  const TextRowCardWidget({Key key, @required this.text_row_title, @required this.text_row_data}) : super(key: key);
+  const TextRowCardWidget({Key? key, required this.text_row_title, required this.text_row_data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

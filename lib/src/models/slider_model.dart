@@ -1,9 +1,9 @@
 import 'package:radadz_app/src/utils/export.dart';
 
 class SliderModel {
-  String imagePath;
-  String title;
-  String description;
+  String? imagePath;
+  String? title;
+  String? description;
 
   SliderModel({this.imagePath, this.title, this.description});
 
@@ -20,20 +20,20 @@ class SliderModel {
   }
 
   String getImagePath() {
-    return imagePath;
+    return imagePath!;
   }
 
   String getTitle() {
-    return title;
+    return title!;
   }
 
   String getDescription() {
-    return description;
+    return description!;
   }
 }
 
 List<SliderModel> getSlides() {
-  List<SliderModel> sliders = new List<SliderModel>();
+  List<SliderModel> sliders = [];
   SliderModel sliderModel = new SliderModel();
 
   sliderModel.setImageAssetPath("assets/ilustracion_1.png");

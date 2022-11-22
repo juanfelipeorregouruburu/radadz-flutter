@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:flutter/gestures.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -12,18 +12,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  final prefs = new Preferences();
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
   bool _isLoading = false;
-  bool _passwordVisible;
+  bool _passwordVisible = false;
 
-  SignInBloc _signInBloc;
+  SignInBloc _signInBloc = new SignInBloc();
 
-  /* Editext */
   TextEditingController _inputPhoneController = new TextEditingController();
   TextEditingController _inputPasswordController = new TextEditingController();
-
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
@@ -33,8 +30,6 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement initState
     super.initState();
     statusBarDark();
-    _signInBloc = new SignInBloc();
-    _passwordVisible = false;
   }
 
   @override
@@ -109,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
                                 onFieldSubmitted: (term) {
                                   _fieldFocusChange(context, _phoneFocus, _passwordFocus);
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) return 'required_field'.tr();
+                                validator: (String? value) {
+                                  if (value!.isEmpty) return 'required_field'.tr();
                                   return null;
                                 },
                               ),
@@ -120,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
 
                             SizedBox(
                               height: size.height / 9,
-                              child: CustomInputTextfieldPassword(
+                              child: CustomInputTextFieldPassword(
                                 focusNode: _passwordFocus,
                                 controller: _inputPasswordController,
                                 keyboardType: TextInputType.text ,
@@ -128,8 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: !_passwordVisible,
                                 hintText:  'enter_password'.tr(),
                                 colorFill: StyleGeneral.GREY,
-                                validator:  (value) {
-                                  if (value.isEmpty) return 'required_field'.tr();
+                                validator: (String? value) {
+                                  if (value!.isEmpty) return 'required_field'.tr();
                                   return null;
                                 },
                                 onPressed: (){
@@ -143,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10.h,
                             ),
 
-                            passwordRestauredSection(),
+                            passwordRestoredSection(),
 
                             SizedBox(
                               height: 30.h,
@@ -206,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
 
   }
 
-  Widget passwordRestauredSection() {
+  Widget passwordRestoredSection() {
 
     return Container(
         margin: EdgeInsets.only(top: 5.h),
@@ -236,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _signIn() async {
 
-    if (formState.currentState.validate()) {
+    if (formState.currentState!.validate()) {
 
       setState(() {
         _isLoading = true;
@@ -253,13 +248,13 @@ class _LoginPageState extends State<LoginPage> {
         });
 
         if (data.error == 1) {
-          prefs.setAuth = true;
-          prefs.setToken = data.token;
-          prefs.setDriverId = data.driver_id;
-          prefs.setDriver = data.driver;
+          Preferences.setAuth = true;
+          Preferences.setToken = data.token;
+          Preferences.setDriverId = data.driver_id;
+
           Navigator.pushReplacementNamed(context, "home");
         } else {
-          prefs.setAuth = false;
+          Preferences.setAuth = false;
 
           var dialog = AlertMessageError(
               icon: "error",

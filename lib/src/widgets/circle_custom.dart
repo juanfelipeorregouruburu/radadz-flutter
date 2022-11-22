@@ -5,9 +5,9 @@ class CircleView extends StatelessWidget {
   final Color color;
 
   const CircleView({
-    Key key,
-    @required this.size,
-    @required this.color,
+    Key? key,
+    required this.size,
+    required this.color,
   }) : super(key: key);
 
   @override

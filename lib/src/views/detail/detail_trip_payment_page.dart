@@ -3,7 +3,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class DetailTripPaymentPage extends StatefulWidget {
   final int trip_payment_id;
-  const DetailTripPaymentPage({Key key , @required this.trip_payment_id}) : super(key: key);
+  const DetailTripPaymentPage({Key? key , required this.trip_payment_id}) : super(key: key);
 
   @override
   State<DetailTripPaymentPage> createState() => _DetailTripPaymentPageState();

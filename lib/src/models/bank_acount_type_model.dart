@@ -5,7 +5,7 @@ BankAcountTypeModel bankAcountTypeModelFromJson(String str) => BankAcountTypeMod
 String BankAcountTypeModelToJson(BankAcountTypeModel data) => json.encode(data.toJson());
 
 class BankAcountTypeModel {
-  List<BankAcountType> bankAcountType;
+  List<BankAcountType>? bankAcountType;
 
   BankAcountTypeModel({
     this.bankAcountType,
@@ -16,15 +16,15 @@ class BankAcountTypeModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(bankAcountType.map((x) => x.toJson())),
+    "data": List<dynamic>.from(bankAcountType!.map((x) => x.toJson())),
   };
 
 }
 
 class BankAcountType {
-  String id;
-  String name;
-  String description;
+  String? id;
+  String? name;
+  String? description;
 
   BankAcountType({
     this.id,

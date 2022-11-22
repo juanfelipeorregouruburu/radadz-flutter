@@ -3,7 +3,7 @@ import 'package:radadz_app/src/utils/export.dart';
 import 'package:intl/intl.dart';
 
 class CardTripPaymentWidget extends StatelessWidget {
-  const CardTripPaymentWidget({Key key}) : super(key: key);
+  const CardTripPaymentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CardTripPaymentWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return ItemTripPayment(
                   index: index,
-                  trip: listTripPaymentProvider?.listTripPaymentsHistory?.payments[index]
+                  trip: listTripPaymentProvider.listTripPaymentsHistory.payments[index]
               );
             }
           )
@@ -67,9 +67,9 @@ class CardTripPaymentWidget extends StatelessWidget {
 class ItemTripPayment extends StatelessWidget{
 
   const ItemTripPayment({
-    Key key,
-    @required this.index,
-    @required this.trip
+    Key? key,
+    required this.index,
+    required this.trip
   }) : super(key: key);
 
   final int index;

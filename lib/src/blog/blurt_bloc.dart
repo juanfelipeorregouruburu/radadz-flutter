@@ -7,12 +7,12 @@ class BlurtCreateBloc {
   final blurtCreate = PublishSubject<BlurtResponseModel>();
 
   get data => blurtCreate.stream;
-  String driver_id, message;
+  String? driver_id, message;
 
   BlurtCreateBloc({this.driver_id, this.message});
 
   BlurtCreate() async {
-    BlurtResponseModel _blurt = await repository.blurtCreateRepository(driver_id, message);
+    BlurtResponseModel _blurt = await repository.blurtCreateRepository(driver_id!, message!);
     blurtCreate.sink.add(_blurt);
   }
 
@@ -27,12 +27,12 @@ class BlurtUpdateBloc {
   final blurtUpdate = PublishSubject<BlurtResponseModel>();
 
   get data => blurtUpdate.stream;
-  String driver_id, blurt_id;
+  String? driver_id, blurt_id;
 
   BlurtUpdateBloc({this.driver_id, this.blurt_id});
 
   BlurtUpdate() async {
-    BlurtResponseModel _blurt = await repository.blurtEnableRepository(driver_id, blurt_id);
+    BlurtResponseModel _blurt = await repository.blurtEnableRepository(driver_id!, blurt_id!);
     blurtUpdate.sink.add(_blurt);
   }
 
@@ -47,8 +47,8 @@ class ListBlurtAllBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  BlurtListModel _listBlurtsModel;
-  Blurt _selectBlurt;
+  BlurtListModel? _listBlurtsModel;
+  Blurt? _selectBlurt;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -58,14 +58,14 @@ class ListBlurtAllBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  Blurt get selectBlurt => _selectBlurt;
+  Blurt get selectBlurt => _selectBlurt!;
 
   set selectBlurt(Blurt selectBlurt) {
     _selectBlurt = selectBlurt;
     notifyListeners();
   }
 
-  BlurtListModel get blurtListAll => _listBlurtsModel;
+  BlurtListModel? get blurtListAll => _listBlurtsModel;
 
   set blurtAll(BlurtListModel data) {
     _listBlurtsModel = data;
@@ -90,7 +90,7 @@ class ListBlurtDriverBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  BlurtListModel _listBlurtsModel;
+  BlurtListModel? _listBlurtsModel;
   bool _isLoading = true;
   bool _isStateButton = false;
 
@@ -107,14 +107,14 @@ class ListBlurtDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  BlurtListModel get blurtListAll => _listBlurtsModel;
+  BlurtListModel? get blurtListAll => _listBlurtsModel;
 
   set blurtAll(BlurtListModel data) {
     _listBlurtsModel = data;
     notifyListeners();
   }
 
-  Future getBlurtsDriver({@required String driver_id}) async {
+  Future getBlurtsDriver({required String driver_id}) async {
     isLoading = true;
 
     debouncer.run(() async {

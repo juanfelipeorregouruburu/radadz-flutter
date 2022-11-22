@@ -5,8 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 
 class App extends StatefulWidget {
-  final bool autenticado;
-  const App({Key key, this.autenticado}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -33,14 +32,14 @@ class _AppState extends State<App> {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            home: widget.autenticado  ? HomePage() : LoginPage(),
+            home: Preferences.getAuth ? HomePage() : LoginPage(),
             routes: getAplicationRoutes(),
             builder: (context, widget) {
               ScreenUtil.setContext(context);
               return MediaQuery(
                 //Setting font does not change with system font size
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget,
+                child: widget!,
               );
             },
             theme: ThemeData(

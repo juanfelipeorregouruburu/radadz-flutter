@@ -1,7 +1,7 @@
 class TripDetailHistoryModel {
-  int _error;
-  String _message;
-  TripDetailHistory _tripDetailHistory ;
+  int? _error;
+  String? _message;
+  TripDetailHistory? _tripDetailHistory ;
 
   TripDetailHistoryModel.fromJson(Map<String, dynamic> json) {
     _error = json['msg'];
@@ -12,21 +12,21 @@ class TripDetailHistoryModel {
     }
   }
 
-  int get error => _error;
-  String get message => _message;
-  TripDetailHistory get tripDetailHistory => _tripDetailHistory;
+  int get error => _error!;
+  String get message => _message!;
+  TripDetailHistory get tripDetailHistory => _tripDetailHistory!;
 }
 
 class TripDetailHistory {
-  int _tripId;
-  String _startTime;
-  String _endTime;
-  String _totalFinishedVideoTime;
-  String _totalEarnedFinishedVideo;
-  String _totalEarnedImageTime;
-   String _totalTokensEarned;
-   String _totalMoneyEarned;
-   TripHistoryDriver _driver;
+  int? _tripId;
+  String? _startTime;
+  String? _endTime;
+  String? _totalFinishedVideoTime;
+  String? _totalEarnedFinishedVideo;
+  String? _totalEarnedImageTime;
+   String? _totalTokensEarned;
+   String? _totalMoneyEarned;
+   TripHistoryDriver? _driver;
 
   TripDetailHistory(parsedJson){
     _tripId = parsedJson['id'];
@@ -40,33 +40,33 @@ class TripDetailHistory {
     if(parsedJson['driver'] != null){_driver = TripHistoryDriver(parsedJson['driver']);}
   }
 
-  int get id => _tripId;
-  String get startTime => _startTime;
-  String get endTime => _endTime;
-  String get totalFinishedVideoTime => _totalFinishedVideoTime;
-  String get totalEarnedFinishedVideo => _totalEarnedFinishedVideo;
-  String get totalEarnedImageTime => _totalEarnedImageTime;
-  String get totalTokensEarned => _totalTokensEarned;
-  String get totalMoneyEarned => _totalMoneyEarned;
-  TripHistoryDriver get driver => _driver ;
+  int get id => _tripId!;
+  String get startTime => _startTime!;
+  String get endTime => _endTime!;
+  String get totalFinishedVideoTime => _totalFinishedVideoTime!;
+  String get totalEarnedFinishedVideo => _totalEarnedFinishedVideo!;
+  String get totalEarnedImageTime => _totalEarnedImageTime!;
+  String get totalTokensEarned => _totalTokensEarned!;
+  String get totalMoneyEarned => _totalMoneyEarned!;
+  TripHistoryDriver get driver => _driver!;
 
 }
 
 class TripHistoryDriver {
-  int _id;
-  String _firstName;
-  String _secondName;
-  String _firstLastName;
-  String _secondLastName;
-  String _documentNumber;
-  String _phone;
-  String _address;
-  String _vehicleYear;
-  String _accountNumber;
-  String _plateNumber;
-  TripHistoryVehicleType _vehicleType;
-  TripHistoryBank _bank;
-  TripHistoryAccount _account;
+  int? _id;
+  String? _firstName;
+  String? _secondName;
+  String? _firstLastName;
+  String? _secondLastName;
+  String? _documentNumber;
+  String? _phone;
+  String? _address;
+  String? _vehicleYear;
+  String? _accountNumber;
+  String? _plateNumber;
+  TripHistoryVehicleType? _vehicleType;
+  TripHistoryBank? _bank;
+  TripHistoryAccount? _account;
 
   TripHistoryDriver(parsedJson){
     _id = parsedJson['id'];
@@ -85,20 +85,20 @@ class TripHistoryDriver {
     if(parsedJson['account_type'] != null){_account = TripHistoryAccount(parsedJson['account_type']);}
   }
 
-  int get id => _id;
-  String get name => _firstName + " " + _secondName + " "+ _firstLastName +" "+ _secondLastName;
-  String get secondName => _secondName;
-  String get firstLastName => _firstLastName;
-  String get secondLastName => _documentNumber;
-  String get documentNumber => _documentNumber;
-  String get phone => _phone;
-  String get address => _address;
-  String get vehicleYear => _vehicleYear;
-  String get accountNumber => _accountNumber;
-  String get plateNumber => _plateNumber;
-  TripHistoryVehicleType get vehicleType => _vehicleType ;
-  TripHistoryBank get bank => _bank ;
-  TripHistoryAccount get accountType => _account ;
+  int get id => _id!;
+  String get name => _firstName! + " " + _secondName! + " "+ _firstLastName! +" "+ _secondLastName!;
+  String get secondName => _secondName!;
+  String get firstLastName => _firstLastName!;
+  String get secondLastName => _documentNumber!;
+  String get documentNumber => _documentNumber!;
+  String get phone => _phone!;
+  String get address => _address!;
+  String get vehicleYear => _vehicleYear!;
+  String get accountNumber => _accountNumber!;
+  String get plateNumber => _plateNumber!;
+  TripHistoryVehicleType get vehicleType => _vehicleType!;
+  TripHistoryBank get bank => _bank!;
+  TripHistoryAccount get accountType => _account!;
 
   Map<String, dynamic> toJson() => {
     "id": _id == null ? null : _id,
@@ -113,19 +113,19 @@ class TripHistoryDriver {
     "accoun_number": _accountNumber == null ? null : _accountNumber,
     "license_plate_number": _plateNumber == null ? null : _plateNumber,
     "vehicle_type": vehicleType == null ? null : vehicleType.toJson(),
-    "bank_name": _bank == null ? null : _bank.toJson(),
-    "account_type": _account == null ? null : _account.toJson(),
+    "bank_name": _bank == null ? null : _bank!.toJson(),
+    "account_type": _account == null ? null : _account!.toJson(),
   };
 }
 
 class TripHistoryVehicleType{
-  String _vehicleName;
+  String? _vehicleName;
 
   TripHistoryVehicleType(parsedJson){
     _vehicleName = parsedJson['vehicle_type'];
   }
 
-  String get name => _vehicleName;
+  String get name => _vehicleName!;
 
   Map<String, dynamic> toJson() => {
     "vehicle_type": _vehicleName == null ? null : _vehicleName
@@ -133,13 +133,13 @@ class TripHistoryVehicleType{
 }
 
 class TripHistoryBank{
-  String _bankName;
+  String? _bankName;
 
   TripHistoryBank(parsedJson){
     _bankName = parsedJson['bank_type'];
   }
 
-  String get bankName => _bankName;
+  String get bankName => _bankName!;
 
   Map<String, dynamic> toJson() => {
     "bank_type": _bankName == null ? null : _bankName
@@ -148,13 +148,13 @@ class TripHistoryBank{
 }
 
 class TripHistoryAccount{
-  String _accountTypeName;
+  String? _accountTypeName;
 
   TripHistoryAccount(parsedJson){
     _accountTypeName = parsedJson['account_type'];
   }
 
-  String get name => _accountTypeName;
+  String get name => _accountTypeName!;
 
   Map<String, dynamic> toJson() => {
     "account_type": _accountTypeName == null ? null : _accountTypeName

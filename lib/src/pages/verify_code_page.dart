@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ResetVerificationCodePage extends StatefulWidget {
-  const ResetVerificationCodePage({Key key}) : super(key: key);
+  const ResetVerificationCodePage({Key? key}) : super(key: key);
 
   @override
   State<ResetVerificationCodePage> createState() => _ResetVerificationCodePageState();
@@ -15,7 +15,6 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
   final ResetVerifyCodeBloc _verifyCodeBloc = ResetVerifyCodeBloc();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
-  final prefs = new Preferences();
 
   /* Editext */
   TextEditingController _inputCodeController = new TextEditingController();
@@ -29,7 +28,7 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
   bool hasError = false;
   String currentText = "";
   bool isValidate = false;
-  StreamController<ErrorAnimationType> errorController;
+  StreamController<ErrorAnimationType>? errorController;
 
   verifyCode(){
     setState(() {
@@ -45,7 +44,7 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
       });
 
       if(data.error == 1){
-        prefs.setCodeVerification = currentText;
+        Preferences.setCodeVerification = currentText;
         Navigator.pushNamed(context, "reset_change_password");
       }
 
@@ -127,8 +126,8 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
                          onCompleted: (value){
                            isValidate = value.length == 4 ? true : false;
                          },
-                         validator: (v) {
-                           if (v.length < 6) {
+                         validator: (String? value) {
+                           if (value!.length < 6) {
                              return  'verify_validate_code'.tr();
                            } else {
                              return null;
@@ -163,7 +162,7 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
             )
           )
         )
-      ),
+      )
     );
   }
 }

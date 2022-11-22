@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 class DetailTripHistory extends StatefulWidget {
   final int trip_id;
-  const DetailTripHistory({Key key, @required this.trip_id}) : super(key: key);
+  const DetailTripHistory({Key? key, required this.trip_id}) : super(key: key);
 
   @override
   State<DetailTripHistory> createState() => _DetailTripHistoryState();
@@ -81,7 +81,7 @@ class _DetailTripHistoryState extends State<DetailTripHistory> {
 }
 
 class DataDetailTripHistory extends StatelessWidget {
-  const DataDetailTripHistory({Key key}) : super(key: key);
+  const DataDetailTripHistory({Key? key}) : super(key: key);
 
   String getSecondsHour(startTime , endTime) {
     DateTime dateTimeFinal = DateTime.parse(startTime);

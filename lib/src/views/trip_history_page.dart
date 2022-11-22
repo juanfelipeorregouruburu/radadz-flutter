@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TripHistoryPage extends StatefulWidget with NavigationStates{
-  const TripHistoryPage({Key key}) : super(key: key);
+  const TripHistoryPage({Key? key}) : super(key: key);
 
   @override
   _TripHistoryPageState createState() => _TripHistoryPageState();
@@ -134,7 +134,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
   }
 
   _filterData() {
-    Future.microtask(() =>context.read<ListTripHistoryDriverBloc>().getListTripHistoryDriver(driver_id: prefs.getDriverId, start_time: _selectedStartDate, end_date:_selectedEndDate));
+    Future.microtask(() =>context.read<ListTripHistoryDriverBloc>().getListTripHistoryDriver(driver_id: Preferences.getDriverId , start_time: _selectedStartDate, end_date:_selectedEndDate));
 
     _isDataPayment = true;
     _buttonSearch = true;

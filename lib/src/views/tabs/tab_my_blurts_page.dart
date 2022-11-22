@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class TabMyBlurtsPage extends StatefulWidget {
-  const TabMyBlurtsPage({Key key}) : super(key: key);
+  const TabMyBlurtsPage({Key? key}) : super(key: key);
 
   @override
   State<TabMyBlurtsPage> createState() => _TabMyBlurtsPageState();

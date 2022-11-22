@@ -7,7 +7,7 @@ class ResetPasswordBloc{
   final resetPassword = PublishSubject<ResponseModel>();
 
   get data => resetPassword.stream;
-  String phone;
+  String? phone;
 
   ResetPasswordBloc({ this.phone});
 
@@ -27,7 +27,7 @@ class ResetVerifyCodeBloc{
   final resetVerifyCode = PublishSubject<ResponseModel>();
 
   get data => resetVerifyCode.stream;
-  String code;
+  String? code;
 
   ResetVerifyCodeBloc({ this.code});
 
@@ -47,8 +47,8 @@ class ResetChangePasswordBloc{
   final resetChangePassword = PublishSubject<ResponseModel>();
 
   get data => resetChangePassword.stream;
-  String code;
-  String password;
+  String? code;
+  String? password;
 
   ResetChangePasswordBloc({this.code , this.password});
 

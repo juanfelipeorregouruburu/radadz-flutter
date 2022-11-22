@@ -3,7 +3,7 @@ import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class BlurtPage extends StatefulWidget with NavigationStates{
-  const BlurtPage({Key key}) : super(key: key);
+  const BlurtPage({Key? key}) : super(key: key);
 
   @override
   State<BlurtPage> createState() => _BlurtPageState();
@@ -11,7 +11,7 @@ class BlurtPage extends StatefulWidget with NavigationStates{
 
 class _BlurtPageState extends State<BlurtPage> with SingleTickerProviderStateMixin{
 
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -54,9 +54,9 @@ class _BlurtPageState extends State<BlurtPage> with SingleTickerProviderStateMix
                   children: <Widget>[
                     Expanded(child: new Container()),
                     getTabBar()
-                  ],
+                  ]
                 )
-            ),
+            )
           )
       ),
       body: getTabBarPages(),

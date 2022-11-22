@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 class BackButtonCustom extends StatelessWidget {
 
   final String icon;
-  const BackButtonCustom({@required this.icon});
+  const BackButtonCustom({required this.icon});
 
   @override
   Widget build(BuildContext context) {

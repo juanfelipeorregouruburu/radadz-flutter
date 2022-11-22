@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class CreateBlurtDriverPage extends StatefulWidget {
-  const CreateBlurtDriverPage({Key key}) : super(key: key);
+  const CreateBlurtDriverPage({Key? key}) : super(key: key);
 
   @override
   State<CreateBlurtDriverPage> createState() => _CreateBlurtDriverPageState();
@@ -13,7 +13,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
   final prefs = new Preferences();
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
 
-  BlurtCreateBloc _blurtCreateBloc;
+  BlurtCreateBloc _blurtCreateBloc = new BlurtCreateBloc();
   bool _isLoading = false;
 
   static OutlineInputBorder borderinput = OutlineInputBorder(
@@ -27,10 +27,8 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
     // TODO: implement initState
     super.initState();
     statusBarDark();
-    _blurtCreateBloc = new BlurtCreateBloc();
   }
 
-  /* editext*/
   TextEditingController _inputTextBlurt = new TextEditingController();
 
   @override
@@ -119,8 +117,8 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                               fontSize: ScreenUtil().setSp(15),
                               fontFamily: "Poppins-Regular",
                             ),
-                            validator: (value) {
-                              if (value.isEmpty) return 'required_field'.tr();
+                            validator: (String? value) {
+                              if (value!.isEmpty) return 'required_field'.tr();
                               return null;
                             },
                           ),
@@ -137,16 +135,15 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                               listTripRecivedProvider.setStateButton(false);
                             },
                           )
-                        ],
-                      ),
-                    ),
+                        ]
+                      )
+                    )
                   )
-                ],
-              ),
-            ),
-          ),
-        ),
-
+                ]
+              )
+            )
+          )
+        )
     );
 
   }
@@ -155,13 +152,13 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
 
   _blurtCreate() async {
 
-    if (formState.currentState.validate()) {
+    if (formState.currentState!.validate()) {
 
       setState(() {
         _isLoading = true;
       });
 
-      _blurtCreateBloc.driver_id = prefs.getDriverId;
+      _blurtCreateBloc.driver_id = Preferences.getDriverId;
       _blurtCreateBloc.message = _inputTextBlurt.text.trim();
 
 
@@ -175,7 +172,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
 
         String icon = data.error == 1 ? 'success' : 'error';
         if(data.error == 1){
-          Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: prefs.getDriverId));
+          Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
         }
 
         var dialog = AlertMessageError(icon: icon, message: data.response);

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class CardPaymentHistoryPage extends StatelessWidget {
-  const CardPaymentHistoryPage({Key key}) : super(key: key);
+  const CardPaymentHistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CardPaymentHistoryPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return ItemPaymentHistory(
               index: index,
-              payment: listPaymentsHistoryProvider?.listPaymentHistory?.payments[index]
+              payment: listPaymentsHistoryProvider.listPaymentHistory.payments[index]
             );
           },
         ) : EmptyDataView(message: 'payment_card_empty_data'.tr());
@@ -32,9 +32,9 @@ class CardPaymentHistoryPage extends StatelessWidget {
 class ItemPaymentHistory extends StatelessWidget {
 
   const ItemPaymentHistory({
-    Key key,
-    @required this.index,
-    @required this.payment,
+    Key? key,
+    required this.index,
+    required this.payment,
   }) : super(key: key);
 
   final int index;

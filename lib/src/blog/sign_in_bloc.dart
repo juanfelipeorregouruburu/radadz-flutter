@@ -6,7 +6,7 @@ class SignInBloc {
   final singIn = PublishSubject<SingninModel>();
 
   get data => singIn.stream;
-  String phone, password,token;
+  String? phone, password,token;
 
   SignInBloc({this.phone, this.password});
 

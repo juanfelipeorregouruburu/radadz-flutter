@@ -1,8 +1,8 @@
 class TripPaymentHistoryModel {
-  int _error;
-  int _totalTrips;
-  String _message;
-  List<Trip> _trips = [];
+  int? _error;
+  int? _totalTrips;
+  String? _message;
+  List<Trip>? _trips = [];
 
   TripPaymentHistoryModel.fromJson(Map<String, dynamic> json) {
     _error = json['msg'];
@@ -19,18 +19,18 @@ class TripPaymentHistoryModel {
     }
   }
 
-  int get error => _error;
-  String get message => _message;
-  int get totalTrips => _totalTrips;
-  List<Trip> get payments => _trips;
+  int get error => _error!;
+  String get message => _message!;
+  int get totalTrips => _totalTrips!;
+  List<Trip> get payments => _trips!;
 }
 
 
 class Trip {
-  String _startTime;
-  String _endDate;
-  String _totalTokensEarned;
-  String _totalMoneyEarned;
+  String? _startTime;
+  String? _endDate;
+  String? _totalTokensEarned;
+  String? _totalMoneyEarned;
 
   Trip(parsedJson){
     _startTime = parsedJson['start_time'];
@@ -39,9 +39,9 @@ class Trip {
     _totalMoneyEarned = parsedJson['total_money_earned'];
   }
 
-  String get startTime => _startTime;
-  String get endTime => _endDate;
-  String get tokenEarned => _totalTokensEarned;
-  String get moneyEarned => _totalMoneyEarned;
+  String get startTime => _startTime!;
+  String get endTime => _endDate!;
+  String get tokenEarned => _totalTokensEarned!;
+  String get moneyEarned => _totalMoneyEarned!;
 
 }

@@ -8,21 +8,21 @@ class SaveDriverBloc {
   final saveDriver = PublishSubject<SaveDriverModel>();
   get data => saveDriver.stream;
 
-  String name_first ;
-  String name_second ;
-  String lastName_first ;
-  String lastName_second ;
-  String document_type ;
-  String document_number ;
-  String email ;
-  String phone ;
-  String address ;
-  String password ;
-  String date_birth ;
-  String licence_number ;
-  String vehicule_type ;
-  String vehicule_year ;
-  String driving_daily_routine ;
+  String? name_first ;
+  String? name_second ;
+  String? lastName_first ;
+  String? lastName_second ;
+  String? document_type ;
+  String? document_number ;
+  String? email ;
+  String? phone ;
+  String? address ;
+  String? password ;
+  String? date_birth ;
+  String? licence_number ;
+  String? vehicule_type ;
+  String? vehicule_year ;
+  String? driving_daily_routine ;
 
 
   SaveDriverBloc({this.name_first, this.name_second, this.lastName_first, this.lastName_second,
@@ -48,21 +48,21 @@ class UpdateDriverBloc {
   get data => updateDriver.stream;
 
 
-  String driver_id ;
-  String name_first ;
-  String name_second ;
-  String lastName_first ;
-  String lastName_second ;
-  String document_type ;
-  String document_number ;
-  String email ;
-  String phone ;
-  String address ;
-  String date_birth ;
-  String licence_number ;
-  String vehicule_type ;
-  String vehicule_year ;
-  String driving_daily_routine ;
+  String? driver_id ;
+  String? name_first ;
+  String? name_second ;
+  String? lastName_first ;
+  String? lastName_second ;
+  String? document_type ;
+  String? document_number ;
+  String? email ;
+  String? phone ;
+  String? address ;
+  String? date_birth ;
+  String? licence_number ;
+  String? vehicule_type ;
+  String? vehicule_year ;
+  String? driving_daily_routine ;
 
 
   UpdateDriverBloc({this.driver_id, this.name_first, this.name_second, this.lastName_first, this.lastName_second,
@@ -85,7 +85,7 @@ class UpdateDataBankDriverBloc {
   final updateDataBankDriver = PublishSubject<UpdateDataBankModel>();
 
   get data => updateDataBankDriver.stream;
-  String driver_id, bank_id, account_number, account_type_id;
+  String? driver_id, bank_id, account_number, account_type_id;
 
   UpdateDataBankDriverBloc({this.driver_id, this.bank_id,this.account_number,this.account_type_id});
 

@@ -1,9 +1,9 @@
 import 'package:radadz_app/src/models/driver_model.dart';
 
 class UpdateDataBankModel {
-  int _error;
-  String _response;
-  Driver _driver;
+  int? _error;
+  String? _response;
+  Driver? _driver;
 
   UpdateDataBankModel.fromJson(Map<String , dynamic> json) {
     _error = json['msg'];
@@ -13,7 +13,7 @@ class UpdateDataBankModel {
     }
   }
 
-  int get error => _error;
-  String get response => _response;
-  Driver get driver => _driver;
+  int get error => _error!;
+  String get response => _response!;
+  Driver get driver => _driver!;
 }

@@ -4,7 +4,7 @@ import 'package:radadz_app/src/utils/export.dart';
 class EmptyDataView extends StatelessWidget {
 
   final String message;
-  const EmptyDataView({Key key, this.message}) : super(key: key);
+  const EmptyDataView({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

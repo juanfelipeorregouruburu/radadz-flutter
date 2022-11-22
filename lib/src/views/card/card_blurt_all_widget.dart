@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class CardBlurtAllWidget extends StatefulWidget {
-  const CardBlurtAllWidget({Key key}) : super(key: key);
+  const CardBlurtAllWidget({Key? key}) : super(key: key);
 
   @override
   State<CardBlurtAllWidget> createState() => _CardBlurtAllWidgetState();
@@ -23,7 +23,7 @@ class _CardBlurtAllWidgetState extends State<CardBlurtAllWidget> {
 
     return listBlurtAllProvider.isLoading
         ? ActivityIndicator(marginTop: 50.h)
-        : listBlurtAllProvider?.blurtListAll.blurts.length > 0
+        : listBlurtAllProvider.blurtListAll!.blurts.length > 0
         ? SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: ListView.separated(
@@ -32,11 +32,11 @@ class _CardBlurtAllWidgetState extends State<CardBlurtAllWidget> {
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.all(0.0),
             scrollDirection: Axis.vertical,
-            itemCount: listBlurtAllProvider?.blurtListAll.blurts.length ?? 0,
+            itemCount: listBlurtAllProvider?.blurtListAll!.blurts.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return ItemBlurtAll(
                 index: index,
-                blurt: listBlurtAllProvider.blurtListAll.blurts[index]
+                blurt: listBlurtAllProvider.blurtListAll!.blurts[index]
               );
             },
           )
@@ -48,9 +48,9 @@ class ItemBlurtAll extends StatefulWidget {
   final int index;
   final Blurt blurt ;
 
-  const ItemBlurtAll({Key key ,
-    @required this.index,
-    @required this.blurt,
+  const ItemBlurtAll({Key? key ,
+    required this.index,
+    required this.blurt,
     }) : super(key: key);
 
   @override
@@ -61,7 +61,7 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
   bool status = false;
   bool statusView = false;
   final prefs = new Preferences();
-  BlurtUpdateBloc _blurtUpdateBloc;
+  BlurtUpdateBloc _blurtUpdateBloc = new BlurtUpdateBloc();
 
   @override
   void initState() {
@@ -112,7 +112,7 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
                     var dialog = CustomAlertDialog(
                         title: 'tab_blurt_dialog_confirmation_title'.tr(),
                         message: 'tab_blurt_dialog_confirmation_text'.tr(),
-                        onPostivePressed: () {
+                        onPositivePressed: () {
                           // setState(() {
                           //   status = val;
                           // });
@@ -149,7 +149,7 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
 
   _blurtUpdate(blurt_id) async {
 
-      _blurtUpdateBloc.driver_id = prefs.getDriverId;
+      _blurtUpdateBloc.driver_id = Preferences.getDriverId;
       _blurtUpdateBloc.blurt_id = blurt_id;
 
       _blurtUpdateBloc.BlurtUpdate();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class CardTripHistoryWidget extends StatelessWidget {
-  const CardTripHistoryWidget({Key key}) : super(key: key);
+  const CardTripHistoryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,9 @@ class ItemTripHistory extends StatelessWidget {
   final TripHistory trip;
 
   const ItemTripHistory({
-    Key key,
-    @required this.index,
-    @required this.trip
+    Key? key,
+    required this.index,
+    required this.trip
   }) : super(key: key);
 
   @override

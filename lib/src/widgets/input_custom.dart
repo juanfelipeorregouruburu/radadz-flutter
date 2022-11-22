@@ -3,27 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class InputCustom extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
   final bool obscureText;
-  final Function validator;
+  final String? Function(String?)? validator;
   final FocusNode focusNode;
-  final Function onTap;
-  final Function onFieldSubmitted;
+  final GestureTapCallback? onTap;
+  final Function? onFieldSubmitted;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final TextEditingController controller;
 
   const InputCustom({
-    Key key,
+    Key? key,
     this.hintText,
     this.obscureText  = false,
     this.onFieldSubmitted,
     this.onTap,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
-    @required this.focusNode,
-    @required this.validator,
-    @required this.controller,
+    required this.focusNode,
+    required this.validator,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,9 @@ class InputCustom extends StatelessWidget {
       textCapitalization: TextCapitalization.words,
       textInputAction: textInputAction,
       focusNode: focusNode,
-      onFieldSubmitted: onFieldSubmitted,
+      onFieldSubmitted: (s) {
+        onFieldSubmitted!(s);
+      },
       decoration: InputDecoration(
         filled: true,
         fillColor: StyleGeneral.GREY,
@@ -52,33 +54,33 @@ class InputCustom extends StatelessWidget {
             borderSide: const BorderSide(
               color: Colors.white,
             )
-        ),
+        )
       ),
       style: new TextStyle(
         color: StyleGeneral.BLACK,
         fontSize: ScreenUtil().setSp(15),
         fontFamily: "Poppins-Regular",
       ),
-      validator: validator,
+      validator: validator
     );
   }
 }
 
-class InputTextfield extends StatelessWidget {
-  final Function onTap;
-  final String hintText;
-  final String labelText;
-  final bool obscureText;
-  final int maxLength;
-  final Function validator;
+class InputTextField extends StatelessWidget {
+  final GestureTapCallback? onTap;
+  final String? hintText;
+  final String? labelText;
+  final bool obscureText ;
+  final int? maxLength;
+  final String? Function(String?)? validator;
   final FocusNode focusNode;
-  final Function onFieldSubmitted;
+  final Function? onFieldSubmitted;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final TextEditingController controller;
 
-  const InputTextfield({
-      Key key ,
+  const InputTextField({
+      Key? key ,
       this.hintText,
       this.labelText,
       this.onTap,
@@ -87,9 +89,9 @@ class InputTextfield extends StatelessWidget {
       this.onFieldSubmitted,
       this.textInputAction = TextInputAction.next,
       this.keyboardType = TextInputType.text,
-      @required this.focusNode,
-      @required this.validator,
-      @required this.controller,
+      required this.focusNode,
+      required this.validator,
+      required this.controller,
   }) : super(key: key);
 
 
@@ -121,27 +123,27 @@ class InputTextfield extends StatelessWidget {
         fontSize: ScreenUtil().setSp(13.sp),
         fontFamily: "Poppins-Regular",
       ),
-      validator: validator,
+      validator: validator
     );
   }
 }
 
-class CustomInputTextfieldPassword extends StatelessWidget {
-  final Function onPressed;
-  final String hintText;
-  final String labelText;
+class CustomInputTextFieldPassword extends StatelessWidget {
+  final GestureTapCallback? onPressed;
+  final String? hintText;
+  final String? labelText;
   final bool obscureText;
   final Color colorFill;
   final bool passwordVisible;
-  final Function validator;
+  final String? Function(String?)? validator;
   final FocusNode focusNode;
-  final Function onFieldSubmitted;
+  final Function? onFieldSubmitted;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final TextEditingController controller;
 
-  const CustomInputTextfieldPassword({
-    Key key ,
+  const CustomInputTextFieldPassword({
+    Key? key ,
     this.hintText,
     this.labelText,
     this.onPressed,
@@ -151,9 +153,9 @@ class CustomInputTextfieldPassword extends StatelessWidget {
     this.onFieldSubmitted,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
-    @required this.focusNode,
-    @required this.validator,
-    @required this.controller,
+    required this.focusNode,
+    required this.validator,
+    required this.controller,
   }) : super(key: key);
 
 
@@ -169,7 +171,9 @@ class CustomInputTextfieldPassword extends StatelessWidget {
       keyboardType:this.keyboardType ,
       cursorColor: StyleGeneral.BLACK,
       textCapitalization: TextCapitalization.words,
-      onFieldSubmitted: onFieldSubmitted,
+      onFieldSubmitted: (s) {
+        onFieldSubmitted!(s);
+      },
       decoration: InputDecoration(
         labelText: labelText,
         fillColor: colorFill,
@@ -196,7 +200,7 @@ class CustomInputTextfieldPassword extends StatelessWidget {
         fontSize: ScreenUtil().setSp(15),
         fontFamily: "Poppins-Regular",
       ),
-      validator: validator,
+      validator: validator
     );
   }
 }

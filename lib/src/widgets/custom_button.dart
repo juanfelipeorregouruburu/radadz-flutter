@@ -4,11 +4,11 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final Function onTap;
+  final GestureTapCallback? onTap;
   final bool fullscreen;
 
   const CustomButton({
-    @required this.text,
+    required this.text,
     this.onTap,
     this.fullscreen = false,
   });
@@ -30,9 +30,9 @@ class CustomButton extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Text(this.text, style: StyleGeneral.styleTextButtonCustom),
-          ),
-        ),
-      ),
+          )
+        )
+      )
     );
   }
 }

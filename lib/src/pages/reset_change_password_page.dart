@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class ResetChangePasswordPage extends StatefulWidget {
-  const ResetChangePasswordPage({Key key}) : super(key: key);
+  const ResetChangePasswordPage({Key? key}) : super(key: key);
 
   @override
   State<ResetChangePasswordPage> createState() => _ResetChangePasswordPageState();
@@ -11,7 +11,6 @@ class ResetChangePasswordPage extends StatefulWidget {
 class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
 
   final ResetChangePasswordBloc _changePasswordBloc = ResetChangePasswordBloc();
-  final prefs = new Preferences();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
   bool stateButton = false;
@@ -39,7 +38,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       isLoading = true;
     });
 
-    _changePasswordBloc.code = prefs.getCodeVerification;
+    _changePasswordBloc.code = Preferences.getCodeVerification;
     _changePasswordBloc.password = _inputPasswordController.text.trim();
     _changePasswordBloc.setResetChangePassword();
 
@@ -57,7 +56,6 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
@@ -115,13 +113,12 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                          text: 'change_password_button'.tr(),
                          fullscreen: true,
                          onTap: (){
-                           if(_key.currentState.validate()){
+                           if(_key.currentState!.validate()){
                              changePassword();
                            }
 
-                         },
-                       ),
-
+                         }
+                       )
                     ]
                    )
                  )
@@ -130,7 +127,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
             )
           )
         )
-      ),
+      )
     );
   }
 
@@ -142,7 +139,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
 
   Widget phoneTextField() {
 
-    return CustomInputTextfieldPassword(
+    return CustomInputTextFieldPassword(
       focusNode: passwordFocus,
       controller: _inputPasswordController,
       keyboardType: TextInputType.text ,
@@ -153,8 +150,8 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       onFieldSubmitted: (term) {
         _fieldFocusChange(context, passwordFocus, passwordConfirmFocus);
       },
-      validator:  (value) {
-        if (value.isEmpty) {
+      validator:  (String? value) {
+        if (value!.isEmpty) {
           return 'required_field'.tr();
         }
         return null;
@@ -163,13 +160,13 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
         setState(() {
           _passwordVisible = !_passwordVisible;
         });
-      },
+      }
     );
   }
 
   Widget phoneConfirmTextField() {
 
-    return CustomInputTextfieldPassword(
+    return CustomInputTextFieldPassword(
       focusNode: passwordConfirmFocus,
       controller: _inputPasswordConfirmController,
       keyboardType: TextInputType.text ,
@@ -177,8 +174,8 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       obscureText: !_passwordVisibleVerify,
       hintText:  'enter_password'.tr(),
       colorFill: StyleGeneral.GREY,
-      validator:  (value) {
-        if (value.isEmpty) {
+      validator:  (String? value) {
+        if (value!.isEmpty) {
           return 'required_field'.tr();
         }else if(value != _inputPasswordController.text.trim()){
           return 'required_password_math'.tr();
@@ -188,7 +185,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
         setState(() {
           _passwordVisibleVerify = !_passwordVisibleVerify;
         });
-      },
+      }
     );
   }
 }

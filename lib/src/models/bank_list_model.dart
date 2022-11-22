@@ -5,7 +5,7 @@ BankListModel bankModelFromJson(String str) => BankListModel.fromJson(json.decod
 String bankLlistModelToJson(BankListModel data) => json.encode(data.toJson());
 
 class BankListModel {
-  List<Bank> bankType;
+  List<Bank>? bankType;
 
   BankListModel({
     this.bankType,
@@ -16,15 +16,15 @@ class BankListModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(bankType.map((x) => x.toJson())),
+    "data": List<dynamic>.from(bankType!.map((x) => x.toJson())),
   };
 
 }
 
 class Bank {
-  String id;
-  String name;
-  String description;
+  String? id;
+  String? name;
+  String? description;
 
   Bank({
     this.id,

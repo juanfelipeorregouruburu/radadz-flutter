@@ -1,11 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/models/slider_model.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class Intro extends StatefulWidget {
-  const Intro({Key key}) : super(key: key);
+  const Intro({Key? key}) : super(key: key);
 
   @override
   _IntroState createState() => _IntroState();
@@ -13,10 +12,9 @@ class Intro extends StatefulWidget {
 
 class _IntroState extends State<Intro> {
 
-  List<SliderModel> sliders = new List<SliderModel>();
+  late List<SliderModel> sliders ;
   int currentIndex = 0;
   PageController pageController = new PageController(initialPage: 0);
-  final prefs = new Preferences();
 
   @override
   void initState() {
@@ -57,7 +55,7 @@ class _IntroState extends State<Intro> {
               return SliderTitle(
                 imageAssetPath: sliders[index].getImagePath(),
                 title: sliders[index].getTitle(),
-                descripcion: sliders[index].getDescription(),
+                description: sliders[index].getDescription(),
               );
             }),
         bottomSheet: currentIndex != sliders.length - 1
@@ -90,9 +88,9 @@ class _IntroState extends State<Intro> {
                           color: StyleGeneral.BLACK,
                           fontSize: ScreenUtil().setSp(15),
                           fontFamily: 'Poppins-Semi'),
-                    ),
-                  ),
-                ),
+                    )
+                  )
+                )
               ),
               Row(
                 children: [
@@ -132,7 +130,7 @@ class _IntroState extends State<Intro> {
         )
             : GestureDetector(
           onTap: () {
-            prefs.setIntro = true ;
+            Preferences.setIntro = true ;
             Navigator.of(context).pushNamed('register');
           },
           child: Container(
@@ -156,12 +154,12 @@ class _IntroState extends State<Intro> {
                       color: StyleGeneral.WHITE,
                       fontSize: ScreenUtil().setSp(15),
                       fontFamily: 'Poppins-Semi'),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+                )
+              )
+            )
+          )
+        )
+      )
     );
 
   }
@@ -171,8 +169,8 @@ class _IntroState extends State<Intro> {
 
 
 class SliderTitle extends StatelessWidget {
-  String imageAssetPath, title, descripcion;
-  SliderTitle({this.imageAssetPath, this.title, this.descripcion});
+  String imageAssetPath, title, description;
+  SliderTitle({required this.imageAssetPath, required this.title, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +200,7 @@ class SliderTitle extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50.w),
             child: Text(
-              descripcion,
+              description,
               textAlign: TextAlign.center,
               style: TextStyle(color: StyleGeneral.GREY_LIGTH, fontSize: ScreenUtil().setSp(15), fontFamily: 'Poppins-Medium'),
             ),

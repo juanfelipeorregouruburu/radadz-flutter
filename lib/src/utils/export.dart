@@ -8,6 +8,7 @@ export 'package:flutter_switch/flutter_switch.dart';
 export 'package:stop_watch_timer/stop_watch_timer.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:radadz_app/src/slider/navigation.dart';
+export 'package:radadz_app/src/utils/validate_input.dart';
 
 /* UTILS*/
 export 'package:radadz_app/src/route/routes.dart';
@@ -85,7 +86,6 @@ export 'package:radadz_app/src/views/tabs/tab_create_blurt_driver_page.dart';
 /* WIDGETS*/
 export 'package:radadz_app/src/widgets/input_custom.dart';
 export 'package:radadz_app/src/widgets/custom_button.dart';
-export 'package:radadz_app/src/widgets/in_well_custom.dart';
 export 'package:radadz_app/src/widgets/circle_custom.dart';
 export 'package:radadz_app/src/widgets/activity_indicator.dart';
 export 'package:radadz_app/src/widgets/back_button_custom.dart';

@@ -7,7 +7,7 @@ class TripStartBloc {
   final tripStart = PublishSubject<TripStartModel>();
 
   get data => tripStart.stream;
-  String driver_id, trip_payment_id;
+  String? driver_id, trip_payment_id;
 
   TripStartBloc({this.driver_id , this.trip_payment_id});
 
@@ -27,7 +27,7 @@ class TripEndBloc {
   final tripEnd = PublishSubject<TripEndModel>();
 
   get data => tripEnd.stream;
-  String driver_id, trip_id;
+  String? driver_id, trip_id;
 
   TripEndBloc({this.driver_id , this.trip_id});
 
@@ -46,7 +46,7 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  TripHistoryModel _tripHistoryModel;
+  TripHistoryModel? _tripHistoryModel;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -56,14 +56,14 @@ class ListTripHistoryDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  TripHistoryModel get listTripsHistory => _tripHistoryModel;
+  TripHistoryModel get listTripsHistory => _tripHistoryModel!;
 
   set listTripsHistory(TripHistoryModel data) {
     _tripHistoryModel = data;
     notifyListeners();
   }
 
-  Future getListTripHistoryDriver({@required String driver_id,@required String start_time, @required String end_date}) async {
+  Future getListTripHistoryDriver({required String driver_id, required String start_time, required String end_date}) async {
     isLoading = true;
     debouncer.run(() async {
       TripHistoryModel _tripModel = await repository.listTripHistoryDriverRepository(driver_id,start_time,end_date);
@@ -78,7 +78,7 @@ class TripHistoryDetailDriverBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  TripDetailHistoryModel _tripDetailHistoryModel;
+  TripDetailHistoryModel? _tripDetailHistoryModel;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -88,14 +88,14 @@ class TripHistoryDetailDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  TripDetailHistoryModel get tripDetailHistoryModel => _tripDetailHistoryModel;
+  TripDetailHistoryModel get tripDetailHistoryModel => _tripDetailHistoryModel!;
 
   set tripDetailHistoryModel(TripDetailHistoryModel data) {
     _tripDetailHistoryModel = data;
     notifyListeners();
   }
 
-  Future getTripHistoryDetailDriver({@required String trip_id}) async {
+  Future getTripHistoryDetailDriver({required String trip_id}) async {
     isLoading = true;
     debouncer.run(() async {
       TripDetailHistoryModel _tripDetail = await repository.tripDetailHistoryDriverRepository(trip_id);
@@ -110,7 +110,7 @@ class ListPaymentHistoryDriverBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  PaymentHistoryModel _paymentHistoryModel;
+  PaymentHistoryModel? _paymentHistoryModel;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -120,14 +120,14 @@ class ListPaymentHistoryDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  PaymentHistoryModel get listPaymentHistory => _paymentHistoryModel;
+  PaymentHistoryModel get listPaymentHistory => _paymentHistoryModel!;
 
   set listPaymentHistory(PaymentHistoryModel data) {
     _paymentHistoryModel = data;
     notifyListeners();
   }
 
-  Future getListPaymentHistoryDriver({@required String driver_id,@required String start_time, @required String end_date}) async {
+  Future getListPaymentHistoryDriver({required String driver_id,required String start_time, required String end_date}) async {
     isLoading = true;
     debouncer.run(() async {
       PaymentHistoryModel _tripPaymentModel = await repository.listPaymentHistoryDriverRepository(driver_id, start_time, end_date);
@@ -142,7 +142,7 @@ class ListTripPaymentDriverBloc with ChangeNotifier {
   final repository = Repository();
   final debouncer = Debouncer();
 
-  TripPaymentHistoryModel _tripPaymentHistoryModel;
+  TripPaymentHistoryModel? _tripPaymentHistoryModel;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -152,14 +152,14 @@ class ListTripPaymentDriverBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  TripPaymentHistoryModel get listTripPaymentsHistory => _tripPaymentHistoryModel;
+  TripPaymentHistoryModel get listTripPaymentsHistory => _tripPaymentHistoryModel!;
 
   set listTripPaymentsHistory(TripPaymentHistoryModel data) {
     _tripPaymentHistoryModel = data;
     notifyListeners();
   }
 
-  Future getListTripPaymentHistoryDriver({@required String trip_payment_id}) async {
+  Future getListTripPaymentHistoryDriver({required String trip_payment_id}) async {
     isLoading = true;
     debouncer.run(() async {
       TripPaymentHistoryModel _tripPaymentModel = await repository.listTripPaymentDriverRepository(trip_payment_id);

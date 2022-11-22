@@ -3,7 +3,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class ToolbarTitleCustom extends StatelessWidget {
   final String title;
-  const ToolbarTitleCustom({@required this.title ,Key key}) : super(key: key);
+  const ToolbarTitleCustom({required this.title , Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

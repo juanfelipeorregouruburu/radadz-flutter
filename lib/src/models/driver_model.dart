@@ -1,23 +1,23 @@
 class Driver {
 
-  String _Id;
-  String _firstName;
-  String _secondName;
-  String _firstLastname;
-  String _secondLastname;
-  String _documentNumber;
-  String _email;
-  String _phone;
-  String _address;
-  String _birthDate;
-  String _licensePlateNumber;
-  String _vehicleYear;
-  String _drivingDailyRoutine;
-  String _accoutNumber;
-  DocumentTypeDriver _documentType;
-  VehicleTypeDriver _vehicleType;
-  BankNameDriver _bankNameDriver;
-  AccountTypeDriver _accountTypeDriver;
+  String? _Id;
+  String? _firstName;
+  String? _secondName;
+  String? _firstLastname;
+  String? _secondLastname;
+  String? _documentNumber;
+  String? _email;
+  String? _phone;
+  String? _address;
+  String? _birthDate;
+  String? _licensePlateNumber;
+  String? _vehicleYear;
+  String? _drivingDailyRoutine;
+  String? _accoutNumber;
+  DocumentTypeDriver? _documentType;
+  VehicleTypeDriver? _vehicleType;
+  BankNameDriver? _bankNameDriver;
+  AccountTypeDriver? _accountTypeDriver;
 
   Driver(parsedJson) {
     _Id = parsedJson['id'].toString();
@@ -55,18 +55,18 @@ class Driver {
     "vehicle_year": _vehicleYear == null ? null : _vehicleYear,
     "driving_daily_routine": _drivingDailyRoutine == null ? null : _drivingDailyRoutine,
     "account_number": _accoutNumber == null ? null : _accoutNumber,
-    "document_type": _documentType == null ? null : _documentType.toJson(),
-    "vehicle_type": _vehicleType == null ? null : _vehicleType.toJson(),
-    "bank_name": _bankNameDriver == null ? null : _bankNameDriver.toJson(),
-    "account_type": _accountTypeDriver == null ? null : _accountTypeDriver.toJson()
+    "document_type": _documentType == null ? null : _documentType!.toJson(),
+    "vehicle_type": _vehicleType == null ? null : _vehicleType!.toJson(),
+    "bank_name": _bankNameDriver == null ? null : _bankNameDriver!.toJson(),
+    "account_type": _accountTypeDriver == null ? null : _accountTypeDriver!.toJson()
   };
 
 }
 
 class DocumentTypeDriver{
-  String _Id;
-  String _documentType;
-  String _description;
+  String? _Id;
+  String? _documentType;
+  String? _description;
 
   DocumentTypeDriver(parsedJson) {
     _Id = parsedJson['id'].toString();
@@ -82,9 +82,9 @@ class DocumentTypeDriver{
 }
 
 class VehicleTypeDriver{
-  String _Id;
-  String _vehicleType;
-  String _description;
+  String? _Id;
+  String? _vehicleType;
+  String? _description;
 
   VehicleTypeDriver(parsedJson) {
     _Id = parsedJson['id'].toString();
@@ -100,9 +100,9 @@ class VehicleTypeDriver{
 }
 
 class AccountTypeDriver{
-  String _Id;
-  String _accountType;
-  String _description;
+  String? _Id;
+  String? _accountType;
+  String? _description;
 
   AccountTypeDriver(parsedJson) {
     _Id = parsedJson['id'].toString();
@@ -118,9 +118,9 @@ class AccountTypeDriver{
 }
 
 class BankNameDriver{
-  String _Id;
-  String _BankName;
-  String _description;
+  String? _Id;
+  String? _BankName;
+  String? _description;
 
   BankNameDriver(parsedJson) {
     _Id = parsedJson['id'].toString();

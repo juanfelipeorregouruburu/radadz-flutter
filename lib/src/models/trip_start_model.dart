@@ -1,9 +1,9 @@
 class TripStartModel {
-  int _error;
-  String _response;
-  int _tripPayment_id;
-  int _tripId;
-  String _startTime;
+  int? _error;
+  String? _response;
+  int? _tripPayment_id;
+  int? _tripId;
+  String? _startTime;
 
   TripStartModel.fromJson(Map<String , dynamic> json) {
     _error = json['msg'];
@@ -17,9 +17,9 @@ class TripStartModel {
 
   }
 
-  int get error => _error;
-  String get response => _response;
-  int get trip_payment_id => _tripPayment_id;
-  int get trip_id => _tripId ;
-  String get start_time => _startTime;
+  int get error => _error!;
+  String get response => _response!;
+  int get trip_payment_id => _tripPayment_id!;
+  int get trip_id => _tripId !;
+  String get start_time => _startTime!;
 }

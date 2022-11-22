@@ -3,7 +3,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 
 class CardBlurtDriverWidget extends StatefulWidget {
-  const CardBlurtDriverWidget({Key key}) : super(key: key);
+  const CardBlurtDriverWidget({Key? key}) : super(key: key);
 
   @override
   State<CardBlurtDriverWidget> createState() => _CardBlurtDriverWidgetState();
@@ -16,7 +16,7 @@ class _CardBlurtDriverWidgetState extends State<CardBlurtDriverWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: prefs.getDriverId));
+    Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
   }
 
   @override
@@ -25,18 +25,18 @@ class _CardBlurtDriverWidgetState extends State<CardBlurtDriverWidget> {
 
     return listBlurtDriverProvider.isLoading
         ? ActivityIndicator(marginTop: 50.h)
-        : listBlurtDriverProvider?.blurtListAll.blurts.length > 0
+        : listBlurtDriverProvider.blurtListAll!.blurts.length > 0
         ? ListView.separated(
           shrinkWrap: true,
           separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(0.0),
           scrollDirection: Axis.vertical,
-          itemCount: listBlurtDriverProvider?.blurtListAll.blurts.length ?? 0,
+          itemCount: listBlurtDriverProvider.blurtListAll!.blurts.length ?? 0,
           itemBuilder: (BuildContext context, int index) {
             return ItemBlurtDriver(
                 index: index,
-                blurt: listBlurtDriverProvider.blurtListAll.blurts[index]
+                blurt: listBlurtDriverProvider.blurtListAll!.blurts[index]
             );
           },
 
@@ -49,9 +49,9 @@ class ItemBlurtDriver extends StatefulWidget {
   final int index;
   final Blurt blurt ;
 
-  const ItemBlurtDriver({Key key ,
-    @required this.index,
-    @required this.blurt,
+  const ItemBlurtDriver({Key? key ,
+    required this.index,
+    required this.blurt,
   }) : super(key: key);
 
   @override
@@ -62,13 +62,12 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
   bool status = false;
   bool statusView = false;
   final prefs = new Preferences();
-  BlurtUpdateBloc _blurtUpdateBloc;
+  BlurtUpdateBloc _blurtUpdateBloc = BlurtUpdateBloc();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _blurtUpdateBloc = BlurtUpdateBloc();
   }
 
   @override
@@ -112,7 +111,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                       var dialog = CustomAlertDialog(
                           title: 'tab_blurt_dialog_confirmation_title'.tr(),
                           message: 'tab_blurt_dialog_confirmation_text'.tr(),
-                          onPostivePressed: () {
+                          onPositivePressed: () {
                             _blurtUpdate(widget.blurt.id);
                           },
                           positiveBtnText: 'tab_blurt_dialog_confirmation_possitive_button'.tr(),
@@ -144,7 +143,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
 
   _blurtUpdate(blurt_id) async {
 
-    _blurtUpdateBloc.driver_id = prefs.getDriverId;
+    _blurtUpdateBloc.driver_id = Preferences.getDriverId;
     _blurtUpdateBloc.blurt_id = blurt_id;
 
     _blurtUpdateBloc.BlurtUpdate();

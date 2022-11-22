@@ -10,7 +10,7 @@ class ActivityIndicator extends StatelessWidget {
   final double marginTop;
 
   const ActivityIndicator({
-    Key key,
+    Key? key,
     this.size = SIZE_INDICATOR,
     this.color = Colors.black,
     this.marginTop = 0,

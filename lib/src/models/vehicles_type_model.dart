@@ -5,7 +5,7 @@ VehicleTypeModel vehicleModelFromJson(String str) => VehicleTypeModel.fromJson(j
 String vehicleModelToJson(VehicleTypeModel data) => json.encode(data.toJson());
 
 class VehicleTypeModel {
-  List<VehicleType> vehiclesType;
+  List<VehicleType>? vehiclesType;
 
   VehicleTypeModel({
     this.vehiclesType,
@@ -16,15 +16,15 @@ class VehicleTypeModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(vehiclesType.map((x) => x.toJson())),
+    "data": List<dynamic>.from(vehiclesType!.map((x) => x.toJson())),
   };
 
 }
 
 class VehicleType {
-  String id;
-  String name;
-  String description;
+  String? id;
+  String? name;
+  String? description;
 
   VehicleType({
     this.id,

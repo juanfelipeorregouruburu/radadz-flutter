@@ -1,6 +1,6 @@
 class QuestionRegister {
-  int valueId;
-  String textQuestion;
+  int? valueId;
+  String? textQuestion;
 
   QuestionRegister({this.valueId, this.textQuestion});
 

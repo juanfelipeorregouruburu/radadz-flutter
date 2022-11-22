@@ -48,7 +48,7 @@ class DriverProvider {
 
     var url = Uri.parse(API.driverUpdate);
 
-    String token = await pref.getToken;
+    String token = await Preferences.getToken;
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {
@@ -81,7 +81,7 @@ class DriverProvider {
   Future<UpdateDataBankModel> UpdateDataBankDriver(String driver_id, String data_bank, String account_number ,  String account_type) async {
     var url = Uri.parse(API.driverDataBank );
 
-    String token = await pref.getToken;
+    String token = Preferences.getToken;
     final response = await http.post(url,
         headers: {
           HttpHeaders.authorizationHeader: "token $token"
