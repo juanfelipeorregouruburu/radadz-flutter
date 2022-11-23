@@ -32,7 +32,7 @@ class _CardBlurtDriverWidgetState extends State<CardBlurtDriverWidget> {
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(0.0),
           scrollDirection: Axis.vertical,
-          itemCount: listBlurtDriverProvider.blurtListAll!.blurts.length ?? 0,
+          itemCount: listBlurtDriverProvider.blurtListAll!.blurts.length ,
           itemBuilder: (BuildContext context, int index) {
             return ItemBlurtDriver(
                 index: index,

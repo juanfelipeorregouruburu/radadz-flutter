@@ -17,7 +17,7 @@ class CardTripHistoryWidget extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(0.0),
-        itemCount: listTripHistoryProvider.listTripsHistory.trips.length ?? 0,
+        itemCount: listTripHistoryProvider.listTripsHistory.trips.length ,
         itemBuilder: (BuildContext context, int index) {
           return ItemTripHistory(
               index: index,

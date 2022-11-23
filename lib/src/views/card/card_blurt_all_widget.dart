@@ -32,7 +32,7 @@ class _CardBlurtAllWidgetState extends State<CardBlurtAllWidget> {
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.all(0.0),
             scrollDirection: Axis.vertical,
-            itemCount: listBlurtAllProvider?.blurtListAll!.blurts.length ?? 0,
+            itemCount: listBlurtAllProvider.blurtListAll!.blurts.length,
             itemBuilder: (BuildContext context, int index) {
               return ItemBlurtAll(
                 index: index,

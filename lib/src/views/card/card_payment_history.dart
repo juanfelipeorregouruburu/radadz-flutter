@@ -16,7 +16,7 @@ class CardPaymentHistoryPage extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(0.0),
-          itemCount: listPaymentsHistoryProvider.listPaymentHistory.payments.length ?? 0,
+          itemCount: listPaymentsHistoryProvider.listPaymentHistory.payments.length ,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             return ItemPaymentHistory(
