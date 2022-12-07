@@ -72,7 +72,7 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
 
   @override
   Widget build(BuildContext context) {
-    statusView = widget.blurt.statusBlurt.id == 1 ? true :false;
+    statusView = widget.blurt.statusBlurt == 1 ? true :false;
 
     return Card(
       elevation: 4,

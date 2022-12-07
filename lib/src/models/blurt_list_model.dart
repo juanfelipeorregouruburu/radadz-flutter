@@ -26,33 +26,17 @@ class Blurt {
   String? _Id;
   String? _creation_date;
   String? _message;
-  StatusBlurt? _statusBlurt;
+  int? _statusBlurt;
 
   Blurt(parsedJson) {
     _Id = parsedJson['id'].toString();
     _creation_date = parsedJson['creation_date'];
     _message = parsedJson['message'];
-    _statusBlurt = StatusBlurt(parsedJson['status']);
+    _statusBlurt = parsedJson['status'];
   }
 
   String get id => _Id! ;
   String get create_date => _creation_date! ;
   String get message => _message! ;
-  StatusBlurt get statusBlurt => _statusBlurt!;
-
-}
-
-class StatusBlurt{
-  int? _Id;
-  String? _status;
-
-  StatusBlurt(parsedJson) {
-    _Id = parsedJson['id'];
-    _status = parsedJson['status'];
-
-  }
-
-  int get id => _Id! ;
-  String get status => _status! ;
-
+  int get statusBlurt => _statusBlurt!;
 }

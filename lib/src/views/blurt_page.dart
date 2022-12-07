@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class BlurtPage extends StatefulWidget with NavigationStates{

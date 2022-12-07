@@ -16,6 +16,7 @@ class _CardBlurtDriverWidgetState extends State<CardBlurtDriverWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(Preferences.getDriverId);
     Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
   }
 
@@ -64,15 +65,57 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
   final prefs = new Preferences();
   BlurtUpdateBloc _blurtUpdateBloc = BlurtUpdateBloc();
 
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
+      mode: StopWatchMode.countDown
+  );
+
+  startTime(){
+    _stopWatchTimer.setPresetSecondTime(120);
+    _stopWatchTimer.fetchEnded.listen((value) {
+      if(value){
+        status = false;
+        setState(() {});
+      }
+    });
+    _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+  }
+
+  String textStatus = "";
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getNameStatus();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await _stopWatchTimer.dispose();  // Need to call dispose function.
+  }
+
+  getNameStatus(){
+    switch(widget.blurt.statusBlurt){
+      case 1:
+        textStatus = 'tab_blurt_status_accepted'.tr();
+        setState(() {});
+        break;
+      case 2:
+        textStatus = 'tab_blurt_status_refused'.tr();
+        setState(() {});
+        break;
+
+      case 3:
+        textStatus = 'tab_blurt_status_pending_review'.tr();
+        setState(() {});
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    statusView = widget.blurt.statusBlurt.id == 1 ? true :false;
+    statusView = widget.blurt.statusBlurt == 1 ? true : false;
 
     return Card(
         elevation: 4,
@@ -109,8 +152,8 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                     showOnOff: true,
                     onToggle: (val) {
                       var dialog = CustomAlertDialog(
-                          title: 'tab_blurt_dialog_confirmation_title'.tr(),
-                          message: 'tab_blurt_dialog_confirmation_text'.tr(),
+                          title: 'tab_blurt_dialog_confirmation_text'.tr(),
+                          message: 'tab_blurt_before_activated_text'.tr(),
                           onPositivePressed: () {
                             _blurtUpdate(widget.blurt.id);
                           },
@@ -125,7 +168,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                 ],
               ) : Container(),
 
-              SizedBox(height: 15.h),
+              SizedBox(height: 10.h) ,
 
               Text(
                   widget.blurt.message,
@@ -133,10 +176,59 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                   softWrap: true,
                   maxLines: 3,
                   style: StyleGeneral.styleTextTextCardPaymentTitle
-              )
+              ),
 
-            ],
-          ),
+              SizedBox(height: 15.h),
+
+              Text(
+                  textStatus,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 3,
+                  style: StyleGeneral.styleTextTextCardPaymentDescription
+              ),
+              SizedBox(height: 10.h),
+
+              if(status)
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.tight,
+                      flex: 2,
+                      child: Text(
+                          'tab_blurt_time_down_text'.tr(),
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          maxLines: 3,
+                          style: StyleGeneral.styleTextTextCardPaymentDescription
+                      )
+                    ),
+
+
+                    Flexible(
+                      fit: FlexFit.tight,
+                      flex: 2,
+                      child: StreamBuilder<int>(
+                          stream: _stopWatchTimer.rawTime,
+                          initialData: _stopWatchTimer.rawTime.value,
+                          builder: (context, snap) {
+                            final value = snap.data;
+                            final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                            return Text(
+                                displayTime,
+                                textAlign: TextAlign.end,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
+                            );
+                          }
+                      )
+                    )
+                  ]
+                )
+
+            ]
+          )
         )
     );
   }
@@ -149,14 +241,22 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
     _blurtUpdateBloc.BlurtUpdate();
 
     _blurtUpdateBloc.data.listen((data) {
+
+      if(data.error == 1){
+        setState(() {
+          status = true;
+          startTime();
+        });
+      }
+
       String icon = data.error == 1 ? 'success' : 'error';
 
-      var dialog = AlertMessageError(icon: icon, message: data.response);
+      var dialog = AlertMessageError(icon: icon, message: 'tab_blurt_activated_text'.tr() );
 
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 3), () {
+            Future.delayed(Duration(seconds: 10), () {
               Navigator.of(context).pop(true);
             });
             return dialog;
