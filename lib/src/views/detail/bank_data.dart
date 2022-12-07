@@ -20,18 +20,37 @@ class _DataBankDriverState extends State<DataBankDriver> {
   final FocusNode _numberCountFocus = FocusNode();
 
   Bank? _bank;
-  BankAcountType? _bankAcountType;
+  BankAccountType? _bankAccountType;
   bool _stateReviewBank = false;
-  bool _stateReviewAcountType = false;
+  bool _stateReviewAccountType = false;
 
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
+  late Map<String, dynamic> _map;
 
   @override
   void initState() {
     super.initState();
-    _updateDataBankDriverBloc = new UpdateDataBankDriverBloc();
+    getDataDriver();
   }
 
+  getDataDriver(){
+    String data = Preferences.getDriver;
+    if(data.isEmpty){
+      print('no data in preferences');
+    }else{
+      _map = jsonDecode(data);
+
+      print('account ${_map['account_number']}');
+
+      if(_map['account_type'] != null && _map['bank_name'] != null){
+        _inputNumberCountController.text = _map['account_number'];
+        _updateDataBankDriverBloc.account_type_id = _map['account_type']['id'].toString();
+        _updateDataBankDriverBloc.bank_id = _map['bank_name']['id'].toString();
+        _stateReviewBank = true;
+        _stateReviewAccountType = true;
+      }
+    }
+  }
 
 
   @override
@@ -65,18 +84,21 @@ class _DataBankDriverState extends State<DataBankDriver> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
+                              _dataSpinnerAccountType(),
 
-                              SizedBox(
-                                height: 35.h,
-                              ),
+                              SizedBox(height: 15.h),
+
+                              _dataSpinnerBank(),
+
+                              SizedBox(height: 25.h),
 
                               InputTextField(
                                 focusNode: _numberCountFocus,
                                 controller: _inputNumberCountController,
                                 keyboardType: TextInputType.number,
                                 textInputAction: TextInputAction.done,
-                                labelText: 'data_bank_acount'.tr(),
-                                hintText: 'xxx-xxxxx-xx',
+                                labelText: 'data_bank_account'.tr(),
+                                hintText: 'xxx-xxx-xx',
                                 validator: (String? value) {
                                   if (value!.isEmpty) return 'required_field'.tr();
                                   return null;
@@ -94,27 +116,165 @@ class _DataBankDriverState extends State<DataBankDriver> {
                                   if (formState.currentState!.validate()) {
                                     _UpdateDataBank();
                                   }
-                                },
-                              ),
+                                }
+                              )
 
-                            ],
-                          ),
+                            ]
+                          )
                         )
-                      ),
+                      )
                     )
-
-                  ],
-                ),
+                  ]
+                )
               )
-          ),
+          )
         ) ;
       }
     );
   }
 
 
+  Widget _dataSpinnerAccountType(){
 
+    blocBankAccountType.BankAccountTypeList();
 
+    return StreamBuilder(
+        stream: blocBankAccountType.data,
+        builder: (context , AsyncSnapshot<BankAcountTypeModel> snapshot) {
+
+          if (snapshot.hasData) {
+            List<BankAccountType> bankAccountTypeList = snapshot.data!.bankAcountType!;
+
+            if(_stateReviewAccountType){
+              bankAccountTypeList.asMap().forEach((index, value) {
+                if(_map['document_type']['id'] == value.id){
+                  _bankAccountType = bankAccountTypeList[index];
+                }
+              });
+            }else{
+              bankAccountTypeList.asMap().forEach((index, value) {
+                _bankAccountType =bankAccountTypeList[0];
+              });
+            }
+            
+            return Center(
+                child:  DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      filled: true,
+                      fillColor: StyleGeneral.GREEN,
+                    ),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 32,
+                      color: Colors.white,
+                    ),
+                    validator: (value) => value == null ? 'selection_document_type'.tr() : null,
+                    dropdownColor:  StyleGeneral.GREEN,
+                    value: bankAccountTypeList.where( (i) => i.name == _bankAccountType!.name).first ,
+                    onChanged: (BankAccountType? value) {
+                      setState(() {
+                        _bankAccountType = value!;
+                        _stateReviewAccountType = false;
+                      });
+                      print('selected $value');
+                    },
+                    items: bankAccountTypeList.map((BankAccountType bankAccountType) {
+                      return DropdownMenuItem<BankAccountType>(
+                        value: bankAccountType,
+                        child: Text(bankAccountType.name! , style: StyleGeneral.styleTextTextSpinner),
+                      );
+                    }).toList()
+
+                )
+            );
+          } else if (snapshot.hasError) {
+            return Icon(Icons.error_outline);
+          } else {
+            return ActivityIndicator();
+          }
+        }
+    );
+
+  }
+
+  Widget _dataSpinnerBank(){
+
+    blocBankList.BankList();
+
+    return StreamBuilder(
+        stream: blocBankList.data,
+        builder: (context , AsyncSnapshot<BankListModel> snapshot) {
+
+          if (snapshot.hasData) {
+            List<Bank> bankTypeList  = snapshot.data!.bankType!;
+
+            if(_stateReviewBank){
+              bankTypeList .asMap().forEach((index, value) {
+                if(_map['bank_name']['id'] == value.id){
+                  _bank = bankTypeList [index];
+                }
+              });
+            }else{
+              bankTypeList .asMap().forEach((index, value) {
+                _bank =bankTypeList [0];
+              });
+            }
+
+            return Center(
+                child:  DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      filled: true,
+                      fillColor: StyleGeneral.GREEN,
+                    ),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 32,
+                      color: Colors.white,
+                    ),
+                    validator: (value) => value == null ? 'selection_document_type'.tr() : null,
+                    dropdownColor:  StyleGeneral.GREEN,
+                    value: bankTypeList .where( (i) => i.name == _bank!.name).first ,
+                    onChanged: (Bank? value) {
+                      setState(() {
+                        _bank = value!;
+                        _stateReviewBank = false;
+                      });
+                      print('selected $value');
+                    },
+                    items: bankTypeList .map((Bank bankAccountType) {
+                      return DropdownMenuItem<Bank>(
+                        value: bankAccountType,
+                        child: Text(bankAccountType.name! , style: StyleGeneral.styleTextTextSpinner),
+                      );
+                    }).toList()
+
+                )
+            );
+          } else if (snapshot.hasError) {
+            return Icon(Icons.error_outline);
+          } else {
+            return ActivityIndicator();
+          }
+        }
+    );
+
+  }
 
 
   _UpdateDataBank() async {
@@ -123,7 +283,9 @@ class _DataBankDriverState extends State<DataBankDriver> {
       _isLoading = true;
     });
 
-    _updateDataBankDriverBloc.driver_id = Preferences.getDriverId;
+    _updateDataBankDriverBloc.driverId = Preferences.getDriverId;
+    _updateDataBankDriverBloc.account_type_id = _bankAccountType!.id.toString();
+    _updateDataBankDriverBloc.bank_id = _bank!.id.toString();
     _updateDataBankDriverBloc.account_number = _inputNumberCountController.text.trim();
 
     _updateDataBankDriverBloc.UpdateDataBank();
@@ -135,7 +297,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
       });
 
       if(data.error == 1){
-
+        Preferences.setDriver = data.driver;
       }
       var dialog = AlertMessageError(
           icon: data.error == 1 ? "success" : "error",
