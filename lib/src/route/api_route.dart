@@ -27,7 +27,7 @@ class API {
   static final String getListTripHistoryDriver = _URL + "list_driver_trips";
   static final String getTripDetailHistoryDriver = _URL + "get_driver_trip";
 
-  static final String blurtListAll = _URL + "list_screen_msgs";
+  static final String blurtListAll = _URL + "list_screen_msgs_phone";
   static final String blurtListDriverId = _URL + "list_screen_msgs_driver";
   static final String blurtCreate = _URL + "create_blurt";
   static final String blurtEnable = _URL + "enable_blurt";
