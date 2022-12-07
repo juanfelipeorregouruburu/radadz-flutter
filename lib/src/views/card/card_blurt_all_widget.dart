@@ -63,11 +63,19 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
   final prefs = new Preferences();
   BlurtUpdateBloc _blurtUpdateBloc = new BlurtUpdateBloc();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _blurtUpdateBloc = BlurtUpdateBloc();
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
+      mode: StopWatchMode.countDown
+  );
+
+  startTime(){
+    _stopWatchTimer.setPresetSecondTime(60);
+    _stopWatchTimer.fetchEnded.listen((value) {
+      if(value){
+        status = false;
+        setState(() {});
+      }
+    });
+    _stopWatchTimer.onExecute.add(StopWatchExecute.start);
   }
 
   @override
@@ -108,27 +116,22 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
                   borderRadius: 30.r,
                   showOnOff: true,
                   onToggle: (val) {
-
                     var dialog = CustomAlertDialog(
-                        title: 'tab_blurt_dialog_confirmation_title'.tr(),
-                        message: 'tab_blurt_dialog_confirmation_text'.tr(),
+                        title: 'tab_blurt_dialog_confirmation_text'.tr(),
+                        message: 'tab_blurt_before_activated_text'.tr(),
                         onPositivePressed: () {
-                          // setState(() {
-                          //   status = val;
-                          // });
                           _blurtUpdate(widget.blurt.id);
                         },
-                        positiveBtnText: 'tab_blurt_dialog_confirmation_possitive_button'.tr(),
+                        positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
                         negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr()
                     );
                     showDialog(
                         context: context,
                         barrierDismissible: false,
                         builder: (BuildContext context) => dialog);
-
-                  },
-                ),
-              ],
+                  }
+                )
+              ]
             ),
 
             SizedBox(height: 15.h),
@@ -141,8 +144,47 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
                 style: StyleGeneral.styleTextTextCardPaymentTitle
             ),
 
-          ],
-        ),
+            SizedBox(height: 15.h),
+
+            if(status)
+              Row(
+                  children: [
+                    Flexible(
+                        fit: FlexFit.tight,
+                        flex: 2,
+                        child: Text(
+                            'tab_blurt_time_down_text'.tr(),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            maxLines: 3,
+                            style: StyleGeneral.styleTextTextCardPaymentDescription
+                        )
+                    ),
+
+
+                    Flexible(
+                        fit: FlexFit.tight,
+                        flex: 2,
+                        child: StreamBuilder<int>(
+                            stream: _stopWatchTimer.rawTime,
+                            initialData: _stopWatchTimer.rawTime.value,
+                            builder: (context, snap) {
+                              final value = snap.data;
+                              final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                              return Text(
+                                  displayTime,
+                                  textAlign: TextAlign.end,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
+                              );
+                            }
+                        )
+                    )
+                  ]
+              )
+          ]
+        )
       )
     );
   }
@@ -155,19 +197,26 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
       _blurtUpdateBloc.BlurtUpdate();
 
       _blurtUpdateBloc.data.listen((data) {
-      String icon = data.error == 1 ? 'success' : 'error';
 
-      var dialog = AlertMessageError(icon: icon, message: data.response);
-
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 3), () {
-              Navigator.of(context).pop(true);
-            });
-            return dialog;
+        if(data.error == 1){
+          setState(() {
+            status = true;
+            startTime();
           });
-    });
+        }
+        String icon = data.error == 1 ? 'success' : 'error';
+
+        var dialog = AlertMessageError(icon: icon, message: 'tab_blurt_activated_text'.tr());
+
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              Future.delayed(Duration(seconds: 3), () {
+                Navigator.of(context).pop(true);
+              });
+              return dialog;
+            });
+      });
   }
 
 }
