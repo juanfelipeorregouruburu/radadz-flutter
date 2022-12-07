@@ -33,7 +33,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
 
   @override
   Widget build(BuildContext context) {
-    final listTripRecivedProvider = context.watch<ListBlurtDriverBloc>();
+    final listBlurtProvider = context.watch<ListBlurtDriverBloc>();
 
     return GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -51,7 +51,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      listTripRecivedProvider.setStateButton(false);
+                      listBlurtProvider.setStateButton(false);
                     },
                     child: Container(
                       width: 95.h,
@@ -132,7 +132,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                             fullscreen: true,
                             onTap: () {
                               _blurtCreate();
-                              listTripRecivedProvider.setStateButton(false);
+                              listBlurtProvider.setStateButton(false);
                             },
                           )
                         ]

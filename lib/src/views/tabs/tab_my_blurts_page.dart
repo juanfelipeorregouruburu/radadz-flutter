@@ -15,10 +15,10 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final listTripRecivedProvider = context.watch<ListBlurtDriverBloc>();
+    final listBlurtProvider = context.watch<ListBlurtDriverBloc>();
 
-    stateView = listTripRecivedProvider.getStateButton;
-    state_button = !listTripRecivedProvider.getStateButton;
+    stateView = listBlurtProvider.getStateButton;
+    state_button = !listBlurtProvider.getStateButton;
 
     return WillPopScope(
       onWillPop: () async{
@@ -32,33 +32,6 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
             physics: BouncingScrollPhysics(),
             child: Stack(
               children: [
-                Positioned(
-                    right: 0,
-                    top: 15,
-                    child: Ink(
-                        decoration: ShapeDecoration(
-                          color: StyleGeneral.GREEN,
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                            icon: Icon(Icons.question_mark_rounded),
-                            iconSize: 32,
-                            color: Colors.white,
-                            onPressed: () {
-                              var dialog = AlertMessageError(icon: 'warning', message: 'tab_blurt_driver_info_question'.tr() );
-
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    Future.delayed(Duration(seconds: 5), () {
-                                      Navigator.of(context).pop(true);
-                                    });
-                                    return dialog;
-                                  });
-                            }
-                        )
-                    )
-                ),
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -67,7 +40,7 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
                       if (state_button)
                           GestureDetector(
                           onTap: (){
-                            listTripRecivedProvider.setStateButton(true);
+                            listBlurtProvider.setStateButton(true);
                           },
                           child: Container(
                             margin: EdgeInsets.fromLTRB(10.h, 10.h, 15.h, 5.h),

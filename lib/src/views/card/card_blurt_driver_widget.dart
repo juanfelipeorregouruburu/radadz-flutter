@@ -16,7 +16,6 @@ class _CardBlurtDriverWidgetState extends State<CardBlurtDriverWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(Preferences.getDriverId);
     Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
   }
 
@@ -157,7 +156,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                           onPositivePressed: () {
                             _blurtUpdate(widget.blurt.id);
                           },
-                          positiveBtnText: 'tab_blurt_dialog_confirmation_possitive_button'.tr(),
+                          positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
                           negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr());
                       showDialog(
                           context: context,
@@ -226,7 +225,6 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                     )
                   ]
                 )
-
             ]
           )
         )
