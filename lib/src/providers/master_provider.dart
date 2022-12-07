@@ -43,6 +43,19 @@ class MasterProvider {
     }
   }
 
+  /* RoutineDriver */
+  Future<RoutineDriverModel> RoutineDrivers() async {
+    var url = Uri.parse(API.routineDriverList );
+
+    final response = await http.get(url);
+
+    if(response.statusCode == 200) {
+      return RoutineDriverModel.fromJson(json.decode(response.body));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
   /* VehiclesType */
   Future<VehicleTypeModel> VehiclesType() async {
     var url = Uri.parse(API.vehiclesList );
@@ -55,4 +68,48 @@ class MasterProvider {
       throw Exception("Fallo al petición");
     }
   }
+
+  /* VehiclesColor */
+  Future<VehicleColorModel> VehiclesColor() async {
+    var url = Uri.parse(API.vehiclesColorList );
+
+    final response = await http.get(url);
+
+    if(response.statusCode == 200) {
+      return VehicleColorModel.fromJson(json.decode(response.body));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
+
+  /* vehicleManufacturerList */
+  Future<VehicleManufacturerModel> VehiclesManufacturer() async {
+    var url = Uri.parse(API.vehicleManufacturerList );
+
+    final response = await http.get(url);
+
+    if(response.statusCode == 200) {
+      return VehicleManufacturerModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
+
+  /* vehiclesModelList */
+  Future<VehicleModel> vehiclesModel(String manufacturerId) async {
+    var url = Uri.parse(API.vehiclesModelList );
+
+    final response = await http.post(url , body: {
+      "manufacturer_id": manufacturerId
+    });
+
+    if(response.statusCode == 200) {
+      return VehicleModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
 }

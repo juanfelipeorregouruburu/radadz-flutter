@@ -22,30 +22,26 @@ class DocumentTypeModel {
 }
 
 class DocumentType {
-  String? id;
+  int? id;
   String? name;
-  String? description;
 
   DocumentType({
     this.id,
-    this.name,
-    this.description,
+    this.name
   });
 
   factory DocumentType.fromJson(Map<String, dynamic> json) => DocumentType(
-    id: json["id"].toString(),
-    name: json["docuement_type"],
-    description: json["description"],
+    id: json["id"],
+    name: json["docuement_type"]
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "docuement_type": name,
-    "description": description
+    "docuement_type": name
   };
 
   @override
   String toString() {
-    return 'FeedDocument{id: $id, name: $name, description: $description}';
+    return 'DocumentType{id: $id, name: $name}';
   }
 }

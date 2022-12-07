@@ -7,31 +7,67 @@ class DriverProvider {
 
   final pref = Preferences();
 
-  Future<SaveDriverModel> SaveDriver(String name_first, String name_second, String lastName_first, String lastName_second,
-      String document_type, String document_number, String email ,  String phone,
-      String password, String address, String date_birth , String licence_number ,
-      String vehicule_type, String vehicule_year, String driving_daily_routine ) async {
+  Future<DriverModel> getDriver(String driverId ) async {
+    print("driverId $driverId");
+
+    var url = Uri.parse(API.getDriver );
+
+    String token = await Preferences.getToken;
+    print("token $token");
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.authorizationHeader: "token $token"
+        }, body: {
+          "driver_id": driverId
+        });
+
+    if(response.statusCode == 200) {
+      return DriverModel.fromJson(json.decode(response.body));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
+
+  Future<SaveDriverModel> SaveDriver(String nameFirst , String nameSecond, String lastNameFirst, String lastNameSecond,
+      String documentType, String documentNumber, String email ,  String phone, String password, String address, String birthDate ,
+      String licencePlateNumber , String vehicleType, String vehicleYear, String drivingDailyRoutine , String vehicleModel , String vehicleManufacturer ,
+      String vehicleColor , String isOwner, String ownerVehicleName, String ownerIdNumber ,  String expirationDateSOAT , String expirationDateDriverLicence ,
+      String expirationDateTechnicalMechanical ) async {
 
     var url = Uri.parse(API.driverCreate );
+    DateTime date = DateTime.now();
 
     final response = await http.post(url, body: {
-      "first_name": name_first,
-      "second_name": name_second,
-      "first_lastname": lastName_first,
-      "second_lastname": lastName_second,
-      "document_type": document_type,
-      "document_number": document_number,
+      "first_name": nameFirst,
+      "second_name": nameSecond,
+      "first_lastname": lastNameFirst,
+      "second_lastname": lastNameSecond,
+      "document_type": documentType,
+      "document_number": documentNumber,
       "email": email,
-      "driver_password": password,
       "phone": phone,
       "address": address,
-      "birth_date": date_birth,
-      "license_plate_number": licence_number,
-      "vehicle_type": vehicule_type,
-      "vehicle_year": vehicule_year,
-      "driving_daily_routine": driving_daily_routine,
-      "staff_approval_date":"yes"
+      "birth_date": birthDate,
+      "license_plate_number": licencePlateNumber,
+      "vehicle_type" : vehicleType,
+      "vehicle_year": vehicleYear,
+      "driving_daily_routine": drivingDailyRoutine,
+      "registration_date": DateFormat("yyyy-MM-dd").format(date),
+      "staff_approval_date":"yes",
+      "driver_password":password,
+      "vehicle_model" : vehicleModel,
+      "vehicle_manufacturer" : vehicleManufacturer ,
+      "vehicle_color" : vehicleColor,
+      "is_owner" : isOwner ,
+      "owner_vehicle_name" : ownerVehicleName,
+      "owner_id_number" : ownerIdNumber,
+      "expiration_date_of_the_technical_mechanical_review" : expirationDateTechnicalMechanical,
+      "soat_expiration_date" : expirationDateSOAT,
+      "expiration_date_drivers_license" : expirationDateDriverLicence
     });
+
+    print(response.body);
 
     if(response.statusCode == 200) {
       return SaveDriverModel.fromJson(json.decode(response.body));
@@ -41,10 +77,11 @@ class DriverProvider {
   }
 
   /* UpdateDriver */
-  Future<UpdateDriverModel> UpdateDriver(String driver_id , String name_first, String name_second, String lastName_first, String lastName_second,
-      String document_type, String document_number, String email ,  String phone,
-      String address, String date_birth , String licence_number ,
-      String vehicule_type, String vehicule_year, String driving_daily_routine ) async {
+  Future<UpdateDriverModel> UpdateDriver(String driverId ,String nameFirst , String nameSecond, String lastNameFirst, String lastNameSecond,
+      String documentType, String documentNumber, String email ,  String phone, String password, String address, String birthDate ,
+      String licencePlateNumber , String vehicleType, String vehicleYear, String driving_daily_routine , String vehicleModel , String vehicleManufacturer ,
+      String vehicleColor , String isOwner, String ownerVehicleName, String ownerIdNumber ,  String expirationDateSOAT , String expirationDateDriverLicence ,
+      String expirationDateTechnicalMechanical  ) async {
 
     var url = Uri.parse(API.driverUpdate);
 
@@ -52,22 +89,33 @@ class DriverProvider {
     final response = await http.post(url,headers: {
       HttpHeaders.authorizationHeader: "token $token"
     }, body: {
-      "id": driver_id,
-      "first_name": name_first,
-      "second_name": name_second,
-      "first_lastname": lastName_first,
-      "second_lastname": lastName_second,
-      "document_type": document_type,
-      "document_number": document_number,
+      "id": driverId,
+      "first_name": nameFirst,
+      "second_name": nameSecond,
+      "first_lastname": lastNameFirst,
+      "second_lastname": lastNameSecond,
+      "document_type": documentType,
+      "document_number": documentNumber,
       "email": email,
       "phone": phone,
       "address": address,
-      "birth_date": date_birth,
-      "license_plate_number": licence_number,
-      "vehicle_type": vehicule_type,
-      "vehicle_year": vehicule_year,
+      "birth_date": birthDate,
+      "license_plate_number": licencePlateNumber,
+      "vehicle_type" : vehicleType,
+      "vehicle_year": vehicleYear,
       "driving_daily_routine": driving_daily_routine,
-      "staff_approval_date":"yes"
+      "registration_date": "2021-02-22",
+      "staff_approval_date":"yes",
+      "driver_password":password,
+      "vehicle_model" : vehicleModel,
+      "vehicle_manufacturer" : vehicleManufacturer ,
+      "vehicle_color" : vehicleColor,
+      "is_owner" : isOwner ,
+      "owner_vehicle_name" : ownerVehicleName,
+      "owner_id_number" : ownerIdNumber,
+      "expiration_date_of_the_technical_mechanical_review" : expirationDateTechnicalMechanical,
+      "soat_expiration_date" : expirationDateSOAT,
+      "expiration_date_drivers_license" : expirationDateDriverLicence
     });
 
     if(response.statusCode == 200) {

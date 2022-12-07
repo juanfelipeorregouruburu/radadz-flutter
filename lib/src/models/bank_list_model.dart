@@ -22,7 +22,7 @@ class BankListModel {
 }
 
 class Bank {
-  String? id;
+  int? id;
   String? name;
   String? description;
 
@@ -33,7 +33,7 @@ class Bank {
   });
 
   factory Bank.fromJson(Map<String, dynamic> json) => Bank(
-    id: json["id"].toString(),
+    id: json["id"],
     name: json["bank_type"],
     description: json["description"],
   );

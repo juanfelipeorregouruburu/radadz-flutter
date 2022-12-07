@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-VehicleTypeModel vehicleModelFromJson(String str) => VehicleTypeModel.fromJson(json.decode(str));
+VehicleTypeModel vehicleTypeModelFromJson(String str) => VehicleTypeModel.fromJson(json.decode(str));
 
-String vehicleModelToJson(VehicleTypeModel data) => json.encode(data.toJson());
+String vehicleTypeModelToJson(VehicleTypeModel data) => json.encode(data.toJson());
 
 class VehicleTypeModel {
   List<VehicleType>? vehiclesType;
@@ -22,30 +22,26 @@ class VehicleTypeModel {
 }
 
 class VehicleType {
-  String? id;
+  int? id;
   String? name;
-  String? description;
 
   VehicleType({
     this.id,
-    this.name,
-    this.description,
+    this.name
   });
 
   factory VehicleType.fromJson(Map<String, dynamic> json) => VehicleType(
-    id: json["id"].toString(),
-    name: json["vehicle_type"],
-    description: json["description"],
+    id: json["id"],
+    name: json["vehicle_type"]
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "vehicle_type": name,
-    "description": description
+    "vehicle_type": name
   };
 
   @override
   String toString() {
-    return 'FeedVehicle{id: $id, name: $name, description: $description}';
+    return 'FeedVehicle{id: $id, name: $name}';
   }
 }

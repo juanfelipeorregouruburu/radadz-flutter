@@ -58,6 +58,25 @@ class DocumentTypeBloc {
 
 }
 
+class RoutineDriverBloc {
+  final repository = Repository();
+  final routineDriver = PublishSubject<RoutineDriverModel>();
+
+  get data => routineDriver.stream;
+
+  RoutineDriverBloc();
+
+  RoutineDrivers() async {
+    RoutineDriverModel _routineDriver = await repository.routineDriversRepository();
+    routineDriver.sink.add(_routineDriver);
+  }
+
+  disponse() {
+    routineDriver.close();
+  }
+
+}
+
 class VehicleTypeBloc {
   final repository = Repository();
   final vehicle = PublishSubject<VehicleTypeModel>();
@@ -67,7 +86,65 @@ class VehicleTypeBloc {
   VehicleTypeBloc();
 
   VehicleTypes() async {
-    VehicleTypeModel _vehicle = await repository.vehiclesListRepository();
+    VehicleTypeModel _vehicle = await repository.vehiclesTypeListRepository();
+    vehicle.sink.add(_vehicle);
+  }
+
+  disponse() {
+    vehicle.close();
+  }
+
+}
+
+class VehicleColorBloc {
+  final repository = Repository();
+  final vehicle = PublishSubject<VehicleColorModel>();
+
+  get data => vehicle.stream;
+
+  VehicleColorBloc();
+
+  VehiclesColor() async {
+    VehicleColorModel _vehicle = await repository.vehiclesColorListRepository();
+    vehicle.sink.add(_vehicle);
+  }
+
+  disponse() {
+    vehicle.close();
+  }
+
+}
+
+class VehicleManufacturerBloc {
+  final repository = Repository();
+  final vehicle = PublishSubject<VehicleManufacturerModel>();
+
+  get data => vehicle.stream;
+
+  VehicleManufacturerBloc();
+
+  VehiclesManufacturer() async {
+    VehicleManufacturerModel _vehicle = await repository.vehiclesManufacturerListRepository();
+    vehicle.sink.add(_vehicle);
+  }
+
+  disponse() {
+    vehicle.close();
+  }
+
+}
+
+class VehiclesBloc {
+  final repository = Repository();
+  final vehicle = PublishSubject<VehicleModel>();
+
+  get data => vehicle.stream;
+
+  String? manufacturerId;
+  VehiclesBloc({this.manufacturerId});
+
+  VehiclesModel() async {
+    VehicleModel _vehicle = await repository.vehiclesListRepository(manufacturerId);
     vehicle.sink.add(_vehicle);
   }
 
@@ -80,4 +157,8 @@ class VehicleTypeBloc {
 final blocBankAccountType = BankAccountTypeBloc();
 final blocBankList = BankListBloc();
 final blocDocumentType = DocumentTypeBloc();
+final blocRoutineDriver = RoutineDriverBloc();
 final blocVehicleType = VehicleTypeBloc();
+final blocVehicleColor = VehicleColorBloc();
+final blocVehicleManufacturer = VehicleManufacturerBloc();
+final blocVehicles = VehiclesBloc();

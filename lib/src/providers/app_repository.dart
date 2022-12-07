@@ -32,67 +32,90 @@ class Repository {
   /* DocumentType*/
   Future<DocumentTypeModel> documentListRepository( ) => masterProvider.DocumentsTypes();
 
-  /* VehicleType*/
-  Future<VehicleTypeModel> vehiclesListRepository( ) => masterProvider.VehiclesType();
+  /* DocumentType*/
+  Future<RoutineDriverModel> routineDriversRepository( ) => masterProvider.RoutineDrivers();
 
-  /* BanktList*/
+  /* VehicleType*/
+  Future<VehicleTypeModel> vehiclesTypeListRepository( ) => masterProvider.VehiclesType();
+
+  /* VehiclesColor*/
+  Future<VehicleColorModel> vehiclesColorListRepository( ) => masterProvider.VehiclesColor();
+
+  /* vehicleManufacturerList*/
+  Future<VehicleManufacturerModel> vehiclesManufacturerListRepository( ) => masterProvider.VehiclesManufacturer();
+
+  /* vehiclesModelList*/
+  Future<VehicleModel> vehiclesListRepository(String? manufacturerId ) => masterProvider.vehiclesModel(manufacturerId!);
+
+  /* BankList*/
   Future<BankListModel> bankListRepository( ) => masterProvider.BanksTypes();
 
-  /* BanktType*/
+  /* BankType*/
   Future<BankAcountTypeModel> accountTypeBankRepository( ) => masterProvider.BankAccountTypes();
 
 
   //////////////////////////////// DRIVER ////////////////////////////////////////////////
+
+  /* vehiclesModelList*/
+  Future<DriverModel> getDriverRepository(String? driverId ) => driverProvider.getDriver(driverId!);
+
   /* SaveDriver */
-  Future<SaveDriverModel> saveDriverRepository(String? name_first , String? name_second, String? lastNameFirst , String? lastNameSecond,
-                                    String? document_type , String? document_number, String? email , String? phone,
-                                    String? password, String? address, String? date_birth , String? licence_number ,
-                                    String? vehicule_type, String? vehicule_year, String? driving_daily_routine ) =>
-      driverProvider.SaveDriver(name_first!, name_second!, lastNameFirst! , lastNameSecond! , document_type!, document_number!,
-                                    email!, phone! , password!, address! , date_birth!,  licence_number! , vehicule_type!, vehicule_year! , driving_daily_routine!);
+  Future<SaveDriverModel> saveDriverRepository(String? nameFirst , String? nameSecond, String? lastNameFirst , String? lastNameSecond,
+                                    String? documentType , String? documentNumber, String? email , String? phone, String? password, String? address, String? birthDate ,
+                                    String? licencePlateNumber , String? vehicleType, String? vehicleYear, String? drivingDailyRoutine ,
+                                    String? vehicleModel,String? vehicleManufacturer,String? vehicleColor,String? isOwner,String? ownerVehicleName,String? ownerIdNumber,
+                                    String? expirationDateTechnicalMechanical , String? expirationDateSOAT , String? expirationDateDriverLicence  ) =>
+
+      driverProvider.SaveDriver(nameFirst!, nameSecond!, lastNameFirst!, lastNameSecond!, documentType!, documentNumber!, email!,  phone!, password!, address!, birthDate!,
+          licencePlateNumber!, vehicleType!, vehicleYear!, drivingDailyRoutine!, vehicleModel!, vehicleManufacturer!, vehicleColor!, isOwner!, ownerVehicleName!, ownerIdNumber!,
+          expirationDateTechnicalMechanical!, expirationDateSOAT!, expirationDateDriverLicence!);
 
   /* UpdateDriver*/
-  Future<UpdateDriverModel> updateDriverRepository(String? driver_id, String? name_first , String? name_second, String? lastNameFirst , String? lastNameSecond,
-      String? document_type , String? document_number, String? email , String? phone, String? address, String? date_birth , String? licence_number ,
-      String? vehicule_type, String? vehicule_year, String? driving_daily_routine ) =>
-      driverProvider.UpdateDriver(driver_id!, name_first!, name_second!, lastNameFirst!, lastNameSecond! , document_type!, document_number!,
-          email!, phone! , address! , date_birth!,  licence_number! , vehicule_type!, vehicule_year! , driving_daily_routine!);
+  Future<UpdateDriverModel> updateDriverRepository(String? driverId, String? nameFirst , String? nameSecond, String? lastNameFirst , String? lastNameSecond,
+      String? documentType , String? documentNumber, String? email , String? phone, String? password, String? address, String? birthDate ,
+      String? licencePlateNumber , String? vehicleType, String? vehicleYear, String? drivingDailyRoutine ,
+      String? vehicleModel,String? vehicleManufacturer,String? vehicleColor,String? isOwner,String? ownerVehicleName,String? ownerIdNumber,
+      String? expirationDateTechnicalMechanical , String? expirationDateSOAT , String? expirationDateDriverLicence ) =>
+
+      driverProvider.UpdateDriver(driverId!, nameFirst!, nameSecond!, lastNameFirst!, lastNameSecond!, documentType!, documentNumber!, email!,  phone!, password!, address!, birthDate!,
+          licencePlateNumber!, vehicleType!, vehicleYear!, drivingDailyRoutine!, vehicleModel!, vehicleManufacturer!, vehicleColor!, isOwner!, ownerVehicleName!, ownerIdNumber!,
+          expirationDateTechnicalMechanical!, expirationDateSOAT!, expirationDateDriverLicence!);
 
   /* UpdateDataBank */
-  Future<UpdateDataBankModel> updateDriverDataBank(String? driver_id, String? bank_id, String? account_number , String? account_type_id) =>
-      driverProvider.UpdateDataBankDriver(driver_id!, bank_id!,account_number!,account_type_id!);
+  Future<UpdateDataBankModel> updateDriverDataBank(String? driverId, String? bankId, String? accountNumber , String? accountTypeId) =>
+      driverProvider.UpdateDataBankDriver(driverId!, bankId!,accountNumber!,accountTypeId!);
 
 
   //////////////////////////////// BLURT ////////////////////////////////////////////////
   /* BlurtCreate */
-  Future<BlurtResponseModel> blurtCreateRepository(String? driver_id, String? message ) => blurtProvider.CreateBlurtDriver(driver_id! , message!);
+  Future<BlurtResponseModel> blurtCreateRepository(String? driverId, String? message ) => blurtProvider.CreateBlurtDriver(driverId! , message!);
 
   /* BlurtUpdate */
-  Future<BlurtResponseModel> blurtEnableRepository(String? driver_id, String? blurt_id ) => blurtProvider.UpdateBlurtDriver(driver_id! , blurt_id!);
+  Future<BlurtResponseModel> blurtEnableRepository(String? driverId, String? blurtId ) => blurtProvider.UpdateBlurtDriver(driverId! , blurtId!);
 
   /* BlurtsList*/
   Future<BlurtListModel> blurtListAllRepository( ) => blurtProvider.BlurtListAll();
 
   /* BlurtsListDriver */
-  Future<BlurtListModel> blurtListDriverRepository(String? driver_id) => blurtProvider.BlurtListDriver(driver_id!);
+  Future<BlurtListModel> blurtListDriverRepository(String? driverId) => blurtProvider.BlurtListDriver(driverId!);
 
 
   //////////////////////////////// TRIP ////////////////////////////////////////////////
   /* TripStart */
-  Future<TripStartModel> tripStartRepository(String? driver_id,String? trip_payment_id) => tripProvider.TripStart(driver_id!, trip_payment_id!);
+  Future<TripStartModel> tripStartRepository(String? driverId,String? tripPaymentId) => tripProvider.TripStart(driverId!, tripPaymentId!);
 
   /* TripEnd */
-  Future<TripEndModel> tripEndRepository(String? driver_id, String? trip_id) => tripProvider.TripEnd(driver_id!, trip_id!);
+  Future<TripEndModel> tripEndRepository(String? driverId, String? tripId) => tripProvider.TripEnd(driverId!, tripId!);
 
   /* listTripHistoryDriver */
-  Future<TripHistoryModel>  listTripHistoryDriverRepository( String? driver_id, String? start_time, String? end_date) => tripProvider.listTripHistoryDriver(driver_id!,start_time!,end_date!);
+  Future<TripHistoryModel>  listTripHistoryDriverRepository( String? driverId, String? startTime, String? endDate) => tripProvider.listTripHistoryDriver(driverId!,startTime!,endDate!);
 
   /* DetailTripHistory */
-  Future<TripDetailHistoryModel>  tripDetailHistoryDriverRepository( String? trip_id) => tripProvider.tripDetailHistoryDriver(trip_id!);
+  Future<TripDetailHistoryModel>  tripDetailHistoryDriverRepository( String? tripId) => tripProvider.tripDetailHistoryDriver(tripId!);
 
   /* ListPaymentHistoryDriver */
-  Future<PaymentHistoryModel> listPaymentHistoryDriverRepository( String? driver_id, String? start_time, String? end_date) => tripProvider.ListPaymentHistoryDriver(driver_id!,start_time!,end_date!);
+  Future<PaymentHistoryModel> listPaymentHistoryDriverRepository( String? driverId, String? startTime, String? endDate) => tripProvider.ListPaymentHistoryDriver(driverId!,startTime!,endDate!);
 
   /* ListTripPaymentHistoryDriver */
-  Future<TripPaymentHistoryModel> listTripPaymentDriverRepository( String? trip_payment_id) => tripProvider.ListTripPaymentDriver(trip_payment_id!);
+  Future<TripPaymentHistoryModel> listTripPaymentDriverRepository( String? tripPaymentId) => tripProvider.ListTripPaymentDriver(tripPaymentId!);
 }

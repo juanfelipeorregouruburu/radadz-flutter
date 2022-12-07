@@ -10,10 +10,15 @@ class API {
   static const String resetChangePassword = _URL + "change_password";
 
   static final String documentsList = _URL + "list_documenttype";
+  static final String vehicleManufacturerList = _URL + "list_vehicle_manufacturer";
   static final String vehiclesList = _URL + "list_vehicletype";
+  static final String routineDriverList = _URL + "list_driver_routine";
+  static final String vehiclesColorList = _URL + "list_vehicle_color";
+  static final String vehiclesModelList = _URL + "list_vehicle_model";
   static final String bankList = _URL + "list_bank";
   static final String getAccountBankType = _URL + "list_bank_account_type";
 
+  static final String getDriver = _URL + "list_driverid";
   static final String driverCreate = _URL + "save_driver";
   static final String driverUpdate = _URL + "update_driver";
   static final String driverDataBank = _URL + "update_driver_bank";
