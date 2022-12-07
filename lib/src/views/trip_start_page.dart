@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:radadz_app/src/utils/get_second.dart';
+import 'package:radadz_app/src/widgets/travel_text_animated_widget.dart';
 
 class TripStartPage extends StatefulWidget with NavigationStates{
   const TripStartPage({Key? key}) : super(key: key);
@@ -46,9 +46,10 @@ class _TripStartPageState extends State<TripStartPage> {
   }
 
   verifyStateTrip(){
+    print('getStartTrip ${Preferences.getStartTrip}');
     if(Preferences.getStartTrip){
-      getSecondDiferenceHourAfter(Preferences.getHourTripStart);
-      changeText(Preferences.getHourTripStart);
+     getSecondDiferenceHourAfter(Preferences.getHourTripStart);
+     changeText(Preferences.getHourTripStart);
     }
   }
 
@@ -191,6 +192,14 @@ class _TripStartPageState extends State<TripStartPage> {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
+
+            if(_isStartTrip)
+              Positioned(
+                left: 15,
+                top: 50,
+                child: TextAnimatedLiveWidget(),
+              ),
+
             Container(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: SingleChildScrollView(
@@ -199,59 +208,13 @@ class _TripStartPageState extends State<TripStartPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 90.h),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          flex: 5,
-                          fit: FlexFit.tight,
-                          child: Text(
-                            'trip_state_text_syn_start_trip'.tr(),
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: StyleGeneral.BLACK,
-                              fontSize: ScreenUtil().setSp(17),
-                              fontFamily: 'Poppins-Regular',
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          fit: FlexFit.loose,
-                          child: Container(
-                            width: 35.h,
-                            height: 35.h,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: _isStartTrip ? StyleGeneral.GREEN : StyleGeneral.WHITE,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: StyleGeneral.GREEN,
-                                width: 1.5,
-                              ),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.done,
-                                color: Colors.white,
-                                size: ScreenUtil().setSp(17),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+
 
                     SizedBox(height: 50.h,),
 
                     Center(
                       child: GestureDetector(
                         onTap: (){
-                          print('clic');
                           _tripMethod();
                         },
                         child: _isLoading ? Container(
@@ -345,20 +308,20 @@ class _TripStartPageState extends State<TripStartPage> {
                                           fontFamily: 'Poppins-Semi'
                                       )
                                   );
-                                },
+                                }
                               )
                           )
 
-                      ],
+                      ]
                     ) : Container(),
 
-                  ],
-                ),
-              ),
+                  ]
+                )
+              )
             )
-          ],
-        ),
-      ),
+          ]
+        )
+      )
     );
   }
 }
