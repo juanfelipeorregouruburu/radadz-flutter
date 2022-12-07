@@ -42,6 +42,7 @@ class StyleGeneral {
   static final Color GREY_LIGTH = Color(0xFF939393);
   static final Color GREY = Color(0xFFF8F8F8);
   static final Color RED_LIGTH = Color(0xFF9F0000);
+  static const Color FILL_COLOR = Color(0xFFf7f7f7);
 
   static final styleTextToolbar = TextStyle(
       color: StyleGeneral.WHITE,
