@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:radadz_app/src/models/driver_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences{
@@ -13,10 +15,21 @@ class Preferences{
   static String _CodeVerification = '';
   static String _driverId = '';
   static String _token = '';
+  static String _driver = "";
 
 
   static Future init() async {
     _preferences = await SharedPreferences.getInstance();
+  }
+
+
+  /* Driver */
+  static String get getDriver{
+    return _preferences.getString('driver') ?? _driver;
+  }
+
+  static set setDriver(Driver driver){
+    _preferences.setString('driver', json.encode(driver));
   }
 
   /* Auth  */
@@ -42,7 +55,7 @@ class Preferences{
 
   /* StartTrip  */
   static bool get getStartTrip   {
-    return _preferences.getBool('intro') ?? _startTrip;
+    return _preferences.getBool('start_trip') ?? _startTrip;
   }
 
   static set setStartTrip( bool value ) {
