@@ -44,6 +44,22 @@ class _BlurtPageState extends State<BlurtPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: StyleGeneral.GREEN,
+        child: Icon(Icons.question_mark_rounded),
+        onPressed: () {
+          var dialog = AlertMessageError(icon: 'warning', message: 'tab_blurt_driver_info_question'.tr() );
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                Future.delayed(Duration(seconds: 5), () {
+                  Navigator.of(context).pop(true);
+                });
+                return dialog;
+           }
+         );
+        }
+      ),
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(75.h),
           child: Container(
