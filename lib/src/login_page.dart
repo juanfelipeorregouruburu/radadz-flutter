@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: false,
                                 hintText: 'enter_phone'.tr(),
                                 onFieldSubmitted: (term) {
-                                  _fieldFocusChange(context, _phoneFocus, _passwordFocus);
+                                  fieldFocusChange(context, _phoneFocus, _passwordFocus);
                                 },
                                 validator: (String? value) {
                                   if (value!.isEmpty) return 'required_field'.tr();
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   text: "text_create_account".tr(),
                                                   recognizer: TapGestureRecognizer()
                                                     ..onTap = () {
-                                                      Navigator.pushNamed(context, "intro");
+                                                      Navigator.pushNamed(context, "register");
                                                     },
                                                   style: TextStyle(
                                                       color: StyleGeneral.WHITE,
@@ -223,12 +223,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-      currentFocus.unfocus();
-      FocusScope.of(context).requestFocus(nextFocus);
-  }
-
   _signIn() async {
 
     if (formState.currentState!.validate()) {
@@ -251,6 +245,7 @@ class _LoginPageState extends State<LoginPage> {
           Preferences.setAuth = true;
           Preferences.setToken = data.token;
           Preferences.setDriverId = data.driver_id;
+          Preferences.setDriver = data.driver;
 
           Navigator.pushReplacementNamed(context, "home");
         } else {
