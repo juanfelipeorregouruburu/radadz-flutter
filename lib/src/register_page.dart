@@ -45,7 +45,6 @@ class _RegisterPageState extends State<RegisterPage> {
   int _currentTimeValue = 1;
 
 
-  /* editext*/
   TextEditingController _inputNameFirstController = new TextEditingController();
   TextEditingController _inputNameSecondController = new TextEditingController();
   TextEditingController _inputLastNameFirstController = new TextEditingController();
@@ -441,6 +440,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Text('selection_vehicle'.tr(), style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Regular')),
                               SizedBox(height: 5.h),
                               _dataSpinnerVehicles(),
+                              SizedBox(height: 15.h),
                               if (_stateContainerVehicle)
                                 InputTextField(
                                   focusNode: _nameVehicleFocus,
@@ -543,6 +543,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   )
                               ),
 
+
                               SizedBox(height: 15.h),
 
                               if(stateVehicleOwner)
@@ -581,9 +582,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                           )
                                         ]
                                     )
-                                ),
-
-
+                                ),//
+                              //
                               SizedBox(height: 15.h),
                               Text(
                                 'register_routine_daily_title'.tr(),
@@ -601,7 +601,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 height: 15.h,
                               ),
 
-                              /////
+
                               _isLoading ? ActivityIndicator() :CustomButton(
                                 text: 'register_button'.tr(),
                                 fullscreen: true,
@@ -712,7 +712,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     title: Text(timeValue.name!, textAlign: TextAlign.left, style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(13) , fontFamily: 'Poppins-Regular') ),
                     value: timeValue.id!,
                     onChanged: (val) {
-                      print('value $val');
                       setState(() {
                         _routineDailyId = val!.toString();
                         _currentTimeValue = val;
@@ -775,7 +774,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         _saveDriverBloc.documentType = value.id.toString();
                         _stateReviewDocumentType = false;
                       });
-                      print('selected $value');
                     },
                     items: documentTypeList.map((DocumentType documentType) {
                       return DropdownMenuItem<DocumentType>(
@@ -840,7 +838,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         _stateReviewVehicleType = false;
                         _saveDriverBloc.vehicleType = value.id.toString();
                       });
-                      print('selected $value');
                     },
                     items: VehicleTypeList.map((VehicleType vehicleType) {
                       return DropdownMenuItem<VehicleType>(
@@ -881,7 +878,7 @@ class _RegisterPageState extends State<RegisterPage> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
+                child:   DropdownButtonFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
@@ -908,7 +905,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         _stateReviewVehicleColor = false;
                         _stateContainerVehicleColor = value.id == 0 ? true : false ;
                       });
-                      print('selected $value');
                     },
                     items: VehicleColorList.map((VehicleColor vehicleColor) {
                       return DropdownMenuItem<VehicleColor>(
@@ -974,7 +970,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         _vehicleManufacturer = value;
                         _stateReviewVehicleManufacturer = false;
                       });
-                      print('selected $value');
                     },
                     items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
                       return DropdownMenuItem<VehicleManufacturer>(
@@ -1041,7 +1036,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         _stateReviewVehicle = false;
                         _stateContainerVehicle = value.id == 0 ? true : false;
                       });
-                      print('selected $value');
                     },
                     items: vehicles.map((Vehicle vehicle) {
                       return DropdownMenuItem<Vehicle>(
@@ -1114,6 +1108,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _SaveDriver() async {
 
+
     if (formState.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -1132,9 +1127,9 @@ class _RegisterPageState extends State<RegisterPage> {
       _saveDriverBloc.licencePlateNumber = _inputNumberLicenceController.text.trim();
       _saveDriverBloc.vehicleYear = _inputYearLicenceController.text.trim();
       _saveDriverBloc.drivingDailyRoutine = _routineDailyId;
-      _saveDriverBloc.vehicleModel = _vehicle.id.toString();
+      _saveDriverBloc.vehicleModel =  _vehicle.id == 0 ? _inputNameVehicleController.text.trim() :  _vehicle.id.toString();
       _saveDriverBloc.vehicleManufacturer = _vehicleManufacturer.id.toString();
-      _saveDriverBloc.vehicleColor = _vehicleColor.id.toString();
+      _saveDriverBloc.vehicleColor = _vehicle.id == 0 ? _inputNameColorController.text.trim() : _vehicleColor.id.toString();
       _saveDriverBloc.isOwner = stateVehicleOwner ? "0" : "1" ;
       _saveDriverBloc.ownerIdNumber = _inputDocumentOwnerController.text.trim();
       _saveDriverBloc.ownerVehicleName = _inputNameOwnerController.text.trim();

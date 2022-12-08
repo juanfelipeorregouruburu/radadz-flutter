@@ -31,30 +31,30 @@ class SaveDriverBloc {
   final saveDriver = PublishSubject<SaveDriverModel>();
   get data => saveDriver.stream;
 
-  String? nameFirst ;//
-  String? nameSecond ;//
-  String? lastNameFirst ;//
-  String? lastNameSecond ;//
-  String? documentType ; //
-  String? documentNumber ;//
-  String? email ;//
-  String? phone ;//
-  String? address ;//
-  String? password ;//
-  String? birthDate ; //
-  String? licencePlateNumber ;//
-  String? vehicleType ; //
-  String? vehicleYear ;//
-  String? drivingDailyRoutine ; //
-  String? vehicleModel ; //
-  String? vehicleManufacturer ; //
-  String? vehicleColor ; //
-  String? isOwner ; //
-  String? ownerVehicleName ; //
-  String? ownerIdNumber ;//
-  String? expirationDateTechnicalMechanical ;//
-  String? expirationDateSOAT ;//
-  String? expirationDateDriverLicence ;//
+  String? nameFirst ;
+  String? nameSecond ;
+  String? lastNameFirst ;
+  String? lastNameSecond ;
+  String? documentType ;
+  String? documentNumber ;
+  String? email ;
+  String? phone ;
+  String? address ;
+  String? password ;
+  String? birthDate ;
+  String? licencePlateNumber ;
+  String? vehicleType ;
+  String? vehicleYear ;
+  String? drivingDailyRoutine ;
+  String? vehicleModel ;
+  String? vehicleManufacturer ;
+  String? vehicleColor ;
+  String? isOwner ;
+  String? ownerVehicleName ;
+  String? ownerIdNumber ;
+  String? expirationDateTechnicalMechanical ;
+  String? expirationDateSOAT ;
+  String? expirationDateDriverLicence ;
 
 
 
@@ -89,9 +89,7 @@ class UpdateDriverBloc {
   String? documentType ;
   String? documentNumber ;
   String? email ;
-  String? phone ;
   String? address ;
-  String? password ;
   String? birthDate ;
   String? licencePlateNumber ;
   String? vehicleType ;
@@ -108,12 +106,12 @@ class UpdateDriverBloc {
   String? expirationDateDriverLicence ;
 
 
-  UpdateDriverBloc({this.driverId, this.nameFirst, this.nameSecond, this.lastNameFirst, this.lastNameSecond, this.documentType, this.documentNumber, this.email , this.phone, this.address, this.password, this.birthDate,
+  UpdateDriverBloc({this.driverId, this.nameFirst, this.nameSecond, this.lastNameFirst, this.lastNameSecond, this.documentType, this.documentNumber, this.email , this.address, this.birthDate,
     this.licencePlateNumber, this.vehicleType, this.vehicleYear, this.drivingDailyRoutine , this.vehicleModel , this.vehicleManufacturer , this.vehicleColor,
     this.isOwner, this.ownerVehicleName , this.ownerIdNumber , this.expirationDateTechnicalMechanical , this.expirationDateSOAT , this.expirationDateDriverLicence});
 
   UpdateDriver() async {
-    UpdateDriverModel _updateDriver = await repository.updateDriverRepository(driverId , nameFirst, nameSecond, lastNameFirst, lastNameSecond, documentType, documentNumber, email,  phone, password, address, birthDate,
+    UpdateDriverModel _updateDriver = await repository.updateDriverRepository(driverId , nameFirst, nameSecond, lastNameFirst, lastNameSecond, documentType, documentNumber, email,address, birthDate,
         licencePlateNumber, vehicleType, vehicleYear, drivingDailyRoutine, vehicleModel, vehicleManufacturer, vehicleColor, isOwner, ownerVehicleName, ownerIdNumber,
         expirationDateTechnicalMechanical, expirationDateSOAT, expirationDateDriverLicence);
     updateDriver.sink.add(_updateDriver);
