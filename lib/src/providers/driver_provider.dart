@@ -78,7 +78,7 @@ class DriverProvider {
 
   /* UpdateDriver */
   Future<UpdateDriverModel> UpdateDriver(String driverId ,String nameFirst , String nameSecond, String lastNameFirst, String lastNameSecond,
-      String documentType, String documentNumber, String email ,  String phone, String password, String address, String birthDate ,
+      String documentType, String documentNumber, String email , String address, String birthDate ,
       String licencePlateNumber , String vehicleType, String vehicleYear, String driving_daily_routine , String vehicleModel , String vehicleManufacturer ,
       String vehicleColor , String isOwner, String ownerVehicleName, String ownerIdNumber ,  String expirationDateSOAT , String expirationDateDriverLicence ,
       String expirationDateTechnicalMechanical  ) async {
@@ -97,16 +97,13 @@ class DriverProvider {
       "document_type": documentType,
       "document_number": documentNumber,
       "email": email,
-      "phone": phone,
       "address": address,
       "birth_date": birthDate,
       "license_plate_number": licencePlateNumber,
       "vehicle_type" : vehicleType,
       "vehicle_year": vehicleYear,
       "driving_daily_routine": driving_daily_routine,
-      "registration_date": "2021-02-22",
       "staff_approval_date":"yes",
-      "driver_password":password,
       "vehicle_model" : vehicleModel,
       "vehicle_manufacturer" : vehicleManufacturer ,
       "vehicle_color" : vehicleColor,
@@ -117,6 +114,7 @@ class DriverProvider {
       "soat_expiration_date" : expirationDateSOAT,
       "expiration_date_drivers_license" : expirationDateDriverLicence
     });
+
 
     if(response.statusCode == 200) {
       return UpdateDriverModel.fromJson(json.decode(response.body));

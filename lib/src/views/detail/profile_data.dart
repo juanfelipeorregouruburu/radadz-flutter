@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'dart:convert';
-import 'package:intl/intl.dart';
-
 
 class ProfileDriver extends StatefulWidget {
 
@@ -20,8 +18,6 @@ class _ProfileDriverState extends State<ProfileDriver> {
   bool _isLoading = false;
   UpdateDriverBloc _updateDriverBloc = new UpdateDriverBloc();
   late Map<String, dynamic> _map;
-
-  bool _passwordVisible = false;
 
   //Date
   String _inputStrDate = '';
@@ -48,18 +44,16 @@ class _ProfileDriverState extends State<ProfileDriver> {
   DateTime date = DateTime.now();
 
 
-  /* editext*/
   TextEditingController _inputNameFirstController = new TextEditingController();
   TextEditingController _inputNameSecondController = new TextEditingController();
   TextEditingController _inputLastNameFirstController = new TextEditingController();
   TextEditingController _inputLastNameSecondController = new TextEditingController();
   TextEditingController _inputDocumentController = new TextEditingController();
   TextEditingController _inputEmailController = new TextEditingController();
-  TextEditingController _inputPhoneController = new TextEditingController();
   TextEditingController _inputAddressController = new TextEditingController();
   TextEditingController _inputNumberLicenceController = new TextEditingController();
   TextEditingController _inputYearLicenceController = new TextEditingController();
-  TextEditingController _inputPasswordController = new TextEditingController();
+
 
   //
   TextEditingController _inputNameOwnerController = new TextEditingController();
@@ -79,7 +73,6 @@ class _ProfileDriverState extends State<ProfileDriver> {
   final FocusNode _numberLicenceFocus = FocusNode();
   final FocusNode _yearLicenceFocus = FocusNode();
   final FocusNode _dateFocus = FocusNode();
-  final FocusNode _passwordFocus = FocusNode();
   final FocusNode _nameOwnerFocus = FocusNode();
   final FocusNode _documentOwnerFocus = FocusNode();
   final FocusNode _nameColorFocus = FocusNode();
@@ -95,11 +88,10 @@ class _ProfileDriverState extends State<ProfileDriver> {
   getDriverData(){
     String data = Preferences.getDriver;
 
-    if(data == null){
+    if(data.isEmpty){
       print('no data in preferences');
     }else{
       _map = jsonDecode(data);
-
       blocVehicles.manufacturerId = _map['vehicle_manufacturer']['id'].toString();
 
       _inputNameFirstController.text = _map['first_name'];
@@ -108,13 +100,13 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _inputLastNameSecondController.text = _map['second_lastname'];
       _inputDocumentController.text = _map['document_number'];
       _inputEmailController.text = _map['email'];
-      _inputPhoneController.text = _map['phone'];
       _inputAddressController.text = _map['address'];
       _inputNumberLicenceController.text = _map['license_plate_number'];
       _inputYearLicenceController.text = _map['vehicle_year'];
-      _inputNameOwnerController.text = _map['second_name'];
-      _inputDocumentOwnerController.text = _map['second_name'];
+      _inputNameOwnerController.text = _map['owner_vehicle_name'];
+      _inputDocumentOwnerController.text = _map['owner_id_number'];
 
+      _routineDailyId = _map['driving_daily_routine']['id'].toString();
       _currentDailyValue = _map['driving_daily_routine']['id'];
       stateVehicleOwner = _map['is_owner'] ;
 
@@ -139,19 +131,19 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _updateDriverBloc.nameSecond = _inputNameSecondController.text.trim();
       _updateDriverBloc.lastNameFirst = _inputLastNameFirstController.text.trim();
       _updateDriverBloc.lastNameSecond = _inputLastNameSecondController.text.trim();
+      _updateDriverBloc.documentType = _documentType.id.toString();
       _updateDriverBloc.birthDate = _inputStrDate;
       _updateDriverBloc.documentNumber = _inputDocumentController.text.trim();
       _updateDriverBloc.email = _inputEmailController.text.trim().toLowerCase();
-      _updateDriverBloc.phone = _inputPhoneController.text.trim();
       _updateDriverBloc.address = _inputAddressController.text.trim();
-      _updateDriverBloc.password = _inputPasswordController.text.trim();
       _updateDriverBloc.licencePlateNumber = _inputNumberLicenceController.text.trim();
       _updateDriverBloc.vehicleYear = _inputYearLicenceController.text.trim();
       _updateDriverBloc.drivingDailyRoutine = _routineDailyId;
-      _updateDriverBloc.vehicleModel = _vehicle.id.toString();
+      _updateDriverBloc.vehicleType = _vehicleType.id.toString();
+      _updateDriverBloc.vehicleModel = _vehicle.id == 0 ? _inputNameVehicleController.text.trim() : _vehicle.id.toString();
       _updateDriverBloc.vehicleManufacturer = _vehicleManufacturer.id.toString();
-      _updateDriverBloc.vehicleColor = _vehicleColor.id.toString();
-      _updateDriverBloc.isOwner = stateVehicleOwner ? "0" : "1" ;
+      _updateDriverBloc.vehicleColor = _vehicleColor.id == 0 ? _inputNameColorController.text.trim() : _vehicleColor.id.toString();
+      _updateDriverBloc.isOwner = stateVehicleOwner ? "1" : "0" ;
       _updateDriverBloc.ownerIdNumber = _inputDocumentOwnerController.text.trim();
       _updateDriverBloc.ownerVehicleName = _inputNameOwnerController.text.trim();
       _updateDriverBloc.expirationDateTechnicalMechanical = _inputStrDateExpirationTechnical;
@@ -340,48 +332,6 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                   SizedBox(height: 15.h),
 
-                  CustomInputTextFieldPassword(
-                    focusNode: _passwordFocus,
-                    controller: _inputPasswordController,
-                    keyboardType: TextInputType.text ,
-                    textInputAction: TextInputAction.done,
-                    obscureText: !_passwordVisible,
-                    hintText:  'enter_password'.tr(),
-                    labelText:'enter_password'.tr(),
-                    validator:  (String? value) {
-                      if (value!.isEmpty) return 'required_field'.tr();
-                      return null;
-                    },
-                    onPressed: (){
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
-                    }
-                  ),
-
-                  SizedBox(height: 15.h),
-
-                  Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                        focusNode: _phoneFocus,
-                        controller: _inputPhoneController,
-                        keyboardType: TextInputType.phone,
-                        onFieldSubmitted: (term) {
-                          fieldFocusChange(context, _phoneFocus, _addressFocus);
-                        },
-                        labelText:'form_phone'.tr(),
-                        hintText: 'form_phone'.tr(),
-                        validator: (String? value) {
-                          if (value!.isEmpty) return 'required_field'.tr();
-                          return null;
-                        },
-                      )
-                  ),
-
-
-                  SizedBox(height: 15.h),
-
 
                   Flexible(
                       flex: 2,
@@ -472,6 +422,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                   Text('selection_vehicle'.tr(), style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Regular')),
                   SizedBox(height: 5.h),
                   _dataSpinnerVehicles(),
+                  SizedBox(height: 15.h),
                   if (_stateContainerVehicle)
                     InputTextField(
                       focusNode: _nameVehicleFocus,
@@ -486,7 +437,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                       },
                     ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 25.h),
 
                   Flexible(
                       flex: 2,
@@ -523,10 +474,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
                   Text('form_expiration_licence_date'.tr(), style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Regular'),),
                   SizedBox(height: 5.h),
                   formatDateContainer(3),
-
-
                   SizedBox(height: 15.h),
-                  SizedBox(height: 15.h),
+
                   Text(
                     'register_Vehicle_owner_title'.tr(),
                     style: StyleGeneral.styleTextDescription,
@@ -551,7 +500,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                                         height: 20.h,
                                         alignment: Alignment.center,
                                         padding: const EdgeInsets.all(3),
-                                        decoration: BoxDecoration(color: stateVehicleOwner ? StyleGeneral.GREEN : StyleGeneral.WHITE, shape: BoxShape.circle, border: Border.all(color: StyleGeneral.GREEN, width: 1.5)),
+                                        decoration: BoxDecoration(color: !stateVehicleOwner ? StyleGeneral.GREEN : StyleGeneral.WHITE, shape: BoxShape.circle, border: Border.all(color: StyleGeneral.GREEN, width: 1.5)),
                                         child: Center(child: Icon(Icons.done, color: Colors.white, size: ScreenUtil().setSp(15)))
                                     )
                                 )
@@ -577,7 +526,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                   SizedBox(height: 15.h),
 
-                  if(stateVehicleOwner)
+                  if(!stateVehicleOwner)
 
                     Flexible(
                         child: Column(
@@ -628,12 +577,10 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                   _routineDriverList(),
 
-                  SizedBox(
-                    height: 15.h,
-                  ),
+
 
                   _isLoading ? ActivityIndicator() :CustomButton(
-                    text: 'register_button'.tr(),
+                    text: 'profile_update_button'.tr(),
                     fullscreen: true,
                     onTap: (){
                       _UpdateDriver();
@@ -794,7 +741,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
           } else if (snapshot.hasError) {
             return Icon(Icons.error_outline);
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         }
     );
@@ -1120,7 +1067,6 @@ class _ProfileDriverState extends State<ProfileDriver> {
                         _stateReviewVehicle = false;
                         _stateContainerVehicle = value.id == 0 ? true : false;
                       });
-                      print('selected $value');
                     },
                     items: vehicles.map((Vehicle vehicle) {
                       return DropdownMenuItem<Vehicle>(
