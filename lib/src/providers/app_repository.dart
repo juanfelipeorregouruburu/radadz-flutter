@@ -11,7 +11,7 @@ class Repository {
 
 
   /* SignIn */
-  Future<SingninModel> sign_in(String? phone, String? password ) => loginProvider.SignIn(phone! , password!);
+  Future<SingInModel> signIn(String? phone, String? password ) => loginProvider.SignIn(phone! , password!);
 
   //////////////////////////////// RESET PASSWORD ////////////////////////////////////////////////
 
@@ -69,12 +69,12 @@ class Repository {
 
   /* UpdateDriver*/
   Future<UpdateDriverModel> updateDriverRepository(String? driverId, String? nameFirst , String? nameSecond, String? lastNameFirst , String? lastNameSecond,
-      String? documentType , String? documentNumber, String? email , String? phone, String? password, String? address, String? birthDate ,
+      String? documentType , String? documentNumber, String? email , String? address, String? birthDate ,
       String? licencePlateNumber , String? vehicleType, String? vehicleYear, String? drivingDailyRoutine ,
       String? vehicleModel,String? vehicleManufacturer,String? vehicleColor,String? isOwner,String? ownerVehicleName,String? ownerIdNumber,
       String? expirationDateTechnicalMechanical , String? expirationDateSOAT , String? expirationDateDriverLicence ) =>
 
-      driverProvider.UpdateDriver(driverId!, nameFirst!, nameSecond!, lastNameFirst!, lastNameSecond!, documentType!, documentNumber!, email!,  phone!, password!, address!, birthDate!,
+      driverProvider.UpdateDriver(driverId!, nameFirst!, nameSecond!, lastNameFirst!, lastNameSecond!, documentType!, documentNumber!, email!, address!, birthDate!,
           licencePlateNumber!, vehicleType!, vehicleYear!, drivingDailyRoutine!, vehicleModel!, vehicleManufacturer!, vehicleColor!, isOwner!, ownerVehicleName!, ownerIdNumber!,
           expirationDateTechnicalMechanical!, expirationDateSOAT!, expirationDateDriverLicence!);
 

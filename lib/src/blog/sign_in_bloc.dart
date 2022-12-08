@@ -3,7 +3,7 @@ import 'package:radadz_app/src/utils/export.dart';
 
 class SignInBloc {
   final repository = Repository();
-  final singIn = PublishSubject<SingninModel>();
+  final singIn = PublishSubject<SingInModel>();
 
   get data => singIn.stream;
   String? phone, password,token;
@@ -11,7 +11,7 @@ class SignInBloc {
   SignInBloc({this.phone, this.password});
 
   SingIn() async {
-    SingninModel _signIn = await repository.sign_in(phone, password);
+    SingInModel _signIn = await repository.signIn(phone, password);
     singIn.sink.add(_signIn);
   }
 

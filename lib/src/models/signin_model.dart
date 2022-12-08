@@ -1,13 +1,13 @@
 import 'package:radadz_app/src/models/driver_model.dart';
 
-class SingninModel {
+class SingInModel {
   int? _error;
   String? _response;
   String? _driverId;
   String? _token;
   Driver? _driver;
 
-  SingninModel.fromJson(Map<String , dynamic> json) {
+  SingInModel.fromJson(Map<String , dynamic> json) {
     _error = json['msg'];
     _response = json['response'];
     if(_error == 1){
