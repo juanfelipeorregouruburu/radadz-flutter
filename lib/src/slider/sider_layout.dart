@@ -26,6 +26,7 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
   final _animationDuration = const Duration(milliseconds: 100);
 
   String? nameUser;
+  Map<String, dynamic>? _map;
 
   @override
   void initState() {
@@ -38,7 +39,8 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
     isSidebarOpenedStream = isSidebarOpenedStreamController!.stream;
     isSidebarOpenedSink = isSidebarOpenedStreamController!.sink;
 
-    nameUser = "name";
+    _map = jsonDecode(Preferences.getDriver);
+    nameUser =  _map!['first_name'] +" "+_map!['second_name'] ;;
   }
 
   @override

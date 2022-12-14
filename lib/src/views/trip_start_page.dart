@@ -1,7 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:radadz_app/src/utils/get_second.dart';
-import 'package:radadz_app/src/widgets/travel_text_animated_widget.dart';
 
 class TripStartPage extends StatefulWidget with NavigationStates{
   const TripStartPage({Key? key}) : super(key: key);
@@ -35,6 +35,9 @@ class _TripStartPageState extends State<TripStartPage> {
   TripStartBloc _tripStartBloc = new TripStartBloc();
   TripEndBloc _tripEndBloc = new TripEndBloc();
 
+  bool _visible = true;
+  late Timer _timer;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -42,11 +45,16 @@ class _TripStartPageState extends State<TripStartPage> {
     _tripStartBloc = TripStartBloc();
     _tripEndBloc = TripEndBloc();
 
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _visible = !_visible;
+      });
+    });
+
     verifyStateTrip();
   }
 
   verifyStateTrip(){
-    print('getStartTrip ${Preferences.getStartTrip}');
     if(Preferences.getStartTrip){
      getSecondDiferenceHourAfter(Preferences.getHourTripStart);
      changeText(Preferences.getHourTripStart);
@@ -79,6 +87,7 @@ class _TripStartPageState extends State<TripStartPage> {
   void dispose() async {
     super.dispose();
     await _stopWatchTimer.dispose();
+    _timer.cancel();
   }
 
   _tripMethod(){
@@ -120,7 +129,7 @@ class _TripStartPageState extends State<TripStartPage> {
           Preferences.setTripPaymentId = data.trip_payment_id;
           Preferences.setTripId = data.trip_id;
           changeText(data.start_time);
-          _cronometroView= 0;
+         _cronometroView= 0;
           getSecondDiferenceHour(data.start_time);
         });
 
@@ -193,13 +202,6 @@ class _TripStartPageState extends State<TripStartPage> {
         body: Stack(
           children: [
 
-            if(_isStartTrip)
-              Positioned(
-                left: 15,
-                top: 50,
-                child: TextAnimatedLiveWidget(),
-              ),
-
             Container(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: SingleChildScrollView(
@@ -208,8 +210,6 @@ class _TripStartPageState extends State<TripStartPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 90.h),
-
-
                     SizedBox(height: 50.h,),
 
                     Center(
@@ -223,31 +223,36 @@ class _TripStartPageState extends State<TripStartPage> {
                             width: 250.r,
                             height: 250.r,
                             child: ActivityIndicator()
-                          ) : Container(
-                          width: 250.r,
-                          height: 250.r,
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  textButton,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: StyleGeneral.WHITE,
-                                    fontSize: ScreenUtil().setSp(25),
-                                    fontFamily: 'Poppins-Semi',
-                                  )
+                          ) : AnimatedOpacity(
+                             // opacity: _visible ? 1.0 : 0.0,
+                              opacity: _isStartTrip ? _visible ? 1.0 : 0.0 : 1,
+                              duration: const Duration(milliseconds: 1500),
+                              child: Container(
+                              width: 250.r,
+                              height: 250.r,
+                              child: Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      textButton,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: StyleGeneral.WHITE,
+                                        fontSize: ScreenUtil().setSp(25),
+                                        fontFamily: 'Poppins-Semi',
+                                      )
+                                    )
+                                  ]
                                 )
-                              ]
-                            )
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: StyleGeneral.GREEN,
+                              )
                           ),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: StyleGeneral.GREEN,
-                          )
-                        )
+                       )
                       )
                     ),
 
