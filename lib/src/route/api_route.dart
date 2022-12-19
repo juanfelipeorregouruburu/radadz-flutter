@@ -1,5 +1,5 @@
 class API {
-  static const String _URL = "https://loud-tv-drf.herokuapp.com/api/";
+  static const String _URL = "https://loud-tv.herokuapp.com/api/";
 
   /* API LIST */
 
