@@ -55,6 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _inputAddressController = new TextEditingController();
   TextEditingController _inputNumberLicenceController = new TextEditingController();
   TextEditingController _inputYearLicenceController = new TextEditingController();
+  TextEditingController _inputEngineSerialNumberController = new TextEditingController();
   TextEditingController _inputPasswordController = new TextEditingController();
 
   //
@@ -74,6 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode _addressFocus = FocusNode();
   final FocusNode _numberLicenceFocus = FocusNode();
   final FocusNode _yearLicenceFocus = FocusNode();
+  final FocusNode _engineSerialNumberFocus = FocusNode();
   final FocusNode _dateFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _nameOwnerFocus = FocusNode();
@@ -464,7 +466,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     controller: _inputYearLicenceController,
                                     keyboardType: TextInputType.number,
                                     onFieldSubmitted: (term) {
-                                      fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
+                                      fieldFocusChange(context, _yearLicenceFocus, _engineSerialNumberFocus);
                                     },
                                     maxLength: 4,
                                     labelText:'form_vehicle_year'.tr(),
@@ -473,6 +475,27 @@ class _RegisterPageState extends State<RegisterPage> {
                                       if (value!.isEmpty) return 'required_field'.tr();
                                       return null;
                                     }
+                                  )
+                              ),
+
+                              SizedBox(height: 15.h),
+
+                              Flexible(
+                                  flex: 2,
+                                  child: InputTextField(
+                                      focusNode: _engineSerialNumberFocus,
+                                      controller: _inputEngineSerialNumberController,
+                                      keyboardType: TextInputType.text,
+                                      onFieldSubmitted: (term) {
+                                        fieldFocusChange(context, _engineSerialNumberFocus, _dateFocus);
+                                      },
+                                      maxLength: 32,
+                                      labelText:'form_engine_serial_number'.tr(),
+                                      hintText: 'form_engine_serial_number'.tr(),
+                                      validator: (String? value) {
+                                        if (value!.isEmpty) return 'required_field'.tr();
+                                        return null;
+                                      }
                                   )
                               ),
 
@@ -869,7 +892,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
           if (snapshot.hasData) {
             List<VehicleColor> VehicleColorList = snapshot.data!.vehiclesColor!;
-
             VehicleColorList.add(VehicleColor(id: 0, name: 'selection_name_text_color'.tr() ));
             if(_stateReviewVehicleColor){
               VehicleColorList.asMap().forEach((index, value) {
@@ -1125,6 +1147,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _saveDriverBloc.address = _inputAddressController.text.trim();
       _saveDriverBloc.password = _inputPasswordController.text.trim();
       _saveDriverBloc.licencePlateNumber = _inputNumberLicenceController.text.trim();
+      _saveDriverBloc.engineSerialNumber = _inputEngineSerialNumberController.text.trim();
       _saveDriverBloc.vehicleYear = _inputYearLicenceController.text.trim();
       _saveDriverBloc.drivingDailyRoutine = _routineDailyId;
       _saveDriverBloc.vehicleModel =  _vehicle.id == 0 ? _inputNameVehicleController.text.trim() :  _vehicle.id.toString();

@@ -52,6 +52,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   TextEditingController _inputEmailController = new TextEditingController();
   TextEditingController _inputAddressController = new TextEditingController();
   TextEditingController _inputNumberLicenceController = new TextEditingController();
+  TextEditingController _inputEngineSerialNumberController = new TextEditingController();
   TextEditingController _inputYearLicenceController = new TextEditingController();
 
 
@@ -71,6 +72,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _addressFocus = FocusNode();
   final FocusNode _numberLicenceFocus = FocusNode();
+  final FocusNode _engineSerialNumberFocus = FocusNode();
   final FocusNode _yearLicenceFocus = FocusNode();
   final FocusNode _dateFocus = FocusNode();
   final FocusNode _nameOwnerFocus = FocusNode();
@@ -102,6 +104,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _inputEmailController.text = _map['email'];
       _inputAddressController.text = _map['address'];
       _inputNumberLicenceController.text = _map['license_plate_number'];
+      _inputEngineSerialNumberController.text = _map['engine_serial_number'];
       _inputYearLicenceController.text = _map['vehicle_year'];
       _inputNameOwnerController.text = _map['owner_vehicle_name'];
       _inputDocumentOwnerController.text = _map['owner_id_number'];
@@ -137,6 +140,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _updateDriverBloc.email = _inputEmailController.text.trim().toLowerCase();
       _updateDriverBloc.address = _inputAddressController.text.trim();
       _updateDriverBloc.licencePlateNumber = _inputNumberLicenceController.text.trim();
+      _updateDriverBloc.engineSerialNumber = _inputEngineSerialNumberController.text.trim();
       _updateDriverBloc.vehicleYear = _inputYearLicenceController.text.trim();
       _updateDriverBloc.drivingDailyRoutine = _routineDailyId;
       _updateDriverBloc.vehicleType = _vehicleType.id.toString();
@@ -446,11 +450,32 @@ class _ProfileDriverState extends State<ProfileDriver> {
                           controller: _inputYearLicenceController,
                           keyboardType: TextInputType.number,
                           onFieldSubmitted: (term) {
-                            fieldFocusChange(context, _yearLicenceFocus, _dateFocus);
+                            fieldFocusChange(context, _yearLicenceFocus, _engineSerialNumberFocus);
                           },
                           maxLength: 4,
                           labelText:'form_vehicle_year'.tr(),
                           hintText: 'form_vehicle_year'.tr(),
+                          validator: (String? value) {
+                            if (value!.isEmpty) return 'required_field'.tr();
+                            return null;
+                          }
+                      )
+                  ),
+
+                  SizedBox(height: 15.h),
+
+                  Flexible(
+                      flex: 2,
+                      child: InputTextField(
+                          focusNode: _engineSerialNumberFocus,
+                          controller: _inputEngineSerialNumberController,
+                          keyboardType: TextInputType.text,
+                          onFieldSubmitted: (term) {
+                            fieldFocusChange(context, _engineSerialNumberFocus, _dateFocus);
+                          },
+                          maxLength: 32,
+                          labelText:'form_engine_serial_number'.tr(),
+                          hintText: 'form_engine_serial_number'.tr(),
                           validator: (String? value) {
                             if (value!.isEmpty) return 'required_field'.tr();
                             return null;
