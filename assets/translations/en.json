@@ -61,6 +61,7 @@
   "form_expiration_SOAT_date": "SOAT Expiration",
   "form_expiration_licence_date": "Expiration date licence",
   "form_license_plate_number": "License number",
+  "form_engine_serial_number": "Engine serial number",
   "selection_vehicle_type": "Select vehicle type",
   "selection_vehicle_color": "Select vehicle color",
   "selection_name_other_color": "Vehicle color",

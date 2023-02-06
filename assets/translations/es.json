@@ -61,6 +61,7 @@
   "form_expiration_SOAT_date": "Caducidad SOAT",
   "form_expiration_licence_date": "Caducidad Licencia condución",
   "form_license_plate_number": "Número licencia",
+  "form_engine_serial_number": "Número de serie motor",
   "selection_vehicle_type": "Seleccione tipo vehiculo",
   "selection_vehicle_color": "Seleccione color vehiculo",
   "selection_name_other_color": "color vehiculo",
