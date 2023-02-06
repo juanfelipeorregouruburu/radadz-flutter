@@ -31,7 +31,7 @@ class DriverProvider {
 
   Future<SaveDriverModel> SaveDriver(String nameFirst , String nameSecond, String lastNameFirst, String lastNameSecond,
       String documentType, String documentNumber, String email ,  String phone, String password, String address, String birthDate ,
-      String licencePlateNumber , String vehicleType, String vehicleYear, String drivingDailyRoutine , String vehicleModel , String vehicleManufacturer ,
+      String licencePlateNumber ,String engineSerialNumber , String vehicleType, String vehicleYear, String drivingDailyRoutine , String vehicleModel , String vehicleManufacturer ,
       String vehicleColor , String isOwner, String ownerVehicleName, String ownerIdNumber ,  String expirationDateSOAT , String expirationDateDriverLicence ,
       String expirationDateTechnicalMechanical ) async {
 
@@ -50,6 +50,7 @@ class DriverProvider {
       "address": address,
       "birth_date": birthDate,
       "license_plate_number": licencePlateNumber,
+      "engine_serial_number": engineSerialNumber,
       "vehicle_type" : vehicleType,
       "vehicle_year": vehicleYear,
       "driving_daily_routine": drivingDailyRoutine,
@@ -67,8 +68,6 @@ class DriverProvider {
       "expiration_date_drivers_license" : expirationDateDriverLicence
     });
 
-    print(response.body);
-
     if(response.statusCode == 200) {
       return SaveDriverModel.fromJson(json.decode(response.body));
     }else{
@@ -79,7 +78,7 @@ class DriverProvider {
   /* UpdateDriver */
   Future<UpdateDriverModel> UpdateDriver(String driverId ,String nameFirst , String nameSecond, String lastNameFirst, String lastNameSecond,
       String documentType, String documentNumber, String email , String address, String birthDate ,
-      String licencePlateNumber , String vehicleType, String vehicleYear, String driving_daily_routine , String vehicleModel , String vehicleManufacturer ,
+      String licencePlateNumber , String engineSerialNumber , String vehicleType, String vehicleYear, String driving_daily_routine , String vehicleModel , String vehicleManufacturer ,
       String vehicleColor , String isOwner, String ownerVehicleName, String ownerIdNumber ,  String expirationDateSOAT , String expirationDateDriverLicence ,
       String expirationDateTechnicalMechanical  ) async {
 
@@ -100,6 +99,7 @@ class DriverProvider {
       "address": address,
       "birth_date": birthDate,
       "license_plate_number": licencePlateNumber,
+      "engine_serial_number": engineSerialNumber,
       "vehicle_type" : vehicleType,
       "vehicle_year": vehicleYear,
       "driving_daily_routine": driving_daily_routine,

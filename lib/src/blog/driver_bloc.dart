@@ -43,6 +43,7 @@ class SaveDriverBloc {
   String? password ;
   String? birthDate ;
   String? licencePlateNumber ;
+  String? engineSerialNumber ;
   String? vehicleType ;
   String? vehicleYear ;
   String? drivingDailyRoutine ;
@@ -59,12 +60,12 @@ class SaveDriverBloc {
 
 
   SaveDriverBloc({this.nameFirst, this.nameSecond, this.lastNameFirst, this.lastNameSecond, this.documentType, this.documentNumber, this.email , this.phone, this.address, this.password, this.birthDate,
-    this.licencePlateNumber, this.vehicleType, this.vehicleYear, this.drivingDailyRoutine , this.vehicleModel , this.vehicleManufacturer , this.vehicleColor,
+    this.licencePlateNumber, this.engineSerialNumber, this.vehicleType, this.vehicleYear, this.drivingDailyRoutine , this.vehicleModel , this.vehicleManufacturer , this.vehicleColor,
     this.isOwner, this.ownerVehicleName , this.ownerIdNumber , this.expirationDateTechnicalMechanical , this.expirationDateSOAT , this.expirationDateDriverLicence});
 
   SaveDriver() async {
     SaveDriverModel _saveDriver = await repository.saveDriverRepository(nameFirst, nameSecond, lastNameFirst, lastNameSecond, documentType, documentNumber, email,  phone, password, address, birthDate,
-        licencePlateNumber, vehicleType, vehicleYear, drivingDailyRoutine, vehicleModel, vehicleManufacturer, vehicleColor, isOwner, ownerVehicleName, ownerIdNumber,
+        licencePlateNumber, engineSerialNumber , vehicleType, vehicleYear, drivingDailyRoutine, vehicleModel, vehicleManufacturer, vehicleColor, isOwner, ownerVehicleName, ownerIdNumber,
         expirationDateTechnicalMechanical, expirationDateSOAT, expirationDateDriverLicence);
     saveDriver.sink.add(_saveDriver);
   }
@@ -92,6 +93,7 @@ class UpdateDriverBloc {
   String? address ;
   String? birthDate ;
   String? licencePlateNumber ;
+  String? engineSerialNumber ;
   String? vehicleType ;
   String? vehicleYear ;
   String? drivingDailyRoutine ;
@@ -107,12 +109,12 @@ class UpdateDriverBloc {
 
 
   UpdateDriverBloc({this.driverId, this.nameFirst, this.nameSecond, this.lastNameFirst, this.lastNameSecond, this.documentType, this.documentNumber, this.email , this.address, this.birthDate,
-    this.licencePlateNumber, this.vehicleType, this.vehicleYear, this.drivingDailyRoutine , this.vehicleModel , this.vehicleManufacturer , this.vehicleColor,
+    this.licencePlateNumber, this.engineSerialNumber , this.vehicleType, this.vehicleYear, this.drivingDailyRoutine , this.vehicleModel , this.vehicleManufacturer , this.vehicleColor,
     this.isOwner, this.ownerVehicleName , this.ownerIdNumber , this.expirationDateTechnicalMechanical , this.expirationDateSOAT , this.expirationDateDriverLicence});
 
   UpdateDriver() async {
     UpdateDriverModel _updateDriver = await repository.updateDriverRepository(driverId , nameFirst, nameSecond, lastNameFirst, lastNameSecond, documentType, documentNumber, email,address, birthDate,
-        licencePlateNumber, vehicleType, vehicleYear, drivingDailyRoutine, vehicleModel, vehicleManufacturer, vehicleColor, isOwner, ownerVehicleName, ownerIdNumber,
+        licencePlateNumber, engineSerialNumber , vehicleType, vehicleYear, drivingDailyRoutine, vehicleModel, vehicleManufacturer, vehicleColor, isOwner, ownerVehicleName, ownerIdNumber,
         expirationDateTechnicalMechanical, expirationDateSOAT, expirationDateDriverLicence);
     updateDriver.sink.add(_updateDriver);
   }

@@ -30,6 +30,7 @@ class Driver {
   String? _address;
   String? _birthDate;
   String? _licensePlateNumber;
+  String? _engineSerialNumber;
   String? _vehicleYear;
   String? _accountNumber;
   bool? _isOwner;
@@ -59,6 +60,7 @@ class Driver {
     _address = parsedJson['address'];
     _birthDate = parsedJson['birth_date'];
     _licensePlateNumber = parsedJson['license_plate_number'];
+    _engineSerialNumber = parsedJson['engine_serial_number'];
     _vehicleYear = parsedJson['vehicle_year'];
     _isOwner = parsedJson['is_owner'];
     _ownerVehicleName = parsedJson['owner_vehicle_name'];
@@ -91,6 +93,7 @@ class Driver {
     "address": _address == null ? null : _address,
     "birth_date": _birthDate == null ? null : _birthDate,
     "license_plate_number": _licensePlateNumber == null ? null : _licensePlateNumber,
+    "engine_serial_number": _engineSerialNumber == null ? null : _engineSerialNumber,
     "vehicle_year": _vehicleYear == null ? null : _vehicleYear,
     "is_owner": _isOwner == null ? null : _isOwner,
     "owner_vehicle_name": _ownerVehicleName == null ? null : _ownerVehicleName,
