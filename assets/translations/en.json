@@ -120,6 +120,7 @@
   "tab_blurt_driver_button" : "Save",
   "tab_blurt_dialog_confirmation_positive_button": "Yes",
   "tab_blurt_dialog_confirmation_negative_button": "No",
+  "tab_blurt_dialog_close_button": "close",
   "tab_blurt_dialog_confirmation_title": "Confirm",
   "tab_blurt_dialog_confirmation_text": "Are you sure to enable blurt?",
   "tab_blurt_switch_active": "used",
