@@ -27,6 +27,26 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
     // TODO: implement initState
     super.initState();
     statusBarDark();
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await _showDialog();
+    });
+  }
+
+  _showDialog() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    var dialog = CustomAlertBlurtDialog(
+      title: "Info",
+      message: 'tab_blurt_before_activated_text'.tr(),
+      onPositivePressed: () {
+
+      },
+      positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
+    );
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => dialog);
   }
 
   TextEditingController _inputTextBlurt = new TextEditingController();
