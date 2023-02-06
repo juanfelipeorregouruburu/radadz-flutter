@@ -62,16 +62,14 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
                           ),
                         ),
 
-                      SizedBox(height: 30.h),
-
                       stateView ? CreateBlurtDriverPage() : CardBlurtDriverWidget()
 
-                    ],
-                  ),
-              ],
-            ),
-          ),
+                    ]
+                  )
+              ]
+            )
           )
+        )
       )
     );
   }

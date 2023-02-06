@@ -203,19 +203,24 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
             status = true;
             startTime();
           });
+
+          var dialog = CustomAlertBlurtDialog(
+            title: "Info",
+            message: 'tab_blurt_activated_text'.tr(),
+            onPositivePressed: () {
+
+            },
+            positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
+          );
+
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) => dialog
+          );
+
         }
-        String icon = data.error == 1 ? 'success' : 'error';
 
-        var dialog = AlertMessageError(icon: icon, message: 'tab_blurt_activated_text'.tr());
-
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pop(true);
-              });
-              return dialog;
-            });
       });
   }
 
