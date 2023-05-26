@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width,
-                      child: Image (image: AssetImage('assets/logo_radaz_transparente.png'))
+                      child: Image (image: AssetImage('assets/loudtv_logo.png'))
                     ),
 
                     Form(
@@ -124,15 +124,20 @@ class _LoginPageState extends State<LoginPage> {
                                 hintText:  'enter_password'.tr(),
                                 colorFill: StyleGeneral.GREY,
                                 validator: (String? value) {
-                                  if (value!.isEmpty) return 'required_field'.tr();
+                                  if (value!.isEmpty) {
+                                    return 'required_field'.tr();
+                                  }else if (!validatePassword(value)) {
+                                    return 'required_password_validate'.tr();
+                                  }
+
                                   return null;
                                 },
                                 onPressed: (){
                                   setState(() {
                                     _passwordVisible = !_passwordVisible;
                                   });
-                                },
-                              ),
+                                }
+                              )
                             ),
                             SizedBox(
                               height: 10.h,
@@ -149,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                               fullscreen: true,
                               onTap: (){
                                 _signIn();
-                              },
+                              }
                             ),
 
                             SizedBox(
@@ -160,32 +165,25 @@ class _LoginPageState extends State<LoginPage> {
                             margin: EdgeInsets.fromLTRB(10.h, 20.w, 10.w, 10.h),
                             child: Center(
                               child: Text.rich(
-                                        TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                  text: "no_register".tr(),
-                                                  style: TextStyle(
-                                                      color: StyleGeneral.WHITE,
-                                                      fontSize: ScreenUtil().setSp(12),
-                                                      fontFamily: 'Poppins-Medium')
-                                              ),
-                                              TextSpan(
-                                                  text: "text_create_account".tr(),
-                                                  recognizer: TapGestureRecognizer()
-                                                    ..onTap = () {
-                                                      Navigator.pushNamed(context, "register");
-                                                    },
-                                                  style: TextStyle(
-                                                      color: StyleGeneral.WHITE,
-                                                      fontSize: ScreenUtil().setSp(13),
-                                                      fontFamily: 'Poppins-Bold')
-                                              )
-                                          ]
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "no_register".tr(),
+                                        style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Medium')
+                                      ),
+                                      TextSpan(
+                                        text: "text_create_account".tr(),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.pushNamed(context, "register");
+                                          },
+                                        style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Bold')
+                                      )
+                                    ]
                                   )
-                                ),
+                                )
                               )
                             )
-
                           ]
                         )
                       )
@@ -204,22 +202,22 @@ class _LoginPageState extends State<LoginPage> {
   Widget passwordRestoredSection() {
 
     return Container(
-        margin: EdgeInsets.only(top: 5.h),
-        alignment: Alignment.topRight,
-        child: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, "reset_password");
-            },
-            child: Text(
-              "login_forgot_password".tr(),
-              style:TextStyle(
-                color: StyleGeneral.WHITE,
-                fontSize: ScreenUtil().setSp(13.sp),
-                fontFamily: "Poppins-Regular",
-              ),
-              textAlign: TextAlign.right,
-            )
+      margin: EdgeInsets.only(top: 5.h),
+      alignment: Alignment.topRight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, "reset_password");
+        },
+        child: Text(
+          "login_forgot_password".tr(),
+          style:TextStyle(
+            color: StyleGeneral.WHITE,
+            fontSize: ScreenUtil().setSp(13.sp),
+            fontFamily: "Poppins-Regular",
+          ),
+          textAlign: TextAlign.right,
         )
+      )
     );
   }
 
