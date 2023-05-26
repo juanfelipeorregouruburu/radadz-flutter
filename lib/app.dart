@@ -16,9 +16,14 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     MaterialColor colorCustom = MaterialColor(0xFF48b74c, StyleGeneral.colors);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+
     return ScreenUtilInit(
-        designSize: Size(360, 690),
-        builder: () => MultiProvider(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context , child) {
+        return MultiProvider(
           providers: [
             ChangeNotifierProvider<ListPaymentHistoryDriverBloc>(create: (_) => ListPaymentHistoryDriverBloc()),
             ChangeNotifierProvider<ListTripPaymentDriverBloc>(create: (_) => ListTripPaymentDriverBloc()),
@@ -35,7 +40,6 @@ class _AppState extends State<App> {
             home: Preferences.getAuth ? HomePage() : LoginPage(),
             routes: getAplicationRoutes(),
             builder: (context, widget) {
-              ScreenUtil.setContext(context);
               return MediaQuery(
                 //Setting font does not change with system font size
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -45,10 +49,12 @@ class _AppState extends State<App> {
             theme: ThemeData(
                 scaffoldBackgroundColor: Colors.blueGrey[50],
                 primarySwatch: colorCustom
-            ),
-          ),
-        )
+            )
+          )
+        );
+      }
     );
+
   }
 
 }
