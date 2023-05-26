@@ -21,9 +21,8 @@ class _CardBlurtAllWidgetState extends State<CardBlurtAllWidget> {
   Widget build(BuildContext context) {
     final listBlurtAllProvider = context.watch<ListBlurtAllBloc>();
 
-    return listBlurtAllProvider.isLoading
-        ? ActivityIndicator(marginTop: 50.h)
-        : listBlurtAllProvider.blurtListAll!.blurts.length > 0
+    return listBlurtAllProvider.isLoading ? ActivityIndicator(marginTop: 50.h) :
+      listBlurtAllProvider.blurtListAll!.blurts.length > 0
         ? SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: ListView.separated(
@@ -38,7 +37,7 @@ class _CardBlurtAllWidgetState extends State<CardBlurtAllWidget> {
                 index: index,
                 blurt: listBlurtAllProvider.blurtListAll!.blurts[index]
               );
-            },
+            }
           )
         ) : EmptyDataView(message: 'blurt_message_empty_data'.tr());
   }
@@ -117,13 +116,13 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
                   showOnOff: true,
                   onToggle: (val) {
                     var dialog = CustomAlertDialog(
-                        title: 'tab_blurt_dialog_confirmation_text'.tr(),
-                        message: 'tab_blurt_before_activated_text'.tr(),
-                        onPositivePressed: () {
-                          _blurtUpdate(widget.blurt.id);
-                        },
-                        positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
-                        negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr()
+                      title: 'tab_blurt_dialog_confirmation_text'.tr(),
+                      message: 'tab_blurt_before_activated_text'.tr(),
+                      onPositivePressed: () {
+                        _blurtUpdate(widget.blurt.id);
+                      },
+                      positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
+                      negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr()
                     );
                     showDialog(
                         context: context,
@@ -148,40 +147,40 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
 
             if(status)
               Row(
-                  children: [
-                    Flexible(
-                        fit: FlexFit.tight,
-                        flex: 2,
-                        child: Text(
-                            'tab_blurt_time_down_text'.tr(),
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
-                            maxLines: 3,
-                            style: StyleGeneral.styleTextTextCardPaymentDescription
-                        )
-                    ),
-
-
-                    Flexible(
-                        fit: FlexFit.tight,
-                        flex: 2,
-                        child: StreamBuilder<int>(
-                            stream: _stopWatchTimer.rawTime,
-                            initialData: _stopWatchTimer.rawTime.value,
-                            builder: (context, snap) {
-                              final value = snap.data;
-                              final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
-                              return Text(
-                                  displayTime,
-                                  textAlign: TextAlign.end,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                  style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
-                              );
-                            }
-                        )
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 2,
+                    child: Text(
+                      'tab_blurt_time_down_text'.tr(),
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      maxLines: 3,
+                      style: StyleGeneral.styleTextTextCardPaymentDescription
                     )
-                  ]
+                  ),
+
+
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 2,
+                    child: StreamBuilder<int>(
+                      stream: _stopWatchTimer.rawTime,
+                      initialData: _stopWatchTimer.rawTime.value,
+                      builder: (context, snap) {
+                        final value = snap.data;
+                        final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                        return Text(
+                          displayTime,
+                          textAlign: TextAlign.end,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
+                        );
+                      }
+                    )
+                  )
+                ]
               )
           ]
         )
@@ -191,37 +190,22 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
 
   _blurtUpdate(blurt_id) async {
 
-      _blurtUpdateBloc.driver_id = Preferences.getDriverId;
-      _blurtUpdateBloc.blurt_id = blurt_id;
+    _blurtUpdateBloc.driver_id = Preferences.getDriverId;
+    _blurtUpdateBloc.blurt_id = blurt_id;
 
-      _blurtUpdateBloc.BlurtUpdate();
+    _blurtUpdateBloc.BlurtUpdate();
 
-      _blurtUpdateBloc.data.listen((data) {
+    _blurtUpdateBloc.data.listen((data) {
 
-        if(data.error == 1){
-          setState(() {
-            status = true;
-            startTime();
-          });
+      if(data.error == 1){
+        setState(() {
+          status = true;
+          startTime();
+        });
+      }
 
-          var dialog = CustomAlertBlurtDialog(
-            title: "Info",
-            message: 'tab_blurt_activated_text'.tr(),
-            onPositivePressed: () {
-
-            },
-            positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
-          );
-
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) => dialog
-          );
-
-        }
-
-      });
+     }
+    );
   }
 
 }

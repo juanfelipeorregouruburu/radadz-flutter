@@ -33,12 +33,12 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
             child: Stack(
               children: [
                 Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10.h),
-                      if (state_button)
-                          GestureDetector(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10.h),
+                    if (state_button)
+                        GestureDetector(
                           onTap: (){
                             listBlurtProvider.setStateButton(true);
                           },
@@ -57,10 +57,10 @@ class _TabMyBlurtsPageState extends State<TabMyBlurtsPage> {
                                 color: Colors.white,
                                 fontSize: ScreenUtil().setSp(12),
                                 fontFamily: 'Poppins-Semi',
-                              ),
-                            ),
-                          ),
-                        ),
+                              )
+                            )
+                          )
+                      ),
 
                       stateView ? CreateBlurtDriverPage() : CardBlurtDriverWidget()
 

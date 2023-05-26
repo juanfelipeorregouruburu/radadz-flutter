@@ -36,7 +36,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     var dialog = CustomAlertBlurtDialog(
-      title: "Info",
+
       message: 'tab_blurt_before_activated_text'.tr(),
       onPositivePressed: () {
 

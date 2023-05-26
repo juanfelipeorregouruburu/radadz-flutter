@@ -170,21 +170,21 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
               SizedBox(height: 10.h) ,
 
               Text(
-                  widget.blurt.message,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                  maxLines: 3,
-                  style: StyleGeneral.styleTextTextCardPaymentTitle
+                widget.blurt.message,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 3,
+                style: StyleGeneral.styleTextTextCardPaymentTitle
               ),
 
               SizedBox(height: 15.h),
 
               Text(
-                  textStatus,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                  maxLines: 3,
-                  style: StyleGeneral.styleTextTextCardPaymentDescription
+                textStatus,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 3,
+                style: StyleGeneral.styleTextTextCardPaymentDescription
               ),
               SizedBox(height: 10.h),
 
@@ -195,11 +195,11 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                       fit: FlexFit.tight,
                       flex: 2,
                       child: Text(
-                          'tab_blurt_time_down_text'.tr(),
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          maxLines: 3,
-                          style: StyleGeneral.styleTextTextCardPaymentDescription
+                        'tab_blurt_time_down_text'.tr(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 3,
+                        style: StyleGeneral.styleTextTextCardPaymentDescription
                       )
                     ),
 
@@ -208,19 +208,19 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                       fit: FlexFit.tight,
                       flex: 2,
                       child: StreamBuilder<int>(
-                          stream: _stopWatchTimer.rawTime,
-                          initialData: _stopWatchTimer.rawTime.value,
-                          builder: (context, snap) {
-                            final value = snap.data;
-                            final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
-                            return Text(
-                                displayTime,
-                                textAlign: TextAlign.end,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                                style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
-                            );
-                          }
+                        stream: _stopWatchTimer.rawTime,
+                        initialData: _stopWatchTimer.rawTime.value,
+                        builder: (context, snap) {
+                          final value = snap.data;
+                          final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                          return Text(
+                              displayTime,
+                              textAlign: TextAlign.end,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
+                              style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
+                          );
+                        }
                       )
                     )
                   ]
@@ -246,20 +246,6 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
           startTime();
         });
 
-        var dialog = CustomAlertBlurtDialog(
-          title: "Info",
-          message: 'tab_blurt_activated_text'.tr(),
-          onPositivePressed: () {
-
-          },
-          positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
-        );
-
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) => dialog
-        );
       }
 
     });

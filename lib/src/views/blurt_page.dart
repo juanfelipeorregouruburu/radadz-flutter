@@ -53,33 +53,32 @@ class _BlurtPageState extends State<BlurtPage> with SingleTickerProviderStateMix
           child: Icon(Icons.question_mark_rounded),
           onPressed: () {
             var dialog = CustomAlertBlurtDialog(
-                title: "Info",
-                message: 'tab_blurt_driver_info_question'.tr(),
-                onPositivePressed: () {
+              message: 'tab_blurt_driver_info_question'.tr(),
+              onPositivePressed: () {
 
-                },
-                positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
+              },
+              positiveBtnText: 'tab_blurt_dialog_close_button'.tr(),
             );
             showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) => dialog);
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) => dialog);
           }
         )
       ),
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(75.h),
-          child: Container(
-            color: Theme.of(context).platform == TargetPlatform.iOS ? Colors.grey[50] : StyleGeneral.BLACK,
-            child: SafeArea(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(child: new Container()),
-                    getTabBar()
-                  ]
-                )
+        preferredSize: Size.fromHeight(85.h),
+        child: Container(
+          color: Theme.of(context).platform == TargetPlatform.iOS ? Colors.grey[50] : StyleGeneral.BLACK,
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Expanded(child: new Container()),
+                getTabBar()
+              ]
             )
           )
+        )
       ),
       body: getTabBarPages(),
     );
