@@ -84,9 +84,21 @@ class _DataBankDriverState extends State<DataBankDriver> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
+                              Text(
+                               'data_bank_subtitle_type'.tr(),
+                               style: TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Ligth'),
+                               textAlign: TextAlign.center,
+                             ),
+
                               _dataSpinnerAccountType(),
 
                               SizedBox(height: 15.h),
+
+                              Text(
+                               'data_bank_subtitle_bank'.tr(),
+                               style: TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Ligth'),
+                               textAlign: TextAlign.center,
+                             ),
 
                               _dataSpinnerBank(),
 
