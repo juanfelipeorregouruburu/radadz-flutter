@@ -65,14 +65,13 @@ class CustomAlertDialog extends StatelessWidget {
 
 class CustomAlertBlurtDialog extends StatelessWidget {
   final Color? bgColor;
-  final String? title;
+
   final String? message;
   final String? positiveBtnText;
   final GestureTapCallback? onPositivePressed;
   final double circularBorderRadius;
 
   CustomAlertBlurtDialog({
-    this.title,
     this.message,
     this.circularBorderRadius = 15.0,
     this.bgColor = Colors.white,
@@ -84,36 +83,20 @@ class CustomAlertBlurtDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: title != null ? Text(title! , style: TextStyle(
-            color: StyleGeneral.BLACK,
-            letterSpacing: .5,
-            fontSize: ScreenUtil().setSp(18),
-            fontFamily: 'Poppins-Semi')) : null,
-        content: message != null ? Text(message! ,  style: TextStyle(
-            color: StyleGeneral.BLACK,
-            letterSpacing: .5,
-            fontSize: ScreenUtil().setSp(14),
-            fontFamily: 'Poppins-Regular')
-        ) : null,
-        backgroundColor: bgColor,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(circularBorderRadius)),
-        actions: <Widget>[
+      title: GestureDetector(
+        onTap: () => Navigator.of(context).pop(),
+        child: Container(
+          alignment: Alignment.topRight,
+          child: Icon(Icons.close , size: 24)
+        )
+      ),
+      content: message != null ? Text(message! , style: TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5, fontSize: ScreenUtil().setSp(14), fontFamily: 'Poppins-Regular')) : null,
+      backgroundColor: bgColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(circularBorderRadius)),
+      actions: <Widget>[
 
-          TextButton(
-              child: Text(positiveBtnText!),
-              style: TextButton.styleFrom(
-                primary: Colors.teal,
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-                if (onPositivePressed != null) {
-                  onPositivePressed!();
-                }
-              }
-          )
-
-        ]
+      ]
     );
   }
 }
