@@ -16,7 +16,6 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
   bool stateButton = false;
   bool colorButton = false;
 
-  /* Editext */
   final FocusNode passwordFocus = FocusNode();
   final FocusNode passwordConfirmFocus = FocusNode();
   final TextEditingController _inputPasswordController = TextEditingController();
@@ -153,6 +152,8 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       validator:  (String? value) {
         if (value!.isEmpty) {
           return 'required_field'.tr();
+        }else if (!validatePassword(value)) {
+          return 'required_password_validate'.tr();
         }
         return null;
       },
@@ -172,12 +173,14 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
       keyboardType: TextInputType.text ,
       textInputAction: TextInputAction.done,
       obscureText: !_passwordVisibleVerify,
-      hintText:  'enter_password'.tr(),
+      hintText:  'enter_password_du'.tr(),
       colorFill: StyleGeneral.GREY,
       validator:  (String? value) {
         if (value!.isEmpty) {
           return 'required_field'.tr();
-        }else if(value != _inputPasswordController.text.trim()){
+        }else if(!validatePassword(value)){
+          return 'required_password_validate'.tr();
+        } else if(value != _inputPasswordController.text.trim()){
           return 'required_password_math'.tr();
         }
       },
