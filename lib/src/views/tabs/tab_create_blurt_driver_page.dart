@@ -37,7 +37,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
 
     var dialog = CustomAlertBlurtDialog(
 
-      message: 'tab_blurt_before_activated_text'.tr(),
+      message: 'tab_blurt_before_activated_text_create'.tr(),
       onPositivePressed: () {
 
       },
