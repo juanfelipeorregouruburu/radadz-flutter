@@ -86,6 +86,7 @@ class StyleGeneral {
   //PADDING
   static final double FONT_SIZE_TITLE_DETAIL = ScreenUtil().setSp(5);
 
+  static final styleTextTitleToolbar = TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Bold');
   static final styleTextTitle = TextStyle(color: StyleGeneral.BLACK, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Bold');
   static final styleTextTitleMenuHeader = TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
   static final styleTextTitleMenu = TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(17), fontFamily: 'Poppins-Semi');
