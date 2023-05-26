@@ -165,7 +165,6 @@ class CustomInputTextFieldPassword extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       textAlign: TextAlign.left,
-      maxLength: 16,
       textInputAction: textInputAction,
       obscureText: this.obscureText,
       keyboardType:this.keyboardType ,

@@ -631,6 +631,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget formatDateContainer(int typeDate){
+    DateTime date = DateTime.now();
 
     return GestureDetector(
         onTap: () => _showDialog(

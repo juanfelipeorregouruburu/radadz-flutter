@@ -412,7 +412,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 labelText: 'selection_name_other_color'.tr(),
                                 hintText: 'selection_name_other_color'.tr(),
                                 validator: (String? value) {
-
+                                  return null;
                                 }
                               ),
 
@@ -436,7 +436,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 labelText: 'selection_name_other_vehicle'.tr(),
                                 hintText: 'selection_name_other_vehicle'.tr(),
                                 validator: (String? value) {
-
+                                  return null;
                                 },
                               ),
                             SizedBox(height: 15.h),
@@ -586,7 +586,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       labelText: 'form_name_owner'.tr(),
                                       hintText: 'form_name_owner'.tr(),
                                       validator: (String? value) {
-
+                                        return null;
                                       },
                                     ),
 
@@ -602,7 +602,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       labelText: 'form_document_owner'.tr(),
                                       hintText: 'form_document_owner'.tr(),
                                       validator: (String? value) {
-
+                                        return null;
                                       }
                                     )
                                   ]
@@ -650,6 +650,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget formatDateContainer(int typeDate){
+    DateTime date = DateTime.now();
 
     return GestureDetector(
       onTap: () => _showDialog(
@@ -664,7 +665,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Expanded(
               child: CupertinoDatePicker(
                 initialDateTime: date,
-                minimumDate: typeDate == 3 ? date : null,
+                minimumDate:  date ,
                 mode: CupertinoDatePickerMode.date,
                 use24hFormat: true,
                 onDateTimeChanged: (DateTime newDate) {

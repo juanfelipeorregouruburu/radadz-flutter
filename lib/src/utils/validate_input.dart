@@ -16,7 +16,7 @@ bool validateText(String? value) {
 }
 
 bool validatePassword(String? value) {
-  bool textValidate = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$%+_&*~]).{8,16}$').hasMatch(value!);
+  bool textValidate = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$%+_&*~]).{8,32}$').hasMatch(value!);
   return textValidate;
 }
 
