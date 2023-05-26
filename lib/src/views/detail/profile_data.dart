@@ -199,45 +199,50 @@ class _ProfileDriverState extends State<ProfileDriver> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
+                  Text(
+                    'register_drive_data_title'.tr(),
+                    style: StyleGeneral.styleTextDescription,
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(height: 15.h),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Flexible(
-                          flex: 2,
-                          child: InputTextField(
-                            focusNode: _nameFirstFocus,
-                            controller: _inputNameFirstController,
-                            onFieldSubmitted: (term) {
+                        flex: 2,
+                        child: InputTextField(
+                          focusNode: _nameFirstFocus,
+                          controller: _inputNameFirstController,
+                          onFieldSubmitted: (term) {
 
-                            },
-                            labelText: 'form_first_name'.tr(),
-                            hintText: 'form_first_name'.tr(),
-                            validator: (String? value) {
-                              if (value!.isEmpty) return 'required_field'.tr();
-                              return null;
-                            }
-                          )
+                          },
+                          labelText: 'form_first_name'.tr(),
+                          hintText: 'form_first_name'.tr(),
+                          validator: (String? value) {
+                            if (value!.isEmpty) return 'required_field'.tr();
+                            return null;
+                          }
+                        )
                       ),
 
                       SizedBox(width: 15.h),
 
                       Flexible(
-                          flex: 2,
-                          child: InputTextField(
-                            focusNode: _nameSecondFocus,
-                            controller: _inputNameSecondController,
-                            onFieldSubmitted: (term) {
+                        flex: 2,
+                        child: InputTextField(
+                          focusNode: _nameSecondFocus,
+                          controller: _inputNameSecondController,
+                          onFieldSubmitted: (term) {
 
-                            },
-                            labelText: 'form_second_name'.tr(),
-                            hintText: 'form_second_name'.tr(),
-                            validator: (String? value) {
-                              return null;
-                            }
-                          )
+                          },
+                          labelText: 'form_second_name'.tr(),
+                          hintText: 'form_second_name'.tr(),
+                          validator: (String? value) {
+                            return null;
+                          }
+                        )
                       )
                     ]
                   ),
@@ -250,131 +255,114 @@ class _ProfileDriverState extends State<ProfileDriver> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Flexible(
-                          flex: 2,
-                          child: InputTextField(
-                            focusNode: _lastNameFirstFocus,
-                            controller: _inputLastNameFirstController,
-                            onFieldSubmitted: (term) {
-                              fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
-                            },
-                            labelText:'form_first_lastname'.tr(),
-                            hintText: 'form_first_lastname'.tr(),
-                            validator: (String? value) {
-                              if (value!.isEmpty) return 'required_field'.tr();
-                              return null;
-                            }
-                          )
+                        flex: 2,
+                        child: InputTextField(
+                          focusNode: _lastNameFirstFocus,
+                          controller: _inputLastNameFirstController,
+                          onFieldSubmitted: (term) {
+                            fieldFocusChange(context, _lastNameFirstFocus, _lastNameSecondFocus);
+                          },
+                          labelText:'form_first_lastname'.tr(),
+                          hintText: 'form_first_lastname'.tr(),
+                          validator: (String? value) {
+                            if (value!.isEmpty) return 'required_field'.tr();
+                            return null;
+                          }
+                        )
                       ),
 
                       SizedBox(width: 15.w,
                       ),
 
                       Flexible(
-                          flex: 2,
-                          child: InputTextField(
-                            focusNode: _lastNameSecondFocus,
-                            controller: _inputLastNameSecondController,
-                            onFieldSubmitted: (term) {
-                              fieldFocusChange(context, _lastNameSecondFocus, _emailFocus);
-                            },
-                            labelText: 'form_second_lastname'.tr(),
-                            hintText: 'form_second_lastname'.tr(),
-                            validator: (String? value) {
+                        flex: 2,
+                        child: InputTextField(
+                          focusNode: _lastNameSecondFocus,
+                          controller: _inputLastNameSecondController,
+                          onFieldSubmitted: (term) {
+                            fieldFocusChange(context, _lastNameSecondFocus, _emailFocus);
+                          },
+                          labelText: 'form_second_lastname'.tr(),
+                          hintText: 'form_second_lastname'.tr(),
+                          validator: (String? value) {
 
-                              return null;
-                            }
-                          )
+                            return null;
+                          }
+                        )
                       )
                     ]
                   ),
 
                   SizedBox(height: 15.h),
-
+                  Text('selection_document_type'.tr(), style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Regular')),
+                  SizedBox(height: 5.h),
                   _dataSpinnerDocumentType(),
 
                   SizedBox(height: 15.h),
 
                   Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                        focusNode: _documentFocus,
-                        controller: _inputDocumentController,
-                        keyboardType: TextInputType.number,
-                        onFieldSubmitted: (term) {
-                          fieldFocusChange(context, _documentFocus, _emailFocus);
-                        },
-                        labelText:'form_document_number'.tr(),
-                        hintText: 'form_document_number'.tr(),
-                        validator: (String? value) {
-                          if (value!.isEmpty) return 'required_field'.tr();
-                          return null;
+                    flex: 2,
+                    child: InputTextField(
+                      focusNode: _documentFocus,
+                      controller: _inputDocumentController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (term) {
+                        fieldFocusChange(context, _documentFocus, _emailFocus);
+                      },
+                      labelText:'form_document_number'.tr(),
+                      hintText: 'form_document_number'.tr(),
+                      validator: (String? value) {
+                        if (value!.isEmpty) return 'required_field'.tr();
+                        return null;
+                      }
+                    )
+                  ),
+
+                  SizedBox(height: 15.h),
+
+                  Flexible(
+                    flex: 2,
+                    child: InputTextField(
+                      focusNode: _emailFocus,
+                      controller: _inputEmailController,
+                      keyboardType: TextInputType.emailAddress,
+                      onFieldSubmitted: (term) {
+                        fieldFocusChange(context, _emailFocus, _phoneFocus);
+                      },
+                      labelText:'form_email'.tr(),
+                      hintText: 'email@gmail.com',
+                      validator: (String? value) {
+                        if(value!.isEmpty){
+                          return 'required_field'.tr();
+                        }else if(!validateEmail(value)){
+                          return 'required_email'.tr();
                         }
-                      )
-                  ),
-
-                  SizedBox(height: 15.h),
-
-                  Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                        focusNode: _emailFocus,
-                        controller: _inputEmailController,
-                        keyboardType: TextInputType.emailAddress,
-                        onFieldSubmitted: (term) {
-                          fieldFocusChange(context, _emailFocus, _phoneFocus);
-                        },
-                        labelText:'form_email'.tr(),
-                        hintText: 'email@gmail.com',
-                        validator: (String? value) {
-                          if(value!.isEmpty){
-                            return 'required_field'.tr();
-                          }else if(validateEmail(value))
-                            return null;
-                        }
-                      )
+                        return null;
+                      }
+                    )
                   ),
 
                   SizedBox(height: 15.h),
 
 
                   Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                        focusNode: _addressFocus,
-                        controller: _inputAddressController,
-                        keyboardType: TextInputType.text,
-                        onFieldSubmitted: (term) {
-                          fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
-                        },
-                        labelText:'form_address'.tr(),
-                        hintText: 'form_address'.tr(),
-                        validator: (String? value) {
-                          if (value!.isEmpty) return 'required_field'.tr();
-                          return null;
-                        },
-                      )
+                    flex: 2,
+                    child: InputTextField(
+                      focusNode: _addressFocus,
+                      controller: _inputAddressController,
+                      keyboardType: TextInputType.text,
+                      onFieldSubmitted: (term) {
+                        fieldFocusChange(context, _addressFocus, _numberLicenceFocus);
+                      },
+                      labelText:'form_address'.tr(),
+                      hintText: 'form_address'.tr(),
+                      validator: (String? value) {
+                        if (value!.isEmpty) return 'required_field'.tr();
+                        return null;
+                      },
+                    )
                   ),
 
-                  SizedBox(height: 15.h),
-
-
-                  Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                          focusNode: _numberLicenceFocus,
-                          controller: _inputNumberLicenceController,
-                          keyboardType: TextInputType.text,
-                          onFieldSubmitted: (term) {
-                            fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
-                          },
-                          labelText:'form_license_plate_number'.tr(),
-                          hintText: 'form_license_plate_number'.tr(),
-                          validator: (String? value) {
-                            if (value!.isEmpty) return 'required_field'.tr();
-                            return null;
-                          }
-                      )
-                  ),
 
                   SizedBox(height: 15.h),
 
@@ -414,8 +402,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
                       labelText: 'selection_name_other_color'.tr(),
                       hintText: 'selection_name_other_color'.tr(),
                       validator: (String? value) {
-
-                      },
+                        return null;
+                      }
                     ),
 
                   SizedBox(height: 15.h),
@@ -438,49 +426,70 @@ class _ProfileDriverState extends State<ProfileDriver> {
                       labelText: 'selection_name_other_vehicle'.tr(),
                       hintText: 'selection_name_other_vehicle'.tr(),
                       validator: (String? value) {
-
-                      },
+                        return null;
+                      }
                     ),
                   SizedBox(height: 25.h),
 
                   Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                          focusNode: _yearLicenceFocus,
-                          controller: _inputYearLicenceController,
-                          keyboardType: TextInputType.number,
-                          onFieldSubmitted: (term) {
-                            fieldFocusChange(context, _yearLicenceFocus, _engineSerialNumberFocus);
-                          },
-                          maxLength: 4,
-                          labelText:'form_vehicle_year'.tr(),
-                          hintText: 'form_vehicle_year'.tr(),
-                          validator: (String? value) {
-                            if (value!.isEmpty) return 'required_field'.tr();
-                            return null;
-                          }
-                      )
+                    flex: 2,
+                    child: InputTextField(
+                      focusNode: _yearLicenceFocus,
+                      controller: _inputYearLicenceController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (term) {
+                        fieldFocusChange(context, _yearLicenceFocus, _engineSerialNumberFocus);
+                      },
+                      maxLength: 4,
+                      labelText:'form_vehicle_year'.tr(),
+                      hintText: 'form_vehicle_year'.tr(),
+                      validator: (String? value) {
+                        if (value!.isEmpty) return 'required_field'.tr();
+                        return null;
+                      }
+                    )
                   ),
 
                   SizedBox(height: 15.h),
 
                   Flexible(
-                      flex: 2,
-                      child: InputTextField(
-                          focusNode: _engineSerialNumberFocus,
-                          controller: _inputEngineSerialNumberController,
-                          keyboardType: TextInputType.text,
-                          onFieldSubmitted: (term) {
-                            fieldFocusChange(context, _engineSerialNumberFocus, _dateFocus);
-                          },
-                          maxLength: 32,
-                          labelText:'form_engine_serial_number'.tr(),
-                          hintText: 'form_engine_serial_number'.tr(),
-                          validator: (String? value) {
-                            if (value!.isEmpty) return 'required_field'.tr();
-                            return null;
-                          }
-                      )
+                    flex: 2,
+                    child: InputTextField(
+                      focusNode: _engineSerialNumberFocus,
+                      controller: _inputEngineSerialNumberController,
+                      keyboardType: TextInputType.text,
+                      onFieldSubmitted: (term) {
+                        fieldFocusChange(context, _engineSerialNumberFocus, _dateFocus);
+                      },
+                      maxLength: 32,
+                      labelText:'form_engine_serial_number'.tr(),
+                      hintText: 'form_engine_serial_number'.tr(),
+                      validator: (String? value) {
+                        if (value!.isEmpty) return 'required_field'.tr();
+                        return null;
+                      }
+                    )
+                  ),
+
+                  SizedBox(height: 15.h),
+
+
+                  Flexible(
+                    flex: 2,
+                    child: InputTextField(
+                        focusNode: _numberLicenceFocus,
+                        controller: _inputNumberLicenceController,
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (term) {
+                          fieldFocusChange(context, _numberLicenceFocus, _yearLicenceFocus);
+                        },
+                        labelText:'form_license_plate_number'.tr(),
+                        hintText: 'form_license_plate_number'.tr(),
+                        validator: (String? value) {
+                          if (value!.isEmpty) return 'required_field'.tr();
+                          return null;
+                        }
+                    )
                   ),
 
                   SizedBox(
@@ -503,50 +512,50 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                   Text(
                     'register_Vehicle_owner_title'.tr(),
-                    style: StyleGeneral.styleTextDescription,
-                    textAlign: TextAlign.left,
+                    style: TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5, fontSize: ScreenUtil().setSp(14), fontFamily: 'Poppins-Semi'),
+                    textAlign: TextAlign.justify
                   ),
                   SizedBox(height: 10.h),
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Flexible( flex: 1,  fit: FlexFit.loose,
-                                child: InkWell(
-                                    onTap: ()  {
-                                      setState(() {
-                                        stateVehicleOwner = !stateVehicleOwner;
-                                      });
-                                    },
-                                    child: Container(
-                                        width: 20.h,
-                                        height: 20.h,
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.all(3),
-                                        decoration: BoxDecoration(color: !stateVehicleOwner ? StyleGeneral.GREEN : StyleGeneral.WHITE, shape: BoxShape.circle, border: Border.all(color: StyleGeneral.GREEN, width: 1.5)),
-                                        child: Center(child: Icon(Icons.done, color: Colors.white, size: ScreenUtil().setSp(15)))
-                                    )
-                                )
-                            ),
-                            SizedBox(width: 10.w),
-                            Flexible( flex: 7,
-                                fit: FlexFit.tight,
-                                child: Container(
-                                    width: double.infinity,
-                                    color: Colors.transparent,
-                                    child: RichText(
-                                        textAlign: TextAlign.left,
-                                        text: TextSpan(
-                                            style: TextStyle( color: StyleGeneral.BLACK ,  fontSize: ScreenUtil().setSp(12) , fontFamily: 'Poppins-Regular'),
-                                            text: 'form_driver_owner'.tr()
-                                        )
-                                    )
-                                )
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible( flex: 1,  fit: FlexFit.loose,
+                          child: InkWell(
+                            onTap: ()  {
+                              setState(() {
+                                stateVehicleOwner = !stateVehicleOwner;
+                              });
+                            },
+                            child: Container(
+                              width: 20.h,
+                              height: 20.h,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(color: !stateVehicleOwner ? StyleGeneral.GREEN : StyleGeneral.WHITE, shape: BoxShape.circle, border: Border.all(color: StyleGeneral.GREEN, width: 1.5)),
+                              child: Center(child: Icon(Icons.done, color: Colors.white, size: ScreenUtil().setSp(15)))
                             )
-                          ]
-                      )
+                          )
+                        ),
+                        SizedBox(width: 10.w),
+                        Flexible( flex: 7,
+                          fit: FlexFit.tight,
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.transparent,
+                            child: RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                style: TextStyle( color: StyleGeneral.BLACK ,  fontSize: ScreenUtil().setSp(12) , fontFamily: 'Poppins-Regular'),
+                                text: 'form_driver_owner'.tr()
+                              )
+                            )
+                          )
+                        )
+                      ]
+                    )
                   ),
 
                   SizedBox(height: 15.h),
@@ -554,39 +563,39 @@ class _ProfileDriverState extends State<ProfileDriver> {
                   if(!stateVehicleOwner)
 
                     Flexible(
-                        child: Column(
-                            children: [
+                      child: Column(
+                        children: [
 
-                              InputTextField(
-                                focusNode: _nameOwnerFocus,
-                                controller: _inputNameOwnerController,
-                                onFieldSubmitted: (term) {
-                                  fieldFocusChange(context, _nameOwnerFocus, _documentOwnerFocus);
-                                },
-                                labelText: 'form_name_owner'.tr(),
-                                hintText: 'form_name_owner'.tr(),
-                                validator: (String? value) {
+                          InputTextField(
+                            focusNode: _nameOwnerFocus,
+                            controller: _inputNameOwnerController,
+                            onFieldSubmitted: (term) {
+                              fieldFocusChange(context, _nameOwnerFocus, _documentOwnerFocus);
+                            },
+                            labelText: 'form_name_owner'.tr(),
+                            hintText: 'form_name_owner'.tr(),
+                            validator: (String? value) {
+                              return null;
+                            }
+                          ),
 
-                                },
-                              ),
+                          SizedBox(height: 10.h),
 
-                              SizedBox(height: 10.h),
+                          InputTextField(
+                            focusNode: _documentOwnerFocus,
+                            controller: _inputDocumentOwnerController,
+                            keyboardType: TextInputType.number,
+                            onFieldSubmitted: (term) {
 
-                              InputTextField(
-                                  focusNode: _documentOwnerFocus,
-                                  controller: _inputDocumentOwnerController,
-                                  keyboardType: TextInputType.number,
-                                  onFieldSubmitted: (term) {
-
-                                  },
-                                  labelText: 'form_document_owner'.tr(),
-                                  hintText: 'form_document_owner'.tr(),
-                                  validator: (String? value) {
-
-                                  }
-                              )
-                            ]
-                        )
+                            },
+                            labelText: 'form_document_owner'.tr(),
+                            hintText: 'form_document_owner'.tr(),
+                            validator: (String? value) {
+                              return null;
+                            }
+                          )
+                        ]
+                      )
                     ),
 
                   SizedBox(height: 15.h),
@@ -602,18 +611,19 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
                   _routineDriverList(),
 
-
+                  SizedBox(
+                    height: 15.h,
+                  ),
 
                   _isLoading ? ActivityIndicator() :CustomButton(
                     text: 'profile_update_button'.tr(),
                     fullscreen: true,
                     onTap: (){
                       _UpdateDriver();
-                    },
+                    }
                   )
-
                 ]
-              ),
+              )
             )
           );
         }
@@ -627,41 +637,42 @@ class _ProfileDriverState extends State<ProfileDriver> {
           Column(
             children: [
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(-2);
-                  },
-                  child: Text('form_button_confirm'.tr() , style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(15), fontFamily: "Poppins-Regular"))
+                onPressed: () {
+                  Navigator.of(context).pop(-2);
+                },
+                child: Text('form_button_confirm'.tr() , style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(15), fontFamily: "Poppins-Regular"))
               ),
               Expanded(
                 child: CupertinoDatePicker(
                   initialDateTime: date,
+                  minimumDate: typeDate == 3 ? date : null,
                   mode: CupertinoDatePickerMode.date,
                   use24hFormat: true,
                   onDateTimeChanged: (DateTime newDate) {
                     formatDate(newDate , typeDate);
-                  },
-                ),
-              ),
-            ],
-          ),
+                  }
+                )
+              )
+            ]
+          )
         ),
         child: Container(
-            padding: EdgeInsets.all(15.r),
-            alignment: Alignment.topLeft,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: StyleGeneral.FILL_COLOR,
-                border: Border.all(color: StyleGeneral.GREEN)
-            ),
-            child: Text(
-                getInputDate(typeDate),
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: ScreenUtil().setSp(15),
-                  fontFamily: "Poppins-Regular",
-                )
+          padding: EdgeInsets.all(15.r),
+          alignment: Alignment.topLeft,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: StyleGeneral.FILL_COLOR,
+            border: Border.all(color: StyleGeneral.GREEN)
+          ),
+          child: Text(
+            getInputDate(typeDate),
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: ScreenUtil().setSp(15),
+              fontFamily: "Poppins-Regular",
             )
+          )
         )
     );
 
