@@ -303,7 +303,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 validator: (String? value) {
                                   if(value!.isEmpty){
                                     return 'required_field'.tr();
-                                  }else if(validateEmail(value))
+                                  }else if(!validateEmail(value)){
+                                    return 'required_email'.tr();
+                                  }
                                   return null;
                                 }
                               )
