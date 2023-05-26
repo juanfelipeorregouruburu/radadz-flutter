@@ -75,7 +75,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width,
-                      child: Image (image: AssetImage('assets/logo_radaz_transparente.png'))
+                      child: Image (image: AssetImage('assets/loudtv_logo.png'))
                   ),
 
                  Form(

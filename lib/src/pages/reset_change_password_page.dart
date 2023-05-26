@@ -82,7 +82,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                   Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width,
-                      child: Image (image: AssetImage('assets/logo_radaz_transparente.png'))
+                      child: Image (image: AssetImage('assets/loudtv_logo.png'))
                   ),
 
                  Form(
@@ -93,7 +93,7 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        Text(
-                         'change_password_text_description'.tr(),
+                         'required_password_validate'.tr(),
                          style: TextStyle(color: StyleGeneral.WHITE,  fontSize: ScreenUtil().setSp(13), fontFamily: 'Poppins-Ligth'),
                          textAlign: TextAlign.center,
                        ),
@@ -103,6 +103,10 @@ class _ResetChangePasswordPageState extends State<ResetChangePasswordPage> {
                        ),
 
                        phoneTextField(),
+
+                       SizedBox(
+                         height: 25.h,
+                       ),
 
                        phoneConfirmTextField(),
 

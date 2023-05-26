@@ -16,7 +16,6 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
 
-  /* Editext */
   TextEditingController _inputCodeController = new TextEditingController();
 
   @override
@@ -80,7 +79,7 @@ class _ResetVerificationCodePageState extends State<ResetVerificationCodePage> {
                   Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width,
-                      child: Image (image: AssetImage('assets/logo_radaz_transparente.png'))
+                      child: Image (image: AssetImage('assets/loudtv_logo.png'))
                   ),
 
                  Form(
