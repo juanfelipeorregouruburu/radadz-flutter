@@ -71,9 +71,9 @@ class ItemTripHistory extends StatelessWidget {
                           SizedBox(height: 10.h),
                           TextRowCardWidget(text_row_title: 'trip_history_card_end_time'.tr(), text_row_data:  DateFormat('y-MM-dd h:mm a').format(DateTime.parse(trip.endTime))),
                           SizedBox(height: 10.h),
-                          TextRowCardWidget(text_row_title: 'trip_history_card_total_money_earned'.tr(), text_row_data:  totalMoneyEarned),
+                          TextRowCardWidget(text_row_title: 'trip_history_card_total_tokens_earned'.tr(), text_row_data:  trip.totalTokensEarned == "" ? "0" : trip.totalTokensEarned),
                           SizedBox(height: 10.h),
-                          TextRowCardWidget(text_row_title: 'trip_history_card_total_tokens_earned'.tr(), text_row_data:  trip.totalTokensEarned == "" ? "0" : trip.totalTokensEarned)
+                          TextRowCardWidget(text_row_title: 'trip_history_card_total_money_earned'.tr(), text_row_data:  totalMoneyEarned),
                         ]
                     )
                 )
