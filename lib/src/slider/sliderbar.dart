@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:radadz_app/src/slider/sider_layout.dart';
+import 'package:radadz_app/src/slider/slider_layout.dart';
 import 'navigation.dart';
 
 
@@ -13,13 +13,14 @@ class SideBar extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             BlocBuilder<NavigationBloc, NavigationStates>(
-                builder: (context, navigationState) {
-                  return navigationState as Widget;
-                }),
-            SiderLayout(),
-          ],
-        ),
-      ),
+              builder: (context, navigationState) {
+                return navigationState as Widget;
+              }
+            ),
+            SliderLayout(),
+          ]
+        )
+      )
     );
   }
 }
