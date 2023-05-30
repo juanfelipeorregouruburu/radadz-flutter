@@ -23,6 +23,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
   BankAccountType? _bankAccountType;
   bool _stateReviewBank = false;
   bool _stateReviewAccountType = false;
+  bool _selectedTypeAccount = false;
+  bool _selectedBank = false;
 
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
   late Map<String, dynamic> _map;
@@ -157,9 +159,11 @@ class _DataBankDriverState extends State<DataBankDriver> {
               }
             });
           }else{
-            bankAccountTypeList.asMap().forEach((index, value) {
-              _bankAccountType =bankAccountTypeList[0];
-            });
+            if(!_selectedTypeAccount){
+              bankAccountTypeList.asMap().forEach((index, value) {
+                _bankAccountType =bankAccountTypeList[0];
+              });
+            }
           }
 
           return Center(
@@ -178,6 +182,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
                 setState(() {
                   _bankAccountType = value!;
                   _stateReviewAccountType = false;
+                  _selectedTypeAccount = true;
                 });
               },
               items: bankAccountTypeList.map((BankAccountType bankAccountType) {
@@ -216,9 +221,11 @@ class _DataBankDriverState extends State<DataBankDriver> {
               }
             });
           }else{
-            bankTypeList .asMap().forEach((index, value) {
-              _bank =bankTypeList [0];
-            });
+            if(!_selectedBank){
+              bankTypeList .asMap().forEach((index, value) {
+                _bank =bankTypeList [0];
+              });
+            }
           }
 
           return Center(
@@ -237,6 +244,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
                 setState(() {
                   _bank = value!;
                   _stateReviewBank = false;
+                  _selectedBank = true;
                 });
               },
               items: bankTypeList .map((Bank bankAccountType) {
