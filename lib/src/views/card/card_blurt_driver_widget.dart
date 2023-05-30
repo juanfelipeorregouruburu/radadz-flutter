@@ -68,15 +68,18 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
       mode: StopWatchMode.countDown
   );
 
+  int raw = 10;
+
   startTime(){
-    _stopWatchTimer.setPresetSecondTime(60);
+    _stopWatchTimer.setPresetSecondTime(raw);
     _stopWatchTimer.fetchEnded.listen((value) {
       if(value){
         status = false;
+        _stopWatchTimer.onResetTimer();
         setState(() {});
       }
     });
-    _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+    _stopWatchTimer.onStartTimer();
   }
 
   String textStatus = "";
@@ -136,6 +139,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlutterSwitch(
+                    disabled: status,
                     activeText: 'tab_blurt_switch_active'.tr(),
                     inactiveText: 'tab_blurt_switch_inactive'.tr(),
                     activeTextColor: StyleGeneral.WHITE,
@@ -162,9 +166,9 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                           context: context,
                           barrierDismissible: false,
                           builder: (BuildContext context) => dialog);
-                    },
-                  ),
-                ],
+                    }
+                  )
+                ]
               ) : Container(),
 
               SizedBox(height: 10.h) ,
@@ -245,9 +249,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
           status = true;
           startTime();
         });
-
       }
-
     });
   }
 }
