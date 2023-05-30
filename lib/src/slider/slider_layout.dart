@@ -97,14 +97,14 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.0.19",
+                          'version'.tr() + " 1.0.18",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(8),
                             fontFamily: 'Poppins-Semi',
-                          )
-                        )
-                      )
+                          ),
+                        ),
+                      ),
                     ),
 
                     Container(
@@ -116,55 +116,59 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                             fit: FlexFit.loose,
                             child: IntrinsicHeight(
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    flex: 8,
-                                    child: Column(
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.topLeft, child: Text('menu_title_top'.tr(), textAlign: TextAlign.left, style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold'))
-                                        ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 8,
+                                      child: Column(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text('menu_title_top'.tr(),
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(25), fontFamily: 'Poppins-Bold')
+                                              )
+                                          ),
 
-                                        SizedBox(height: 5),
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text(nameUser!,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                              maxLines: 2,
-                                              style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Regular')
-                                          )
-                                        )
-                                      ]
-                                    )
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        onIconPressed();
-                                      },
-                                      child: Container(
-                                        width: 50.w,
-                                        height: 50.w,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: StyleGeneral.GREEN,
-                                        ),
-                                        child: Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Colors.white,
-                                          size: ScreenUtil().setHeight(28),
-                                        )
+                                          SizedBox(height: 5),
+                                          Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(nameUser!,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                  maxLines: 2,
+                                                  style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Regular')
+                                              )
+                                          ),
+
+                                        ],
                                       )
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          onIconPressed();
+                                        },
+                                        child: Container(
+                                          width: 50.w,
+                                          height: 50.w,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: StyleGeneral.GREEN,
+                                          ),
+                                          child: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.white,
+                                            size: ScreenUtil().setHeight(28),
+                                          ),
+                                        ),
+                                      ),
                                     )
-                                  )
-                                ]
-                              )
-                            )
+                                  ]),
+                            ),
                           ),
 
                           SizedBox(height: 35.h),
@@ -261,7 +265,14 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.only(left: 10.w),
-                                              child: Text('menu_title_log_out'.tr(), textAlign: TextAlign.left, style: TextStyle(fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Semi', color: Colors.white))
+                                              child: Text(
+                                                'menu_title_log_out'.tr(),
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                    fontSize: ScreenUtil().setSp(18),
+                                                    fontFamily: 'Poppins-Semi',
+                                                    color: Colors.white),
+                                              )
                                             )
                                           )
                                         )
@@ -286,16 +297,16 @@ class _SiderLayoutState extends State<SiderLayout> with SingleTickerProviderStat
                     onIconPressed();
                   },
                   child: Container(
-                    width: 75.w,
-                    height: 110.h,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: Image(
-                      height: 50.h,
-                      width: 50.h,
-                      color: StyleGeneral.GREEN,
-                      image: AssetImage("assets/menu/icono_menu.png",),
-                    )
+                      width: 75.w,
+                      height: 110.h,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Image(
+                        height: 50.h,
+                        width: 50.h,
+                        color: StyleGeneral.GREEN,
+                        image: AssetImage("assets/menu/icono_menu.png",),
+                      )
                   )
                 )
               )
