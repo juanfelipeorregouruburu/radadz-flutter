@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String _inputStrDateExpirationTechnical = '';
   String _inputStrDateExpirationSOAT = '';
   String _inputStrDateExpirationLicence = '';
-  String _routineDailyId = '';
+  String _routineDailyId = '1';
 
 
   bool _stateReviewDocumentType = true;
@@ -152,9 +152,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
 
                       SizedBox(
-                        height: 15.h,
+                        height: 30.h,
                       ),
-
 
                       Form(
                         key: formState,
@@ -610,6 +609,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),//
                             //
                             SizedBox(height: 15.h),
+
+
                             Text(
                               'register_routine_daily_title'.tr(),
                               style: StyleGeneral.styleTextDescription,
@@ -650,6 +651,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget formatDateContainer(int typeDate){
+
     DateTime date = DateTime.now();
 
     return GestureDetector(
@@ -665,7 +667,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Expanded(
               child: CupertinoDatePicker(
                 initialDateTime: date,
-                minimumDate:  date ,
+                minimumDate: typeDate == 0 ? null : date ,
                 mode: CupertinoDatePickerMode.date,
                 use24hFormat: true,
                 onDateTimeChanged: (DateTime newDate) {
@@ -1061,7 +1063,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
 
   _SaveDriver() async {
-
 
     if (formState.currentState!.validate()) {
       setState(() {
