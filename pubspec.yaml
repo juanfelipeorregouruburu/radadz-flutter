@@ -55,7 +55,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter_native_splash:
-  image: assets/logo_radaz_transparente.png
+  image: assets/loudtv_logo.png
   color: "#171817"
   android_disable_fullscreen: true
   android_12:
