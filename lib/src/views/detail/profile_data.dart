@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'dart:convert';
 
@@ -161,25 +162,27 @@ class _ProfileDriverState extends State<ProfileDriver> {
         setState(() {
           _isLoading = false;
         });
+
         if (data.error == 1) {
           Preferences.setDriver = data.driver;
-        } else {
-          var dialog = AlertMessageError(
-              icon: "error",
-              message: data.response
-          );
-
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                Future.delayed(Duration(seconds: 3), () {
-                  Navigator.of(context).pop(true);
-                });
-                return dialog;
-              }
-          );
         }
+
+        var dialog = AlertMessageError(
+          icon: data.error == 1 ? "success" : "error",
+          message: data.error == 1 ? 'profile_data_success'.tr() : 'profile_data_error'.tr()
+        );
+
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              Future.delayed(Duration(seconds: 3), () {
+                Navigator.of(context).pop(true);
+              });
+              return dialog;
+            }
+        );
+
       });
     }
 
@@ -1077,42 +1080,37 @@ class _ProfileDriverState extends State<ProfileDriver> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: StyleGeneral.GREEN,
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 32,
-                      color: Colors.white,
-                    ),
-                    validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
-                    dropdownColor:  StyleGeneral.GREEN,
-                    value: vehicles.where( (i) => i.name == _vehicle.name).first ,
-                    onChanged: (Vehicle? value) {
-                      setState(() {
-                        _vehicle = value!;
-                        _stateReviewVehicle = false;
-                        _stateContainerVehicle = value.id == 0 ? true : false;
-                      });
-                    },
-                    items: vehicles.map((Vehicle vehicle) {
-                      return DropdownMenuItem<Vehicle>(
-                        value: vehicle,
-                        child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
-                      );
-                    }).toList()
-
-                )
+              child:  DropdownButtonFormField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  filled: true,
+                  fillColor: StyleGeneral.GREEN,
+                ),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+                validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
+                dropdownColor:  StyleGeneral.GREEN,
+                value: vehicles.where( (i) => i.name == _vehicle.name).first ,
+                onChanged: (Vehicle? value) {
+                  setState(() {
+                    _vehicle = value!;
+                    _stateReviewVehicle = false;
+                    _stateContainerVehicle = value.id == 0 ? true : false;
+                  });
+                },
+                items: vehicles.map((Vehicle vehicle) {
+                  return DropdownMenuItem<Vehicle>(
+                    value: vehicle,
+                    child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
+                  );
+                }).toList()
+              )
             );
 
           } else if (snapshot.hasError) {
