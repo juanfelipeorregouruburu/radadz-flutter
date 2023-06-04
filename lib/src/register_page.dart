@@ -1105,7 +1105,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Preferences.setDriverId = data.driver_id;
           var dialog = AlertMessageError(
             icon: "success",
-            message: "Your registration is successful!  Please log in."
+            message: 'register_success'.tr()
           );
 
           showDialog(
