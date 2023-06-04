@@ -33,29 +33,49 @@ class CustomAlertDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(circularBorderRadius)),
       actions: <Widget>[
 
-        TextButton(
-          child: Text(negativeBtnText!),
-          style: TextButton.styleFrom(
-            primary: Colors.redAccent,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-            onNegativePressed!();
-          }
-        ) ,
-        TextButton(
-          child: Text(positiveBtnText!),
-            style: TextButton.styleFrom(
-              primary: Colors.teal,
-            ),
-          onPressed: () {
-            Navigator.of(context).pop();
-            if (onPositivePressed != null) {
-              onPositivePressed!();
-            }
-          }
+        Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+            InkWell(
+              child: Container(
+                alignment: Alignment.center,
+                width: 80.w,
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Text(negativeBtnText!, style: TextStyle(color: Colors.white),
+                )
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                onNegativePressed!();
+              }
+            ) ,
+            SizedBox(width: 10.w),
+            InkWell(
+              child: Container(
+                alignment: Alignment.center,
+                width: 80.w,
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Text(positiveBtnText!, style: TextStyle(color: Colors.white),
+                )
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                if (onPositivePressed != null) {
+                  onPositivePressed!();
+                }
+              }
+            )
+          ]
         )
-
       ]
     );
   }

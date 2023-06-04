@@ -27,7 +27,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
     // TODO: implement initState
     super.initState();
     statusBarDark();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _showDialog();
     });
   }
@@ -150,8 +150,8 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
                           _isLoading ? ActivityIndicator() :CustomButton(
                             text: 'tab_blurt_driver_button'.tr(),
                             fullscreen: true,
-                            onTap: () {
-                              _blurtCreate();
+                            onTap: () async {
+                              await _blurtCreate();
                               listBlurtProvider.setStateButton(false);
                             },
                           )
@@ -170,7 +170,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
 
 
 
-  _blurtCreate() async {
+  _blurtCreate() {
 
     if (formState.currentState!.validate()) {
 
@@ -191,11 +191,7 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
         });
 
         String icon = data.error == 1 ? 'success' : 'error';
-        if(data.error == 1){
-          Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
-        }
-
-        var dialog = AlertMessageError(icon: icon, message: data.response);
+        var dialog = AlertMessageError(icon: icon, message: data.error == 1 ? 'tab_blurt_data_success'.tr() : 'tab_blurt_data_error'.tr());
 
         showDialog(
             context: context,
@@ -205,6 +201,10 @@ class _CreateBlurtDriverPageState extends State<CreateBlurtDriverPage> {
               });
               return dialog;
             });
+
+        if(data.error == 1){
+          Future.microtask(() => context.read<ListBlurtDriverBloc>().getBlurtsDriver(driver_id: Preferences.getDriverId));
+        }
       });
     }
   }
