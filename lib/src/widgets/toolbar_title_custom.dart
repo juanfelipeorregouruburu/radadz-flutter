@@ -17,4 +17,20 @@ class ToolbarTitleCustom extends StatelessWidget {
 }
 
 
+SnackBar customSnackBar(String title ,String message, ContentType type){
+
+  return  SnackBar(
+    elevation: 0,
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.transparent,
+    content: AwesomeSnackbarContent(
+      title: title,
+      message: message,
+      messageFontSize: 14.sp,
+      contentType: type
+    ),
+  );
+}
+
+
 

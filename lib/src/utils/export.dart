@@ -9,6 +9,7 @@ export 'package:stop_watch_timer/stop_watch_timer.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:radadz_app/src/slider/navigation.dart';
 export 'package:radadz_app/src/utils/validate_input.dart';
+export 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 /* UTILS*/
 export 'package:radadz_app/src/route/routes.dart';
