@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -28,11 +29,13 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
   final GlobalKey<FormState> formState = new GlobalKey<FormState>();
   late Map<String, dynamic> _map;
+  String? defaultLocale ;
 
   @override
   void initState() {
     super.initState();
     getDataDriver();
+    defaultLocale = Platform.localeName ;
   }
 
   getDataDriver(){
@@ -186,9 +189,15 @@ class _DataBankDriverState extends State<DataBankDriver> {
                 });
               },
               items: bankAccountTypeList.map((BankAccountType bankAccountType) {
+                String name = bankAccountType.name!;
+                String nameType = '';
+
+                final splinted = name.split('/');
+                nameType = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+
                 return DropdownMenuItem<BankAccountType>(
                   value: bankAccountType,
-                  child: Text(bankAccountType.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameType , style: StyleGeneral.styleTextTextSpinner),
                 );
                }
               ).toList()
