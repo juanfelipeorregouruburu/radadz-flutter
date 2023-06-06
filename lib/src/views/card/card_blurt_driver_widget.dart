@@ -68,7 +68,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
       mode: StopWatchMode.countDown
   );
 
-  int raw = 10;
+  int raw = 60;
 
   startTime(){
     _stopWatchTimer.setPresetSecondTime(raw);

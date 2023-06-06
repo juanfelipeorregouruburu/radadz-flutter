@@ -101,6 +101,7 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 FlutterSwitch(
+                  disabled: status,
                   activeText: 'tab_blurt_switch_active'.tr(),
                   inactiveText: 'tab_blurt_switch_inactive'.tr(),
                   activeTextColor: StyleGeneral.WHITE,
