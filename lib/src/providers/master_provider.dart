@@ -11,7 +11,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return BankAcountTypeModel.fromJson(json.decode(response.body));
+      return BankAcountTypeModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
@@ -24,7 +24,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return BankListModel.fromJson(json.decode(response.body));
+      return BankListModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
@@ -37,7 +37,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return DocumentTypeModel.fromJson(json.decode(response.body));
+      return DocumentTypeModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
@@ -50,7 +50,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return RoutineDriverModel.fromJson(json.decode(response.body));
+      return RoutineDriverModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
@@ -63,7 +63,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return VehicleTypeModel.fromJson(json.decode(response.body));
+      return VehicleTypeModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }
@@ -76,7 +76,7 @@ class MasterProvider {
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      return VehicleColorModel.fromJson(json.decode(response.body));
+      return VehicleColorModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     }else{
       throw Exception("Fallo al petición");
     }

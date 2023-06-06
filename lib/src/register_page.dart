@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:radadz_app/src/utils/export.dart';
@@ -85,8 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
 
   DateTime date = DateTime.now();
-
-
+  String? defaultLocale ;
   @override
   void initState() {
     // TODO: implement initState
@@ -100,6 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
     formatDate(date ,1);
     formatDate(date ,2);
     formatDate(date ,3);
+
+    defaultLocale = Platform.localeName ;
   }
 
   @override
@@ -765,6 +766,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
             return Center(
               child:  DropdownButtonFormField(
+                isExpanded: true,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                   border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -783,9 +785,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   });
                 },
                 items: documentTypeList.map((DocumentType documentType) {
+                  String name = documentType.name!;
+                  String nameType = '';
+                  final splinted = name.split('/');
+
+                  if (defaultLocale!.contains("en_US")) {
+                    nameType = splinted[0];
+                  } else {
+                    nameType = splinted[1];
+                  }
+
                   return DropdownMenuItem<DocumentType>(
                     value: documentType,
-                    child: Text(documentType.name! , style: StyleGeneral.styleTextTextSpinner),
+                    child: Text(nameType , maxLines: 2, style: StyleGeneral.styleTextTextSpinner),
                   );
                 }).toList()
               )
@@ -818,6 +830,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isExpanded: true,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -836,9 +849,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               items: VehicleTypeList.map((VehicleType vehicleType) {
+                String name = vehicleType.name!;
+                String nameTypeVehicle = '';
+
+                if(name.contains("/")){
+                 final splinted = name.split('/');
+                 nameTypeVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                 nameTypeVehicle = name;
+                }
+
                 return DropdownMenuItem<VehicleType>(
                   value: vehicleType,
-                  child: Text(vehicleType.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameTypeVehicle , style: StyleGeneral.styleTextTextSpinner),
                 );
               }).toList()
             )
@@ -872,6 +895,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
+              isExpanded: true,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -890,9 +914,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               items: VehicleColorList.map((VehicleColor vehicleColor) {
+                String name = vehicleColor.name!;
+                String nameColor = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameColor = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameColor = name;
+                }
+
                 return DropdownMenuItem<VehicleColor>(
                   value: vehicleColor,
-                  child: Text(vehicleColor.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameColor, style: StyleGeneral.styleTextTextSpinner),
                 );
               }).toList()
             )
@@ -925,6 +959,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
+              isExpanded: true,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -979,6 +1014,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
+              isExpanded: true,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -1096,48 +1132,25 @@ class _RegisterPageState extends State<RegisterPage> {
 
       _saveDriverBloc.SaveDriver();
 
-      _saveDriverBloc.data.listen((data) {
+      _saveDriverBloc.data.listen((data) async {
         setState(() {
           _isLoading = false;
         });
         if (data.error == 1) {
-          Navigator.pushReplacementNamed(context, "login");
           Preferences.setDriverId = data.driver_id;
-          var dialog = AlertMessageError(
-            icon: "success",
-            message: 'register_success'.tr()
-          );
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pop(true);
-              });
-              return dialog;
-            }
-          );
-
+          final snackBar = customSnackBar('Success' , 'register_success'.tr() , ContentType.success);
+          await ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
+          Navigator.pushReplacementNamed(context, "login");
         } else {
-          var dialog = AlertMessageError(
-            icon: "error",
-            message: data.response
-          );
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pop(true);
-              });
-              return dialog;
-            }
-          );
+          final snackBar = customSnackBar('Error' , data.response , ContentType.failure);
+          ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
         }
        }
       );
+    }else{
+      final snackBar = customSnackBar('Info' , 'register_form_incomplete'.tr() , ContentType.help);
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
     }
   }
 }
+

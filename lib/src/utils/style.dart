@@ -113,3 +113,9 @@ void statusBarDark(){
       statusBarBrightness: Brightness.dark// this one for iOS
   ));
 }
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  }
+}
