@@ -78,10 +78,10 @@ class _LoginPageState extends State<LoginPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                                'login_hello'.tr(),
-                                style: TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Bold'),
-                                textAlign: TextAlign.center,
-                              ),
+                              'login_hello'.tr(),
+                              style: TextStyle(color: StyleGeneral.WHITE, letterSpacing: .5 , fontSize: ScreenUtil().setSp(18), fontFamily: 'Poppins-Bold'),
+                              textAlign: TextAlign.center
+                            ),
 
                             Text(
                               'login_info'.tr(),
@@ -94,7 +94,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
 
                             SizedBox(
-                              height: size.height / 10,
                               child: InputCustom(
                                 focusNode: _phoneFocus,
                                 controller: _inputPhoneController,
@@ -107,14 +106,14 @@ class _LoginPageState extends State<LoginPage> {
                                 validator: (String? value) {
                                   if (value!.isEmpty) return 'required_field'.tr();
                                   return null;
-                                },
-                              ),
+                                }
+                              )
                             ),
 
                             SizedBox(height: 10.h,),
 
                             SizedBox(
-                              height: size.height / 9,
+
                               child: CustomInputTextFieldPassword(
                                 focusNode: _passwordFocus,
                                 controller: _inputPasswordController,
@@ -248,25 +247,13 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacementNamed(context, "home");
         } else {
           Preferences.setAuth = false;
-
-          var dialog = AlertMessageError(
-              icon: "error",
-              message: data.response
-          );
-
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                Future.delayed(Duration(seconds: 3), () {
-                  Navigator.of(context).pop(true);
-                });
-                return dialog;
-              }
-          );
+          final snackBar = customSnackBar('Error' , data.response, ContentType.failure);
+          ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
         }
       });
+    }else{
+      final snackBar = customSnackBar('Info' , 'register_form_incomplete'.tr() , ContentType.help);
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
     }
-
   }
 }
