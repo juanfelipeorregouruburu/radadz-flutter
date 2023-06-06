@@ -683,7 +683,7 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.all(15.r),
         alignment: Alignment.topLeft,
         width: double.infinity,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: StyleGeneral.FILL_COLOR, border: Border.all(color: StyleGeneral.GREEN)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: StyleGeneral.FILL_COLOR, border: Border.all(color: StyleGeneral.GREEN)),
         child: Text(getInputDate(typeDate), style: TextStyle(color: Colors.black87, fontSize: ScreenUtil().setSp(15), fontFamily: "Poppins-Regular",))
       )
     );
@@ -768,12 +768,12 @@ class _RegisterPageState extends State<RegisterPage> {
               child:  DropdownButtonFormField(
                 isExpanded: true,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
-                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                   filled: true,
                   fillColor: StyleGeneral.GREEN,
                 ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
                 validator: (value) => value == null ? 'selection_document_type'.tr() : null,
                 dropdownColor:  StyleGeneral.GREEN,
                 value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
@@ -832,12 +832,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child:  DropdownButtonFormField(
               isExpanded: true,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
-                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 filled: true,
                 fillColor: StyleGeneral.GREEN,
               ),
-              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
               validator: (value) => value == null ? 'selection_vehicle_type'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: VehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
@@ -897,12 +897,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child: DropdownButtonFormField(
               isExpanded: true,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
-                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 filled: true,
                 fillColor: StyleGeneral.GREEN,
               ),
-              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
               validator: (value) => value == null ? 'selection_vehicle_color'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: VehicleColorList.where( (i) => i.name == _vehicleColor.name).first ,
@@ -961,12 +961,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child: DropdownButtonFormField(
               isExpanded: true,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
-                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 filled: true,
                 fillColor: StyleGeneral.GREEN,
               ),
-              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
               validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
@@ -1016,12 +1016,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child: DropdownButtonFormField(
               isExpanded: true,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
-                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 filled: true,
                 fillColor: StyleGeneral.GREEN,
               ),
-              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
               validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: vehicles.where( (i) => i.name == _vehicle.name).first ,

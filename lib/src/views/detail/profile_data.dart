@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,10 +82,13 @@ class _ProfileDriverState extends State<ProfileDriver> {
   final FocusNode _nameColorFocus = FocusNode();
   final FocusNode _nameVehicleFocus = FocusNode();
 
+  String? defaultLocale ;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    defaultLocale = Platform.localeName ;
     getDriverData();
   }
 
@@ -649,7 +653,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
               Expanded(
                 child: CupertinoDatePicker(
                   initialDateTime: date,
-                  minimumDate: typeDate == 3 ? date : null,
+                  minimumDate: typeDate == 0 ? null : date,
                   mode: CupertinoDatePickerMode.date,
                   use24hFormat: true,
                   onDateTimeChanged: (DateTime newDate) {
@@ -665,7 +669,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
           alignment: Alignment.topLeft,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             color: StyleGeneral.FILL_COLOR,
             border: Border.all(color: StyleGeneral.GREEN)
           ),
@@ -808,42 +812,37 @@ class _ProfileDriverState extends State<ProfileDriver> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: StyleGeneral.GREEN,
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 32,
-                      color: Colors.white,
-                    ),
-                    validator: (value) => value == null ? 'selection_document_type'.tr() : null,
-                    dropdownColor:  StyleGeneral.GREEN,
-                    value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
-                    onChanged: (DocumentType? value) {
-                      setState(() {
-                        _documentType = value!;
-                        _stateReviewDocumentType = false;
-                      });
-                      print('selected $value');
-                    },
-                    items: documentTypeList.map((DocumentType documentType) {
-                      return DropdownMenuItem<DocumentType>(
-                        value: documentType,
-                        child: Text(documentType.name! , style: StyleGeneral.styleTextTextSpinner),
-                      );
-                    }).toList()
+              child:  DropdownButtonFormField(
+                isExpanded: true,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  filled: true,
+                  fillColor: StyleGeneral.GREEN,
+                ),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+                validator: (value) => value == null ? 'selection_document_type'.tr() : null,
+                dropdownColor:  StyleGeneral.GREEN,
+                value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
+                onChanged: (DocumentType? value) {
+                  setState(() {
+                    _documentType = value!;
+                    _stateReviewDocumentType = false;
+                  });
+                },
+                items: documentTypeList.map((DocumentType documentType) {
+                  String name = documentType.name!;
+                  String nameType = '';
+                  final splinted = name.split('/');
+                  nameType = defaultLocale!.contains("en_US") ? nameType = splinted[0] : nameType = splinted[1];
 
-                )
+                  return DropdownMenuItem<DocumentType>(
+                    value: documentType,
+                    child: Text(nameType, style: StyleGeneral.styleTextTextSpinner),
+                  );
+                }).toList()
+
+              )
             );
           } else if (snapshot.hasError) {
             return Icon(Icons.error_outline);
@@ -874,42 +873,40 @@ class _ProfileDriverState extends State<ProfileDriver> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: StyleGeneral.GREEN,
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 32,
-                      color: Colors.white,
-                    ),
-                    validator: (value) => value == null ? 'selection_vehicle_type'.tr() : null,
-                    dropdownColor:  StyleGeneral.GREEN,
-                    value: VehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
-                    onChanged: (VehicleType? value) {
-                      setState(() {
-                        _vehicleType = value!;
-                        _stateReviewVehicleType = false;
-                      });
+              child:  DropdownButtonFormField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r),),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  filled: true,
+                  fillColor: StyleGeneral.GREEN,
+                ),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+                validator: (value) => value == null ? 'selection_vehicle_type'.tr() : null,
+                dropdownColor:  StyleGeneral.GREEN,
+                value: VehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
+                onChanged: (VehicleType? value) {
+                  setState(() {
+                    _vehicleType = value!;
+                    _stateReviewVehicleType = false;
+                  });
+                },
+                items: VehicleTypeList.map((VehicleType vehicleType) {
+                  String name = vehicleType.name!;
+                  String nameTypeVehicle = '';
 
-                    },
-                    items: VehicleTypeList.map((VehicleType vehicleType) {
-                      return DropdownMenuItem<VehicleType>(
-                        value: vehicleType,
-                        child: Text(vehicleType.name! , style: StyleGeneral.styleTextTextSpinner),
-                      );
-                    }).toList()
+                  if(name.contains("/")){
+                    final splinted = name.split('/');
+                    nameTypeVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                  }else{
+                    nameTypeVehicle = name;
+                  }
 
-                )
+                  return DropdownMenuItem<VehicleType>(
+                    value: vehicleType,
+                    child: Text(nameTypeVehicle , style: StyleGeneral.styleTextTextSpinner),
+                  );
+                }).toList()
+              )
             );
 
           } else if (snapshot.hasError) {
@@ -943,43 +940,41 @@ class _ProfileDriverState extends State<ProfileDriver> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: StyleGeneral.GREEN,
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 32,
-                      color: Colors.white,
-                    ),
-                    validator: (value) => value == null ? 'selection_vehicle_color'.tr() : null,
-                    dropdownColor:  StyleGeneral.GREEN,
-                    value: VehicleColorList.where( (i) => i.name == _vehicleColor.name).first ,
-                    onChanged: (VehicleColor? value) {
-                      setState(() {
-                        _vehicleColor = value!;
-                        _stateReviewVehicleColor = false;
-                        _stateContainerVehicleColor = value.id == 0 ? true : false ;
-                      });
-                      print('selected $value');
-                    },
-                    items: VehicleColorList.map((VehicleColor vehicleColor) {
-                      return DropdownMenuItem<VehicleColor>(
-                        value: vehicleColor,
-                        child: Text(vehicleColor.name! , style: StyleGeneral.styleTextTextSpinner),
-                      );
-                    }).toList()
+              child:  DropdownButtonFormField(
+                decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  filled: true,
+                  fillColor: StyleGeneral.GREEN,
+                ),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+                validator: (value) => value == null ? 'selection_vehicle_color'.tr() : null,
+                dropdownColor:  StyleGeneral.GREEN,
+                value: VehicleColorList.where( (i) => i.name == _vehicleColor.name).first ,
+                onChanged: (VehicleColor? value) {
+                  setState(() {
+                    _vehicleColor = value!;
+                    _stateReviewVehicleColor = false;
+                    _stateContainerVehicleColor = value.id == 0 ? true : false ;
+                  });
+                },
+                items: VehicleColorList.map((VehicleColor vehicleColor) {
+                  String name = vehicleColor.name!;
+                  String nameColor = '';
 
-                )
+                  if(name.contains("/")){
+                    final splinted = name.split('/');
+                    nameColor = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                  }else{
+                    nameColor = name;
+                  }
+
+                  return DropdownMenuItem<VehicleColor>(
+                    value: vehicleColor,
+                    child: Text(nameColor , style: StyleGeneral.styleTextTextSpinner),
+                  );
+                }).toList()
+              )
             );
 
           } else if (snapshot.hasError) {
@@ -1011,43 +1006,31 @@ class _ProfileDriverState extends State<ProfileDriver> {
             }
 
             return Center(
-                child:  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: StyleGeneral.GREEN,
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 32,
-                      color: Colors.white,
-                    ),
-                    validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
-                    dropdownColor:  StyleGeneral.GREEN,
-                    value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
-                    onChanged: (VehicleManufacturer? value) {
-                      setState(() {
-                        blocVehicles.manufacturerId = value!.id.toString();
-                        _vehicleManufacturer = value;
-                        _stateReviewVehicleManufacturer = false;
-                      });
-                      print('selected $value');
-                    },
-                    items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
-                      return DropdownMenuItem<VehicleManufacturer>(
-                        value: vehicleManufacturer,
-                        child: Text(vehicleManufacturer.name! , style: StyleGeneral.styleTextTextSpinner),
-                      );
-                    }).toList()
-
-                )
+              child:  DropdownButtonFormField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  filled: true,
+                  fillColor: StyleGeneral.GREEN,
+                ),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+                validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
+                dropdownColor:  StyleGeneral.GREEN,
+                value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
+                onChanged: (VehicleManufacturer? value) {
+                  setState(() {
+                    blocVehicles.manufacturerId = value!.id.toString();
+                    _vehicleManufacturer = value;
+                    _stateReviewVehicleManufacturer = false;
+                  });
+                },
+                items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
+                  return DropdownMenuItem<VehicleManufacturer>(
+                    value: vehicleManufacturer,
+                    child: Text(vehicleManufacturer.name! , style: StyleGeneral.styleTextTextSpinner),
+                  );
+                }).toList()
+              )
             );
 
           } else if (snapshot.hasError) {
@@ -1082,18 +1065,12 @@ class _ProfileDriverState extends State<ProfileDriver> {
             return Center(
               child:  DropdownButtonFormField(
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                   filled: true,
                   fillColor: StyleGeneral.GREEN,
                 ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
                 validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
                 dropdownColor:  StyleGeneral.GREEN,
                 value: vehicles.where( (i) => i.name == _vehicle.name).first ,
