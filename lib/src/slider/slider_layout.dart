@@ -93,7 +93,7 @@ class _SliderLayoutState extends State<SliderLayout> with SingleTickerProviderSt
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.0.21",
+                          'version'.tr() + " 1.0.22",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(8),
