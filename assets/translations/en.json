@@ -84,6 +84,7 @@
   "data_bank_subtitle_type": "Account Type:",
   "data_bank_subtitle_bank": "Bank Name:",
   "data_bank_account": "Account Number",
+  "data_bank_account_validate": "The account number must contain a minimum of: 8 \ncharacters and numbers only",
   "data_bank_button": "Update",
   "data_bank_success": "Driver Bank Data Updated!",
   "selection_bank_type": "Select Bank",

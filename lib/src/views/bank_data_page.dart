@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class BankDataPage extends StatefulWidget with NavigationStates{
@@ -17,16 +16,16 @@ class _BankDataPageState extends State<BankDataPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-            preferredSize: Size.fromHeight(65.h),
-            child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                automaticallyImplyLeading: false,
-                flexibleSpace : ToolbarTitleCustom(title: 'data_bank_title'.tr())
-            ),
-          ),
-          body: DataBankDriver()
-    ) ;
+        preferredSize: Size.fromHeight(65.h),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          flexibleSpace : ToolbarTitleCustom(title: 'data_bank_title'.tr())
+        )
+      ),
+      body: DataBankDriver()
+    );
 
   }
 

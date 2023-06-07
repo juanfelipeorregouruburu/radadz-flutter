@@ -84,6 +84,7 @@
   "data_bank_subtitle_type": "Tipo De Cuenta:",
   "data_bank_subtitle_bank": "Nombre Del Banco",
   "data_bank_account": "Número De Cuenta",
+  "data_bank_account_validate": "El número de cuenta  debe contener un mínimo de: 8 \ncaracteres y  solo números",
   "data_bank_button": "Actualizar Datos",
   "data_bank_success": "Datos Del Banco De Conductor Actualizados!",
   "selection_bank_type": "Seleccione Banco",

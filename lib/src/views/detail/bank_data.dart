@@ -78,6 +78,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Form(
                         key: formState,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,14 +107,19 @@ class _DataBankDriverState extends State<DataBankDriver> {
                             InputTextField(
                               focusNode: _numberCountFocus,
                               controller: _inputNumberCountController,
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.numberWithOptions(decimal: false),
                               textInputAction: TextInputAction.done,
                               labelText: 'data_bank_account'.tr(),
                               hintText: 'xxx-xxx-xx',
+                              maxLength: 20,
                               validator: (String? value) {
-                                if (value!.isEmpty) return 'required_field'.tr();
+                                if (value!.isEmpty) {
+                                  return 'required_field'.tr();
+                                } else if(!validateAccountBankNumber(value)){
+                                  return 'data_bank_account_validate'.tr();
+                                }
                                 return null;
-                              },
+                              }
                             ),
 
                             SizedBox(
@@ -126,6 +132,9 @@ class _DataBankDriverState extends State<DataBankDriver> {
                               onTap: (){
                                 if (formState.currentState!.validate()) {
                                   _UpdateDataBank();
+                                }else{
+                                  final snackBar = customSnackBar('Info' , 'register_form_incomplete'.tr() , ContentType.help);
+                                  ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
                                 }
                               }
                             )
@@ -289,29 +298,17 @@ class _DataBankDriverState extends State<DataBankDriver> {
     _updateDataBankDriverBloc.UpdateDataBank();
 
     _updateDataBankDriverBloc.data.listen((data) {
-
-      setState(() {
-        _isLoading = false;
-      });
+      SystemChannels.textInput.invokeMethod('TextInput.hide');
+      setState(() {_isLoading = false;});
 
       if(data.error == 1){
         Preferences.setDriver = data.driver;
+        final snackBar = customSnackBar('Success' , 'data_bank_success'.tr() , ContentType.success);
+        ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
+      }else{
+        final snackBar = customSnackBar('Error' , data.response , ContentType.failure);
+        ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
       }
-      var dialog = AlertMessageError(
-          icon: data.error == 1 ? "success" : "error",
-          message: data.error == 1 ? 'data_bank_success'.tr() : data.response,
-      );
-      SystemChannels.textInput.invokeMethod('TextInput.hide');
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 3), () {
-              Navigator.of(context).pop(true);
-            });
-            return dialog;
-          }
-      );
-
     });
 
   }

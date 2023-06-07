@@ -25,6 +25,11 @@ bool validateNumber(String? value) {
   return dateValidate;
 }
 
+bool validateAccountBankNumber(String? value) {
+  bool dateValidate = RegExp(r'^[0-9]{9,20}$').hasMatch(value!);
+  return dateValidate;
+}
+
 bool validateHour(String? value) {
   bool dateValidate = RegExp(r'^[0-9]+([.][0-9]+)?$').hasMatch(value!);
   return dateValidate;
