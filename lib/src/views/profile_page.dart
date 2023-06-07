@@ -15,18 +15,18 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(65.h),
-          child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              flexibleSpace : ToolbarTitleCustom(title: 'profile_title'.tr())
-          ),
-        ),
-        body: ProfileDriver()
-    ) ;
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(65.h),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          flexibleSpace : ToolbarTitleCustom(title: 'profile_title'.tr())
+        )
+      ),
+      body: ProfileDriver()
+    );
 
   }
 }

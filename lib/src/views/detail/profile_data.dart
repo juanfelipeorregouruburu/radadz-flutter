@@ -163,31 +163,23 @@ class _ProfileDriverState extends State<ProfileDriver> {
       _updateDriverBloc.UpdateDriver();
 
       _updateDriverBloc.data.listen((data) {
-        setState(() {
-          _isLoading = false;
-        });
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+        setState(() {_isLoading = false;});
 
         if (data.error == 1) {
           Preferences.setDriver = data.driver;
+          final snackBar = customSnackBar('Success' , 'profile_data_success'.tr() , ContentType.success);
+          ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
+        }else{
+          final snackBar = customSnackBar('Error' , 'profile_data_error'.tr() , ContentType.failure);
+          ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
         }
 
-        var dialog = AlertMessageError(
-          icon: data.error == 1 ? "success" : "error",
-          message: data.error == 1 ? 'profile_data_success'.tr() : 'profile_data_error'.tr()
-        );
-
-        SystemChannels.textInput.invokeMethod('TextInput.hide');
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pop(true);
-              });
-              return dialog;
-            }
-        );
-
       });
+
+    }else{
+      final snackBar = customSnackBar('Info' , 'register_form_incomplete'.tr() , ContentType.help);
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
     }
 
   }
@@ -641,47 +633,47 @@ class _ProfileDriverState extends State<ProfileDriver> {
     DateTime date = DateTime.now();
 
     return GestureDetector(
-        onTap: () => _showDialog(
-          Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(-2);
-                },
-                child: Text('form_button_confirm'.tr() , style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(15), fontFamily: "Poppins-Regular"))
-              ),
-              Expanded(
-                child: CupertinoDatePicker(
-                  initialDateTime: date,
-                  minimumDate: typeDate == 0 ? null : date,
-                  mode: CupertinoDatePickerMode.date,
-                  use24hFormat: true,
-                  onDateTimeChanged: (DateTime newDate) {
-                    formatDate(newDate , typeDate);
-                  }
-                )
+      onTap: () => _showDialog(
+        Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(-2);
+              },
+              child: Text('form_button_confirm'.tr() , style: TextStyle(color: StyleGeneral.WHITE, fontSize: ScreenUtil().setSp(15), fontFamily: "Poppins-Regular"))
+            ),
+            Expanded(
+              child: CupertinoDatePicker(
+                initialDateTime: date,
+                minimumDate: typeDate == 0 ? null : date,
+                mode: CupertinoDatePickerMode.date,
+                use24hFormat: true,
+                onDateTimeChanged: (DateTime newDate) {
+                  formatDate(newDate , typeDate);
+                }
               )
-            ]
-          )
-        ),
-        child: Container(
-          padding: EdgeInsets.all(15.r),
-          alignment: Alignment.topLeft,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            color: StyleGeneral.FILL_COLOR,
-            border: Border.all(color: StyleGeneral.GREEN)
-          ),
-          child: Text(
-            getInputDate(typeDate),
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: ScreenUtil().setSp(15),
-              fontFamily: "Poppins-Regular",
             )
+          ]
+        )
+      ),
+      child: Container(
+        padding: EdgeInsets.all(15.r),
+        alignment: Alignment.topLeft,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          color: StyleGeneral.FILL_COLOR,
+          border: Border.all(color: StyleGeneral.GREEN)
+        ),
+        child: Text(
+          getInputDate(typeDate),
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: ScreenUtil().setSp(15),
+            fontFamily: "Poppins-Regular"
           )
         )
+      )
     );
 
   }
@@ -737,57 +729,56 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
-        context: context,
-        builder: (BuildContext context) => Container(
-          height: 320.h,
-          padding: const EdgeInsets.only(top: 6.0),
-          margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          color: CupertinoColors.systemBackground.resolveFrom(context),
-          child: SafeArea(
-            top: false,
-            child: child,
-          ),
-        ));
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 320.h,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: SafeArea(
+          top: false,
+          child: child
+        )
+      )
+    );
   }
 
   Widget _routineDriverList(){
     blocRoutineDriver.RoutineDrivers();
 
     return  StreamBuilder(
-        stream: blocRoutineDriver.data!,
-        builder: (context , AsyncSnapshot<RoutineDriverModel> snapshot) {
+      stream: blocRoutineDriver.data!,
+      builder: (context , AsyncSnapshot<RoutineDriverModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<RoutineDriver> routinesDriver = snapshot.data!.routinesDriver!;
+        if (snapshot.hasData) {
+          List<RoutineDriver> routinesDriver = snapshot.data!.routinesDriver!;
 
-            return ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 0.w),
-              children:routinesDriver.map((value) => RadioListTile<int>(
-                  groupValue: _currentDailyValue,
-                  activeColor: StyleGeneral.GREEN,
-                  title: Text(value.name!, textAlign: TextAlign.left, style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(13) , fontFamily: 'Poppins-Regular') ),
-                  value: value.id!,
-                  onChanged: (val) {
-                    print('value $val');
-                    setState(() {
-                      _routineDailyId = val!.toString();
-                      _currentDailyValue = val;
-                    });
-                  }
-              )).toList(),
-            );
+          return ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 0.w),
+            children:routinesDriver.map((value) => RadioListTile<int>(
+                groupValue: _currentDailyValue,
+                activeColor: StyleGeneral.GREEN,
+                title: Text(value.name!, textAlign: TextAlign.left, style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(13) , fontFamily: 'Poppins-Regular') ),
+                value: value.id!,
+                onChanged: (val) {
+                  print('value $val');
+                  setState(() {
+                    _routineDailyId = val!.toString();
+                    _currentDailyValue = val;
+                  });
+                }
+            )).toList(),
+          );
 
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return Center(child: CircularProgressIndicator());
         }
+      }
     );
   }
 
@@ -796,60 +787,60 @@ class _ProfileDriverState extends State<ProfileDriver> {
     blocDocumentType.DocumentTypes();
 
     return StreamBuilder(
-        stream: blocDocumentType.data,
-        builder: (context , AsyncSnapshot<DocumentTypeModel> snapshot) {
+      stream: blocDocumentType.data,
+      builder: (context , AsyncSnapshot<DocumentTypeModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<DocumentType> documentTypeList = snapshot.data!.documentsType!;
+        if (snapshot.hasData) {
+          List<DocumentType> documentTypeList = snapshot.data!.documentsType!;
 
-            if(_stateReviewDocumentType){
-              documentTypeList.asMap().forEach((index, value) {
+          if(_stateReviewDocumentType){
+            documentTypeList.asMap().forEach((index, value) {
 
-                if(_map['document_type']['id'] == value.id){
-                  _documentType = documentTypeList[index];
-                }
-              });
-            }
-
-            return Center(
-              child:  DropdownButtonFormField(
-                isExpanded: true,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  filled: true,
-                  fillColor: StyleGeneral.GREEN,
-                ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
-                validator: (value) => value == null ? 'selection_document_type'.tr() : null,
-                dropdownColor:  StyleGeneral.GREEN,
-                value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
-                onChanged: (DocumentType? value) {
-                  setState(() {
-                    _documentType = value!;
-                    _stateReviewDocumentType = false;
-                  });
-                },
-                items: documentTypeList.map((DocumentType documentType) {
-                  String name = documentType.name!;
-                  String nameType = '';
-                  final splinted = name.split('/');
-                  nameType = defaultLocale!.contains("en_US") ? nameType = splinted[0] : nameType = splinted[1];
-
-                  return DropdownMenuItem<DocumentType>(
-                    value: documentType,
-                    child: Text(nameType, style: StyleGeneral.styleTextTextSpinner),
-                  );
-                }).toList()
-
-              )
-            );
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return ActivityIndicator();
+              if(_map['document_type']['id'] == value.id){
+                _documentType = documentTypeList[index];
+              }
+            });
           }
+
+          return Center(
+            child:  DropdownButtonFormField(
+              isExpanded: true,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                filled: true,
+                fillColor: StyleGeneral.GREEN,
+              ),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              validator: (value) => value == null ? 'selection_document_type'.tr() : null,
+              dropdownColor:  StyleGeneral.GREEN,
+              value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
+              onChanged: (DocumentType? value) {
+                setState(() {
+                  _documentType = value!;
+                  _stateReviewDocumentType = false;
+                });
+              },
+              items: documentTypeList.map((DocumentType documentType) {
+                String name = documentType.name!;
+                String nameType = '';
+                final splinted = name.split('/');
+                nameType = defaultLocale!.contains("en_US") ? nameType = splinted[0] : nameType = splinted[1];
+
+                return DropdownMenuItem<DocumentType>(
+                  value: documentType,
+                  child: Text(nameType, style: StyleGeneral.styleTextTextSpinner),
+                );
+              }).toList()
+
+            )
+          );
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return ActivityIndicator();
         }
+      }
     );
 
   }
@@ -858,63 +849,63 @@ class _ProfileDriverState extends State<ProfileDriver> {
     blocVehicleType.VehicleTypes();
 
     return StreamBuilder(
-        stream: blocVehicleType.data!,
-        builder: (context , AsyncSnapshot<VehicleTypeModel> snapshot) {
+      stream: blocVehicleType.data!,
+      builder: (context , AsyncSnapshot<VehicleTypeModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<VehicleType> VehicleTypeList = snapshot.data!.vehiclesType!;
+        if (snapshot.hasData) {
+          List<VehicleType> VehicleTypeList = snapshot.data!.vehiclesType!;
 
-            if(_stateReviewVehicleType){
-              VehicleTypeList.asMap().forEach((index, value) {
-                if(value.id == _map['vehicle_type']['id']){
-                  _vehicleType = VehicleTypeList[index];
-                }
-              });
-            }
-
-            return Center(
-              child:  DropdownButtonFormField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r),),
-                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  filled: true,
-                  fillColor: StyleGeneral.GREEN,
-                ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
-                validator: (value) => value == null ? 'selection_vehicle_type'.tr() : null,
-                dropdownColor:  StyleGeneral.GREEN,
-                value: VehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
-                onChanged: (VehicleType? value) {
-                  setState(() {
-                    _vehicleType = value!;
-                    _stateReviewVehicleType = false;
-                  });
-                },
-                items: VehicleTypeList.map((VehicleType vehicleType) {
-                  String name = vehicleType.name!;
-                  String nameTypeVehicle = '';
-
-                  if(name.contains("/")){
-                    final splinted = name.split('/');
-                    nameTypeVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
-                  }else{
-                    nameTypeVehicle = name;
-                  }
-
-                  return DropdownMenuItem<VehicleType>(
-                    value: vehicleType,
-                    child: Text(nameTypeVehicle , style: StyleGeneral.styleTextTextSpinner),
-                  );
-                }).toList()
-              )
-            );
-
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return ActivityIndicator();
+          if(_stateReviewVehicleType){
+            VehicleTypeList.asMap().forEach((index, value) {
+              if(value.id == _map['vehicle_type']['id']){
+                _vehicleType = VehicleTypeList[index];
+              }
+            });
           }
+
+          return Center(
+            child:  DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r),),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                filled: true,
+                fillColor: StyleGeneral.GREEN,
+              ),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+              validator: (value) => value == null ? 'selection_vehicle_type'.tr() : null,
+              dropdownColor:  StyleGeneral.GREEN,
+              value: VehicleTypeList.where( (i) => i.name == _vehicleType.name).first ,
+              onChanged: (VehicleType? value) {
+                setState(() {
+                  _vehicleType = value!;
+                  _stateReviewVehicleType = false;
+                });
+              },
+              items: VehicleTypeList.map((VehicleType vehicleType) {
+                String name = vehicleType.name!;
+                String nameTypeVehicle = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameTypeVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameTypeVehicle = name;
+                }
+
+                return DropdownMenuItem<VehicleType>(
+                  value: vehicleType,
+                  child: Text(nameTypeVehicle , style: StyleGeneral.styleTextTextSpinner),
+                );
+              }).toList()
+            )
+          );
+
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return ActivityIndicator();
         }
+      }
     );
 
   }
@@ -924,65 +915,65 @@ class _ProfileDriverState extends State<ProfileDriver> {
     blocVehicleColor.VehiclesColor();
 
     return StreamBuilder(
-        stream: blocVehicleColor.data!,
-        builder: (context , AsyncSnapshot<VehicleColorModel> snapshot) {
+      stream: blocVehicleColor.data!,
+      builder: (context , AsyncSnapshot<VehicleColorModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<VehicleColor> VehicleColorList = snapshot.data!.vehiclesColor!;
+        if (snapshot.hasData) {
+          List<VehicleColor> VehicleColorList = snapshot.data!.vehiclesColor!;
 
-            VehicleColorList.add(VehicleColor(id: 0, name: 'selection_name_text_color'.tr() ));
-            if(_stateReviewVehicleColor){
-              VehicleColorList.asMap().forEach((index, value) {
-                if(value.id == _map['vehicle_color']['id']){
-                  _vehicleColor = VehicleColorList[index];
-                }
-              });
-            }
-
-            return Center(
-              child:  DropdownButtonFormField(
-                decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  filled: true,
-                  fillColor: StyleGeneral.GREEN,
-                ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
-                validator: (value) => value == null ? 'selection_vehicle_color'.tr() : null,
-                dropdownColor:  StyleGeneral.GREEN,
-                value: VehicleColorList.where( (i) => i.name == _vehicleColor.name).first ,
-                onChanged: (VehicleColor? value) {
-                  setState(() {
-                    _vehicleColor = value!;
-                    _stateReviewVehicleColor = false;
-                    _stateContainerVehicleColor = value.id == 0 ? true : false ;
-                  });
-                },
-                items: VehicleColorList.map((VehicleColor vehicleColor) {
-                  String name = vehicleColor.name!;
-                  String nameColor = '';
-
-                  if(name.contains("/")){
-                    final splinted = name.split('/');
-                    nameColor = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
-                  }else{
-                    nameColor = name;
-                  }
-
-                  return DropdownMenuItem<VehicleColor>(
-                    value: vehicleColor,
-                    child: Text(nameColor , style: StyleGeneral.styleTextTextSpinner),
-                  );
-                }).toList()
-              )
-            );
-
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return ActivityIndicator();
+          VehicleColorList.add(VehicleColor(id: 0, name: 'selection_name_text_color'.tr() ));
+          if(_stateReviewVehicleColor){
+            VehicleColorList.asMap().forEach((index, value) {
+              if(value.id == _map['vehicle_color']['id']){
+                _vehicleColor = VehicleColorList[index];
+              }
+            });
           }
+
+          return Center(
+            child:  DropdownButtonFormField(
+              decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+              border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                filled: true,
+                fillColor: StyleGeneral.GREEN,
+              ),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+              validator: (value) => value == null ? 'selection_vehicle_color'.tr() : null,
+              dropdownColor:  StyleGeneral.GREEN,
+              value: VehicleColorList.where( (i) => i.name == _vehicleColor.name).first ,
+              onChanged: (VehicleColor? value) {
+                setState(() {
+                  _vehicleColor = value!;
+                  _stateReviewVehicleColor = false;
+                  _stateContainerVehicleColor = value.id == 0 ? true : false ;
+                });
+              },
+              items: VehicleColorList.map((VehicleColor vehicleColor) {
+                String name = vehicleColor.name!;
+                String nameColor = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameColor = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameColor = name;
+                }
+
+                return DropdownMenuItem<VehicleColor>(
+                  value: vehicleColor,
+                  child: Text(nameColor , style: StyleGeneral.styleTextTextSpinner),
+                );
+              }).toList()
+            )
+          );
+
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return ActivityIndicator();
         }
+      }
     );
 
   }
@@ -991,54 +982,54 @@ class _ProfileDriverState extends State<ProfileDriver> {
     blocVehicleManufacturer.VehiclesManufacturer();
 
     return StreamBuilder(
-        stream: blocVehicleManufacturer.data!,
-        builder: (context , AsyncSnapshot<VehicleManufacturerModel> snapshot) {
+      stream: blocVehicleManufacturer.data!,
+      builder: (context , AsyncSnapshot<VehicleManufacturerModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<VehicleManufacturer> VehicleManufacturerList = snapshot.data!.vehiclesManufacturer!;
+        if (snapshot.hasData) {
+          List<VehicleManufacturer> VehicleManufacturerList = snapshot.data!.vehiclesManufacturer!;
 
-            if(_stateReviewVehicleManufacturer){
-              VehicleManufacturerList.asMap().forEach((index, value) {
-                if(value.id == _map['vehicle_manufacturer']['id']){
-                  _vehicleManufacturer = VehicleManufacturerList[index];
-                }
-              });
-            }
-
-            return Center(
-              child:  DropdownButtonFormField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  filled: true,
-                  fillColor: StyleGeneral.GREEN,
-                ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
-                validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
-                dropdownColor:  StyleGeneral.GREEN,
-                value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
-                onChanged: (VehicleManufacturer? value) {
-                  setState(() {
-                    blocVehicles.manufacturerId = value!.id.toString();
-                    _vehicleManufacturer = value;
-                    _stateReviewVehicleManufacturer = false;
-                  });
-                },
-                items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
-                  return DropdownMenuItem<VehicleManufacturer>(
-                    value: vehicleManufacturer,
-                    child: Text(vehicleManufacturer.name! , style: StyleGeneral.styleTextTextSpinner),
-                  );
-                }).toList()
-              )
-            );
-
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return ActivityIndicator();
+          if(_stateReviewVehicleManufacturer){
+            VehicleManufacturerList.asMap().forEach((index, value) {
+              if(value.id == _map['vehicle_manufacturer']['id']){
+                _vehicleManufacturer = VehicleManufacturerList[index];
+              }
+            });
           }
+
+          return Center(
+            child:  DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                filled: true,
+                fillColor: StyleGeneral.GREEN,
+              ),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+              validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
+              dropdownColor:  StyleGeneral.GREEN,
+              value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
+              onChanged: (VehicleManufacturer? value) {
+                setState(() {
+                  blocVehicles.manufacturerId = value!.id.toString();
+                  _vehicleManufacturer = value;
+                  _stateReviewVehicleManufacturer = false;
+                });
+              },
+              items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
+                return DropdownMenuItem<VehicleManufacturer>(
+                  value: vehicleManufacturer,
+                  child: Text(vehicleManufacturer.name! , style: StyleGeneral.styleTextTextSpinner),
+                );
+              }).toList()
+            )
+          );
+
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return ActivityIndicator();
         }
+      }
     );
 
   }
@@ -1047,55 +1038,55 @@ class _ProfileDriverState extends State<ProfileDriver> {
     blocVehicles.VehiclesModel();
 
     return StreamBuilder(
-        stream: blocVehicles.data!,
-        builder: (context , AsyncSnapshot<VehicleModel> snapshot) {
+      stream: blocVehicles.data!,
+      builder: (context , AsyncSnapshot<VehicleModel> snapshot) {
 
-          if (snapshot.hasData) {
-            List<Vehicle> vehicles = snapshot.data!.vehicles!;
+        if (snapshot.hasData) {
+          List<Vehicle> vehicles = snapshot.data!.vehicles!;
 
-            vehicles.add(Vehicle(id: 0, name: 'selection_name_text_color'.tr() ));
-            if(_stateReviewVehicle){
-              vehicles.asMap().forEach((index, value) {
-                if(value.id == _map['vehicle_model']['id']){
-                  _vehicle = vehicles[index];
-                }
-              });
-            }
-
-            return Center(
-              child:  DropdownButtonFormField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
-                  filled: true,
-                  fillColor: StyleGeneral.GREEN,
-                ),
-                icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
-                validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
-                dropdownColor:  StyleGeneral.GREEN,
-                value: vehicles.where( (i) => i.name == _vehicle.name).first ,
-                onChanged: (Vehicle? value) {
-                  setState(() {
-                    _vehicle = value!;
-                    _stateReviewVehicle = false;
-                    _stateContainerVehicle = value.id == 0 ? true : false;
-                  });
-                },
-                items: vehicles.map((Vehicle vehicle) {
-                  return DropdownMenuItem<Vehicle>(
-                    value: vehicle,
-                    child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
-                  );
-                }).toList()
-              )
-            );
-
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
-          } else {
-            return ActivityIndicator();
+          vehicles.add(Vehicle(id: 0, name: 'selection_name_text_color'.tr() ));
+          if(_stateReviewVehicle){
+            vehicles.asMap().forEach((index, value) {
+              if(value.id == _map['vehicle_model']['id']){
+                _vehicle = vehicles[index];
+              }
+            });
           }
+
+          return Center(
+            child:  DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
+                filled: true,
+                fillColor: StyleGeneral.GREEN,
+              ),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
+              validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
+              dropdownColor:  StyleGeneral.GREEN,
+              value: vehicles.where( (i) => i.name == _vehicle.name).first ,
+              onChanged: (Vehicle? value) {
+                setState(() {
+                  _vehicle = value!;
+                  _stateReviewVehicle = false;
+                  _stateContainerVehicle = value.id == 0 ? true : false;
+                });
+              },
+              items: vehicles.map((Vehicle vehicle) {
+                return DropdownMenuItem<Vehicle>(
+                  value: vehicle,
+                  child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
+                );
+              }).toList()
+            )
+          );
+
+        } else if (snapshot.hasError) {
+          return Icon(Icons.error_outline);
+        } else {
+          return ActivityIndicator();
         }
+      }
     );
 
   }
