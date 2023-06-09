@@ -64,14 +64,10 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
   final prefs = new Preferences();
   BlurtUpdateBloc _blurtUpdateBloc = BlurtUpdateBloc();
 
-  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
-      mode: StopWatchMode.countDown
-  );
-
 
   startTime(){
 
-    var dialog = CustomTimerDialog();
+    var dialog = CustomTimerDialog(message: widget.blurt.message);
 
     showDialog(
       context: context,
@@ -94,11 +90,6 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
     getNameStatus();
   }
 
-  @override
-  void dispose() async {
-    super.dispose();
-    await _stopWatchTimer.dispose();  // Need to call dispose function.
-  }
 
   getNameStatus(){
     switch(widget.blurt.statusBlurt){

@@ -120,7 +120,8 @@ class CustomAlertBlurtDialog extends StatelessWidget {
 }
 
 class CustomTimerDialog extends StatefulWidget {
-  const CustomTimerDialog({Key? key}) : super(key: key);
+  final String message;
+  const CustomTimerDialog({Key? key , required this.message}) : super(key: key);
 
   @override
   State<CustomTimerDialog> createState() => _CustomTimerDialogState();
@@ -178,9 +179,14 @@ class _CustomTimerDialogState extends State<CustomTimerDialog> with SingleTicker
               
               Positioned(
                 top: 0,
-                child: Text('tab_blurt_time_down_text'.tr(), style: StyleGeneral.styleTextTitleMenuHeader)
+                child: Column(
+                  children: [
+                    Text('tab_blurt_time_down_text'.tr(), style: StyleGeneral.styleTextTitleMenuHeader),
+                    SizedBox(height: 10.h),
+                    Text(widget.message, maxLines: 2, overflow: TextOverflow.ellipsis, softWrap: true,  style: StyleGeneral.styleTextTextCardPaymentDescription),
+                  ]
+                )
               ),
-              
               
               SizedBox(
                 width: 200.h,

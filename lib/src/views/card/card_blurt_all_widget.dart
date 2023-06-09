@@ -62,12 +62,8 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
   final prefs = new Preferences();
   BlurtUpdateBloc _blurtUpdateBloc = new BlurtUpdateBloc();
 
-  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
-      mode: StopWatchMode.countDown
-  );
-
   startTime(){
-    var dialog = CustomTimerDialog();
+    var dialog = CustomTimerDialog(message: widget.blurt.message);
 
     showDialog(
         context: context,
@@ -150,43 +146,6 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
 
             SizedBox(height: 15.h),
 
-            if(status)
-              Row(
-                children: [
-                  Flexible(
-                    fit: FlexFit.tight,
-                    flex: 2,
-                    child: Text(
-                      'tab_blurt_time_down_text'.tr(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 3,
-                      style: StyleGeneral.styleTextTextCardPaymentDescription
-                    )
-                  ),
-
-
-                  Flexible(
-                    fit: FlexFit.tight,
-                    flex: 2,
-                    child: StreamBuilder<int>(
-                      stream: _stopWatchTimer.rawTime,
-                      initialData: _stopWatchTimer.rawTime.value,
-                      builder: (context, snap) {
-                        final value = snap.data;
-                        final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
-                        return Text(
-                          displayTime,
-                          textAlign: TextAlign.end,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
-                        );
-                      }
-                    )
-                  )
-                ]
-              )
           ]
         )
       )
