@@ -1148,7 +1148,7 @@ class _RegisterPageState extends State<RegisterPage> {
        }
       );
     }else{
-      final snackBar = customSnackBar('Info' , 'register_form_incomplete'.tr() , ContentType.help);
+      final snackBar = customSnackBar('Error' , 'register_form_incomplete'.tr() , ContentType.help);
       ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
     }
   }
