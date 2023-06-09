@@ -168,7 +168,7 @@ class _CustomTimerDialogState extends State<CustomTimerDialog> with SingleTicker
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.white,
-      insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 150.h),
+      insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 120.h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       content: Builder(
         builder: (context) {
