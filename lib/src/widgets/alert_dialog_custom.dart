@@ -81,8 +81,6 @@ class CustomAlertDialog extends StatelessWidget {
   }
 }
 
-
-
 class CustomAlertBlurtDialog extends StatelessWidget {
   final Color? bgColor;
 
@@ -117,6 +115,101 @@ class CustomAlertBlurtDialog extends StatelessWidget {
       actions: <Widget>[
 
       ]
+    );
+  }
+}
+
+class CustomTimerDialog extends StatefulWidget {
+  const CustomTimerDialog({Key? key}) : super(key: key);
+
+  @override
+  State<CustomTimerDialog> createState() => _CustomTimerDialogState();
+}
+
+class _CustomTimerDialogState extends State<CustomTimerDialog> with SingleTickerProviderStateMixin<CustomTimerDialog>{
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
+    mode: StopWatchMode.countDown,
+  );
+
+  AnimationController? controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _stopWatchTimer.setPresetSecondTime(60);
+    _stopWatchTimer.onStartTimer();
+
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 60),
+    )..addListener(() {
+      setState(() {});
+    });
+    controller!.repeat();
+
+    _stopWatchTimer.fetchEnded.listen((value) {
+      if(value){
+       Navigator.of(context).pop();
+       controller!.dispose();
+      }
+    });
+
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await _stopWatchTimer.dispose();
+    controller!.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 150.h),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+      content: Builder(
+        builder: (context) {
+
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              
+              Positioned(
+                top: 0,
+                child: Text('tab_blurt_time_down_text'.tr(), style: StyleGeneral.styleTextTitleMenuHeader)
+              ),
+              
+              
+              SizedBox(
+                width: 200.h,
+                height: 200.h,
+                child: CircularProgressIndicator(
+                  value: controller!.value,
+                  backgroundColor: Colors.grey.shade300,
+                  strokeWidth: 6.w,
+                )
+              ),
+
+              Center(
+                child: StreamBuilder<int>(
+                  stream: _stopWatchTimer.rawTime,
+                  initialData: _stopWatchTimer.rawTime.value,
+                  builder: (context, snap) {
+                    final value = snap.data;
+                    final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                    return Text(
+                      displayTime,
+                      style: TextStyle(fontSize: ScreenUtil().setSp(64), color: StyleGeneral.BLACK, fontFamily: 'Roboto-Black')
+                    );
+                  }
+                )
+              )
+            ]
+          );
+        }
+      )
     );
   }
 }
