@@ -68,18 +68,21 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
       mode: StopWatchMode.countDown
   );
 
-  int raw = 60;
 
   startTime(){
-    _stopWatchTimer.setPresetSecondTime(raw);
-    _stopWatchTimer.fetchEnded.listen((value) {
-      if(value){
+
+    var dialog = CustomTimerDialog();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => dialog);
+
+    Future.delayed(const Duration(seconds: 60), () {
+      setState(() {
         status = false;
-        _stopWatchTimer.onResetTimer();
-        setState(() {});
-      }
+      });
     });
-    _stopWatchTimer.onStartTimer();
   }
 
   String textStatus = "";
@@ -155,17 +158,17 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                     showOnOff: true,
                     onToggle: (val) {
                       var dialog = CustomAlertDialog(
-                          title: 'tab_blurt_dialog_confirmation_text'.tr(),
-                          message: 'tab_blurt_before_activated_text'.tr(),
-                          onPositivePressed: () {
-                            _blurtUpdate(widget.blurt.id);
-                          },
-                          positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
-                          negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr());
+                        title: 'tab_blurt_dialog_confirmation_text'.tr(),
+                        message: 'tab_blurt_before_activated_text'.tr(),
+                        onPositivePressed: () {
+                          _blurtUpdate(widget.blurt.id);
+                        },
+                        positiveBtnText: 'tab_blurt_dialog_confirmation_positive_button'.tr(),
+                        negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr());
                       showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) => dialog);
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) => dialog);
                     }
                   )
                 ]
@@ -190,45 +193,7 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
                 maxLines: 3,
                 style: StyleGeneral.styleTextTextCardPaymentDescription
               ),
-              SizedBox(height: 10.h),
-
-              if(status)
-                Row(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      flex: 2,
-                      child: Text(
-                        'tab_blurt_time_down_text'.tr(),
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        maxLines: 3,
-                        style: StyleGeneral.styleTextTextCardPaymentDescription
-                      )
-                    ),
-
-
-                    Flexible(
-                      fit: FlexFit.tight,
-                      flex: 2,
-                      child: StreamBuilder<int>(
-                        stream: _stopWatchTimer.rawTime,
-                        initialData: _stopWatchTimer.rawTime.value,
-                        builder: (context, snap) {
-                          final value = snap.data;
-                          final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
-                          return Text(
-                              displayTime,
-                              textAlign: TextAlign.end,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                              style: TextStyle(fontSize: ScreenUtil().setSp(24) , color: StyleGeneral.BLACK ,fontFamily: 'Poppins-Semi')
-                          );
-                        }
-                      )
-                    )
-                  ]
-                )
+              SizedBox(height: 10.h)
             ]
           )
         )
@@ -247,8 +212,8 @@ class _ItemBlurtDriverState extends State<ItemBlurtDriver> {
       if(data.error == 1){
         setState(() {
           status = true;
-          startTime();
         });
+        startTime();
       }
     });
   }

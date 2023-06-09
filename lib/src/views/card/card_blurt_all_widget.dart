@@ -67,14 +67,18 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
   );
 
   startTime(){
-    _stopWatchTimer.setPresetSecondTime(60);
-    _stopWatchTimer.fetchEnded.listen((value) {
-      if(value){
+    var dialog = CustomTimerDialog();
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => dialog);
+
+    Future.delayed(const Duration(seconds: 60), () {
+      setState(() {
         status = false;
-        setState(() {});
-      }
+      });
     });
-    _stopWatchTimer.onExecute.add(StopWatchExecute.start);
   }
 
   @override
@@ -126,9 +130,9 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
                       negativeBtnText: 'tab_blurt_dialog_confirmation_negative_button'.tr()
                     );
                     showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) => dialog);
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => dialog);
                   }
                 )
               ]
@@ -201,12 +205,11 @@ class _ItemBlurtAllState extends State<ItemBlurtAll> {
       if(data.error == 1){
         setState(() {
           status = true;
-          startTime();
         });
+        startTime();
       }
 
-     }
-    );
+     });
   }
 
 }
