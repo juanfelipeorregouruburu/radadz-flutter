@@ -118,8 +118,6 @@ class _TripStartPageState extends State<TripStartPage> {
         _isLoading = false ;
       });
 
-      String icon = data.error == 1 ? 'success' : 'error';
-
       if (data.error == 1) {
 
         setState(() {
@@ -135,16 +133,9 @@ class _TripStartPageState extends State<TripStartPage> {
 
       }
 
-      var dialog = AlertMessageError(icon: icon, message: data.response);
+      final snackBar = customSnackBar(data.error == 1 ? 'success' : 'error' , data.response , data.error == 1 ? ContentType.success : ContentType.failure );
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
 
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 3), () {
-              Navigator.of(context).pop(true);
-            });
-            return dialog;
-          });
     });
   }
 
@@ -165,8 +156,6 @@ class _TripStartPageState extends State<TripStartPage> {
         _isLoading = false ;
       });
 
-      String icon = data.error == 1 ? 'success' : 'error';
-
       if (data.error == 1) {
         setState(() {
           _isStartTrip = false;
@@ -174,21 +163,13 @@ class _TripStartPageState extends State<TripStartPage> {
           stateBtn = 1;
           Preferences.setStartTrip = false;
           Preferences.setHourTripStart = '';
-          //_stopWatchTimer.onExecute.add(StopWatchExecute.reset);
         });
 
       }
 
-      var dialog = AlertMessageError(icon: icon, message: data.response);
+      final snackBar = customSnackBar(data.error == 1 ? 'success' : 'error' , data.response , data.error == 1 ? ContentType.success : ContentType.failure );
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
 
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 3), () {
-              Navigator.of(context).pop(true);
-            });
-            return dialog;
-          });
     });
   }
 
