@@ -47,7 +47,7 @@
   "register_drive_data_title": "Driver Information",
   "register_button": "Submit",
   "register_success": "Your registration is successful.  Please Log In" ,
-  "register_form_incomplete": "There is pending information. Please valid." ,
+  "register_form_incomplete": "There is pending information. Please validate it." ,
   "form_button_confirm": "Confirm",
   "form_name_owner": "Name of Vehicle Owner",
   "form_document_owner": "Document Number of Vehicle Owner",
