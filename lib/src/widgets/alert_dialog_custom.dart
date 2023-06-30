@@ -166,56 +166,59 @@ class _CustomTimerDialogState extends State<CustomTimerDialog> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: Colors.white,
-      insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 120.h),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-      content: Builder(
-        builder: (context) {
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: AlertDialog(
+        backgroundColor: Colors.white,
+        insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 120.h),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+        content: Builder(
+          builder: (context) {
 
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              
-              Positioned(
-                top: 0,
-                child: Column(
-                  children: [
-                    Text('tab_blurt_time_down_text'.tr(), style: StyleGeneral.styleTextTitleMenuHeader),
-                    SizedBox(height: 10.h),
-                    Text(widget.message, maxLines: 2, overflow: TextOverflow.ellipsis, softWrap: true,  style: StyleGeneral.styleTextTextCardPaymentDescription),
-                  ]
-                )
-              ),
-              
-              SizedBox(
-                width: 200.h,
-                height: 200.h,
-                child: CircularProgressIndicator(
-                  value: controller!.value,
-                  backgroundColor: Colors.grey.shade300,
-                  strokeWidth: 6.w,
-                )
-              ),
+            return Stack(
+              alignment: Alignment.center,
+              children: [
 
-              Center(
-                child: StreamBuilder<int>(
-                  stream: _stopWatchTimer.rawTime,
-                  initialData: _stopWatchTimer.rawTime.value,
-                  builder: (context, snap) {
-                    final value = snap.data;
-                    final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
-                    return Text(
-                      displayTime,
-                      style: TextStyle(fontSize: ScreenUtil().setSp(64), color: StyleGeneral.BLACK, fontFamily: 'Roboto-Black')
-                    );
-                  }
+                Positioned(
+                  top: 0,
+                  child: Column(
+                    children: [
+                      Text('tab_blurt_time_down_text'.tr(), style: StyleGeneral.styleTextTitleMenuHeader),
+                      SizedBox(height: 10.h),
+                      Text(widget.message, maxLines: 2, overflow: TextOverflow.ellipsis, softWrap: true,  style: StyleGeneral.styleTextTextCardPaymentDescription),
+                    ]
+                  )
+                ),
+
+                SizedBox(
+                  width: 200.h,
+                  height: 200.h,
+                  child: CircularProgressIndicator(
+                    value: controller!.value,
+                    backgroundColor: Colors.grey.shade300,
+                    strokeWidth: 6.w,
+                  )
+                ),
+
+                Center(
+                  child: StreamBuilder<int>(
+                    stream: _stopWatchTimer.rawTime,
+                    initialData: _stopWatchTimer.rawTime.value,
+                    builder: (context, snap) {
+                      final value = snap.data;
+                      final displayTime = StopWatchTimer.getDisplayTime(value!, hours: false , milliSecond: false);
+                      return Text(
+                        displayTime,
+                        style: TextStyle(fontSize: ScreenUtil().setSp(64), color: StyleGeneral.BLACK, fontFamily: 'Roboto-Black')
+                      );
+                    }
+                  )
                 )
-              )
-            ]
-          );
-        }
-      )
+              ]
+            );
+          }
+        )
+      ),
     );
   }
 }
