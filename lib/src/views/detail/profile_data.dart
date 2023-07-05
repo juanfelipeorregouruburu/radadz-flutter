@@ -40,6 +40,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
   bool _stateContainerVehicleColor = false;
   bool _stateReviewVehicleManufacturer = true;
   bool _stateReviewVehicle = true;
+  bool _SelectedVehicle = false;
+  bool _loadingVehicle = false;
   bool _stateContainerVehicle = false;
   bool stateVehicleOwner = false;
   int _currentDailyValue = 1;
@@ -412,7 +414,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                   SizedBox(height: 15.h),
                   Text('selection_vehicle'.tr(), style: TextStyle(color: StyleGeneral.BLACK , fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Regular')),
                   SizedBox(height: 5.h),
-                  _dataSpinnerVehicles(),
+                  _loadingVehicle ? ActivityIndicator() : _dataSpinnerVehicles(),
                   SizedBox(height: 15.h),
                   if (_stateContainerVehicle)
                     InputTextField(
@@ -1008,12 +1010,17 @@ class _ProfileDriverState extends State<ProfileDriver> {
               validator: (value) => value == null ? 'selection_vehicle_manufacturer'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: VehicleManufacturerList.where( (i) => i.name == _vehicleManufacturer.name).first ,
-              onChanged: (VehicleManufacturer? value) {
+              onChanged: (VehicleManufacturer? value) async {
                 setState(() {
                   blocVehicles.manufacturerId = value!.id.toString();
                   _vehicleManufacturer = value;
+                  _SelectedVehicle = false;
+                  _loadingVehicle = true;
                   _stateReviewVehicleManufacturer = false;
                 });
+
+                await Future.delayed(const Duration(milliseconds: 500)).then((value) => setState(() { _loadingVehicle = false;}));
+
               },
               items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
                 return DropdownMenuItem<VehicleManufacturer>(
@@ -1044,7 +1051,11 @@ class _ProfileDriverState extends State<ProfileDriver> {
         if (snapshot.hasData) {
           List<Vehicle> vehicles = snapshot.data!.vehicles!;
 
-          vehicles.add(Vehicle(id: 0, name: 'selection_name_text_color'.tr() ));
+          if(!_SelectedVehicle){
+            _vehicle = vehicles[0];
+          }
+
+
           if(_stateReviewVehicle){
             vehicles.asMap().forEach((index, value) {
               if(value.id == _map['vehicle_model']['id']){
@@ -1069,13 +1080,24 @@ class _ProfileDriverState extends State<ProfileDriver> {
                 setState(() {
                   _vehicle = value!;
                   _stateReviewVehicle = false;
+                  _SelectedVehicle = true;
                   _stateContainerVehicle = value.id == 0 ? true : false;
                 });
               },
               items: vehicles.map((Vehicle vehicle) {
+                String name = vehicle.name!;
+                String nameVehicle = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameVehicle = name;
+                }
+
                 return DropdownMenuItem<Vehicle>(
                   value: vehicle,
-                  child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameVehicle , style: StyleGeneral.styleTextTextSpinner),
                 );
               }).toList()
             )
