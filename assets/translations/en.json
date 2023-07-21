@@ -164,5 +164,18 @@
   "trip_history_card_detail_data_total_time" : "Travel time",
   "trip_history_card_detail_data_earning" : "Earnings",
   "trip_history_card_detail_data_earning_money" : "Money",
-  "trip_history_card_detail_data_earning_tokens" : "Tokens"
+  "trip_history_card_detail_data_earning_tokens" : "Tokens",
+  "account_delete_title_popup_before" : "Warning!  You are requesting to PERMANENTLY delete your Loud.TV user account!  ",
+  "account_delete_subTitle_popup_before" : "Do you want to continue? ",
+  "account_delete_subTitle_popup_before_button_positive" : "Yes",
+  "account_delete_subTitle_popup_before_button_negative" : "No ",
+  "account_delete_title" : "REQUEST TO DELETE ACCOUNT",
+  "account_delete_paragraphs_1" : "You have initiated a request to delete your Loud.TV user account and all personal information associated with your account which Loud.TV is not legally obligated to retain.  ",
+  "account_delete_paragraphs_2" : "PLEASE NOTE that once the account deletion is complete, it will not be possible to open a new Loud.TV user account in the future using the user email address or mobile telephone number associated with the deleted account. ",
+  "account_delete_paragraphs_3" : "If you are an Authorized Loud.TV Driver who has earned income from Loud.TV in the past or has current payments due to you and being processed by Loud.TV, we may be legally obligated to retain certain account information in association with those earnings and/or payments.  ",
+  "account_delete_paragraphs_4" : "Account deletion will usually be completed the same day requested, and not more than 7 days after the request.   You will receive a confirmation email from Loud.TV when your account deletion is complete.  If we have questions about your account deletion, we will contact you by email within 7 days.  After 7 days, if you have not received an email from Loud.TV (and you have confirmed that the email has not been routed to your spam filter), or if you have further questions or concerns about your account deletion, please contact us by email at info@loud.tv .",
+  "account_delete_paragraphs_5" : "Please confirm that you wish to delete your Loud.TV user account and all personal information associated with your account which Loud.TV is not legally obligated to retain, after which you will not be able to open a new account in the future using the email address or mobile telephone number associated with the deleted account.",
+  "account_delete_paragraphs_button_negative" : "NO, CANCEL THIS REQUEST",
+  "account_delete_paragraphs_button_positive" : "YES, DELETE MY ACCOUNT",
+  "account_delete_text_success" : "We're sorry to see you go!  Your account deletion request has been transmitted. "
 }

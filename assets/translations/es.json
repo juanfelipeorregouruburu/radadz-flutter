@@ -164,5 +164,18 @@
   "trip_history_card_detail_data_total_time" : "Tiempo Total",
   "trip_history_card_detail_data_earning" : "Ganancias",
   "trip_history_card_detail_data_earning_money" : "Dinero",
-  "trip_history_card_detail_data_earning_tokens" : "Tokens"
+  "trip_history_card_detail_data_earning_tokens" : "Tokens",
+  "account_delete_title_popup_before" : "¡Advertencia! ¡Está solicitando eliminar PERMANENTEMENTE su cuenta de usuario de Loud.TV!",
+  "account_delete_subTitle_popup_before" : "¿Quieres continuar? ",
+  "account_delete_subTitle_popup_before_button_positive" : "Sí ",
+  "account_delete_subTitle_popup_before_button_negative" : "No ",
+  "account_delete_title" : "SOLICITUD DE ELIMINACIÓN DE CUENTA ",
+  "account_delete_paragraphs_1" : "Ha iniciado una solicitud para eliminar su cuenta de usuario de Loud.TV y toda la información personal asociada con su cuenta que Loud.TV no está legalmente obligada a conservar.   ",
+  "account_delete_paragraphs_2" : "TENGA EN CUENTA que una vez que se complete la eliminación de la cuenta, no será posible abrir una nueva cuenta de usuario de Loud.TV en el futuro utilizando la dirección de correo electrónico del usuario o el número de teléfono móvil asociado con la cuenta eliminada. ",
+  "account_delete_paragraphs_3" : "Si usted es un Conductor autorizado de Loud.TV que obtuvo ingresos de Loud.TV en el pasado o tiene pagos actuales adeudados y procesados por Loud.TV, es posible que estemos legalmente obligados a retener cierta información de la cuenta en relación con esas ganancias y/o pagos. ",
+  "account_delete_paragraphs_4" : "La eliminación de la cuenta generalmente se completará el mismo día que se solicite y no más de 7 días después de la solicitud. Recibirá un correo electrónico de confirmación de Loud.TV cuando se complete la eliminación de su cuenta. Si tenemos preguntas sobre la eliminación de su cuenta, nos comunicaremos con usted por correo electrónico dentro de los 7 días. Después de 7 días, si no ha recibido un correo electrónico de Loud.TV (y ha confirmado que el correo electrónico no se ha enrutado a su filtro de spam), o si tiene más preguntas o inquietudes sobre la eliminación de su cuenta, comuníquese con nosotros por correo electrónico a info@loud.tv. ",
+  "account_delete_paragraphs_5" : "Confirme que desea eliminar su cuenta de usuario de Loud.TV y toda la información personal asociada con su cuenta que Loud.TV no está legalmente obligada a conservar, después de lo cual no podrá abrir una nueva cuenta en el futuro utilizando la dirección de correo electrónico o el número de teléfono móvil asociado con la cuenta eliminada. ",
+  "account_delete_paragraphs_button_negative" : "NO, CANCELAR ESTA SOLICITUD ",
+  "account_delete_paragraphs_button_positive" : "SÍ, ELIMINAR MI CUENTA",
+  "account_delete_text_success" : "¡Sentimos verte partir! Tu solicitud de eliminación de cuenta ha sido transmitida. "
 }
