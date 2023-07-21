@@ -86,6 +86,7 @@ export 'package:radadz_app/src/views/blurt_page.dart';
 export 'package:radadz_app/src/views/tabs/tab_my_blurts_page.dart';
 export 'package:radadz_app/src/views/tabs/tab_blurt_all_page.dart';
 export 'package:radadz_app/src/views/tabs/tab_create_blurt_driver_page.dart';
+export 'package:radadz_app/src/views/account_delete_page.dart';
 
 
 /* WIDGETS*/

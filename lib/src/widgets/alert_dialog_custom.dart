@@ -119,6 +119,28 @@ class CustomAlertBlurtDialog extends StatelessWidget {
   }
 }
 
+class CustomDialogDeleteAccount extends StatelessWidget {
+  final String? message;
+  const CustomDialogDeleteAccount({Key? key , required this.message}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: AlertDialog(
+          backgroundColor: Colors.white,
+          insetPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 120.h),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+          content: message != null ? Text(message!) : null,
+        )
+      )
+    );
+  }
+}
+
+
 class CustomTimerDialog extends StatefulWidget {
   final String message;
   const CustomTimerDialog({Key? key , required this.message}) : super(key: key);

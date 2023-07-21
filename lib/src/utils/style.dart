@@ -83,6 +83,19 @@ class StyleGeneral {
       color: StyleGeneral.WHITE,
       fontSize: ScreenUtil().setSp(17),
       fontFamily: 'Poppins-Regular');
+
+  static final styleTextParagraphs = TextStyle(
+      color: StyleGeneral.BLACK,
+      fontSize: ScreenUtil().setSp(13),
+      fontFamily: 'Poppins-Regular');
+
+  static final styleTextParagraphsWeight = TextStyle(
+      color: StyleGeneral.BLACK,
+      fontWeight: FontWeight.bold,
+      fontSize: ScreenUtil().setSp(13),
+      fontFamily: 'Poppins-Regular');
+
+
   //PADDING
   static final double FONT_SIZE_TITLE_DETAIL = ScreenUtil().setSp(5);
 

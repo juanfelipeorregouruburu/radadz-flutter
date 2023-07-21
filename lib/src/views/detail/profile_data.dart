@@ -622,6 +622,33 @@ class _ProfileDriverState extends State<ProfileDriver> {
                     onTap: (){
                       _UpdateDriver();
                     }
+                  ),
+
+                  SizedBox(
+                    height: 25.h,
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(top: 5.h),
+                    alignment: Alignment.topCenter,
+                    child: GestureDetector(
+                      onTap: () {
+                        var dialog = CustomAlertDialog(
+                          title: 'account_delete_title_popup_before'.tr(),
+                          message: 'account_delete_subTitle_popup_before'.tr(),
+                          onPositivePressed: () {
+                            Navigator.pushNamed(context, "account_delete");
+                          },
+                          positiveBtnText: 'account_delete_subTitle_popup_before_button_positive'.tr(),
+                          negativeBtnText: 'account_delete_subTitle_popup_before_button_negative'.tr()
+                        );
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) => dialog);
+                      },
+                      child: Text('account_delete_title'.tr().capitalize(), style:TextStyle(color: Colors.blue, fontSize: ScreenUtil().setSp(13.sp), fontFamily: "Poppins-Regular",), textAlign: TextAlign.right,)
+                    )
                   )
                 ]
               )

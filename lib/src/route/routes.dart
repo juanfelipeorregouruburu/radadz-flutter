@@ -12,6 +12,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'reset_password': (BuildContext context) =>  ResetPasswordPage(),
     'reset_verify_code': (BuildContext context) =>  ResetVerificationCodePage(),
     'reset_change_password': (BuildContext context) => ResetChangePasswordPage(),
+    'account_delete': (BuildContext context) => AccountDeletePage(),
 
   };
 }
