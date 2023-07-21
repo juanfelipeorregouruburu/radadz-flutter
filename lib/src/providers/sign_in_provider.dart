@@ -18,4 +18,18 @@ class LoginProvider {
     }
   }
 
+
+  Future<ResponseModel> DeleteAccount(String userId) async {
+    var url = Uri.parse(API.deleteAccount );
+    final response = await http.post(url, body: {
+      "userId": userId
+    });
+
+    if(response.statusCode == 200) {
+      return ResponseModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    }else{
+      throw Exception("Fallo al petición");
+    }
+  }
+
 }

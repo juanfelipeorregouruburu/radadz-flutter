@@ -4,6 +4,7 @@ class API {
   /* API LIST */
 
   static final String login = _URL + "driver_log";
+  static final String deleteAccount = _URL + "delete_account";
 
   static const String resetPassword = _URL + "reset_password";
   static const String resetVerifyCode = _URL + "verify_user_token";

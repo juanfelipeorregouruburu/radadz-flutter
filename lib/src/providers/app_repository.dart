@@ -13,6 +13,9 @@ class Repository {
   /* SignIn */
   Future<SingInModel> signIn(String? phone, String? password ) => loginProvider.SignIn(phone! , password!);
 
+  /* DeleteAccount */
+  Future<ResponseModel> DeleteAccountRepository(String? userId) => loginProvider.DeleteAccount(userId!);
+
   //////////////////////////////// RESET PASSWORD ////////////////////////////////////////////////
 
   /* ResetPassword */

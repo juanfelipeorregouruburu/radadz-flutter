@@ -20,3 +20,23 @@ class SignInBloc {
   }
 
 }
+
+class DeleteAccountBloc {
+  final repository = Repository();
+  final deleteAccount = PublishSubject<ResponseModel>();
+
+  get data => deleteAccount.stream;
+  String? userId;
+
+  DeleteAccountBloc({this.userId});
+
+  SetDeleteAccount() async {
+    ResponseModel _signIn = await repository.DeleteAccountRepository(userId);
+    deleteAccount.sink.add(_signIn);
+  }
+
+  disponse() {
+    deleteAccount.close();
+  }
+
+}
