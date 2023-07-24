@@ -134,7 +134,7 @@ class _AccountDeletePageState extends State<AccountDeletePage> {
                         child: Text('account_delete_paragraphs_button_negative'.tr(), style: TextStyle(color: Colors.white, fontSize: 12.sp))
                       ),
                       onTap: () {
-
+                        Navigator.of(context).pop();
                       }
                     ) ,
                     SizedBox(height: 10.h),
