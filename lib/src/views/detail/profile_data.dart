@@ -812,7 +812,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget _dataSpinnerDocumentType(){
-
+    var size = MediaQuery.of(context).size.height;
     blocDocumentType.DocumentTypes();
 
     return StreamBuilder(
@@ -833,6 +833,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               isExpanded: true,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -840,7 +842,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
                 filled: true,
                 fillColor: StyleGeneral.GREEN,
               ),
-              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32, color: Colors.white),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, size: 32.sp, color: Colors.white),
               validator: (value) => value == null ? 'selection_document_type'.tr() : null,
               dropdownColor:  StyleGeneral.GREEN,
               value: documentTypeList.where( (i) => i.name == _documentType.name).first ,
@@ -875,6 +877,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget _dataSpinnerType(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicleType.VehicleTypes();
 
     return StreamBuilder(
@@ -894,6 +897,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r),),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -940,7 +945,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget _dataSpinnerColor(){
-
+    var size = MediaQuery.of(context).size.height;
     blocVehicleColor.VehiclesColor();
 
     return StreamBuilder(
@@ -961,6 +966,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
               border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -1008,6 +1015,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget _dataSpinnerVehicleManufacturer(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicleManufacturer.VehiclesManufacturer();
 
     return StreamBuilder(
@@ -1027,6 +1035,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -1069,6 +1079,7 @@ class _ProfileDriverState extends State<ProfileDriver> {
   }
 
   Widget _dataSpinnerVehicles(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicles.VehiclesModel();
 
     return StreamBuilder(
@@ -1093,6 +1104,8 @@ class _ProfileDriverState extends State<ProfileDriver> {
 
           return Center(
             child:  DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),

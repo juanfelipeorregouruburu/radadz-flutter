@@ -154,7 +154,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
 
   Widget _dataSpinnerAccountType(){
-
+    var size = MediaQuery.of(context).size.height;
     blocBankAccountType.BankAccountTypeList();
 
     return StreamBuilder(
@@ -180,6 +180,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
           return Center(
             child: DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
@@ -223,7 +225,7 @@ class _DataBankDriverState extends State<DataBankDriver> {
   }
 
   Widget _dataSpinnerBank(){
-
+    var size = MediaQuery.of(context).size.height;
     blocBankList.BankList();
 
     return StreamBuilder(
@@ -248,6 +250,8 @@ class _DataBankDriverState extends State<DataBankDriver> {
 
           return Center(
             child: DropdownButtonFormField(
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20)),

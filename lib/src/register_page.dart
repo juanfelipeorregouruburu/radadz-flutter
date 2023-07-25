@@ -748,7 +748,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _dataSpinnerDocumentType(){
-
+    var size = MediaQuery.of(context).size.height;
     blocDocumentType.DocumentTypes();
 
     return StreamBuilder(
@@ -766,7 +766,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
             return Center(
               child:  DropdownButtonFormField(
-                isExpanded: true,
+                isDense: size < 1000 ? true : false,
+                itemHeight: 45.h,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                   border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -813,6 +814,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _dataSpinnerType(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicleType.VehicleTypes();
 
     return StreamBuilder(
@@ -830,7 +832,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child:  DropdownButtonFormField(
-              isExpanded: true,
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -877,7 +880,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _dataSpinnerColor(){
-
+    var size = MediaQuery.of(context).size.height;
     blocVehicleColor.VehiclesColor();
 
     return StreamBuilder(
@@ -895,7 +898,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
-              isExpanded: true,
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -942,6 +946,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _dataSpinnerVehicleManufacturer(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicleManufacturer.VehiclesManufacturer();
 
     return StreamBuilder(
@@ -959,7 +964,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
-              isExpanded: true,
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -978,9 +984,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               items: VehicleManufacturerList.map((VehicleManufacturer vehicleManufacturer) {
+                String name = vehicleManufacturer.name!;
+                String nameVehicle = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameVehicle = name;
+                }
                 return DropdownMenuItem<VehicleManufacturer>(
                   value: vehicleManufacturer,
-                  child: Text(vehicleManufacturer.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameVehicle, style: StyleGeneral.styleTextTextSpinner),
                 );
               }).toList()
             )
@@ -996,6 +1011,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _dataSpinnerVehicles(){
+    var size = MediaQuery.of(context).size.height;
     blocVehicles.VehiclesModel();
 
     return StreamBuilder(
@@ -1014,7 +1030,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return Center(
             child: DropdownButtonFormField(
-              isExpanded: true,
+              isDense: size < 1000 ? true : false,
+              itemHeight: 45.h,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
                 border: OutlineInputBorder(borderSide: BorderSide(color: StyleGeneral.GREEN, width: 2), borderRadius: BorderRadius.circular(20.r)),
@@ -1033,9 +1050,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
               items: vehicles.map((Vehicle vehicle) {
+                String name = vehicle.name!;
+                String nameVehicle = '';
+
+                if(name.contains("/")){
+                  final splinted = name.split('/');
+                  nameVehicle = defaultLocale!.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+                }else{
+                  nameVehicle = name;
+                }
+
                 return DropdownMenuItem<Vehicle>(
                   value: vehicle,
-                  child: Text(vehicle.name! , style: StyleGeneral.styleTextTextSpinner),
+                  child: Text(nameVehicle, style: StyleGeneral.styleTextTextSpinner),
                 );
               }).toList()
             )
