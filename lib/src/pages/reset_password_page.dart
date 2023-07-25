@@ -40,6 +40,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
       if(data.error == 1){
         Navigator.pushNamed(context, "reset_verify_code");
+      }else{
+        final snackBar = customSnackBar('Error' , data.response, ContentType.failure);
+        ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
       }
 
     });

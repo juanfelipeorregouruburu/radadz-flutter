@@ -22,7 +22,7 @@ class LoginProvider {
   Future<ResponseModel> DeleteAccount(String userId) async {
     var url = Uri.parse(API.deleteAccount );
     final response = await http.post(url, body: {
-      "userId": userId
+      "driver_id": userId
     });
 
     if(response.statusCode == 200) {
