@@ -1,5 +1,6 @@
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:flutter/material.dart';
+import 'package:radadz_app/src/views/payment/payment_page.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:radadz_app/src/slider/menu_item.dart';
 import 'dart:convert';
@@ -93,7 +94,7 @@ class _SliderLayoutState extends State<SliderLayout> with SingleTickerProviderSt
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.1.4",
+                          'version'.tr() + " 1.1.5",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(8),
@@ -233,6 +234,17 @@ class _SliderLayoutState extends State<SliderLayout> with SingleTickerProviderSt
                                       },
                                       padding: 16.w,
                                     ),
+                                    SizedBox(height: 15.h),
+                                    MenuItem(
+                                      title: 'menu_title_payment_data'.tr(),
+                                      icon: AssetImage("assets/menu/icono_tipo_pago.png"),
+                                      onTap: () {
+                                        onIconPressed();
+                                        BlocProvider.of<NavigationBloc>(context).emit(PaymentPage());
+                                      },
+                                      padding: 16.w,
+                                    ),
+
                                     SizedBox(height: 25.h),
 
                                     Row(

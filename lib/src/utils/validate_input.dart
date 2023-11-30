@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+
+import 'package:radadz_app/src/utils/style.dart';
 
 fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
   currentFocus.unfocus();
@@ -38,4 +41,18 @@ bool validateHour(String? value) {
 bool validateDate(String? value) {
   bool dateValidate = RegExp(r'^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$').hasMatch(value!);
   return dateValidate;
+}
+
+String formatString(String value){
+  String text = '';
+  String defaultLocale = Platform.localeName ;
+
+  if(value.contains("/")){
+    final splinted = value.split('/');
+    text = defaultLocale.contains("en_US") ? splinted[0].capitalize() : splinted[1].substring(1).capitalize();
+  }else{
+    text = value;
+  }
+
+  return text;
 }
