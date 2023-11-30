@@ -33,11 +33,7 @@ class CardTripPaymentWidget extends StatelessWidget {
                     ),
                     child: Text(
                       'payment_card_total_trip'.tr() + listTripPaymentProvider.listTripPaymentsHistory.payments.length.toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: ScreenUtil().setSp(15),
-                        fontFamily: 'Poppins-Semi',
-                      )
+                      style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(15), fontFamily: 'Poppins-Semi')
                     )
                   )
                 )
@@ -53,10 +49,7 @@ class CardTripPaymentWidget extends StatelessWidget {
             itemCount: listTripPaymentProvider.listTripPaymentsHistory.payments.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
-              return ItemTripPayment(
-                  index: index,
-                  trip: listTripPaymentProvider.listTripPaymentsHistory.payments[index]
-              );
+              return ItemTripPayment(trip: listTripPaymentProvider.listTripPaymentsHistory.payments[index]);
             }
           )
         ]
@@ -65,24 +58,16 @@ class CardTripPaymentWidget extends StatelessWidget {
 }
 
 class ItemTripPayment extends StatelessWidget{
-
-  const ItemTripPayment({
-    Key? key,
-    required this.index,
-    required this.trip
-  }) : super(key: key);
-
-  final int index;
   final Trip trip;
+  const ItemTripPayment({Key? key, required this.trip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final formatter = new NumberFormat("#,###");
 
-    var money_earned = trip.moneyEarned == "" ? 0 : int.parse(trip.moneyEarned) ;
+    var money_earned = trip.moneyEarned == "" ? 0 : double.parse(trip.moneyEarned) ;
+    var token_earned = trip.tokenEarned == "" ? 0 : double.parse(trip.tokenEarned) ;
     var totalMoneyEarned = formatter.format(money_earned);
-
-    var token_earned = trip.tokenEarned == "" ? 0 : int.parse(trip.tokenEarned) ;
     var totalTokenEarned = formatter.format(token_earned);
 
    return Card(
@@ -90,10 +75,7 @@ class ItemTripPayment extends StatelessWidget{
      color: StyleGeneral.GREY,
      shadowColor: StyleGeneral.BLACK,
      margin: EdgeInsets.all(15.r),
-     shape:  OutlineInputBorder(
-         borderRadius: BorderRadius.circular(10.r),
-         borderSide: BorderSide(color: Colors.white)
-     ),
+     shape:  OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: Colors.white)),
      child: Container(
        padding: EdgeInsets.fromLTRB(10.w, 15.h, 10.w, 10.h),
        child: Padding(

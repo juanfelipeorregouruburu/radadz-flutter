@@ -9,48 +9,35 @@ class CardPaymentHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final listPaymentsHistoryProvider = context.watch<ListPaymentHistoryDriverBloc>();
 
-    return listPaymentsHistoryProvider.isLoading ? ActivityIndicator(marginTop: 50.h)
-        : listPaymentsHistoryProvider.listPaymentHistory.payments.length > 0 ?
-        ListView.separated(
-          shrinkWrap: true,
-          separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.all(0.0),
-          itemCount: listPaymentsHistoryProvider.listPaymentHistory.payments.length ,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (BuildContext context, int index) {
-            return ItemPaymentHistory(
-              index: index,
-              payment: listPaymentsHistoryProvider.listPaymentHistory.payments[index]
-            );
-          },
-        ) : EmptyDataView(message: 'payment_card_empty_data'.tr());
+    return listPaymentsHistoryProvider.isLoading ? ActivityIndicator(marginTop: 50.h) : listPaymentsHistoryProvider.listPaymentHistory.payments.length > 0 ?
+      ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5.h),
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.all(0.0),
+        itemCount: listPaymentsHistoryProvider.listPaymentHistory.payments.length ,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (BuildContext context, int index) {
+          return ItemPaymentHistory(payment: listPaymentsHistoryProvider.listPaymentHistory.payments[index]);
+        }
+      ) : EmptyDataView(message: 'payment_card_empty_data'.tr());
   }
 }
 
 
 class ItemPaymentHistory extends StatelessWidget {
-
-  const ItemPaymentHistory({
-    Key? key,
-    required this.index,
-    required this.payment,
-  }) : super(key: key);
-
-  final int index;
   final Payment payment;
-
+  const ItemPaymentHistory({Key? key, required this.payment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final formatter = new NumberFormat("#,###");
 
-    String textPaymentInfo = 'payment_card_info_payment'.tr() +payment.accountTypeBankPayment.name + ' '+payment.accountNumber+' - '+payment.bankNamePayment.name;
+    String textPaymentInfo = 'payment_card_info_payment'.tr() + "${formatString(payment.accountTypeBankPayment.name)}" + ' - '+payment.accountNumber+' - '+payment.bankNamePayment.name;
 
-    var money_earned = payment.moneyPayment == "" ? 0 : int.parse(payment.moneyPayment) ;
+    var money_earned = payment.moneyPayment == "" ? 0 : double.parse(payment.moneyPayment) ;
+    var token_earned = payment.tokensCancel == "" ? 0 : double.parse(payment.tokensCancel) ;
     var totalMoneyEarned = formatter.format(money_earned);
-
-    var token_earned = payment.tokensCancel == "" ? 0 : int.parse(payment.moneyPayment) ;
     var totalTokenEarned = formatter.format(token_earned);
 
     return Hero(
@@ -64,10 +51,7 @@ class ItemPaymentHistory extends StatelessWidget {
           color: StyleGeneral.GREY,
           shadowColor: StyleGeneral.BLACK,
           margin: EdgeInsets.all(15.r),
-          shape:  OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(color: Colors.white)
-          ),
+          shape:  OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: Colors.white)),
           child: Container(
             padding: EdgeInsets.fromLTRB(12.w, 15.h, 12.w, 10.h),
 
