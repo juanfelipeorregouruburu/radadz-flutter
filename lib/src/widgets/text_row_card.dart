@@ -9,32 +9,20 @@ class TextRowCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
-            child: Text(
-                text_row_title,
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 2,
-                style: StyleGeneral.styleTextTextCardPaymentTitle
-            ),
-          ),
-          Flexible(
-              flex: 1,
-              fit: FlexFit.tight,
-              child: Text(
-                  text_row_data,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                  maxLines: 2,
-                  style: StyleGeneral.styleTextTextCardPaymentDescription
-              )
-          )
-        ]
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: Text(text_row_title, overflow: TextOverflow.ellipsis, softWrap: true, maxLines: 2, style: StyleGeneral.styleTextTextCardPaymentTitle)
+        ),
+        Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: Text(text_row_data, textAlign: TextAlign.end, overflow: TextOverflow.ellipsis, softWrap: true, maxLines: 2, style: StyleGeneral.styleTextTextCardPaymentDescription)
+        )
+      ]
     );
   }
 }
