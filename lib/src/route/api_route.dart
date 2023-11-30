@@ -36,5 +36,7 @@ class API {
   static final String setTripStart = _URL + "trip_start";
   static final String setTripEnd = _URL + "trip_end";
 
+  static final String getPaymentList = _URL + "list_trip_payment_history";
+  static final String getPaymentDetail = _URL + "list_trip_by_trip_payment_history";
 
 }

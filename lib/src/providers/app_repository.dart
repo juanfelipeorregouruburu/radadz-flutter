@@ -1,3 +1,7 @@
+//import 'package:radadz_app/src/models/payment_detail_model.dart';
+import 'package:radadz_app/src/models/payment_detail_model.dart';
+import 'package:radadz_app/src/models/payment_model.dart';
+import 'package:radadz_app/src/providers/payment_provider.dart';
 import 'package:radadz_app/src/utils/export.dart';
 
 class Repository {
@@ -8,6 +12,7 @@ class Repository {
   final blurtProvider = BlurtProvider();
   final masterProvider = MasterProvider();
   final tripProvider = TripProvider();
+  final paymentProvider = PaymentProvider();
 
 
   /* SignIn */
@@ -118,4 +123,13 @@ class Repository {
 
   /* ListTripPaymentHistoryDriver */
   Future<TripPaymentHistoryModel> listTripPaymentDriverRepository( String? tripPaymentId) => tripProvider.ListTripPaymentDriver(tripPaymentId!);
+
+
+  ////////////////////////////////  PAYMENT ////////////////////////////////////////////////
+
+  /* GetPaymentList */
+  Future<PaymentModel> getPaymentListRepository(String? driverId) => paymentProvider.getPaymentList(driverId!);
+
+  /* GetPaymentDetail */
+  Future<PaymentDetailModel> getPaymentDetailRepository(String? tripPaymentId) => paymentProvider.getPaymentDetail(tripPaymentId!);
 }
