@@ -89,15 +89,15 @@ class _SliderLayoutState extends State<SliderLayout> with SingleTickerProviderSt
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(10.h, 0, 15.h, 5.h),
+                        margin: EdgeInsets.fromLTRB(15.h, 0, 25.h, 5.h),
                         width: 75.h,
                         height: 25.w,
                         alignment: Alignment.center,
                         child: Text(
-                          'version'.tr() + " 1.1.5",
+                          'version'.tr() + " 1.1.6",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: ScreenUtil().setSp(8),
+                            fontSize: ScreenUtil().setSp(12),
                             fontFamily: 'Poppins-Semi',
                           )
                         )
