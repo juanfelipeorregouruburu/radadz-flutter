@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:radadz_app/src/slider/navigation.dart';
 import 'package:radadz_app/src/utils/export.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -23,17 +22,13 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
   String _range = '';
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+
     setState(() {
       if (args.value is PickerDateRange) {
-        _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
-        // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
-
+        _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
         _selectedStartDate = DateFormat('yyyy-MM-dd').format(args.value.startDate);
         _selectedEndDate = DateFormat('yyyy-MM-dd').format(args.value.endDate);
-
         _buttonFilter = true;
-
       }
     });
 
@@ -51,11 +46,11 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(65.h),
           child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              flexibleSpace : ToolbarTitleCustom(title: 'menu_title_history_trip'.tr())
-          ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            flexibleSpace : ToolbarTitleCustom(title: 'menu_title_history_trip'.tr())
+          )
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
@@ -90,10 +85,10 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                             _buttonSearch = false;
                             _filterData();
                           });
-                        },
+                        }
                       ): Container(),
-                    ],
-                  ),
+                    ]
+                  )
                 ),
                 SizedBox(height: 15.h),
                 Padding(
@@ -101,23 +96,13 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(
-                          _range,
-                          style: TextStyle(
-                              color: StyleGeneral.BLACK,
-                              letterSpacing: .5,
-                              fontSize: ScreenUtil().setSp(12),
-                              fontFamily: 'Poppins-Semi'),
-                          textAlign: TextAlign.left,
-                        ),
+                        child: Text(_range, style: TextStyle(color: StyleGeneral.BLACK, letterSpacing: .5, fontSize: ScreenUtil().setSp(12), fontFamily: 'Poppins-Semi'), textAlign: TextAlign.left)
                       ),
                       SizedBox(height: 15.h),
                       _isCalendar ?  SfDateRangePicker(
                         onSelectionChanged: _onSelectionChanged,
                         selectionMode: DateRangePickerSelectionMode.range,
-                        initialSelectedRange: PickerDateRange(
-                            DateTime.now().subtract(const Duration(days: 4)),
-                            DateTime.now().add(const Duration(days: 3))),
+                        initialSelectedRange: PickerDateRange(DateTime.now().subtract(const Duration(days: 4)), DateTime.now().add(const Duration(days: 3)))
                       ) : Container(),
                     ]
                   )
@@ -129,7 +114,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
             )
           )
         )
-      ),
+      )
     );
   }
 
